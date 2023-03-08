@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Spel {
@@ -14,7 +15,9 @@ public class Spel {
 	}
 
 	public void voegSpelerToe(Speler speler) {
-
+		if (speler != null) {
+			spelers.add(speler);
+		}
 	}
 
 	public void organiseerTafelVolgensHetAantalSpelers(int aantalSpelers) {
@@ -22,11 +25,19 @@ public class Spel {
 	}
 
 	public int geefSpelerAanDeBeurt() {
-		return 0;
+		int index = spelers.indexOf(spelerAanDeBeurt);
+		if (index == spelers.size() - 1) {
+			index = 0;
+		} else {
+			index += 1;
+		}
+		return index;
 	}
 
 	private void kiesStartSpeler() {
-
+		Collections.sort(spelers, new SpelerComparator());
+		spelerAanDeBeurt = spelers.get(0);
 	}
+
 
 }
