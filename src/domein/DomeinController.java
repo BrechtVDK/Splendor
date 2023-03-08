@@ -24,4 +24,9 @@ public class DomeinController {
 		return 0;
 	}
 
+//	ik heb deze nodig voor mijn menu te kunnen doen stoppen 
+	public int geefAantalSpelers() {
+		return spel.geefAantalSpelers();
+	}
+
 }

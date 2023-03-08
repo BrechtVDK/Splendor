@@ -12,7 +12,10 @@ public class SpelerRepository {
 
 
 	public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
-		return null;
+
+		// Geen try and catch. als de Speler niet bestaat in de DB wordt er null
+		// gereturned. Op te lossen bij de aanroeper als nullpointException.
+		return spelerMap.geefSpeler(gebruikersnaam, geboortejaar);
 	}
 
 }

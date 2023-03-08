@@ -39,5 +39,10 @@ public class Spel {
 		spelerAanDeBeurt = spelers.get(0);
 	}
 
+	// Ik mis nog deze methode om zo uit het menu te geraken
+	public int geefAantalSpelers() {
+		return spelers.size();
+	}
+
 
 }

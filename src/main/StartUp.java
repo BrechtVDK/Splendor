@@ -1,9 +1,12 @@
 package main;
 
+import cui.SplendorApplication;
+import domein.DomeinController;
+
 public class StartUp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		new SplendorApplication(new DomeinController());
 
 	}
 
