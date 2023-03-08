@@ -29,5 +29,23 @@ public class SpelerMapper {
 		}
 		return spelers;
 	}
+	
+	public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
+		Speler speler = null;
+
+		try (Connection conn = DriverManager.getConnection(ConnectieDB.CONNECTIE_STRING);
+				PreparedStatement query = conn.prepareStatement("SELECT * FROM ID399244_g119.Speler WHERE gebruikersnaam = ? AND geboortejaar = ?")){
+			query.setString(1, gebruikersnaam);
+			query.setInt(2, geboortejaar);
+			try (ResultSet rs = query.executeQuery()) {
+				if (rs.next()) {
+					speler = new Speler(gebruikersnaam, geboortejaar);
+				}
+			}
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+		return speler;
+	}
 
 }
