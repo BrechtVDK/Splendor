@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class Speler {
@@ -7,10 +8,28 @@ public class Speler {
 	private int geboortejaar;
 
 	public Speler(String gebruikersnaam, int geboortejaar) {
-		this.gebruikersnaam = gebruikersnaam;
-		this.geboortejaar = geboortejaar;
+		setGebruikersnaam(gebruikersnaam);
+		setGeboortejaar(geboortejaar);
 	}
 
+	private void setGebruikersnaam(String gebruikersnaam) throws IllegalArgumentException {
+		String REGEX = "^[a-z,A-Z][\\w|\\s]*";
+		if (gebruikersnaam == null || !gebruikersnaam.matches(REGEX)) {
+			throw new IllegalArgumentException(
+					"Gebruikersnaam mag enkel cijfers,letters, spaties of _ bevatten. De gebruikersnaam moet altijd starten met een letter (groot of klein)");
+		}
+		this.gebruikersnaam = gebruikersnaam;
+	}
+
+	private void setGeboortejaar(int geboortejaar) throws IllegalArgumentException {
+		int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
+		if (geboortejaar < huidigJaar - 6) {
+			throw new IllegalArgumentException("Minimum leeftijd is 6 jaar;");
+		} else if (geboortejaar > huidigJaar) {
+			throw new IllegalArgumentException("Geboortejaar is niet geldig.");
+		}
+		this.geboortejaar = geboortejaar;
+	}
 
 	public String getGebruikersnaam() {
 		return gebruikersnaam;
