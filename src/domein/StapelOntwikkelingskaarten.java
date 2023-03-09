@@ -15,6 +15,12 @@ public class StapelOntwikkelingskaarten {
 		schudDeStapel();
 	}
 
+	// Haalt de laatste kaart van de stapel: perfomanter dan de eerste kaart te
+	// verwijderen
+	public Ontwikkelingskaart haalKaartVanStapel() {
+		return ontwikkelingskaarten.remove(ontwikkelingskaarten.size() - 1);
+	}
+
 	private void maakOntwikkelingskaartenAan() {
 		switch (niveau) {
 		case EEN:

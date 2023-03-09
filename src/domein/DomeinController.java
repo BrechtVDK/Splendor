@@ -25,7 +25,7 @@ public class DomeinController {
 	}
 
 	public int geefSpelerAanDeBeurt() {
-		return 0;
+		return spel.geefSpelerAanDeBeurt();
 	}
 
 //	ik heb deze nodig voor mijn menu te kunnen doen stoppen 

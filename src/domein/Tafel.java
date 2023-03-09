@@ -22,8 +22,18 @@ public class Tafel {
 		stapelsOntwikkelingskaarten.put(Niveau.DRIE, new StapelOntwikkelingskaarten(Niveau.DRIE));
 	}
 
+	// bij start spel 4 kaarten per niveau van stapel halen en op tafel zichtbaar
+	// leggen
 	private void selecteerZichtbareKaarten() {
-		// TODO
+		for (int i = 0; i < 4; i++) {
+			zichtbareOntwikkelingskaarten[0][i] = stapelsOntwikkelingskaarten.get(Niveau.EEN).haalKaartVanStapel();
+		}
+		for (int i = 0; i < 4; i++) {
+			zichtbareOntwikkelingskaarten[1][i] = stapelsOntwikkelingskaarten.get(Niveau.TWEE).haalKaartVanStapel();
+		}
+		for (int i = 0; i < 4; i++) {
+			zichtbareOntwikkelingskaarten[2][i] = stapelsOntwikkelingskaarten.get(Niveau.DRIE).haalKaartVanStapel();
+		}
 	}
 
 }

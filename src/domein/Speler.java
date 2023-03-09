@@ -23,10 +23,8 @@ public class Speler {
 
 	private void setGeboortejaar(int geboortejaar) throws IllegalArgumentException {
 		int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
-		if (geboortejaar < huidigJaar - 6) {
+		if (geboortejaar > huidigJaar - 6) {
 			throw new IllegalArgumentException("Minimum leeftijd is 6 jaar;");
-		} else if (geboortejaar > huidigJaar) {
-			throw new IllegalArgumentException("Geboortejaar is niet geldig.");
 		}
 		this.geboortejaar = geboortejaar;
 	}

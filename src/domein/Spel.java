@@ -59,11 +59,11 @@ public class Spel {
 		}
 
 		int index = spelers.indexOf(spelerAanDeBeurt);
-		if (index == spelers.size() - 1) {
-			index = 0;
-		} else {
-			index += 1;
-		}
+		// Brecht: onderstaande code niet nodig. Zal voor een andere methode zijn, bv.
+		// stelVolgendeSpelerAanDeBeurt In
+		/*
+		 * if (index == spelers.size() - 1) { index = 0; } else { index += 1; }
+		 */
 		return index;
 	}
 
@@ -132,7 +132,7 @@ public class Spel {
 	// edelen eerst shufflen, daarna van achter naar voor verwijderen
 	private void kiesRandomEdelen(int aantal) {
 		Collections.shuffle(edelen);
-		for (int i = 10; i > aantal; i--) {
+		for (int i = 9; i >= aantal; i--) {
 			edelen.remove(i);
 		}
 	}

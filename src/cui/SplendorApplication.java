@@ -29,16 +29,17 @@ public class SplendorApplication {
 		do {
 			try {
 				int maximaleOptie = 0;
-				System.out.println("Maak een keuze uit volgende opties:\n\n");
-				System.out.printf("%10s%s%n", "Optienr.", "Omschrijving van de optie");
-				System.out.printf("%10d%s%n", 0, "Spel verlaten");
+				System.out.print("Maak een keuze uit volgende opties:\n\n");
+				// Brecht: volgende lijn code lijkt me niet nodig
+				// System.out.printf("%10s%s%n", "Optienr.", "Omschrijving van de optie");
+				System.out.printf("%d%s%n", 0, ": Spel verlaten");
 				if (keuze < 0) {
 					maximaleOptie = 1;
-					System.out.printf("%10d%s%n", 1, "Nieuw Spel spelen");
+					System.out.printf("%d%s%n", 1, ": Nieuw Spel spelen");
 				} else {
 					maximaleOptie = 2;
-					System.out.printf("%10d%s%n", 1, "Nieuw Spel spelen en alle geregistreerde spelers schrappen");
-					System.out.printf("%10d%s%n", 2, "Een speler toevoegen");
+					System.out.printf("%d%s%n", 1, ": Nieuw Spel spelen en alle geregistreerde spelers schrappen");
+					System.out.printf("%d%s%n", 2, ": Een speler toevoegen");
 				}
 				System.out.print("Maak uw keuze:\t");
 				keuze = invoer.nextInt();
@@ -52,25 +53,28 @@ public class SplendorApplication {
 			} catch (IllegalArgumentException ex) {
 				System.out.println(ex.getMessage());
 			} catch (Exception e) {
-				System.err.println("ExceptionClass: " +e.getClass() + " - Message: " + e.getMessage());
+				System.err.println("ExceptionClass: " + e.getClass() + " - Message: " + e.getMessage());
 				StackTraceElement[] elements = e.getStackTrace();
 				for (int i = elements.length - 1; i >= 0; i--) {
 					System.err.println("Filename: " + elements[i].getFileName() + " (class: "
-						+ elements[i].getClassName() + ")\n- linenr: " + elements[i].getLineNumber()
-						+ " >> method: " + elements[i].getMethodName());
-			          }
+							+ elements[i].getClassName() + ")\n- linenr: " + elements[i].getLineNumber()
+							+ " >> method: " + elements[i].getMethodName());
+				}
 				gelukt = true;
 			} finally {
-				
-				if (gelukt == false) invoer.nextLine(); 
-					else invoer.close();
+
+				if (gelukt == false) {
+					invoer.nextLine();
+				} else {
+					// Brecht: in commentaar gezet, cui werkte anders niet
+					// invoer.close();
+				}
 			}
 		} while (!gelukt);
 
 	}
 
 	private void keuzeTree(int keuze2) {
-		// TODO Auto-generated method stub
 
 	}
 

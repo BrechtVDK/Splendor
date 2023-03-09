@@ -6,8 +6,10 @@ public class SpelerComparator implements Comparator<Speler> {
 
 	@Override
 	public int compare(Speler s1, Speler s2) {
-		int vergelijkGeboortejaar = s1.getGeboortejaar() - s2.getGeboortejaar();
-		int vergelijkGebruikersnaam = s1.getGebruikersnaam().length() - s2.getGebruikersnaam().length();
+		// Brecht: s2 en s1 omgewisseld --> jongste speler
+		int vergelijkGeboortejaar = s2.getGeboortejaar() - s1.getGeboortejaar();
+		// Brecht: s2 en s1 omgewisseld --> langste gebruikersnaam
+		int vergelijkGebruikersnaam = s2.getGebruikersnaam().length() - s1.getGebruikersnaam().length();
 
 		StringBuilder st1r = new StringBuilder(s1.getGebruikersnaam());
 		StringBuilder st2r = new StringBuilder(s2.getGebruikersnaam());
