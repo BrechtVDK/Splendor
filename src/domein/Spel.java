@@ -72,13 +72,11 @@ public class Spel {
 		spelerAanDeBeurt = spelers.get(0);
 	}
 
-<<<<<<< Upstream, based on branch 'main' of git@github.com:HoGentTIProjecten1/splendor-g119.git
 	// Ik mis nog deze methode om zo uit het menu te geraken
 	public int geefAantalSpelers() {
 		return spelers.size();
 	}
 
-=======
 	// 5 instanties van StapelEdelsteenfiches aanmaken en verzamelen in HashMap
 	// stapelsEdelsteenfiches
 	private void maakStapelsEdelsteenfichesAan() {
@@ -91,7 +89,7 @@ public class Spel {
 		stapelsEdelsteenfiches.put(Edelsteen.ROOD, new StapelEdelsteenfiches(Edelsteen.ROOD));
 	}
 
-	// 10 instanties van Edelen aanmaken en verzamelen in Set
+	// 10 instanties van Edelen aanmaken en verzamelen in List
 	private void maakEdelenAan() {
 		edelen = new ArrayList<>();
 		edelen.add(new Edele(maakArrayEdelsteenfiches(0, 4, 0, 4, 0)));
@@ -138,6 +136,5 @@ public class Spel {
 			edelen.remove(i);
 		}
 	}
->>>>>>> a9a46b5 implementatie DCD
 
 }
