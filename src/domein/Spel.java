@@ -21,6 +21,14 @@ public class Spel {
 		spelers = new ArrayList<>();
 	}
 
+	public List<Edele> getEdelen() {
+		return edelen;
+	}
+
+	public Speler getSpelerAanDeBeurt() {
+		return spelerAanDeBeurt;
+	}
+
 	public void voegSpelerToe(Speler speler) throws IllegalArgumentException {
 		if (spelers.indexOf(speler) != -1) {
 			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
@@ -28,6 +36,8 @@ public class Spel {
 		if (speler != null) {
 			spelers.add(speler);
 		}
+		else
+			throw new NullPointerException("De speler bestaat niet in de database");
 	}
 
 	public void organiseerSpelVolgensHetAantalSpelers() {

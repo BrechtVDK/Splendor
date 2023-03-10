@@ -6,6 +6,8 @@ import java.util.Objects;
 public class Speler {
 	private String gebruikersnaam;
 	private int geboortejaar;
+	private final static int MINIMUMLEEFTIJD = 6;
+	private final static int MINIMUMGEBOORTEJAAR = 1900;
 
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
@@ -23,7 +25,10 @@ public class Speler {
 
 	private void setGeboortejaar(int geboortejaar) throws IllegalArgumentException {
 		int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
-		if (geboortejaar > huidigJaar - 6) {
+		if (geboortejaar < 1900) {
+			throw new IllegalArgumentException("Gelieve een geldig geboortejaar in te geven");
+		}
+		if (geboortejaar > huidigJaar - MINIMUMLEEFTIJD) {
 			throw new IllegalArgumentException("Minimum leeftijd is 6 jaar;");
 		}
 		this.geboortejaar = geboortejaar;
@@ -37,8 +42,6 @@ public class Speler {
 		return geboortejaar;
 	}
 
-	// hier zou ik de vergelijking uitwerken om de startspeler te kunnen selecteren
-	// #Jonas
 	@Override
 	public int hashCode() {
 		return Objects.hash(geboortejaar, gebruikersnaam);

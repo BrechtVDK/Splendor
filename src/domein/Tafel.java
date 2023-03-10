@@ -14,6 +14,11 @@ public class Tafel {
 		selecteerZichtbareKaarten();
 	}
 
+	public Ontwikkelingskaart[][] getZichtbareOntwikkelingskaarten() {
+		return zichtbareOntwikkelingskaarten;
+	}
+
+
 	// Per niveau (3) stapelOntwikkelingskaarten aanmaken en verzamelen in HashMap
 	private void maakStapelsOntwikkelingskaartenAan() {
 		stapelsOntwikkelingskaarten = new HashMap<Niveau, StapelOntwikkelingskaarten>();
@@ -35,5 +40,6 @@ public class Tafel {
 			zichtbareOntwikkelingskaarten[2][i] = stapelsOntwikkelingskaarten.get(Niveau.DRIE).haalKaartVanStapel();
 		}
 	}
+
 
 }

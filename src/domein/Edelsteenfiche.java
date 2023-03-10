@@ -6,4 +6,9 @@ public class Edelsteenfiche {
 	public Edelsteenfiche(Edelsteen edelsteen) {
 		this.edelsteen = edelsteen;
 	}
+
+	public Edelsteen getEdelsteen() {
+		return edelsteen;
+	}
+
 }
