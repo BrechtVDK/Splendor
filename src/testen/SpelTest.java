@@ -84,4 +84,16 @@ class SpelTest {
 		Assertions.assertEquals("Karel", spel.getSpelerAanDeBeurt().getGebruikersnaam());
 	}
 
+	@Test
+	public void geefSpelerAanDeBeurt_SpelersMetGelijkeGeboortejarenEnLengteNaam_oorspronkelijkeVolgordeSpelersBlijftGelijk() {
+		spel.voegSpelerToe(new Speler("Filip", 1980));
+		spel.voegSpelerToe(new Speler("Karel", 1980));
+		spel.voegSpelerToe(new Speler("Joris", 1980));
+		spel.voegSpelerToe(new Speler("David", 1980));
+
+		int index = spel.geefSpelerAanDeBeurt();
+
+		Assertions.assertEquals("Filip", spel.getSpelers().get(0).getGebruikersnaam());
+	}
+
 }

@@ -29,18 +29,32 @@ public class Spel {
 		return spelerAanDeBeurt;
 	}
 
-	public void voegSpelerToe(Speler speler) throws IllegalArgumentException {
+	public List<Speler> getSpelers() {
+		return spelers;
+	}
+
+	//Jonas: ben niet zeker van de soort Exception voor de controle op het maximum aantal spelers
+	public void voegSpelerToe(Speler speler) {
 		if (spelers.indexOf(speler) != -1) {
 			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
 		}
-		if (speler != null) {
-			spelers.add(speler);
-		}
-		else
+		
+		if (speler.equals(null)) {
 			throw new NullPointerException("De speler bestaat niet in de database");
+		}
+		if (spelers.size()>4) {
+			throw new IllegalArgumentException("Teveel spelers toegevoegd");
+		}
+		spelers.add(speler);
+	
+			
 	}
 
+	//Jonas: ook hier niet zeker van de soort Exception
 	public void organiseerSpelVolgensHetAantalSpelers() {
+		if (spelers.size() <2) {
+			throw new IllegalArgumentException("Spel moet gespeeld worden door minimum 2 spelers");
+		}
 		int aantalSpelers = spelers.size();
 		switch (aantalSpelers) {
 		// 3 edelen 4 fiches
@@ -78,8 +92,9 @@ public class Spel {
 	}
 
 	private void kiesStartSpeler() {
-		Collections.sort(spelers, new SpelerComparator());
-		spelerAanDeBeurt = spelers.get(0);
+		List<Speler> kopieVanSpelers = new ArrayList<>(spelers);
+		Collections.sort(kopieVanSpelers, new SpelerComparator());
+		spelerAanDeBeurt = kopieVanSpelers.get(0);
 	}
 
 	// Ik mis nog deze methode om zo uit het menu te geraken
