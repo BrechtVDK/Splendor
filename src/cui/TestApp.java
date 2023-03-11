@@ -15,7 +15,7 @@ public class TestApp {
 		dc.voegSpelerToeAanSpel("Brecht", 1993);
 
 		dc.voegSpelerToeAanSpel("David", 1975);
-		// dc.voegSpelerToeAanSpel("Sonia", 1985);
+		dc.voegSpelerToeAanSpel("Sonia", 1985);
 		dc.organiseerSpelVolgensHetAantalSpelers();
 		int speler = dc.geefSpelerAanDeBeurt();
 		System.out.println(speler);

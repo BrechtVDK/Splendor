@@ -19,9 +19,6 @@ public class SpelerRepository {
 		// aan spel als deze niet bestaat
 		return spelerMap.geefSpeler(gebruikersnaam, geboortejaar);
 
-		// Brecht: om TestApp te gebruiken onderstaande uit commentaar halen,
-		// bovenstaande in commentaar
-		// return (new Speler(gebruikersnaam, geboortejaar));
 	}
 
 }

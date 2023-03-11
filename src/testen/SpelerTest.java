@@ -19,6 +19,7 @@ class SpelerTest {
 
 
 	// jonas: weet niet goed of je 2x mag testen binnen één methode
+	// Brecht: mag zeker
 	@ParameterizedTest
 	@ValueSource(strings = { "abc", "a bc", "abc ", "a_b", "ABc", "a12", "Aa 1_3", GELDIGE_GEBRUIKERSNAAM })
 	public void maakSpeler_geldigGeboortejaar_GeldigeGebruikersnaam_maaktSpeler(String naam) {
