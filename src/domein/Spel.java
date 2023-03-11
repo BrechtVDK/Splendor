@@ -34,6 +34,8 @@ public class Spel {
 	}
 
 	//Jonas: ben niet zeker van de soort Exception voor de controle op het maximum aantal spelers
+	// > Brecht: IllegalArgument ok voor mij, eigen exceptionklasse kan ook maar
+	// lijkt me niet echt nodig
 	public void voegSpelerToe(Speler speler) {
 		if (spelers.indexOf(speler) != -1) {
 			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");

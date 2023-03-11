@@ -11,10 +11,11 @@ public class TestApp {
 		this.dc = dc;
 
 		dc.startNieuwSpel();
-		dc.voegSpelerToeAanSpel("Brecht", 1989);
-		dc.voegSpelerToeAanSpel("Jonasa", 1989);
+		dc.voegSpelerToeAanSpel("Jonas", 1989);
+		dc.voegSpelerToeAanSpel("Brecht", 1993);
+
 		dc.voegSpelerToeAanSpel("David", 1975);
-		dc.voegSpelerToeAanSpel("Sonia_df", 1975);
+		// dc.voegSpelerToeAanSpel("Sonia", 1985);
 		dc.organiseerSpelVolgensHetAantalSpelers();
 		int speler = dc.geefSpelerAanDeBeurt();
 		System.out.println(speler);

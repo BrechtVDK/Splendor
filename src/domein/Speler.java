@@ -29,7 +29,7 @@ public class Speler {
 			throw new IllegalArgumentException("Gelieve een geldig geboortejaar in te geven");
 		}
 		if (geboortejaar > huidigJaar - MINIMUMLEEFTIJD) {
-			throw new IllegalArgumentException("Minimum leeftijd is 6 jaar;");
+			throw new IllegalArgumentException(String.format("Minimum leeftijd is %d jaar;", MINIMUMLEEFTIJD));
 		}
 		this.geboortejaar = geboortejaar;
 	}
