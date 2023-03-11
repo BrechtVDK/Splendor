@@ -6,8 +6,6 @@ import java.util.List;
 import domein.DomeinController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 
 public class EdelenScherm extends HBox {
 	private DomeinController dc;
@@ -22,8 +20,7 @@ public class EdelenScherm extends HBox {
 		this.dc = dc;
 		this.setSpacing(10);
 
-		Region spring = new Region();
-		HBox.setHgrow(spring, Priority.ALWAYS);
+
 
 		List<Label> edelen = new ArrayList<>();
 
@@ -33,7 +30,7 @@ public class EdelenScherm extends HBox {
 
 		for (Label edele : edelen) {
 			edele.setMaxWidth(100);
-			edele.setPrefSize(500, 150);
+			edele.setPrefSize(500, 100);
 			this.getChildren().add(edele);
 			edele.getStyleClass().add("edele");
 		}

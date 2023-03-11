@@ -18,6 +18,8 @@ public class Hoofdscherm extends GridPane {
 		this.setPrefSize(1080, 800);
 
 		this.setPadding(new Insets(25));
+		this.setVgap(25);
+		this.setHgap(25);
 
 		edelenScherm = new EdelenScherm(dc, aantalSpelers);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc, aantalSpelers);

@@ -29,7 +29,7 @@
 	-fx-text-alignment: center;
 }
 
-.edele {
+.edele, .ontwikkelingskaart {
 	-fx-border-color: black;
 	-fx-border-radius: 10px;
 }
