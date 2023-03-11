@@ -14,6 +14,7 @@ public class StartUpGui extends Application {
 
 		Scene scene = new Scene(new Hoofdscherm(dc));
 
+		scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 		primaryStage.setTitle("Splendor");
 		primaryStage.setScene(scene);
 		primaryStage.show();

@@ -1,0 +1,35 @@
+#smaragd {
+  -fx-background-color: green;
+ 
+}
+
+#diamant {
+	-fx-background-color: white;
+}
+
+#saffier {
+	-fx-background-color: blue;
+}
+
+#onyx {
+	-fx-background-color: black;
+}
+
+#robijn {
+	-fx-background-color: red;
+}
+
+.edelsteenfiche {
+	-fx-shape: "M 100, 100
+        m -75, 0
+        a 75,75 0 1,0 150,0
+        a 75,75 0 1,0 -150,0";
+ 	-fx-border-width: 1px;
+	-fx-border-color: black;
+	-fx-text-alignment: center;
+}
+
+.edele {
+	-fx-border-color: black;
+	-fx-border-radius: 10px;
+}
