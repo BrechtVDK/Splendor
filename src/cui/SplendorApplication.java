@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import domein.DomeinController;
 
+/*David 20230312 - Ik werk hier morgen verder aan.
+ * probleem zat hem bij het closen van de scanners. Heb die eruit gehaald en nu werkt het wel*/
 public class SplendorApplication {
 
 	private final DomeinController dc;
