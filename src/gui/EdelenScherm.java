@@ -16,7 +16,7 @@ public class EdelenScherm extends HBox {
 	private Label lblEdele4;
 	private Label lblEdele5;
 
-	public EdelenScherm(DomeinController dc, int aantalSpelers) {
+	public EdelenScherm(DomeinController dc) {
 		this.dc = dc;
 		this.setSpacing(25);
 
@@ -24,7 +24,7 @@ public class EdelenScherm extends HBox {
 
 		List<Label> edelen = new ArrayList<>();
 
-		for (int i = 0; i < aantalSpelers + 1; i++) {
+		for (int i = 0; i < dc.geefAantalSpelers() + 1; i++) {
 			edelen.add(new Label(String.format("Edele%d", i + 1)));
 		}
 

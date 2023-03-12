@@ -36,7 +36,7 @@ public class Spel {
 	//Jonas: ben niet zeker van de soort Exception voor de controle op het maximum aantal spelers
 	// > Brecht: IllegalArgument ok voor mij, eigen exceptionklasse kan ook maar
 	// lijkt me niet echt nodig
-	public void voegSpelerToe(Speler speler) {
+	public void voegSpelerToe(Speler speler) throws IllegalArgumentException, NullPointerException {
 		if (spelers.indexOf(speler) != -1) {
 			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
 		}
@@ -44,8 +44,8 @@ public class Spel {
 		if (speler.equals(null)) {
 			throw new NullPointerException("De speler bestaat niet in de database");
 		}
-		if (spelers.size()>4) {
-			throw new IllegalArgumentException("Teveel spelers toegevoegd");
+		if (spelers.size() >= 4) {
+			throw new IllegalArgumentException("Max 4 spelers!");
 		}
 		spelers.add(speler);
 	
@@ -53,7 +53,7 @@ public class Spel {
 	}
 
 	//Jonas: ook hier niet zeker van de soort Exception
-	public void organiseerSpelVolgensHetAantalSpelers() {
+	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
 		if (spelers.size() <2) {
 			throw new IllegalArgumentException("Spel moet gespeeld worden door minimum 2 spelers");
 		}
@@ -104,9 +104,9 @@ public class Spel {
 		return spelers.size();
 	}
 
-	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
-	public String[][] geefStringOntwikkelingskaarten() {
-		return tafel.geefStringOntwikkelingskaarten();
+
+	public Ontwikkelingskaart[][] geefZichtbareOntwikkelingskaarten() {
+		return tafel.getZichtbareOntwikkelingskaarten();
 	}
 
 	// 5 instanties van StapelEdelsteenfiches aanmaken en verzamelen in HashMap

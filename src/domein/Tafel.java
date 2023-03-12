@@ -41,18 +41,4 @@ public class Tafel {
 		}
 	}
 
-	// Jonas: geeft array van strings terug, nodig voor aanmaken zichtbare kaarten
-	// gui
-	public String[][] geefStringOntwikkelingskaarten() {
-		String[][] kaarten = new String[3][4];
-		for (int rij = 0; rij < 3; rij++) {
-			for (int kolom = 0; kolom < 4; kolom++) {
-				kaarten[rij][kolom] = zichtbareOntwikkelingskaarten[rij][kolom].toString();
-			}
-		}
-
-		return kaarten;
-	}
-
-
 }

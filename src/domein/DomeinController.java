@@ -12,15 +12,14 @@ public class DomeinController {
 		spel = new Spel();
 	}
 
-	public void voegSpelerToeAanSpel(String gebruikersnaam, int geboortejaar) throws IllegalArgumentException {
-		// Brecht: try catch voor correcte input gebruikersnaam en int voorzien in cui
-		// en gui
-		// TODO try catch voorzien voor dubbele speler
+	public void voegSpelerToeAanSpel(String gebruikersnaam, int geboortejaar)
+			throws IllegalArgumentException, NullPointerException {
+
 		spel.voegSpelerToe(spelerRepo.geefSpeler(gebruikersnaam, geboortejaar));
 
 	}
 
-	public void organiseerSpelVolgensHetAantalSpelers() {
+	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
 		spel.organiseerSpelVolgensHetAantalSpelers();
 	}
 
@@ -38,8 +37,15 @@ public class DomeinController {
 	}
 
 	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
-	public String[][] geefStringOntwikkelingskaarten() {
-		return spel.geefStringOntwikkelingskaarten();
+	public String[][] geefZichtbareOntwikkelingskaarten() {
+		Ontwikkelingskaart[][] zichtbareOntwikkelingskaarten = spel.geefZichtbareOntwikkelingskaarten();
+		String[][] kaarten = new String[3][4];
+		for (int rij = 0; rij < 3; rij++) {
+			for (int kolom = 0; kolom < 4; kolom++) {
+				kaarten[rij][kolom] = zichtbareOntwikkelingskaarten[rij][kolom].toString();
+			}
+		}
+		return kaarten;
 	}
 
 }

@@ -6,9 +6,6 @@ import javafx.scene.layout.VBox;
 
 public class EdelsteenFicheScherm extends VBox {
 	private DomeinController dc;
-	// Jonas: om te testen voorlopig aantalspelers is 4, moet uiteindelijk uit
-	// domein komen, zie constructor
-	private int aantalspelers = 4;
 
 	private Button btnDiamant;
 	private Button btnRobijn;
@@ -16,7 +13,7 @@ public class EdelsteenFicheScherm extends VBox {
 	private Button btnSmaragd;
 	private Button btnOnyx;
 
-	public EdelsteenFicheScherm(DomeinController dc, int aantalSpelers) {
+	public EdelsteenFicheScherm(DomeinController dc) {
 		this.dc = dc;
 
 		this.setSpacing(10);

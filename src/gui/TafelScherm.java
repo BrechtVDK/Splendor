@@ -50,7 +50,7 @@ public class TafelScherm extends GridPane {
 	}
 
 	private void geefHuidigeTafelWeer() {
-		String[][] kaarten = dc.geefStringOntwikkelingskaarten();
+		String[][] kaarten = dc.geefZichtbareOntwikkelingskaarten();
 
 		for (int rij = 0; rij < kaarten.length; rij++) {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
