@@ -98,6 +98,8 @@ public class SpelerRegistratieScherm extends GridPane {
 	}
 
 	private void startSpelGeklikt(ActionEvent event) {
+		toonStartspeler();
+
 		Stage stage = (Stage) this.getScene().getWindow();
 		double breedte = this.getScene().getWidth();
 		double hoogte = this.getScene().getHeight();
@@ -106,6 +108,15 @@ public class SpelerRegistratieScherm extends GridPane {
 		Scene scene = new Scene(new Hoofdscherm(dc, ws, spelers), breedte, hoogte);
 		scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 		stage.setScene(scene);
+	}
+
+	private void toonStartspeler() {
+		String startspeler = spelers.get(dc.geefSpelerAanDeBeurt());
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Startspeler");
+		alert.setContentText("Speler \"" + startspeler + "\" mag starten");
+		alert.showAndWait();
+
 	}
 
 	private void toonFoutmelding(String melding) {
