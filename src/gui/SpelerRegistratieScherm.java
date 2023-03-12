@@ -22,7 +22,6 @@ public class SpelerRegistratieScherm extends GridPane {
 	private WelkomScherm ws;
 	private TextField txtGebruikersnaam, txtGeboortejaar;
 	private Button btnStartSpel;
-	private int aantalSpelersToegevoegd;
 	private List<String> spelers;
 	private ListView<String> lvSpelers;
 
@@ -76,14 +75,12 @@ public class SpelerRegistratieScherm extends GridPane {
 			String gebruikersnaam = txtGebruikersnaam.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar.getText());
 			dc.voegSpelerToeAanSpel(gebruikersnaam, geboortejaar);
-			aantalSpelersToegevoegd++;
 			// >=2 spelers: btnStartSpel klikbaar
-			if (aantalSpelersToegevoegd >= 2) {
+			if (dc.geefAantalSpelers() >= 2) {
 				btnStartSpel.setDisable(false);
 			}
 			// speler toevoegen aan lijst
-			String speler = String.format("%s - %d", gebruikersnaam, geboortejaar);
-			spelers.add(speler);
+			spelers.add(String.format("%s - %d", gebruikersnaam, geboortejaar));
 			// speler zichtbaar in listview maken
 			updateSpelersLijst();
 		} catch (NumberFormatException e) {
