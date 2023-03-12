@@ -18,7 +18,8 @@ public class SplendorApplication {
 		// Geeft het keuze menu weer
 		do {
 			menu();
-			keuzeTree(geefKeuze());
+			geefKeuze();
+			keuzeTree(keuze);
 		} while (keuze != 0);
 	}
 
@@ -43,7 +44,7 @@ public class SplendorApplication {
 		System.out.print("Maak uw keuze:\t");
 	}
 
-	private int geefKeuze() {
+	private void geefKeuze() {
 		Scanner invoer = new Scanner(System.in);
 		boolean gelukt = false;
 		int maximaleOptie = 0;
@@ -78,14 +79,14 @@ public class SplendorApplication {
 			} finally {
 
 				if (!gelukt) {
-					invoer.nextLine();
-				} else {
+					if (invoer.hasNext())
+						invoer.nextLine();
+				} // else {
 					// Brecht: in commentaar gezet, cui werkte anders niet
-					invoer.close();
-				}
+					// invoer.close();
+					// }
 			}
 		} while (!gelukt);
-		return keuze;
 	}
 
 
@@ -94,46 +95,61 @@ public class SplendorApplication {
 		switch (optie) {
 		case 1 -> {
 			dc.startNieuwSpel();
+//			dc.voegSpelerToeAanSpel("David", 1975);
 			voegSpelerToeAanSpel();
 		}
 		case 2 -> {
 			if (aantalSpelers == 4) {
 				dc.geefSpelerAanDeBeurt();
 			} else {
-				dc.voegSpelerToeAanSpel(null, optie);
+				voegSpelerToeAanSpel();
+//				dc.voegSpelerToeAanSpel("Brecht", 1993);
 			}
 		}
 		case 3 -> dc.geefSpelerAanDeBeurt();
-//		default ->
-//		throw new IllegalArgumentException("Unexpected value: " + optie);
 		}
 
 	}
 
 	private void voegSpelerToeAanSpel() {
-		Scanner invoerGebruiker = new Scanner(System.in);
-		String gebruikersnaam = "";
-		int geboortejaar = 0;
 		boolean gelukt = false;
+		Scanner invoerGebruiker = new Scanner(System.in);
 
 		do {
 			try {
-//				System.out.println("Geef de gebruikersnaam:\t");
-//				gebruikersnaam = invoerGebruiker.nextLine();
+				System.out.print("Geef de gebruikersnaam:\t");
+				String gnaam = invoerGebruiker.next();
 				System.out.print("Geef het geboortejaar van de gebruiker:\t");
-				geboortejaar = invoerGebruiker.nextInt();
-				dc.voegSpelerToeAanSpel(gebruikersnaam, geboortejaar);
+				int gjaar = invoerGebruiker.nextInt();
+				dc.voegSpelerToeAanSpel(gnaam, gjaar);
 				gelukt = true;
 			} catch (IllegalArgumentException ea) {
 				System.err.println(ea.getMessage());
 			} catch (NoSuchElementException noe) {
-				// TODO: handle exception
+				System.err.println("ExceptionClass: " + noe.getClass() + " - Message: " + noe.getMessage());
+				StackTraceElement[] elements = noe.getStackTrace();
+				for (int i = elements.length - 1; i >= 0; i--) {
+					System.err.println("Filename: " + elements[i].getFileName() + " (class: "
+							+ elements[i].getClassName() + ")\n- linenr: " + elements[i].getLineNumber()
+							+ " >> method: " + elements[i].getMethodName());
+				}
+				gelukt = true;
+			} catch (Exception e) {
+				System.err.println("ExceptionClass: " + e.getClass() + " - Message: " + e.getMessage());
+				StackTraceElement[] elements = e.getStackTrace();
+				for (int i = elements.length - 1; i >= 0; i--) {
+					System.err.println("Filename: " + elements[i].getFileName() + " (class: "
+							+ elements[i].getClassName() + ")\n- linenr: " + elements[i].getLineNumber()
+							+ " >> method: " + elements[i].getMethodName());
+				}
+				gelukt = true;
+
 			} finally {
 				if (!gelukt) {
 					if (invoerGebruiker.hasNext())
 						invoerGebruiker.nextLine();
-				} else
-					invoerGebruiker.close();
+				} // else
+//					invoerGebruiker.close();
 			}
 		} while (!gelukt);
 	}
