@@ -28,9 +28,13 @@ public class DomeinController {
 		return spel.geefSpelerAanDeBeurt();
 	}
 
-//	ik heb deze nodig voor mijn menu te kunnen doen stoppen 
+//	David: ik heb deze nodig voor mijn menu te kunnen doen stoppen 
 	public int geefAantalSpelers() {
-		return spel.geefAantalSpelers();
+		try {
+			return spel.geefAantalSpelers();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui

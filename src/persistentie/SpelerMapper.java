@@ -40,12 +40,13 @@ public class SpelerMapper {
 			try (ResultSet rs = query.executeQuery()) {
 				if (rs.next()) {
 					speler = new Speler(gebruikersnaam, geboortejaar);
+					return speler;
 				}
 			}
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		}
-		return speler;
+		return null;
 	}
 
 }
