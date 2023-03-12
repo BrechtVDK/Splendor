@@ -47,10 +47,12 @@ public class SpelerRegistratieScherm extends GridPane {
 		txtGeboortejaar.setOnAction(this::voegToeGeklikt);
 
 		Button btnVoegToe = new Button("voeg toe");
+		btnVoegToe.setMinWidth(150);
 		btnVoegToe.setOnAction(this::voegToeGeklikt);
 
 		btnStartSpel = new Button("start spel");
 		// Pas klikbaar na toevoegen 2 spelers
+		btnStartSpel.setMinWidth(150);
 		btnStartSpel.setDisable(true);
 		btnStartSpel.setOnAction(this::startSpelGeklikt);
 
