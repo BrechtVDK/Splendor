@@ -33,4 +33,9 @@ public class DomeinController {
 		return spel.geefAantalSpelers();
 	}
 
+	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
+	public String[][] geefStringOntwikkelingskaarten() {
+		return spel.geefStringOntwikkelingskaarten();
+	}
+
 }

@@ -11,4 +11,9 @@ public class Edelsteenfiche {
 		return edelsteen;
 	}
 
+	@Override
+	public String toString() {
+		return edelsteen.toString();
+	}
+
 }

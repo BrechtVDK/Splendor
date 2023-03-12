@@ -17,7 +17,11 @@ public class SpelerRepository {
 		// gereturned. Op te lossen bij de aanroeper als nullpointException.
 		// Jonas: heb dit in klasse spel bijgevoegd; speler kan niet toegevoegd worden
 		// aan spel als deze niet bestaat
+
 		return spelerMap.geefSpeler(gebruikersnaam, geboortejaar);
+
+		// Jonas: onderstaade moet uit commentaar om de gui te kunnen gebruiken;
+		// return new Speler(gebruikersnaam, geboortejaar);
 
 	}
 

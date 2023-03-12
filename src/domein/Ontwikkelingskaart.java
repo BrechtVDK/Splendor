@@ -24,4 +24,13 @@ public class Ontwikkelingskaart {
 		return edelsteenfiches;
 	}
 
+	@Override
+	public String toString() {
+
+		String fiches = "";
+		for (Edelsteenfiche fiche : edelsteenfiches) {
+			fiches += "," + fiche.toString();
+		}
+		return String.format("%d,%s%s", prestigePunten, bonus, fiches);
+	}
 }

@@ -18,7 +18,7 @@ public class EdelenScherm extends HBox {
 
 	public EdelenScherm(DomeinController dc, int aantalSpelers) {
 		this.dc = dc;
-		this.setSpacing(10);
+		this.setSpacing(25);
 
 
 

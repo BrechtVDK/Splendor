@@ -20,4 +20,9 @@ public enum Edelsteen {
 		return soort;
 	}
 
+	@Override
+	public String toString() {
+		return soort;
+	}
+
 }

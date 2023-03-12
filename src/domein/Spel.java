@@ -104,6 +104,11 @@ public class Spel {
 		return spelers.size();
 	}
 
+	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
+	public String[][] geefStringOntwikkelingskaarten() {
+		return tafel.geefStringOntwikkelingskaarten();
+	}
+
 	// 5 instanties van StapelEdelsteenfiches aanmaken en verzamelen in HashMap
 	// stapelsEdelsteenfiches
 	private void maakStapelsEdelsteenfichesAan() {

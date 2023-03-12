@@ -31,14 +31,27 @@ public class Tafel {
 	// leggen
 	private void selecteerZichtbareKaarten() {
 		for (int i = 0; i < 4; i++) {
-			zichtbareOntwikkelingskaarten[0][i] = stapelsOntwikkelingskaarten.get(Niveau.EEN).haalKaartVanStapel();
+			zichtbareOntwikkelingskaarten[2][i] = stapelsOntwikkelingskaarten.get(Niveau.EEN).haalKaartVanStapel();
 		}
 		for (int i = 0; i < 4; i++) {
 			zichtbareOntwikkelingskaarten[1][i] = stapelsOntwikkelingskaarten.get(Niveau.TWEE).haalKaartVanStapel();
 		}
 		for (int i = 0; i < 4; i++) {
-			zichtbareOntwikkelingskaarten[2][i] = stapelsOntwikkelingskaarten.get(Niveau.DRIE).haalKaartVanStapel();
+			zichtbareOntwikkelingskaarten[0][i] = stapelsOntwikkelingskaarten.get(Niveau.DRIE).haalKaartVanStapel();
 		}
+	}
+
+	// Jonas: geeft array van strings terug, nodig voor aanmaken zichtbare kaarten
+	// gui
+	public String[][] geefStringOntwikkelingskaarten() {
+		String[][] kaarten = new String[3][4];
+		for (int rij = 0; rij < 3; rij++) {
+			for (int kolom = 0; kolom < 4; kolom++) {
+				kaarten[rij][kolom] = zichtbareOntwikkelingskaarten[rij][kolom].toString();
+			}
+		}
+
+		return kaarten;
 	}
 
 

@@ -18,11 +18,11 @@ public class TafelScherm extends GridPane {
 		this.setHgap(25);
 
 		stelOpmaakStapelsIn();
+		geefHuidigeTafelWeer();
 
-		String[] test = { "test", "test", "test" };
 
-		this.add(new FXOntwikkelingskaart("1", "robijn", test), 1, 0);
-		this.add(new FXOntwikkelingskaart("0", "diamant", test), 2, 0);
+
+
 
 	}
 
@@ -43,9 +43,20 @@ public class TafelScherm extends GridPane {
 		lblStapelNiveau2.getStyleClass().add("ontwikkelingskaart");
 		lblStapelNiveau3.getStyleClass().add("ontwikkelingskaart");
 
-		this.add(lblStapelNiveau1, 0, 0);
+		this.add(lblStapelNiveau3, 0, 0);
 		this.add(lblStapelNiveau2, 0, 1);
-		this.add(lblStapelNiveau3, 0, 2);
+		this.add(lblStapelNiveau1, 0, 2);
+
 	}
 
+	private void geefHuidigeTafelWeer() {
+		String[][] kaarten = dc.geefStringOntwikkelingskaarten();
+
+		for (int rij = 0; rij < kaarten.length; rij++) {
+			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
+				this.add(new FXOntwikkelingskaart(kaarten[rij][kolom]), kolom + 1, rij);
+			}
+		}
+
+	}
 }

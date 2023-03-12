@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 public class StartUpGui extends Application {
 
+	// om dit te kunne runnen moet in de spelerRepo nog iets uit commentaar gehaald
+	// worden;
+
 	@Override
 	public void start(Stage primaryStage) {
 		DomeinController dc = new DomeinController();
