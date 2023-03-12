@@ -38,7 +38,8 @@ public class SplendorApplication {
 		}
 		if (aantalSpelers >= 1 && aantalSpelers < 4) {
 			System.out.printf("%d:\t%s%n", 2, "Een speler toevoegen");
-		} else if (aantalSpelers >= 2 && aantalSpelers < 4) {
+		}
+		if (aantalSpelers >= 2 && aantalSpelers < 4) {
 			System.out.printf("%d:\t%s%n", 3, "Start spel");
 		} else if (aantalSpelers == 4) {
 			System.out.printf("%d:\t%s%n", 2, "Start spel");
@@ -103,12 +104,16 @@ public class SplendorApplication {
 		case 2 -> {
 			if (aantalSpelers == 4) {
 				dc.geefSpelerAanDeBeurt();
+				keuze = 0;
 			} else {
 				voegSpelerToeAanSpel();
 //				dc.voegSpelerToeAanSpel("Brecht", 1993);
 			}
 		}
-		case 3 -> dc.geefSpelerAanDeBeurt();
+		case 3 -> {
+			dc.geefSpelerAanDeBeurt();
+			keuze = 0;
+		}
 		}
 
 	}
@@ -127,6 +132,8 @@ public class SplendorApplication {
 				gelukt = true;
 			} catch (IllegalArgumentException ea) {
 				System.err.println(ea.getMessage());
+			} catch (NullPointerException nulp) {
+				System.err.println(nulp.getMessage());
 			} catch (NoSuchElementException noe) {
 				System.err.println("ExceptionClass: " + noe.getClass() + " - Message: " + noe.getMessage());
 				StackTraceElement[] elements = noe.getStackTrace();
