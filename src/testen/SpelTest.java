@@ -30,6 +30,15 @@ class SpelTest {
 		Assertions.assertThrows(NullPointerException.class, () -> spel.voegSpelerToe(null));
 	}
 
+	@Test
+	public void voegSpelerToe_teVeelSpelers_Exception() {
+		spel.voegSpelerToe(new Speler("abc", 1950));
+		spel.voegSpelerToe(new Speler("abcd", 1951));
+		spel.voegSpelerToe(new Speler("abcde", 1952));
+		spel.voegSpelerToe(new Speler("abcdef", 1953));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> spel.voegSpelerToe(new Speler("abcdefg", 1954)));
+	}
+
 	@ParameterizedTest
 	@ValueSource(ints = { 2, 3, 4 })
 	public void organiseerSpelVolgensHetAantalSpelers_correctAantal_correctAantalEdelenInSpel(int aantalSpelers) {
