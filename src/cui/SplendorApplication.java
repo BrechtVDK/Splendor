@@ -1,7 +1,6 @@
 package cui;
 
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import domein.DomeinController;
@@ -23,6 +22,10 @@ public class SplendorApplication {
 			geefKeuze();
 			keuzeTree(keuze);
 		} while (keuze != 0);
+		if (aantalSpelers >= 2)
+			System.out.println("\n\n\t\tENJOY PLAYING SPLENDOR !!");
+		else
+			System.out.println("\n\n\t\tSEE YOU SOON !!");
 	}
 
 	private void menu() {
@@ -82,7 +85,7 @@ public class SplendorApplication {
 			} finally {
 
 				if (!gelukt) {
-					if (invoer.hasNext())
+					// if (invoer.hasNext())
 						invoer.nextLine();
 				} // else {
 					// Brecht: in commentaar gezet, cui werkte anders niet
@@ -98,22 +101,22 @@ public class SplendorApplication {
 		switch (optie) {
 		case 1 -> {
 			dc.startNieuwSpel();
-//			dc.voegSpelerToeAanSpel("David", 1975);
 			voegSpelerToeAanSpel();
 		}
 		case 2 -> {
 			if (aantalSpelers == 4) {
-				dc.geefSpelerAanDeBeurt();
+				System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefNaamSpeler(dc.geefSpelerAanDeBeurt()));
+				dc.organiseerSpelVolgensHetAantalSpelers();
 				keuze = 0;
 			} else {
 				voegSpelerToeAanSpel();
-//				dc.voegSpelerToeAanSpel("Brecht", 1993);
 			}
 		}
 		case 3 -> {
-			dc.geefSpelerAanDeBeurt();
+			System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefNaamSpeler(dc.geefSpelerAanDeBeurt()));
+			dc.organiseerSpelVolgensHetAantalSpelers();
 			keuze = 0;
-		}
+			}
 		}
 
 	}
@@ -125,24 +128,17 @@ public class SplendorApplication {
 		do {
 			try {
 				System.out.print("Geef de gebruikersnaam:\t");
-				String gnaam = invoerGebruiker.next();
+				String gnaam = invoerGebruiker.nextLine();
 				System.out.print("Geef het geboortejaar van de gebruiker:\t");
 				int gjaar = invoerGebruiker.nextInt();
 				dc.voegSpelerToeAanSpel(gnaam, gjaar);
 				gelukt = true;
 			} catch (IllegalArgumentException ea) {
-				System.err.println(ea.getMessage());
+				System.err.println(ea.getClass() + ": " + ea.getMessage());
 			} catch (NullPointerException nulp) {
-				System.err.println(nulp.getMessage());
-			} catch (NoSuchElementException noe) {
-				System.err.println("ExceptionClass: " + noe.getClass() + " - Message: " + noe.getMessage());
-				StackTraceElement[] elements = noe.getStackTrace();
-				for (int i = elements.length - 1; i >= 0; i--) {
-					System.err.println("Filename: " + elements[i].getFileName() + " (class: "
-							+ elements[i].getClassName() + ")\n- linenr: " + elements[i].getLineNumber()
-							+ " >> method: " + elements[i].getMethodName());
-				}
-				gelukt = true;
+				System.err.println(nulp.getClass() + ": " + nulp.getMessage());
+			} catch (InputMismatchException ime) {
+				System.err.println(ime.getClass() + ": geef het geboortejaar op in cijfers. ");
 			} catch (Exception e) {
 				System.err.println("ExceptionClass: " + e.getClass() + " - Message: " + e.getMessage());
 				StackTraceElement[] elements = e.getStackTrace();
@@ -155,7 +151,7 @@ public class SplendorApplication {
 
 			} finally {
 				if (!gelukt) {
-					if (invoerGebruiker.hasNext())
+					// if (invoerGebruiker.hasNext())
 						invoerGebruiker.nextLine();
 				} // else
 //					invoerGebruiker.close();

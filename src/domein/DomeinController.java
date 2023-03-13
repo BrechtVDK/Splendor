@@ -36,6 +36,12 @@ public class DomeinController {
 		}
 	}
 
+	// David gemaakt om de naam van een speler terug te krijgen naar gui of ui
+	public String geefNaamSpeler(int index) {
+		Speler spelerOpIndex = spel.getSpelers().get(index);
+		return spelerOpIndex.getGebruikersnaam();
+	}
+
 	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
 	public String[][] geefZichtbareOntwikkelingskaarten() {
 		Ontwikkelingskaart[][] zichtbareOntwikkelingskaarten = spel.geefZichtbareOntwikkelingskaarten();
