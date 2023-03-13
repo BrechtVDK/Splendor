@@ -40,9 +40,9 @@ public class Spel {
 		if (spelers.indexOf(speler) != -1) {
 			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
 		}
-		
-		if (speler.equals(null)) {
-			throw new NullPointerException("De speler bestaat niet in de database");
+		// Brecht aangepast naar == null ipv .equals(null)
+		if (speler == null) {
+			throw new NullPointerException("De speler is niet geregistreerd in de databank");
 		}
 		if (spelers.size() >= 4) {
 			throw new IllegalArgumentException("Max 4 spelers!");
