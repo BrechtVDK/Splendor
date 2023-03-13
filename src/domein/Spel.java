@@ -2,9 +2,11 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Spel {
 	private List<Speler> spelers;
@@ -95,7 +97,12 @@ public class Spel {
 
 	private void kiesStartSpeler() {
 		List<Speler> kopieVanSpelers = new ArrayList<>(spelers);
-		Collections.sort(kopieVanSpelers, new SpelerComparator());
+
+		kopieVanSpelers = spelers.stream()
+				.sorted(Comparator.comparing(Speler::getGeboortejaar)
+						.thenComparing(speler -> speler.getGebruikersnaam().length())
+						.thenComparing(Speler::getGebruikersnaam).reversed())
+				.collect(Collectors.toList());
 		spelerAanDeBeurt = kopieVanSpelers.get(0);
 	}
 

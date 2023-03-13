@@ -56,7 +56,7 @@ public class Speler {
 		if (getClass() != obj.getClass())
 			return false;
 		Speler other = (Speler) obj;
-		return geboortejaar == other.geboortejaar && Objects.equals(gebruikersnaam, other.gebruikersnaam);
+		return Objects.equals(gebruikersnaam, other.gebruikersnaam);
 	}
 
 }
