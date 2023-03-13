@@ -43,7 +43,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 		Label lblGeboortejaar = new Label("Geboortejaar");
 		txtGeboortejaar = new TextField();
-		// Enter na ingeven geboortejaar = klikken op voeg toe
+		// Enter na ingeven geboortejaar = klikken op btnVoegToe
 		txtGeboortejaar.setOnAction(this::voegToeGeklikt);
 
 		Button btnVoegToe = new Button("voeg toe");
@@ -51,15 +51,17 @@ public class SpelerRegistratieScherm extends GridPane {
 		btnVoegToe.setOnAction(this::voegToeGeklikt);
 
 		btnStartSpel = new Button("start spel");
-		// Pas klikbaar na toevoegen 2 spelers
 		btnStartSpel.setMinWidth(150);
+		// Pas klikbaar na toevoegen 2 spelers
 		btnStartSpel.setDisable(true);
 		btnStartSpel.setOnAction(this::startSpelGeklikt);
 
 		Label lblSpelers = new Label("Spelers toegevoegd aan spel:");
+
 		lvSpelers = new ListView<String>();
 		lvSpelers.setMinWidth(200);
 		lvSpelers.setMaxHeight(150);
+
 
 		this.add(lblGebruikersnaam, 0, 1);
 		this.add(txtGebruikersnaam, 1, 1);
@@ -84,7 +86,7 @@ public class SpelerRegistratieScherm extends GridPane {
 			// speler toevoegen aan lijst
 			spelers.add(String.format("%s - %d", gebruikersnaam, geboortejaar));
 			// speler zichtbaar in listview maken
-			updateSpelersLijst();
+			updateLvSpelers();
 		} catch (NumberFormatException e) {
 			toonFoutmelding("Geboortejaar is niet juist ingevuld");
 		} catch (NullPointerException e) {
@@ -95,8 +97,9 @@ public class SpelerRegistratieScherm extends GridPane {
 
 	}
 
-	private void updateSpelersLijst() {
+	private void updateLvSpelers() {
 		lvSpelers.setItems(FXCollections.observableArrayList(spelers));
+
 	}
 
 	private void startSpelGeklikt(ActionEvent event) {
