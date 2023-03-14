@@ -44,7 +44,7 @@ public class Speler {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(geboortejaar, gebruikersnaam);
+		return Objects.hash(gebruikersnaam);
 	}
 
 	@Override
@@ -58,5 +58,6 @@ public class Speler {
 		Speler other = (Speler) obj;
 		return Objects.equals(gebruikersnaam, other.gebruikersnaam);
 	}
+
 
 }

@@ -10,54 +10,66 @@ import java.util.stream.Collectors;
 
 public class Spel {
 	private List<Speler> spelers;
-	private Speler spelerAanDeBeurt;
+	private int spelerAanDeBeurt;
 	private Tafel tafel;
 	private List<Edele> edelen;
 	// hashmap: sleutel = enum Edelsteen, waarde = list Edelsteenfiches
 	private Map<Edelsteen, StapelEdelsteenfiches> stapelsEdelsteenfiches;
+	public static final int MIN_SPELERS = 2;
+	public static final int MAX_SPELERS = 4;
 
 	public Spel() {
 		maakStapelsEdelsteenfichesAan();
 		tafel = new Tafel();
 		maakEdelenAan();
 		spelers = new ArrayList<>();
+		spelerAanDeBeurt = -1;
 	}
 
 	public List<Edele> getEdelen() {
 		return edelen;
 	}
 
-	public Speler getSpelerAanDeBeurt() {
-		return spelerAanDeBeurt;
+	/*
+	 * public Speler getSpelerAanDeBeurt() { return spelers.get(spelerAanDeBeurt); }
+	 */
+	public Speler geefSpelerAanDeBeurt() {
+		if (spelerAanDeBeurt == -1) {
+			kiesStartSpeler();
+		}
+		return spelers.get(spelerAanDeBeurt);
+
 	}
+
 
 	public List<Speler> getSpelers() {
 		return spelers;
 	}
 
-	//Jonas: ben niet zeker van de soort Exception voor de controle op het maximum aantal spelers
+	// Jonas: ben niet zeker van de soort Exception voor de controle op het maximum
+	// aantal spelers
 	// > Brecht: IllegalArgument ok voor mij, eigen exceptionklasse kan ook maar
 	// lijkt me niet echt nodig
-	public void voegSpelerToe(Speler speler) throws IllegalArgumentException, NullPointerException {
+	public void voegSpelerToe(Speler speler) throws IllegalArgumentException {
+		if (speler == null) {
+			throw new IllegalArgumentException("De speler is niet geregistreerd in de databank");
+		}
 		if (spelers.indexOf(speler) != -1) {
 			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
 		}
-		// Brecht aangepast naar == null ipv .equals(null)
-		if (speler == null) {
-			throw new NullPointerException("De speler is niet geregistreerd in de databank");
-		}
-		if (spelers.size() >= 4) {
-			throw new IllegalArgumentException("Max 4 spelers!");
+
+		if (spelers.size() >= MAX_SPELERS) {
+			throw new IllegalArgumentException(String.format("Max %d spelers!", MAX_SPELERS));
 		}
 		spelers.add(speler);
-	
-			
+
 	}
 
-	//Jonas: ook hier niet zeker van de soort Exception
+	// Jonas: ook hier niet zeker van de soort Exception
 	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
-		if (spelers.size() <2) {
-			throw new IllegalArgumentException("Spel moet gespeeld worden door minimum 2 spelers");
+		if (spelers.size() < MIN_SPELERS) {
+			throw new IllegalArgumentException(
+					String.format("Spel moet gespeeld worden door minimum %d spelers", MIN_SPELERS));
 		}
 		int aantalSpelers = spelers.size();
 		switch (aantalSpelers) {
@@ -81,19 +93,7 @@ public class Spel {
 		}
 	}
 
-	public int geefSpelerAanDeBeurt() {
-		if (spelerAanDeBeurt == null) {
-			kiesStartSpeler();
-		}
 
-		int index = spelers.indexOf(spelerAanDeBeurt);
-		// Brecht: onderstaande code niet nodig. Zal voor een andere methode zijn, bv.
-		// stelVolgendeSpelerAanDeBeurt In
-		/*
-		 * if (index == spelers.size() - 1) { index = 0; } else { index += 1; }
-		 */
-		return index;
-	}
 
 	private void kiesStartSpeler() {
 		List<Speler> kopieVanSpelers = new ArrayList<>(spelers);
@@ -103,14 +103,14 @@ public class Spel {
 						.thenComparing(speler -> speler.getGebruikersnaam().length())
 						.thenComparing(Speler::getGebruikersnaam).reversed())
 				.collect(Collectors.toList());
-		spelerAanDeBeurt = kopieVanSpelers.get(0);
+		// Brecht: aangepast om int in te stellen
+		spelerAanDeBeurt = spelers.indexOf(kopieVanSpelers.get(0));
 	}
 
 	// Ik mis nog deze methode om zo uit het menu te geraken
 	public int geefAantalSpelers() {
 		return spelers.size();
 	}
-
 
 	public Ontwikkelingskaart[][] geefZichtbareOntwikkelingskaarten() {
 		return tafel.getZichtbareOntwikkelingskaarten();
@@ -175,6 +175,5 @@ public class Spel {
 			edelen.remove(i);
 		}
 	}
-
 
 }

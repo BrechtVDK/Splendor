@@ -13,7 +13,7 @@ public class DomeinController {
 	}
 
 	public void voegSpelerToeAanSpel(String gebruikersnaam, int geboortejaar)
-			throws IllegalArgumentException, NullPointerException {
+			throws IllegalArgumentException {
 
 		spel.voegSpelerToe(spelerRepo.geefSpeler(gebruikersnaam, geboortejaar));
 
@@ -23,17 +23,14 @@ public class DomeinController {
 		spel.organiseerSpelVolgensHetAantalSpelers();
 	}
 
-	public int geefSpelerAanDeBeurt() {
+	public Speler geefSpelerAanDeBeurt() {
 		return spel.geefSpelerAanDeBeurt();
 	}
 
 //	David: ik heb deze nodig voor mijn menu te kunnen doen stoppen 
 	public int geefAantalSpelers() {
-		try {
 			return spel.geefAantalSpelers();
-		} catch (Exception e) {
-			return 0;
-		}
+
 	}
 
 	// David gemaakt om de naam van een speler terug te krijgen naar gui of ui
@@ -54,4 +51,11 @@ public class DomeinController {
 		return kaarten;
 	}
 
+	public int geefMinAantalSpelers() {
+		return spel.MIN_SPELERS;
+	}
+
+	public int geefMaxAantalSpelers() {
+		return spel.MAX_SPELERS;
+	}
 }

@@ -79,8 +79,8 @@ public class SpelerRegistratieScherm extends GridPane {
 			String gebruikersnaam = txtGebruikersnaam.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar.getText());
 			dc.voegSpelerToeAanSpel(gebruikersnaam, geboortejaar);
-			// Vanaf 2 spelers: btnStartSpel klikbaar
-			if (dc.geefAantalSpelers() == 2) {
+			// Vanaf MIN_SPELERS: btnStartSpel klikbaar
+			if (dc.geefAantalSpelers() == dc.geefMinAantalSpelers()) {
 				btnStartSpel.setDisable(false);
 			}
 			// speler toevoegen aan lijst
@@ -89,8 +89,6 @@ public class SpelerRegistratieScherm extends GridPane {
 			updateLvSpelers();
 		} catch (NumberFormatException e) {
 			toonFoutmelding("Geboortejaar is niet juist ingevuld");
-		} catch (NullPointerException e) {
-			toonFoutmelding(e.getMessage());
 		} catch (IllegalArgumentException e) {
 			toonFoutmelding(e.getMessage());
 		}
