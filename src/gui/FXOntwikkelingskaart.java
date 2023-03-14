@@ -3,21 +3,21 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import domein.OntwikkelingskaartDTO;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class FXOntwikkelingskaart extends GridPane {
-	private String prestigePunten;
-	private String bonus;
+	private int prestigePunten;
+	private int bonus;
 	private List<String> edelsteenfiches;
-	private String[] kaartInfo;
 
 
-	public FXOntwikkelingskaart(String Info) {
-		kaartInfo = Info.split(",");
 
-		prestigePunten = this.kaartInfo[0];
-		bonus = kaartInfo[1];
+	public FXOntwikkelingskaart(OntwikkelingskaartDTO info) {
+
+		prestigePunten = info.getPrestigePunten();
+		bonus = info.getBonus();
 
 		edelsteenfiches = new ArrayList<>();
 

@@ -40,15 +40,9 @@ public class DomeinController {
 	}
 
 	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
-	public String[][] geefZichtbareOntwikkelingskaarten() {
-		Ontwikkelingskaart[][] zichtbareOntwikkelingskaarten = spel.geefZichtbareOntwikkelingskaarten();
-		String[][] kaarten = new String[3][4];
-		for (int rij = 0; rij < 3; rij++) {
-			for (int kolom = 0; kolom < 4; kolom++) {
-				kaarten[rij][kolom] = zichtbareOntwikkelingskaarten[rij][kolom].toString();
-			}
-		}
-		return kaarten;
+	public OntwikkelingskaartDTO[][] geefZichtbareOntwikkelingskaarten() {
+
+		return spel.geefZichtbareOntwikkelingskaarten();
 	}
 
 	public int geefMinAantalSpelers() {

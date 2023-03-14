@@ -33,4 +33,8 @@ public class Ontwikkelingskaart {
 		}
 		return String.format("%d,%s%s", prestigePunten, bonus, fiches);
 	}
+
+	public OntwikkelingskaartDTO toDTO() {
+		return new OntwikkelingskaartDTO(this.getPrestigePunten(), this.getBonus(), this.getEdelsteenfiches());
+	}
 }

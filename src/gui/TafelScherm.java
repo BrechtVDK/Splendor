@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.OntwikkelingskaartDTO;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -50,7 +51,7 @@ public class TafelScherm extends GridPane {
 	}
 
 	private void geefHuidigeTafelWeer() {
-		String[][] kaarten = dc.geefZichtbareOntwikkelingskaarten();
+		OntwikkelingskaartDTO[][] kaarten = dc.geefZichtbareOntwikkelingskaarten();
 
 		for (int rij = 0; rij < kaarten.length; rij++) {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {

@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,14 @@ public class Tafel {
 		selecteerZichtbareKaarten();
 	}
 
-	public Ontwikkelingskaart[][] getZichtbareOntwikkelingskaarten() {
-		return zichtbareOntwikkelingskaarten;
+	public OntwikkelingskaartDTO[][] getZichtbareOntwikkelingskaarten() {
+		OntwikkelingskaartDTO[][] Odto = new OntwikkelingskaartDTO[3][4];
+		for (int i = 0; i < 3; i++) {
+			Odto[i] = Arrays.stream(zichtbareOntwikkelingskaarten[i]).map(o -> o.toDTO())
+					.toArray(OntwikkelingskaartDTO[]::new);
+		}
+			
+		return Odto;
 	}
 
 
