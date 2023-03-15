@@ -43,7 +43,7 @@ public class DomeinController {
 	}
 
 	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
-	public OntwikkelingskaartDTO[][] geefZichtbareOntwikkelingskaarten() {
+	public OntwikkelingskaartRecord[][] geefZichtbareOntwikkelingskaarten() {
 
 		return spel.geefZichtbareOntwikkelingskaarten();
 	}

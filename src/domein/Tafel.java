@@ -15,14 +15,14 @@ public class Tafel {
 		selecteerZichtbareKaarten();
 	}
 
-	public OntwikkelingskaartDTO[][] getZichtbareOntwikkelingskaarten() {
-		OntwikkelingskaartDTO[][] Odto = new OntwikkelingskaartDTO[3][4];
+	public OntwikkelingskaartRecord[][] getZichtbareOntwikkelingskaarten() {
+		OntwikkelingskaartRecord[][] oRecord = new OntwikkelingskaartRecord[3][4];
 		for (int i = 0; i < 3; i++) {
-			Odto[i] = Arrays.stream(zichtbareOntwikkelingskaarten[i]).map(o -> o.toDTO())
-					.toArray(OntwikkelingskaartDTO[]::new);
+			oRecord[i] = Arrays.stream(zichtbareOntwikkelingskaarten[i]).map(o -> o.toRecord())
+					.toArray(OntwikkelingskaartRecord[]::new);
 		}
 			
-		return Odto;
+		return oRecord;
 	}
 
 

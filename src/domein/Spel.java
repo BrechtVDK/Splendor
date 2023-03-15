@@ -97,7 +97,7 @@ public class Spel {
 		return spelers.size();
 	}
 
-	public OntwikkelingskaartDTO[][] geefZichtbareOntwikkelingskaarten() {
+	public OntwikkelingskaartRecord[][] geefZichtbareOntwikkelingskaarten() {
 		return tafel.getZichtbareOntwikkelingskaarten();
 	}
 
