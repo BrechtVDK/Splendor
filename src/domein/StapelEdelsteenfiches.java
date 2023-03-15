@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StapelEdelsteenfiches {
-	List<Edelsteenfiche> edelsteenfiches;
-	Edelsteen edelsteen;
+	private List<Edelsteenfiche> edelsteenfiches;
+	private Edelsteen edelsteen;
+	private static final int MIN_FICHES_BIJ_START = 4;
 
 	public StapelEdelsteenfiches(Edelsteen edelsteen) {
 		// 4 instanties van Edelsteenfiches aanmaken en verzamelen in ArrayList
@@ -17,7 +18,7 @@ public class StapelEdelsteenfiches {
 	}
 
 	private void maakEdelsteenfichesAan() {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < MIN_FICHES_BIJ_START; i++) {
 			edelsteenfiches.add(new Edelsteenfiche(edelsteen));
 		}
 	}

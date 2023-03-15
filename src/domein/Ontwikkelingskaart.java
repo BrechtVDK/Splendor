@@ -27,11 +27,11 @@ public class Ontwikkelingskaart {
 	@Override
 	public String toString() {
 
-		String fiches = "";
+		StringBuilder sbFiches = new StringBuilder();
 		for (Edelsteenfiche fiche : edelsteenfiches) {
-			fiches += "," + fiche.toString();
+			sbFiches.append(",").append(fiche.toString());
 		}
-		return String.format("%d,%s%s", prestigePunten, bonus, fiches);
+		return String.format("%d,%s%s", prestigePunten, bonus, sbFiches.toString());
 	}
 
 	public OntwikkelingskaartDTO toDTO() {

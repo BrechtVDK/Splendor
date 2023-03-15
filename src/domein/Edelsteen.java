@@ -1,8 +1,8 @@
 package domein;
 
 public enum Edelsteen {
-	WIT("(255,255,255)", "diamant"), ZWART("(0,0,0)", "onyxen"), ROOD("(255,0,0)", "robijn"),
-	BLAUW("(0,0,255)", "saffier"), GROEN("(0,255,0)", "smaragd");
+	GROEN("(0,255,0)", "smaragd"), WIT("(255,255,255)", "diamant"), BLAUW("(0,0,255)", "saffier"),
+	ZWART("(0,0,0)", "onyxen"), ROOD("(255,0,0)", "robijn");
 
 	private final String rgb;
 	private final String soort;

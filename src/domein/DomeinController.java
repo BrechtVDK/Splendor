@@ -60,4 +60,5 @@ public class DomeinController {
 		return spel.getSpelers().stream().map(s -> s.toString()).toList();
 	}
 
+	// UC2
 }
