@@ -1,8 +1,5 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import domein.DomeinController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,13 +19,11 @@ public class SpelerRegistratieScherm extends GridPane {
 	private WelkomScherm ws;
 	private TextField txtGebruikersnaam, txtGeboortejaar;
 	private Button btnStartSpel;
-	private List<String> spelers;
 	private ListView<String> lvSpelers;
 
 	public SpelerRegistratieScherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
 		this.ws = ws;
-		spelers = new ArrayList<>();
 		buildGui();
 	}
 
@@ -83,8 +78,6 @@ public class SpelerRegistratieScherm extends GridPane {
 			if (dc.geefAantalSpelers() == dc.geefMinAantalSpelers()) {
 				btnStartSpel.setDisable(false);
 			}
-			// speler toevoegen aan lijst
-			spelers.add(String.format("%s - %d", gebruikersnaam, geboortejaar));
 			// speler zichtbaar in listview maken
 			updateLvSpelers();
 		} catch (NumberFormatException e) {
@@ -96,7 +89,7 @@ public class SpelerRegistratieScherm extends GridPane {
 	}
 
 	private void updateLvSpelers() {
-		lvSpelers.setItems(FXCollections.observableArrayList(spelers));
+		lvSpelers.setItems(FXCollections.observableArrayList(dc.geefSpelers()));
 
 	}
 
@@ -108,16 +101,15 @@ public class SpelerRegistratieScherm extends GridPane {
 		double hoogte = this.getScene().getHeight();
 		stage.setTitle("Splendor");
 
-		Scene scene = new Scene(new Hoofdscherm(dc, ws, spelers), breedte, hoogte);
+		Scene scene = new Scene(new Hoofdscherm(dc, ws), breedte, hoogte);
 		scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 		stage.setScene(scene);
 	}
 
 	private void toonStartspeler() {
-		String startspeler = spelers.get(dc.geefSpelerAanDeBeurt());
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Startspeler");
-		alert.setContentText("Speler \"" + startspeler + "\" mag starten");
+		alert.setContentText("Speler " + dc.geefSpelerAanDeBeurt() + " mag starten");
 		alert.showAndWait();
 
 	}

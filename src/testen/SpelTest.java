@@ -27,7 +27,7 @@ class SpelTest {
 	@Test
 	public void voegSpelerToe_spelerBestaatNietInDB_Exception() {
 
-		Assertions.assertThrows(NullPointerException.class, () -> spel.voegSpelerToe(null));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> spel.voegSpelerToe(null));
 	}
 
 	@Test
@@ -58,51 +58,48 @@ class SpelTest {
 	}
 
 	@Test
-	public void geefSpelerAanDeBeurt_SpelersMetVerschillendeGeboortejaren_correcteStartSpelerWerdGekozen() {
+	public void getSpelerAanDeBeurt_SpelersMetVerschillendeGeboortejaren_correcteStartSpelerWerdGekozen() {
 		spel.voegSpelerToe(new Speler("Jan", 1980));
 		spel.voegSpelerToe(new Speler("Piet", 1990));
 		spel.voegSpelerToe(new Speler("Joris", 2000));
 		spel.voegSpelerToe(new Speler("Corneel", 2005));
+		spel.organiseerSpelVolgensHetAantalSpelers();
 
-		int index = spel.geefSpelerAanDeBeurt();
-
-		Assertions.assertEquals("Corneel", spel.getSpelerAanDeBeurt().getGebruikersnaam());
+		Assertions.assertEquals("Corneel", spel.getSpelerAanDeBeurt().toString());
 	}
 
 	@Test
-	public void geefSpelerAanDeBeurt_SpelersMetGelijkeGeboortejaren_correcteStartSpelerWerdGekozen() {
+	public void getSpelerAanDeBeurt_SpelersMetGelijkeGeboortejaren_correcteStartSpelerWerdGekozen() {
 		spel.voegSpelerToe(new Speler("Jan", 1980));
 		spel.voegSpelerToe(new Speler("Piet", 1980));
 		spel.voegSpelerToe(new Speler("Joris", 1980));
 		spel.voegSpelerToe(new Speler("Corneel", 1980));
+		spel.organiseerSpelVolgensHetAantalSpelers();
 
-		int index = spel.geefSpelerAanDeBeurt();
 
-		Assertions.assertEquals("Corneel", spel.getSpelerAanDeBeurt().getGebruikersnaam());
+		Assertions.assertEquals("Corneel", spel.getSpelerAanDeBeurt().toString());
 	}
 
 	@Test
-	public void geefSpelerAanDeBeurt_SpelersMetGelijkeGeboortejarenEnLengteNaam_correcteStartSpelerWerdGekozen() {
+	public void getSpelerAanDeBeurt_SpelersMetGelijkeGeboortejarenEnLengteNaam_correcteStartSpelerWerdGekozen() {
+		spel.voegSpelerToe(new Speler("Filip", 1980));
+		spel.voegSpelerToe(new Speler("Karel", 1980));
+		spel.voegSpelerToe(new Speler("Joris", 1980));
+		spel.voegSpelerToe(new Speler("David", 1980));
+		spel.organiseerSpelVolgensHetAantalSpelers();
+
+		Assertions.assertEquals("Karel", spel.getSpelerAanDeBeurt().toString());
+	}
+
+	@Test
+	public void spelersMetGelijkeGeboortejarenEnLengteNaam_oorspronkelijkeVolgordeSpelersBlijftGelijk() {
 		spel.voegSpelerToe(new Speler("Filip", 1980));
 		spel.voegSpelerToe(new Speler("Karel", 1980));
 		spel.voegSpelerToe(new Speler("Joris", 1980));
 		spel.voegSpelerToe(new Speler("David", 1980));
 
-		int index = spel.geefSpelerAanDeBeurt();
 
-		Assertions.assertEquals("Karel", spel.getSpelerAanDeBeurt().getGebruikersnaam());
-	}
-
-	@Test
-	public void geefSpelerAanDeBeurt_SpelersMetGelijkeGeboortejarenEnLengteNaam_oorspronkelijkeVolgordeSpelersBlijftGelijk() {
-		spel.voegSpelerToe(new Speler("Filip", 1980));
-		spel.voegSpelerToe(new Speler("Karel", 1980));
-		spel.voegSpelerToe(new Speler("Joris", 1980));
-		spel.voegSpelerToe(new Speler("David", 1980));
-
-		int index = spel.geefSpelerAanDeBeurt();
-
-		Assertions.assertEquals("Filip", spel.getSpelers().get(0).getGebruikersnaam());
+		Assertions.assertEquals("Filip", spel.getSpelers().get(0).toString());
 	}
 
 }

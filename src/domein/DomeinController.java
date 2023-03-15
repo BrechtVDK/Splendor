@@ -1,9 +1,12 @@
 package domein;
 
+import java.util.List;
+
 public class DomeinController {
 	private SpelerRepository spelerRepo;
 	private Spel spel;
 
+	// UC1
 	public DomeinController() {
 		spelerRepo = new SpelerRepository();
 	}
@@ -12,8 +15,7 @@ public class DomeinController {
 		spel = new Spel();
 	}
 
-	public void voegSpelerToeAanSpel(String gebruikersnaam, int geboortejaar)
-			throws IllegalArgumentException {
+	public void voegSpelerToeAanSpel(String gebruikersnaam, int geboortejaar) throws IllegalArgumentException {
 
 		spel.voegSpelerToe(spelerRepo.geefSpeler(gebruikersnaam, geboortejaar));
 
@@ -23,13 +25,14 @@ public class DomeinController {
 		spel.organiseerSpelVolgensHetAantalSpelers();
 	}
 
-	public Speler geefSpelerAanDeBeurt() {
-		return spel.geefSpelerAanDeBeurt();
+	public String geefSpelerAanDeBeurt() {
+		return spel.getSpelerAanDeBeurt().toString();
 	}
 
 //	David: ik heb deze nodig voor mijn menu te kunnen doen stoppen 
+	// Brecht: kan nu evt vervangen worden door geefSpelers().size();
 	public int geefAantalSpelers() {
-			return spel.geefAantalSpelers();
+		return spel.geefAantalSpelers();
 
 	}
 
@@ -52,4 +55,9 @@ public class DomeinController {
 	public int geefMaxAantalSpelers() {
 		return spel.MAX_SPELERS;
 	}
+
+	public List<String> geefSpelers() {
+		return spel.getSpelers().stream().map(s -> s.toString()).toList();
+	}
+
 }

@@ -8,6 +8,7 @@ public class Speler {
 	private int geboortejaar;
 	private final static int MINIMUMLEEFTIJD = 6;
 	private final static int MINIMUMGEBOORTEJAAR = 1900;
+	private boolean isStartSpeler;
 
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
@@ -42,6 +43,14 @@ public class Speler {
 		return geboortejaar;
 	}
 
+	public boolean isStartSpeler() {
+		return isStartSpeler;
+	}
+
+	public final void setStartSpeler(boolean isStartSpeler) {
+		this.isStartSpeler = isStartSpeler;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(gebruikersnaam);
@@ -59,5 +68,9 @@ public class Speler {
 		return Objects.equals(gebruikersnaam, other.gebruikersnaam);
 	}
 
+	@Override
+	public String toString() {
+		return gebruikersnaam;
+	}
 
 }

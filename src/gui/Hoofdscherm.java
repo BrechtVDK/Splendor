@@ -19,10 +19,10 @@ public class Hoofdscherm extends GridPane {
 	private List<String> spelers;
 
 
-	public Hoofdscherm(DomeinController dc, WelkomScherm ws, List<String> spelers) {
+	public Hoofdscherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
 		this.ws = ws;
-		this.spelers = spelers;
+
 		
 		dc.organiseerSpelVolgensHetAantalSpelers();
 

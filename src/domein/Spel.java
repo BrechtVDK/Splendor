@@ -30,17 +30,11 @@ public class Spel {
 		return edelen;
 	}
 
-	/*
-	 * public Speler getSpelerAanDeBeurt() { return spelers.get(spelerAanDeBeurt); }
-	 */
-	public Speler geefSpelerAanDeBeurt() {
-		if (spelerAanDeBeurt == -1) {
-			kiesStartSpeler();
-		}
+	public Speler getSpelerAanDeBeurt() {
+		// spelerAanDeBeurt wordt 1e x ingesteld in
+		// organiseerSpelVolgensHetAantalSpelers()
 		return spelers.get(spelerAanDeBeurt);
-
 	}
-
 
 	public List<Speler> getSpelers() {
 		return spelers;
@@ -65,35 +59,25 @@ public class Spel {
 
 	}
 
-	// Jonas: ook hier niet zeker van de soort Exception
 	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
 		if (spelers.size() < MIN_SPELERS) {
 			throw new IllegalArgumentException(
 					String.format("Spel moet gespeeld worden door minimum %d spelers", MIN_SPELERS));
 		}
+
+		kiesStartSpeler();
+
 		int aantalSpelers = spelers.size();
-		switch (aantalSpelers) {
-		// 3 edelen 4 fiches
-		case 2:
-			kiesRandomEdelen(3);
-			break;
-		// 4 edelen 4+1fiches
-		case 3:
-			kiesRandomEdelen(4);
+		// aantal edelen = aantal spelers +1
+		kiesRandomEdelen(aantalSpelers + 1);
+		// 3 spelers -> 1 fiche extra, 4 spelers -> 3 fiches extra
+		int[] aantal = { 0, 0, 0, 1, 3 };
+		if (aantalSpelers >= MAX_SPELERS - 1) {
 			for (StapelEdelsteenfiches stapel : stapelsEdelsteenfiches.values()) {
-				stapel.voegEdelsteenfichesToe(1);
-			}
-			break;
-		// 5 edelen 4+3fiches
-		case 4:
-			kiesRandomEdelen(5);
-			for (StapelEdelsteenfiches stapel : stapelsEdelsteenfiches.values()) {
-				stapel.voegEdelsteenfichesToe(3);
+				stapel.voegEdelsteenfichesToe(aantal[aantalSpelers]);
 			}
 		}
 	}
-
-
 
 	private void kiesStartSpeler() {
 		List<Speler> kopieVanSpelers = new ArrayList<>(spelers);
@@ -103,8 +87,11 @@ public class Spel {
 						.thenComparing(speler -> speler.getGebruikersnaam().length())
 						.thenComparing(Speler::getGebruikersnaam).reversed())
 				.collect(Collectors.toList());
-		// Brecht: aangepast om int in te stellen
+
+		// boolean isStartSpeler van Speler op true zetten en instellen als
+		// spelerAanDeBeurt;
 		spelerAanDeBeurt = spelers.indexOf(kopieVanSpelers.get(0));
+		spelers.get(spelerAanDeBeurt).setStartSpeler(true);
 	}
 
 	// Ik mis nog deze methode om zo uit het menu te geraken
