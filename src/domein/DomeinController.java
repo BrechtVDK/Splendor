@@ -48,14 +48,6 @@ public class DomeinController {
 		return spel.geefZichtbareOntwikkelingskaarten();
 	}
 
-	public int geefMinAantalSpelers() {
-		return spel.MIN_SPELERS;
-	}
-
-	public int geefMaxAantalSpelers() {
-		return spel.MAX_SPELERS;
-	}
-
 	public List<String> geefSpelers() {
 		return spel.getSpelers().stream().map(s -> s.toString()).toList();
 	}

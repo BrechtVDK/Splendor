@@ -19,7 +19,7 @@ public class Speler {
 		String REGEX = "^[a-z,A-Z][\\w|\\s]*";
 		if (gebruikersnaam == null || !gebruikersnaam.matches(REGEX)) {
 			throw new IllegalArgumentException(
-					"Gebruikersnaam mag enkel cijfers,letters, spaties of _ bevatten. De gebruikersnaam moet altijd starten met een letter (groot of klein)");
+					"Gebruikersnaam mag enkel cijfers, letters, spaties of _ bevatten. De gebruikersnaam moet altijd starten met een letter (groot of klein)");
 		}
 		this.gebruikersnaam = gebruikersnaam;
 	}

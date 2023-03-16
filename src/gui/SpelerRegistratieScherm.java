@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.Spel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -57,7 +58,6 @@ public class SpelerRegistratieScherm extends GridPane {
 		lvSpelers.setMinWidth(200);
 		lvSpelers.setMaxHeight(150);
 
-
 		this.add(lblGebruikersnaam, 0, 1);
 		this.add(txtGebruikersnaam, 1, 1);
 		this.add(lblGeboortejaar, 0, 2);
@@ -75,7 +75,7 @@ public class SpelerRegistratieScherm extends GridPane {
 			int geboortejaar = Integer.parseInt(txtGeboortejaar.getText());
 			dc.voegSpelerToeAanSpel(gebruikersnaam, geboortejaar);
 			// Vanaf MIN_SPELERS: btnStartSpel klikbaar
-			if (dc.geefAantalSpelers() == dc.geefMinAantalSpelers()) {
+			if (dc.geefAantalSpelers() == Spel.MIN_SPELERS) {
 				btnStartSpel.setDisable(false);
 			}
 			// speler zichtbaar in listview maken
@@ -109,7 +109,7 @@ public class SpelerRegistratieScherm extends GridPane {
 	private void toonStartspeler() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Startspeler");
-		alert.setContentText("Speler " + dc.geefSpelerAanDeBeurt() + " mag starten");
+		alert.setContentText(String.format("Speler %s mag starten", dc.geefSpelerAanDeBeurt()));
 		alert.showAndWait();
 
 	}
