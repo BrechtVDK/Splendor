@@ -17,7 +17,6 @@ public class StartUpGui extends Application {
 		primaryStage.setTitle("Splendor");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		// Brecht: scherm werd niet mooi geopend bij mij, onderstaande zorgt voor
 		// fullscreen
 		primaryStage.setMaximized(true);
 	}

@@ -80,6 +80,11 @@ public class SpelerRegistratieScherm extends GridPane {
 			}
 			// speler zichtbaar in listview maken
 			updateLvSpelers();
+			// TextFields leegmaken en focus terug instellen
+			txtGebruikersnaam.clear();
+			txtGeboortejaar.clear();
+			txtGebruikersnaam.requestFocus();
+
 		} catch (NumberFormatException e) {
 			toonFoutmelding("Geboortejaar is niet juist ingevuld");
 		} catch (IllegalArgumentException e) {

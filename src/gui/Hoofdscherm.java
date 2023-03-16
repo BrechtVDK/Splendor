@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.List;
-
 import domein.DomeinController;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
@@ -12,20 +10,10 @@ public class Hoofdscherm extends GridPane {
 	private EdelenScherm edelenScherm;
 	private EdelsteenFicheScherm edelsteenFicheScherm;
 	private TafelScherm tafelscherm;
-	// jonas: aantalspelers voorlopig vastgezet op 4
-	// Brecht: vervangen door lijst van spelers (komende van
-	// SpelerRegistratieScherm)
-	// private int aantalSpelers = 4;
-	private List<String> spelers;
-
 
 	public Hoofdscherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
 		this.ws = ws;
-
-
-		// Brecht: Fullscreen ingesteld in StartUpGui
-		// this.setPrefSize(1080, 800);
 
 		this.setPadding(new Insets(25));
 		this.setVgap(25);
