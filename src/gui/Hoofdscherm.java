@@ -23,8 +23,6 @@ public class Hoofdscherm extends GridPane {
 		this.dc = dc;
 		this.ws = ws;
 
-		
-		dc.organiseerSpelVolgensHetAantalSpelers();
 
 		// Brecht: Fullscreen ingesteld in StartUpGui
 		// this.setPrefSize(1080, 800);
