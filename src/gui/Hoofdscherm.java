@@ -33,7 +33,6 @@ public class Hoofdscherm extends GridPane {
 		this.setVgap(25);
 		this.setHgap(25);
 
-		// aantalSpelers geschrapt, --> methode dc.geefAantalSpelers()
 		edelenScherm = new EdelenScherm(dc);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
 		tafelscherm = new TafelScherm(dc);

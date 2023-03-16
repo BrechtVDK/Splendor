@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -16,6 +17,7 @@ public class EdelenScherm extends HBox {
 
 		for (int i = 0; i < lblEdelen.length; i++) {
 			lblEdelen[i] = new Label(String.format("Edele%d", i + 1));
+			lblEdelen[i].setAlignment(Pos.CENTER);
 			lblEdelen[i].setMaxWidth(100);
 			lblEdelen[i].setPrefSize(500, 100);
 			lblEdelen[i].getStyleClass().add("edele");
