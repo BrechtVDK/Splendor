@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -51,7 +52,7 @@ public class TafelScherm extends GridPane {
 	}
 
 	// Deze code gaan we wss ook voor de edelen en de fiches nodig hebben. ==> nog
-	// in aparte klasse stoppen.
+	// in aparte klasse (of interface Clickable?) stoppen?
 	private void eventsOntwikkelingskaartInstellen(FXOntwikkelingskaart kaart) {
 		// transities instellen
 		ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), kaart);
@@ -84,7 +85,10 @@ public class TafelScherm extends GridPane {
 
 	private void ontwikkelingskaartGeklikt(MouseEvent event) {
 		// TODO
-		System.out.println("test");
+		// Enkel linker muisknop heeft effect
+		if (event.getButton() == MouseButton.PRIMARY) {
+			System.out.println("test");
+		}
 
 	}
 }
