@@ -39,7 +39,17 @@ public class Tafel {
 						.haalKaartVanStapel();
 			}
 		}
-
 	}
 
+	// UC2
+
+	// geef het aantal resterende kaarten per stapel (per niveau) terug
+	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
+		Map<Niveau, Integer> aantalPerNiveau = new HashMap<Niveau, Integer>();
+
+		for (Niveau n : Niveau.values()) {
+			aantalPerNiveau.put(n, stapelsOntwikkelingskaarten.get(n).geefAantalResterendeKaarten());
+		}
+		return aantalPerNiveau;
+	}
 }

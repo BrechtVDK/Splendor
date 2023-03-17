@@ -8,6 +8,7 @@ import domein.Edele;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -32,9 +33,11 @@ public class FXEdeleKaart extends GridPane {
 
 		this.setHgap(25);
 		this.setPadding(new Insets(5));
+		this.setMinWidth(100);
 		this.setMaxWidth(100);
-		this.setPrefSize(800, 150);
-		this.getStyleClass().add("ontwikkelingskaart");
+		this.setMinHeight(150);
+		this.setMaxHeight(150);
+		this.getStyleClass().add("edele");
 	}
 
 	private void plaatsPrestigePunten() {
@@ -49,6 +52,7 @@ public class FXEdeleKaart extends GridPane {
 
 	private void voegEdelsteenfichesToe() {
 		FlowPane fpFiches = new FlowPane();
+		fpFiches.setOrientation(Orientation.VERTICAL);
 
 		Map<String, Long> aantalFichesPerKleur = new HashMap<String, Long>();
 
@@ -69,11 +73,11 @@ public class FXEdeleKaart extends GridPane {
 			}
 		}
 
-		fpFiches.setPrefWidth(30);
-		fpFiches.setPrefHeight(150);
+		fpFiches.setMaxWidth(70);
+		fpFiches.setMaxHeight(100);
 		fpFiches.setVgap(4);
+		fpFiches.setHgap(4);
 		fpFiches.setAlignment(Pos.BOTTOM_LEFT);
-		this.add(fpFiches, 0, 1);
-
+		this.add(fpFiches, 0, 1, 2, 1);
 }
 }

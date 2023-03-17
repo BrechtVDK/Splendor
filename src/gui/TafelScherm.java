@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.Map;
+
 import domein.DomeinController;
 import domein.Niveau;
 import domein.Ontwikkelingskaart;
@@ -33,6 +35,7 @@ public class TafelScherm extends GridPane {
 
 	private void buildGui() {
 		geefZichtbareKaartenWeer();
+		geefStapelsWeer();
 	}
 
 	private void geefZichtbareKaartenWeer() {
@@ -49,11 +52,13 @@ public class TafelScherm extends GridPane {
 	}
 
 	private void geefStapelsWeer() {
+		Map<Niveau, Integer> aantalResterendeKaarten = dc.geefAantalResterendeKaarten();
 		lblStapels = new Label[Niveau.values().length];
 		for (int i = 0; i < lblStapels.length; i++) {
-			lblStapels[i] = new Label("• ".repeat(lblStapels.length - i));
+			StringBuilder aantal = new StringBuilder(Integer.toString(aantalResterendeKaarten.get(Niveau.values()[i])));
+			aantal.append("\n").append(" • ".repeat(lblStapels.length - i));
+			lblStapels[i] = new Label(aantal.toString());
 			lblStapels[i].setAlignment(Pos.BOTTOM_CENTER);
-			// lblStapels[i].setPrefSize(300, 100);
 			lblStapels[i].setMinHeight(150);
 			lblStapels[i].setMaxHeight(150);
 			lblStapels[i].setMinWidth(100);

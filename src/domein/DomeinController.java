@@ -57,9 +57,15 @@ public class DomeinController {
 		return spel.getEdelen();
 	}
 
+	// UC2
+
 	public Map<Edelsteen, Integer> geefAantalFichesPerStapel() {
 		return spel.geefAantalFichesPerStapel();
 	}
 
-	// UC2
+	public Map<Niveau, Integer> geefAantalResterendeKaarten(){
+		return spel.geefAantalResterendeKaarten();
+	}
+
+
 }

@@ -1,6 +1,8 @@
 package domein;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Speler {
@@ -9,10 +11,16 @@ public class Speler {
 	private final static int MINIMUMLEEFTIJD = 6;
 	private final static int MINIMUMGEBOORTEJAAR = 1900;
 	private boolean isStartSpeler;
+	private boolean isAanDeBeurt;
+	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
+	private int prestigepunten;
+	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
+	private List<Edele> edelenInBezit;
 
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
 		setGeboortejaar(geboortejaar);
+		prestigepunten = 0;
 	}
 
 	private void setGebruikersnaam(String gebruikersnaam) throws IllegalArgumentException {

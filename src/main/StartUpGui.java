@@ -18,7 +18,10 @@ public class StartUpGui extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		// fullscreen
+
 		primaryStage.setMaximized(true);
+		primaryStage.setMinWidth(800);
+		primaryStage.setMinHeight(800);
 	}
 
 	public static void main(String[] args) {

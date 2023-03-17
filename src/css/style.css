@@ -46,8 +46,14 @@
 	-fx-background-radius: 10.0px;
 }
 
-.edele, .ontwikkelingskaart{
-	-fx-background-color: #F8BD7F;
+.stapel{
+	-fx-font-size: 25;
+	-fx-text-fill: white;
+	-fx-text-alignment: center;
+}
+
+.edele{
+	-fx-background-color: linear-gradient(#C05746, #DB9E95);
 }
 
 .ontwikkelingskaart{
@@ -63,3 +69,14 @@
 	-fx-backgroundcolor: #F8BD7F;
 }
 
+.stapelniveau1 {
+	-fx-background-color: linear-gradient(#274C77, #74A0D2)
+}
+
+.stapelniveau2 {
+	-fx-background-color: linear-gradient(#F8BD7F, #FCE1C5)
+}
+
+.stapelniveau3 {
+	-fx-background-color: linear-gradient(#3C5F30, #7CB46A)
+}

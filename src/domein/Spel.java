@@ -130,7 +130,9 @@ public class Spel {
 		edelen.subList(aantal, edelen.size()).clear();
 	}
 
-	// geeft het aantal fiches per soort terug;
+	// UC2
+
+	// geeft het aantal fiches per soort terug
 	public Map<Edelsteen, Integer> geefAantalFichesPerStapel()
 	{
 		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<Edelsteen, Integer>();
@@ -142,6 +144,9 @@ public class Spel {
 		return aantalPerSoort;
 	}
 
-	// UC2
+	// geef het aantal resterende kaarten per stapel (per niveau) terug
+	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
+		return tafel.geefAantalResterendeKaarten();
+	}
 
 }

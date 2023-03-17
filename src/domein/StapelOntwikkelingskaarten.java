@@ -226,4 +226,10 @@ public class StapelOntwikkelingskaarten {
 		Collections.shuffle(ontwikkelingskaarten);
 	}
 
+	// UC2
+
+	public int geefAantalResterendeKaarten() {
+		return ontwikkelingskaarten.size();
+	}
+
 }
