@@ -13,7 +13,7 @@ class EdelsteenficheTest {
 	public void maakEdelsteenFiche_correcteEdelsteen_maaktEdelsteenfiche() {
 		edelsteenfiche = new Edelsteenfiche(Edelsteen.BLAUW);
 
-		Assertions.assertEquals(Edelsteen.BLAUW, edelsteenfiche.getEdelsteen());
+		Assertions.assertEquals(Edelsteen.BLAUW, edelsteenfiche.edelsteen());
 	}
 
 }

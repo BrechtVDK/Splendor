@@ -17,6 +17,10 @@ public class StapelEdelsteenfiches {
 
 	}
 
+	public int getAantalFiches() {
+		return edelsteenfiches.size();
+	}
+
 	private void maakEdelsteenfichesAan() {
 		for (int i = 0; i < MIN_FICHES_BIJ_START; i++) {
 			edelsteenfiches.add(new Edelsteenfiche(edelsteen));

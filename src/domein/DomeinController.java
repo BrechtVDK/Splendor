@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.List;
+import java.util.Map;
 
 public class DomeinController {
 	private SpelerRepository spelerRepo;
@@ -43,13 +44,21 @@ public class DomeinController {
 	}
 
 	// Jonas: om ontwikkelingskaarten te kunnen weergeven in gui
-	public OntwikkelingskaartRecord[][] geefZichtbareOntwikkelingskaarten() {
+	public Ontwikkelingskaart[][] geefZichtbareOntwikkelingskaarten() {
 
 		return spel.geefZichtbareOntwikkelingskaarten();
 	}
 
 	public List<String> geefSpelers() {
 		return spel.getSpelers().stream().map(s -> s.toString()).toList();
+	}
+
+	public List<Edele> geefEdelen() {
+		return spel.getEdelen();
+	}
+
+	public Map<Edelsteen, Integer> geefAantalFichesPerStapel() {
+		return spel.geefAantalFichesPerStapel();
 	}
 
 	// UC2

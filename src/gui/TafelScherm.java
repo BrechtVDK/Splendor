@@ -2,7 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import domein.Niveau;
-import domein.OntwikkelingskaartRecord;
+import domein.Ontwikkelingskaart;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -24,22 +24,19 @@ public class TafelScherm extends GridPane {
 		this.setVgap(25);
 		this.setHgap(25);
 
-		lblStapels = new Label[Niveau.values().length];
-		for (int i = 0; i < lblStapels.length; i++) {
-			lblStapels[i] = new Label("• ".repeat(lblStapels.length - i));
-			lblStapels[i].setAlignment(Pos.BOTTOM_CENTER);
-			lblStapels[i].setPrefSize(500, 100);
-			lblStapels[i].setMaxWidth(100);
-			lblStapels[i].getStyleClass().add("ontwikkelingskaart");
-			this.add(lblStapels[i], 0, i);
-		}
+		buildGui();
 
-		geefHuidigeTafelWeer();
+
+
 
 	}
 
-	private void geefHuidigeTafelWeer() {
-		OntwikkelingskaartRecord[][] kaarten = dc.geefZichtbareOntwikkelingskaarten();
+	private void buildGui() {
+		geefZichtbareKaartenWeer();
+	}
+
+	private void geefZichtbareKaartenWeer() {
+		Ontwikkelingskaart[][] kaarten = dc.geefZichtbareOntwikkelingskaarten();
 
 		for (int rij = 0; rij < kaarten.length; rij++) {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
@@ -51,6 +48,22 @@ public class TafelScherm extends GridPane {
 
 	}
 
+	private void geefStapelsWeer() {
+		lblStapels = new Label[Niveau.values().length];
+		for (int i = 0; i < lblStapels.length; i++) {
+			lblStapels[i] = new Label("• ".repeat(lblStapels.length - i));
+			lblStapels[i].setAlignment(Pos.BOTTOM_CENTER);
+			// lblStapels[i].setPrefSize(300, 100);
+			lblStapels[i].setMinHeight(150);
+			lblStapels[i].setMaxHeight(150);
+			lblStapels[i].setMinWidth(100);
+			lblStapels[i].setMaxWidth(100);
+			lblStapels[i].getStyleClass().add(String.format("stapelniveau%d", i + 1));
+			lblStapels[i].getStyleClass().add("stapel");
+			this.add(lblStapels[i], 0, i);
+		}
+
+	}
 	// Deze code gaan we wss ook voor de edelen en de fiches nodig hebben. ==> nog
 	// in aparte klasse (of interface Clickable?) stoppen?
 	private void eventsOntwikkelingskaartInstellen(FXOntwikkelingskaart kaart) {

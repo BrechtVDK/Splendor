@@ -1,6 +1,5 @@
 package domein;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,15 +14,11 @@ public class Tafel {
 		selecteerZichtbareKaarten();
 	}
 
-	public OntwikkelingskaartRecord[][] getZichtbareOntwikkelingskaarten() {
-		OntwikkelingskaartRecord[][] oRecord = new OntwikkelingskaartRecord[3][4];
-		for (int i = 0; i < 3; i++) {
-			oRecord[i] = Arrays.stream(zichtbareOntwikkelingskaarten[i]).map(o -> o.toRecord())
-					.toArray(OntwikkelingskaartRecord[]::new);
-		}
 
-		return oRecord;
+	public Ontwikkelingskaart[][] getZichtbareOntwikkelingskaarten() {
+		return zichtbareOntwikkelingskaarten;
 	}
+
 
 	// Per niveau (3) stapelOntwikkelingskaarten aanmaken en verzamelen in HashMap
 	private void maakStapelsOntwikkelingskaartenAan() {

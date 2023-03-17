@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class SpelerRegistratieScherm extends GridPane {
@@ -109,6 +110,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 		Scene scene = new Scene(new Hoofdscherm(dc, ws), breedte, hoogte);
 		scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+		scene.setFill(Color.ALICEBLUE);
 		stage.setScene(scene);
 	}
 

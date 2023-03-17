@@ -4,27 +4,23 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import domein.Edele;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
-import domein.Ontwikkelingskaart;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
-public class FXOntwikkelingskaart extends GridPane {
+public class FXEdeleKaart extends GridPane {
 	private int prestigePunten;
-	private Edelsteenfiche bonus;
 	private Edelsteenfiche edelsteenfiches[];
 
+	public FXEdeleKaart(Edele info) {
 
-
-	public FXOntwikkelingskaart(Ontwikkelingskaart info) {
-
-		prestigePunten = info.prestigePunten();
-		bonus = info.bonus();
-		edelsteenfiches = info.edelsteenfiches();
+		prestigePunten = Edele.PRESTIGE_PUNTEN;
+		edelsteenfiches = info.bonussen();
 
 		buildGui();
 
@@ -32,13 +28,12 @@ public class FXOntwikkelingskaart extends GridPane {
 
 	private void buildGui() {
 		plaatsPrestigePunten();
-		plaatsBonus();
 		voegEdelsteenfichesToe();
 
 		this.setHgap(25);
 		this.setPadding(new Insets(5));
 		this.setMaxWidth(100);
-		this.setPrefSize(1500, 100);
+		this.setPrefSize(800, 150);
 		this.getStyleClass().add("ontwikkelingskaart");
 	}
 
@@ -50,16 +45,6 @@ public class FXOntwikkelingskaart extends GridPane {
 		if (lblPrestigePunten.getText().equals("0")) {
 			lblPrestigePunten.setVisible(false);
 		}
-	}
-
-	private void plaatsBonus() {
-		Label lblBonus = new Label();
-		lblBonus.setStyle(String.format("-fx-background-color: rgb%s", bonus.edelsteen().getRgb()));
-		lblBonus.getStyleClass().add("edelsteenfiche");
-		lblBonus.setPrefSize(30, 30);
-		lblBonus.setMaxSize(30, 30);
-		lblBonus.setAlignment(Pos.BOTTOM_RIGHT);
-		this.add(lblBonus, 1, 0);
 	}
 
 	private void voegEdelsteenfichesToe() {
@@ -83,12 +68,12 @@ public class FXOntwikkelingskaart extends GridPane {
 				fpFiches.getChildren().add(lblfiche);
 			}
 		}
-		
+
 		fpFiches.setPrefWidth(30);
 		fpFiches.setPrefHeight(150);
 		fpFiches.setVgap(4);
 		fpFiches.setAlignment(Pos.BOTTOM_LEFT);
 		this.add(fpFiches, 0, 1);
-	}
 
+}
 }

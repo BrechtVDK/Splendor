@@ -97,7 +97,7 @@ public class Spel {
 		return spelers.size();
 	}
 
-	public OntwikkelingskaartRecord[][] geefZichtbareOntwikkelingskaarten() {
+	public Ontwikkelingskaart[][] geefZichtbareOntwikkelingskaarten() {
 		return tafel.getZichtbareOntwikkelingskaarten();
 	}
 
@@ -128,6 +128,18 @@ public class Spel {
 	private void kiesRandomEdelen(int aantal) {
 		Collections.shuffle(edelen);
 		edelen.subList(aantal, edelen.size()).clear();
+	}
+
+	// geeft het aantal fiches per soort terug;
+	public Map<Edelsteen, Integer> geefAantalFichesPerStapel()
+	{
+		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<Edelsteen, Integer>();
+
+		for (Edelsteen edelsteen : Edelsteen.values()) {
+			aantalPerSoort.put(edelsteen, stapelsEdelsteenfiches.get(edelsteen).getAantalFiches());
+		}
+
+		return aantalPerSoort;
 	}
 
 	// UC2

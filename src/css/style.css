@@ -32,16 +32,34 @@
  	-fx-border-width: 1.0px;
 	-fx-border-color: black;
 	-fx-text-alignment: center;
+	-fx-text-fill: #F8BD7F;
+	-fx-font-weight: bold;
+	}
+
+.edelsteenfichegroot{
+	-fx-font-size: 25;
 }
 
-.edele, .ontwikkelingskaart {
-	-fx-border-color: black;
+.edele, .ontwikkelingskaart, .stapel {
+	-fx-border-color: #a9a9a9;
 	-fx-border-radius: 10.0px;
 	-fx-background-radius: 10.0px;
+}
+
+.edele, .ontwikkelingskaart{
 	-fx-background-color: #F8BD7F;
+}
+
+.ontwikkelingskaart{
+	-fx-background-color: white;
 }
 
 .prestigePunten{
 	-fx-font-family: 'Londrina Outline', cursive;
 	-fx-font-size:35;
 }
+
+.hoofdscherm {
+	-fx-backgroundcolor: #F8BD7F;
+}
+
