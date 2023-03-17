@@ -11,15 +11,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
-public class FXOntwikkelingskaart extends GridPane {
+public class FXOntwikkelingskaart extends GridPane implements Clickable {
 	private int prestigePunten;
 	private Edelsteenfiche bonus;
 	private Edelsteenfiche edelsteenfiches[];
-
-
 
 	public FXOntwikkelingskaart(Ontwikkelingskaart info) {
 
@@ -43,6 +43,10 @@ public class FXOntwikkelingskaart extends GridPane {
 		this.setMinHeight(150);
 		this.setMaxHeight(150);
 		this.getStyleClass().add("ontwikkelingskaart");
+
+		// interface Clickable
+		this.setOnMouseClicked(this::onClicked);
+		this.onHovered(this, 1.15);
 	}
 
 	private void plaatsPrestigePunten() {
@@ -87,13 +91,20 @@ public class FXOntwikkelingskaart extends GridPane {
 				fpFiches.getChildren().add(lblfiche);
 			}
 		}
-		
+
 		fpFiches.setMaxWidth(70);
 		fpFiches.setMaxHeight(100);
 		fpFiches.setVgap(4);
 		fpFiches.setHgap(4);
 		fpFiches.setAlignment(Pos.BOTTOM_LEFT);
 		this.add(fpFiches, 0, 1, 2, 1);
+	}
+
+	@Override
+	public void onClicked(MouseEvent event) {
+		if (event.getButton() == MouseButton.PRIMARY) {
+			System.out.println("FXOntwikkelingskaart");
+		}
 	}
 
 }

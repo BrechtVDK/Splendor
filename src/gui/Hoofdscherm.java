@@ -1,7 +1,6 @@
 package gui;
 
 import domein.DomeinController;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
@@ -24,7 +23,7 @@ public class Hoofdscherm extends GridPane {
 	private void buildGui() {
 		this.getStyleClass().add("hoofddscherm");
 
-		this.setPadding(new Insets(25));
+		// this.setPadding(new Insets(25));
 		this.setVgap(25);
 		this.setHgap(25);
 		this.setAlignment(Pos.CENTER);
