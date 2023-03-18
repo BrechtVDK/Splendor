@@ -21,11 +21,8 @@ public class EdelsteenFicheScherm extends VBox {
 		this.setSpacing(10);
 
 		for (Edelsteen e : Edelsteen.values()) {
-			String rgb = e.getRgb();
-			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(
-					Integer.toString(aantalFichesPerStapel.get(e)), rgb);
-			fxEdelsteenFiche.getStyleClass().add("edelsteenfichegroot");
-			fxEdelsteenFiche.setPrefSize(75, 75);
+			int aantal = aantalFichesPerStapel.get(e);
+			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFicheKlikbaar(e, 38, aantal);
 			this.getChildren().add(fxEdelsteenFiche);
 		}
 	}

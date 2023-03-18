@@ -60,22 +60,15 @@ public class FXEdeleKaart extends GridPane implements Clickable {
 		FlowPane fpFiches = new FlowPane();
 		fpFiches.setOrientation(Orientation.VERTICAL);
 
-		Map<String, Long> aantalFichesPerKleur = new HashMap<String, Long>();
-
+		Map<Edelsteen, Long> aantalFichesPerEdelsteen = new HashMap<Edelsteen, Long>();
 		for (Edelsteen edelsteen : Edelsteen.values()) {
-			aantalFichesPerKleur.put(edelsteen.getRgb(), Arrays.stream(edelsteenfiches)
+			aantalFichesPerEdelsteen.put(edelsteen, Arrays.stream(edelsteenfiches)
 					.filter(e -> e.edelsteen().getRgb().equals(edelsteen.getRgb())).count());
 		}
-
-		for (Map.Entry<String, Long> set : aantalFichesPerKleur.entrySet()) {
+		for (Map.Entry<Edelsteen, Long> set : aantalFichesPerEdelsteen.entrySet()) {
 			if (set.getValue() != 0) {
-				Label lblfiche = new Label(Long.toString(set.getValue()));
-				lblfiche.setStyle(String.format("-fx-background-color: rgb%s", set.getKey()));
-				lblfiche.getStyleClass().add("edelsteenfiche");
-				lblfiche.setPrefSize(25, 25);
-				lblfiche.setMaxSize(25, 25);
-				lblfiche.setAlignment(Pos.CENTER);
-				fpFiches.getChildren().add(lblfiche);
+				FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(set.getKey(), 12, set.getValue().intValue());
+				fpFiches.getChildren().add(fxEdelsteenFiche);
 			}
 		}
 

@@ -28,7 +28,6 @@ public class FXOntwikkelingskaart extends GridPane implements Clickable {
 		edelsteenfiches = info.edelsteenfiches();
 
 		buildGui();
-
 	}
 
 	private void buildGui() {
@@ -60,41 +59,25 @@ public class FXOntwikkelingskaart extends GridPane implements Clickable {
 	}
 
 	private void plaatsBonus() {
-		Label lblBonus = new Label();
-		lblBonus.setStyle(String.format("-fx-background-color: rgb%s", bonus.edelsteen().getRgb()));
-		lblBonus.getStyleClass().add("edelsteenfiche");
-		lblBonus.setPrefSize(30, 30);
-		lblBonus.setMaxSize(30, 30);
-		lblBonus.setAlignment(Pos.TOP_RIGHT);
-		this.add(lblBonus, 1, 0);
+		FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(bonus.edelsteen(), 15);
+		fxEdelsteenFiche.setAlignment(Pos.TOP_RIGHT);
+
+		this.add(fxEdelsteenFiche, 1, 0);
 	}
 
 	private void voegEdelsteenfichesToe() {
 		FlowPane fpFiches = new FlowPane();
 		fpFiches.setOrientation(Orientation.VERTICAL);
 
-		// HashMap<rgb, aantal>
-		Map<String, Long> aantalFichesPerKleur = new HashMap<String, Long>();
-
+		Map<Edelsteen, Long> aantalFichesPerEdelsteen = new HashMap<Edelsteen, Long>();
 		for (Edelsteen edelsteen : Edelsteen.values()) {
-			aantalFichesPerKleur.put(edelsteen.getRgb(), Arrays.stream(edelsteenfiches)
+			aantalFichesPerEdelsteen.put(edelsteen, Arrays.stream(edelsteenfiches)
 					.filter(e -> e.edelsteen().getRgb().equals(edelsteen.getRgb())).count());
 		}
-
-		for (Map.Entry<String, Long> set : aantalFichesPerKleur.entrySet()) {
+		for (Map.Entry<Edelsteen, Long> set : aantalFichesPerEdelsteen.entrySet()) {
 			if (set.getValue() != 0) {
-				// Momenteel geen gebruik van FXEdelsteenFiche, mag niet klikbaar zijn
-				// Mss later klasse FXEdelsteenFiche aanpassen naar een Circle/Pane of zo iets
-				// ipv Button
-				// en een specialisatieklasse FXEdelsteenFicheKlikbaar voorzien die
-				// de interface Clickable implementeert
-				Label lblfiche = new Label(Long.toString(set.getValue()));
-				lblfiche.setStyle(String.format("-fx-background-color: rgb%s", set.getKey()));
-				lblfiche.getStyleClass().add("edelsteenfiche");
-				lblfiche.setPrefSize(25, 25);
-				lblfiche.setMaxSize(25, 25);
-				lblfiche.setAlignment(Pos.CENTER);
-				fpFiches.getChildren().add(lblfiche);
+				FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(set.getKey(), 12, set.getValue().intValue());
+				fpFiches.getChildren().add(fxEdelsteenFiche);
 			}
 		}
 
@@ -104,6 +87,7 @@ public class FXOntwikkelingskaart extends GridPane implements Clickable {
 		fpFiches.setHgap(4);
 		fpFiches.setAlignment(Pos.BOTTOM_LEFT);
 		this.add(fpFiches, 0, 1, 2, 1);
+
 	}
 
 	@Override

@@ -24,7 +24,8 @@
  
 */
 
-.edelsteenfiche {
+/*Brecht: overbodig geworden door te werken met aparte klasse FXEdelsteenFiche
+ .edelsteenfiche {
 	-fx-shape: "M 100, 100
         m -75, 0
         a 75,75 0 1,0 150,0
@@ -38,7 +39,7 @@
 
 .edelsteenfichegroot{
 	-fx-font-size: 25;
-}
+}*/
 
 .edele, .ontwikkelingskaart, .stapel {
 	-fx-border-color: #a9a9a9;
@@ -47,7 +48,7 @@
 }
 
 .stapel{
-	-fx-font-size: 25;
+	-fx-font-size: 25.0;
 	-fx-text-fill: white;
 	-fx-text-alignment: center;
 }
@@ -62,7 +63,7 @@
 
 .prestigePunten{
 	-fx-font-family: 'Londrina Outline', cursive;
-	-fx-font-size:35;
+	-fx-font-size:35.0;
 }
 
 .hoofdscherm {
