@@ -4,8 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-public class FXEdelsteesteenFiche extends Button implements Clickable {
-	public FXEdelsteesteenFiche(String aantalFiches, String rgb) {
+public class FXEdelsteenFiche extends Button implements Clickable {
+	public FXEdelsteenFiche(String aantalFiches, String rgb) {
 		// tekst in Button
 		super(aantalFiches);
 		buildGui(rgb);

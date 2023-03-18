@@ -73,6 +73,7 @@ public class FXOntwikkelingskaart extends GridPane implements Clickable {
 		FlowPane fpFiches = new FlowPane();
 		fpFiches.setOrientation(Orientation.VERTICAL);
 
+		// HashMap<rgb, aantal>
 		Map<String, Long> aantalFichesPerKleur = new HashMap<String, Long>();
 
 		for (Edelsteen edelsteen : Edelsteen.values()) {
@@ -82,6 +83,11 @@ public class FXOntwikkelingskaart extends GridPane implements Clickable {
 
 		for (Map.Entry<String, Long> set : aantalFichesPerKleur.entrySet()) {
 			if (set.getValue() != 0) {
+				// Momenteel geen gebruik van FXEdelsteenFiche, mag niet klikbaar zijn
+				// Mss later klasse FXEdelsteenFiche aanpassen naar een Circle/Pane of zo iets
+				// ipv Button
+				// en een specialisatieklasse FXEdelsteenFicheKlikbaar voorzien die
+				// de interface Clickable implementeert
 				Label lblfiche = new Label(Long.toString(set.getValue()));
 				lblfiche.setStyle(String.format("-fx-background-color: rgb%s", set.getKey()));
 				lblfiche.getStyleClass().add("edelsteenfiche");

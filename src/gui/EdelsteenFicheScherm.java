@@ -22,7 +22,7 @@ public class EdelsteenFicheScherm extends VBox {
 
 		for (Edelsteen e : Edelsteen.values()) {
 			String rgb = e.getRgb();
-			FXEdelsteesteenFiche fxEdelsteenFiche = new FXEdelsteesteenFiche(
+			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(
 					Integer.toString(aantalFichesPerStapel.get(e)), rgb);
 			fxEdelsteenFiche.getStyleClass().add("edelsteenfichegroot");
 			fxEdelsteenFiche.setPrefSize(75, 75);
