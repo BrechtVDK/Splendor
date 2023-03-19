@@ -88,10 +88,17 @@ public class SpelerRegistratieScherm extends GridPane {
 
 		} catch (NumberFormatException e) {
 			toonFoutmelding("Geboortejaar is niet juist ingevuld");
+			// David 2023/03/19 16:22 Toegevoegd als assistentie wanneer eer een fout ingave
+			// is
+			txtGeboortejaar.requestFocus();
+			txtGeboortejaar.selectAll();
 		} catch (IllegalArgumentException e) {
 			toonFoutmelding(e.getMessage());
+			// David 2023/03/19 16:22 Toegevoegd als assistentie wanneer er een fout ingave
+			// is
+			txtGebruikersnaam.requestFocus();
+			txtGebruikersnaam.selectAll();
 		}
-
 	}
 
 	private void updateLvSpelers() {
