@@ -11,8 +11,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
@@ -81,9 +79,8 @@ public class FXEdeleKaart extends GridPane implements Clickable {
 	}
 
 	@Override
-	public void onClicked(MouseEvent event) {
-		if (event.getButton() == MouseButton.PRIMARY) {
-			System.out.println("FXEdeleKaart");
-		}
+	public void onLeftClicked() {
+		System.out.println("FXEdeleKaart");
+
 	}
 }

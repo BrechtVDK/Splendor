@@ -1,8 +1,6 @@
 package gui;
 
 import domein.Edelsteen;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 
 public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clickable {
 
@@ -14,11 +12,7 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	}
 
 	@Override
-	public void onClicked(MouseEvent event) {
-		if (event.getButton() == MouseButton.PRIMARY) {
-			System.out.println("FXEdelsteenFiche");
-		}
-
+	public void onLeftClicked() {
+		System.out.println("FXEdelsteenFiche");
 	}
-
 }

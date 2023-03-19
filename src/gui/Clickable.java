@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Cursor;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
@@ -38,6 +39,12 @@ public interface Clickable {
 		});
 	}
 
+	default void onClicked(MouseEvent event) {
+		if (event.getButton() == MouseButton.PRIMARY) {
+			onLeftClicked();
+		}
+	}
+
 	// abstracte methode
-	void onClicked(MouseEvent event);
+	void onLeftClicked();
 }
