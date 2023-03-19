@@ -37,7 +37,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 
 	@Override
 	public void onLeftClicked() {
-		System.out.println("Ontwikkelingskaart");
+		System.out.println("FXOntwikkelingskaart");
 	}
 
 }

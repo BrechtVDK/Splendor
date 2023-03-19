@@ -21,7 +21,7 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 
 	@Override
 	public void onLeftClicked() {
-		System.out.println("Edelekaart");
+		System.out.println("FXEdelekaart");
 
 	}
 
