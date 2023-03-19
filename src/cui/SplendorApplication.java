@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import domein.DomeinController;
+import domein.Spel;
 
 /*David : probleem zat hem bij het closen van de scanners. Heb die eruit gehaald en nu werkt het wel*/
 public class SplendorApplication {
@@ -15,8 +16,14 @@ public class SplendorApplication {
 
 	public SplendorApplication(DomeinController dc) {
 		this.dc = dc;
-		minSpelers = dc.geefMinAantalSpelers();
-		maxSpelers = dc.geefMaxAantalSpelers();
+//		minSpelers = dc.geefMinAantalSpelers();
+//		maxSpelers = dc.geefMaxAantalSpelers();
+		/*
+		 * David: @Brecht en Jonas (20230319) Ben ergens niet akkoord dat ik nu ook
+		 * klasse Spel moet importeren buiten het domein
+		 */
+		minSpelers = Spel.MIN_SPELERS;
+		maxSpelers = Spel.MAX_SPELERS;
 
 		// Geeft het keuze menu weer
 		do {
@@ -31,8 +38,12 @@ public class SplendorApplication {
 	}
 
 	private void menu() {
-
-		aantalSpelers = dc.geefAantalSpelers();
+//		aantalSpelers = dc.geefAantalSpelers();
+		try {
+			aantalSpelers = dc.geefSpelers().size();
+		} catch (Exception e) {
+			aantalSpelers = 0;
+		}
 
 		System.out.print("Maak een keuze uit volgende opties:\n\n");
 		System.out.printf("%d:\t%s%n", 0, "Spel verlaten");
@@ -99,7 +110,12 @@ public class SplendorApplication {
 
 
 	private void keuzeTree(int optie) {
-		aantalSpelers = dc.geefAantalSpelers();
+//		aantalSpelers = dc.geefAantalSpelers();
+		try {
+			aantalSpelers = dc.geefSpelers().size();
+		} catch (Exception e) {
+			aantalSpelers = 0;
+		}
 		switch (optie) {
 		case 1 -> {
 			dc.startNieuwSpel();
