@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
-public class FXKaart extends GridPane implements Clickable {
+public abstract class FXKaart extends GridPane {
 
 	private int prestigePunten;
 	private Edelsteenfiche edelsteenfiches[];
@@ -21,7 +21,7 @@ public class FXKaart extends GridPane implements Clickable {
 	public FXKaart(int prestigePunten, Edelsteenfiche edelsteenfiches[]) {
 		this.prestigePunten = prestigePunten;
 		this.edelsteenfiches = edelsteenfiches;
-
+		buildGui();
 	}
 
 	public void buildGui() {
@@ -34,11 +34,6 @@ public class FXKaart extends GridPane implements Clickable {
 		this.setMaxWidth(100);
 		this.setMinHeight(150);
 		this.setMaxHeight(150);
-		this.getStyleClass().add("edele");
-
-		// interface Clickable
-		this.setOnMouseClicked(this::onClicked);
-		this.onHovered(this, 1.15);
 	}
 
 	private void plaatsPrestigePunten() {
@@ -75,9 +70,4 @@ public class FXKaart extends GridPane implements Clickable {
 		this.add(fpFiches, 0, 1, 2, 1);
 	}
 
-	@Override
-	public void onLeftClicked() {
-		System.out.println("FXKaart");
-
-	}
 }

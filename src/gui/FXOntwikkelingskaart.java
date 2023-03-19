@@ -4,7 +4,7 @@ import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
 import javafx.geometry.Pos;
 
-public class FXOntwikkelingskaart extends FXKaart {
+public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 
 	private Edelsteenfiche bonus;
 
@@ -12,12 +12,16 @@ public class FXOntwikkelingskaart extends FXKaart {
 	public FXOntwikkelingskaart(Ontwikkelingskaart info) {
 		super(info.prestigePunten(), info.edelsteenfiches());
 		bonus = info.bonus();
-		super.buildGui();
 		buildExtras();
+
 	}
 
 	private void buildExtras() {
 		plaatsBonus();
+		this.getStyleClass().add("ontwikkelingskaart");
+		// interface
+		this.setOnMouseClicked(this::onClicked);
+		this.onHovered(this, 1.1);
 	}
 
 
@@ -28,6 +32,10 @@ public class FXOntwikkelingskaart extends FXKaart {
 		this.add(fxEdelsteenFiche, 1, 0);
 	}
 
+	@Override
+	public void onLeftClicked() {
+		System.out.println("Ontwikkelingskaart");
+	}
 
 
 }
