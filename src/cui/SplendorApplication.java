@@ -1,10 +1,12 @@
 package cui;
 
+import static domein.Spel.MAX_SPELERS;
+import static domein.Spel.MIN_SPELERS;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import domein.DomeinController;
-import domein.Spel;
 
 /*David : probleem zat hem bij het closen van de scanners. Heb die eruit gehaald en nu werkt het wel*/
 public class SplendorApplication {
@@ -12,7 +14,6 @@ public class SplendorApplication {
 	private final DomeinController dc;
 	private int keuze;
 	private int aantalSpelers;
-	private final int minSpelers, maxSpelers;
 
 	public SplendorApplication(DomeinController dc) {
 		this.dc = dc;
@@ -22,8 +23,6 @@ public class SplendorApplication {
 		 * David: @Brecht en Jonas (20230319) Ben ergens niet akkoord dat ik nu ook
 		 * klasse Spel moet importeren buiten het domein
 		 */
-		minSpelers = Spel.MIN_SPELERS;
-		maxSpelers = Spel.MAX_SPELERS;
 
 		// Geeft het keuze menu weer
 		do {
@@ -31,7 +30,7 @@ public class SplendorApplication {
 			geefKeuze();
 			keuzeTree(keuze);
 		} while (keuze != 0);
-		if (aantalSpelers >= minSpelers)
+		if (aantalSpelers >= MIN_SPELERS)
 			System.out.println("\n\n\t\tENJOY PLAYING SPLENDOR !!");
 		else
 			System.out.println("\n\n\t\tSEE YOU SOON !!");
@@ -52,12 +51,12 @@ public class SplendorApplication {
 		} else {
 			System.out.printf("%d:\t%s%n", 1, "Nieuw Spel spelen en alle reeds geregistreerde spelers schrappen");
 		}
-		if (aantalSpelers >= 1 && aantalSpelers < maxSpelers) {
+		if (aantalSpelers >= 1 && aantalSpelers < MAX_SPELERS) {
 			System.out.printf("%d:\t%s%n", 2, "Een speler toevoegen");
 		}
-		if (aantalSpelers >= minSpelers && aantalSpelers < maxSpelers) {
+		if (aantalSpelers >= MIN_SPELERS && aantalSpelers < MAX_SPELERS) {
 			System.out.printf("%d:\t%s%n", 3, "Start spel");
-		} else if (aantalSpelers == maxSpelers) {
+		} else if (aantalSpelers == MAX_SPELERS) {
 			System.out.printf("%d:\t%s%n", 2, "Start spel");
 		}
 		System.out.print("Maak uw keuze:\t");
@@ -122,7 +121,7 @@ public class SplendorApplication {
 			voegSpelerToeAanSpel();
 		}
 		case 2 -> {
-			if (aantalSpelers == maxSpelers) {
+			if (aantalSpelers == MAX_SPELERS) {
 				System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefSpelerAanDeBeurt());
 				dc.organiseerSpelVolgensHetAantalSpelers();
 				keuze = 0;

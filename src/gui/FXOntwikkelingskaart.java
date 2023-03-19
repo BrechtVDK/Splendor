@@ -20,6 +20,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		plaatsBonus();
 		this.getStyleClass().add("ontwikkelingskaart");
 		// interface
+		this.backgroundProperty();
 		this.setOnMouseClicked(this::onClicked);
 		this.onHovered(this, 1.1);
 	}
