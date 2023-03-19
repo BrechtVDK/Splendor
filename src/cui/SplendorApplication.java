@@ -11,9 +11,12 @@ public class SplendorApplication {
 	private final DomeinController dc;
 	private int keuze;
 	private int aantalSpelers;
+	private final int minSpelers, maxSpelers;
 
 	public SplendorApplication(DomeinController dc) {
 		this.dc = dc;
+		minSpelers = dc.geefMinAantalSpelers();
+		maxSpelers = dc.geefMaxAantalSpelers();
 
 		// Geeft het keuze menu weer
 		do {
@@ -21,7 +24,7 @@ public class SplendorApplication {
 			geefKeuze();
 			keuzeTree(keuze);
 		} while (keuze != 0);
-		if (aantalSpelers >= 2)
+		if (aantalSpelers >= minSpelers)
 			System.out.println("\n\n\t\tENJOY PLAYING SPLENDOR !!");
 		else
 			System.out.println("\n\n\t\tSEE YOU SOON !!");
@@ -38,12 +41,12 @@ public class SplendorApplication {
 		} else {
 			System.out.printf("%d:\t%s%n", 1, "Nieuw Spel spelen en alle reeds geregistreerde spelers schrappen");
 		}
-		if (aantalSpelers >= 1 && aantalSpelers < 4) {
+		if (aantalSpelers >= 1 && aantalSpelers < maxSpelers) {
 			System.out.printf("%d:\t%s%n", 2, "Een speler toevoegen");
 		}
-		if (aantalSpelers >= 2 && aantalSpelers < 4) {
+		if (aantalSpelers >= minSpelers && aantalSpelers < maxSpelers) {
 			System.out.printf("%d:\t%s%n", 3, "Start spel");
-		} else if (aantalSpelers == 4) {
+		} else if (aantalSpelers == maxSpelers) {
 			System.out.printf("%d:\t%s%n", 2, "Start spel");
 		}
 		System.out.print("Maak uw keuze:\t");
@@ -103,8 +106,8 @@ public class SplendorApplication {
 			voegSpelerToeAanSpel();
 		}
 		case 2 -> {
-			if (aantalSpelers == 4) {
-				System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefNaamSpeler(dc.geefSpelerAanDeBeurt()));
+			if (aantalSpelers == maxSpelers) {
+				System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefSpelerAanDeBeurt());
 				dc.organiseerSpelVolgensHetAantalSpelers();
 				keuze = 0;
 			} else {
@@ -112,8 +115,8 @@ public class SplendorApplication {
 			}
 		}
 		case 3 -> {
-			System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefNaamSpeler(dc.geefSpelerAanDeBeurt()));
 			dc.organiseerSpelVolgensHetAantalSpelers();
+			System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefSpelerAanDeBeurt());
 			keuze = 0;
 			}
 		}
