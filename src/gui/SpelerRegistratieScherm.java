@@ -116,6 +116,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 	private void toonStartspeler() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setHeaderText("");
 		alert.setTitle("Startspeler");
 		alert.setContentText(String.format("Speler %s mag starten", dc.geefSpelerAanDeBeurt()));
 		alert.showAndWait();
