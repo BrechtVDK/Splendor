@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
 public class Spel {
 	private List<Speler> spelers;
@@ -79,17 +79,18 @@ public class Spel {
 
 	private void kiesStartSpeler() {
 		List<Speler> kopieVanSpelers = new ArrayList<>(spelers);
+		Function<Speler, Integer> byYear = Speler::getGeboortejaar;
+		Function<Speler, Integer> byNaamLength = speler -> speler.getGebruikersnaam().length();
+		Function<Speler, String> byNaam = Speler::getGebruikersnaam;
 
-		kopieVanSpelers = spelers.stream()
-				.sorted(Comparator.comparing(Speler::getGeboortejaar)
-						.thenComparing(speler -> speler.getGebruikersnaam().length())
-						.thenComparing(Speler::getGebruikersnaam).reversed())
-				.collect(Collectors.toList());
+		Speler startSpeler = spelers.stream()
+				.sorted(Comparator.comparing(byYear).thenComparing(byNaamLength).thenComparing(byNaam).reversed())
+				.toList().get(0);
 
 		// isStartSpeler van Speler op true zetten en instellen als
 		// spelerAanDeBeurt;
-		spelerAanDeBeurt = spelers.indexOf(kopieVanSpelers.get(0));
-		spelers.get(spelerAanDeBeurt).setStartSpeler(true);
+		spelerAanDeBeurt = spelers.indexOf(startSpeler);
+		startSpeler.setStartSpeler(true);
 	}
 
 	// Ik mis nog deze methode om zo uit het menu te geraken
@@ -133,8 +134,7 @@ public class Spel {
 	// UC2
 
 	// geeft het aantal fiches per soort terug
-	public Map<Edelsteen, Integer> geefAantalFichesPerStapel()
-	{
+	public Map<Edelsteen, Integer> geefAantalFichesPerStapel() {
 		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<Edelsteen, Integer>();
 
 		for (Edelsteen edelsteen : Edelsteen.values()) {

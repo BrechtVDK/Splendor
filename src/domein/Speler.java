@@ -11,6 +11,7 @@ public class Speler {
 	private final static int MINIMUMLEEFTIJD = 6;
 	private final static int MINIMUMGEBOORTEJAAR = 1900;
 	private boolean isStartSpeler;
+	private boolean isAanDeBeurt;
 	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
 	private int prestigepunten;
 	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;

@@ -17,7 +17,8 @@ public class DomeinController {
 	}
 
 	public void voegSpelerToeAanSpel(String gebruikersnaam, int geboortejaar) throws IllegalArgumentException {
-
+		// validatie correcte gebruikersnaam en geboortejaar
+		new Speler(gebruikersnaam, geboortejaar);
 		spel.voegSpelerToe(spelerRepo.geefSpeler(gebruikersnaam, geboortejaar));
 
 	}
