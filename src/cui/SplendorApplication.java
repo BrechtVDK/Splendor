@@ -17,6 +17,8 @@ public class SplendorApplication {
 
 	public SplendorApplication(DomeinController dc) {
 		this.dc = dc;
+		// start applicatie = 0 spelers
+		this.aantalSpelers = 0;
 //		minSpelers = dc.geefMinAantalSpelers();
 //		maxSpelers = dc.geefMaxAantalSpelers();
 		/*
@@ -37,13 +39,6 @@ public class SplendorApplication {
 	}
 
 	private void menu() {
-//		aantalSpelers = dc.geefAantalSpelers();
-		try {
-			aantalSpelers = dc.geefSpelers().size();
-		} catch (Exception e) {
-			aantalSpelers = 0;
-		}
-
 		System.out.print("Maak een keuze uit volgende opties:\n\n");
 		System.out.printf("%d:\t%s%n", 0, "Spel verlaten");
 		if (aantalSpelers == 0) {
@@ -82,7 +77,8 @@ public class SplendorApplication {
 				gelukt = true;
 			} catch (InputMismatchException ex) {
 				System.out.println("Voer een geheel getal in.");
-				invoer.nextLine();
+				// in commentaar, cui zit anders vast
+				// invoer.nextLine();
 			} catch (IllegalArgumentException ex) {
 				System.out.println(ex.getMessage());
 			} catch (Exception e) {
@@ -98,23 +94,13 @@ public class SplendorApplication {
 
 				if (!gelukt) {
 					// if (invoer.hasNext())
-						invoer.nextLine();
-				} // else {
-					// Brecht: in commentaar gezet, cui werkte anders niet
-					// invoer.close();
-					// }
+					invoer.nextLine();
+				}
 			}
 		} while (!gelukt);
 	}
 
-
 	private void keuzeTree(int optie) {
-//		aantalSpelers = dc.geefAantalSpelers();
-		try {
-			aantalSpelers = dc.geefSpelers().size();
-		} catch (Exception e) {
-			aantalSpelers = 0;
-		}
 		switch (optie) {
 		case 1 -> {
 			dc.startNieuwSpel();
@@ -122,8 +108,8 @@ public class SplendorApplication {
 		}
 		case 2 -> {
 			if (aantalSpelers == MAX_SPELERS) {
-				System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefSpelerAanDeBeurt());
 				dc.organiseerSpelVolgensHetAantalSpelers();
+				System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefSpelerAanDeBeurt());
 				keuze = 0;
 			} else {
 				voegSpelerToeAanSpel();
@@ -133,7 +119,7 @@ public class SplendorApplication {
 			dc.organiseerSpelVolgensHetAantalSpelers();
 			System.out.printf("%n\t%s%n\tU bent aan de beurt", dc.geefSpelerAanDeBeurt());
 			keuze = 0;
-			}
+		}
 		}
 
 	}
@@ -149,6 +135,7 @@ public class SplendorApplication {
 				System.out.print("Geef het geboortejaar van de gebruiker:\t");
 				int gjaar = invoerGebruiker.nextInt();
 				dc.voegSpelerToeAanSpel(gnaam, gjaar);
+				aantalSpelers = dc.geefSpelers().size();
 				gelukt = true;
 			} catch (IllegalArgumentException ea) {
 				System.err.println(ea.getClass() + ": " + ea.getMessage());
@@ -169,9 +156,8 @@ public class SplendorApplication {
 			} finally {
 				if (!gelukt) {
 					// if (invoerGebruiker.hasNext())
-						invoerGebruiker.nextLine();
-				} // else
-//					invoerGebruiker.close();
+					invoerGebruiker.nextLine();
+				}
 			}
 		} while (!gelukt);
 	}
