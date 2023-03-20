@@ -55,6 +55,8 @@ public abstract class FXKaart extends GridPane {
 			aantalFichesPerEdelsteen.put(edelsteen, Arrays.stream(edelsteenfiches)
 					.filter(e -> e.edelsteen().getRgb().equals(edelsteen.getRgb())).count());
 		}
+		// Hier wordt over de Map geïtereerd om de nodige info te bekomen (manier werd
+		// gevonden op internet)
 		for (Map.Entry<Edelsteen, Long> set : aantalFichesPerEdelsteen.entrySet()) {
 			if (set.getValue() != 0) {
 				FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(set.getKey(), 12, set.getValue().intValue());
