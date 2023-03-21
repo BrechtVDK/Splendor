@@ -78,7 +78,6 @@ public class Spel {
 	}
 
 	private void kiesStartSpeler() {
-		List<Speler> kopieVanSpelers = new ArrayList<>(spelers);
 		Function<Speler, Integer> byYear = Speler::getGeboortejaar;
 		Function<Speler, Integer> byNaamLength = speler -> speler.getGebruikersnaam().length();
 		Function<Speler, String> byNaam = Speler::getGebruikersnaam;
@@ -91,9 +90,9 @@ public class Spel {
 		// spelerAanDeBeurt;
 		spelerAanDeBeurt = spelers.indexOf(startSpeler);
 		startSpeler.setStartSpeler(true);
+		startSpeler.setAanDeBeurt(true);
 	}
 
-	// Ik mis nog deze methode om zo uit het menu te geraken
 	public int geefAantalSpelers() {
 		return spelers.size();
 	}
@@ -135,7 +134,7 @@ public class Spel {
 
 	// geeft het aantal fiches per soort terug
 	public Map<Edelsteen, Integer> geefAantalFichesPerStapel() {
-		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<>();
+		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<Edelsteen, Integer>();
 
 		for (Edelsteen edelsteen : Edelsteen.values()) {
 			aantalPerSoort.put(edelsteen, stapelsEdelsteenfiches.get(edelsteen).getAantalFiches());

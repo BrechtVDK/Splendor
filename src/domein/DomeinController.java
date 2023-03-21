@@ -27,6 +27,8 @@ public class DomeinController {
 		spel.organiseerSpelVolgensHetAantalSpelers();
 	}
 
+	// indien we meer willen dan de naam kunnen we ook Speler teruggeven (gedrag is
+	// toch afgeschermd)
 	public String geefSpelerAanDeBeurt() {
 		return spel.getSpelerAanDeBeurt().toString();
 	}
@@ -50,8 +52,9 @@ public class DomeinController {
 		return spel.geefZichtbareOntwikkelingskaarten();
 	}
 
-	public List<String> geefSpelers() {
-		return spel.getSpelers().stream().map(s -> s.toString()).toList();
+	// gedrag Speler is afgeschermd via private en protected setters
+	public List<Speler> geefSpelers() {
+		return spel.getSpelers();
 	}
 
 	public List<Edele> geefEdelen() {

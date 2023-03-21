@@ -34,7 +34,7 @@ public class Speler {
 
 	private void setGeboortejaar(int geboortejaar) throws IllegalArgumentException {
 		int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
-		if (geboortejaar < 1900) {
+		if (geboortejaar < MINIMUMGEBOORTEJAAR) {
 			throw new IllegalArgumentException("Gelieve een geldig geboortejaar in te geven");
 		}
 		if (geboortejaar > huidigJaar - MINIMUMLEEFTIJD) {
@@ -55,8 +55,16 @@ public class Speler {
 		return isStartSpeler;
 	}
 
-	public final void setStartSpeler(boolean isStartSpeler) {
+	protected final void setStartSpeler(boolean isStartSpeler) {
 		this.isStartSpeler = isStartSpeler;
+	}
+
+	public boolean isAanDeBeurt() {
+		return isAanDeBeurt;
+	}
+
+	protected void setAanDeBeurt(boolean isAanDeBeurt) {
+		this.isAanDeBeurt = isAanDeBeurt;
 	}
 
 	@Override

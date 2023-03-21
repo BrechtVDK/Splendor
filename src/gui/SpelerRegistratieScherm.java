@@ -22,6 +22,7 @@ public class SpelerRegistratieScherm extends GridPane {
 	private TextField txtGebruikersnaam, txtGeboortejaar;
 	private Button btnStartSpel;
 	private ListView<String> lvSpelers;
+	private Label lblFoutmelding;
 
 	public SpelerRegistratieScherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
@@ -59,6 +60,10 @@ public class SpelerRegistratieScherm extends GridPane {
 		lvSpelers.setMinWidth(200);
 		lvSpelers.setMaxHeight(150);
 
+		lblFoutmelding = new Label();
+		lblFoutmelding.setTextFill(Color.RED);
+
+
 		this.add(lblGebruikersnaam, 0, 1);
 		this.add(txtGebruikersnaam, 1, 1);
 		this.add(lblGeboortejaar, 0, 2);
@@ -67,10 +72,12 @@ public class SpelerRegistratieScherm extends GridPane {
 		this.add(btnStartSpel, 1, 4);
 		this.add(lblSpelers, 3, 0);
 		this.add(lvSpelers, 3, 1, 1, 4);
+		this.add(lblFoutmelding, 0, 5, this.getColumnCount(), 1);
 
 	}
 
 	private void voegToeGeklikt(ActionEvent event) {
+		lblFoutmelding.setText("");
 		try {
 			String gebruikersnaam = txtGebruikersnaam.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar.getText());
@@ -88,7 +95,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 		} catch (NumberFormatException e) {
 			toonFoutmelding("Geboortejaar is niet juist ingevuld");
-			// David 2023/03/19 16:22 Toegevoegd als assistentie wanneer eer een fout ingave
+			// David 2023/03/19 16:22 Toegevoegd als assistentie wanneer er een fout ingave
 			// is
 			txtGeboortejaar.requestFocus();
 			txtGeboortejaar.selectAll();
@@ -102,8 +109,8 @@ public class SpelerRegistratieScherm extends GridPane {
 	}
 
 	private void updateLvSpelers() {
-		lvSpelers.setItems(FXCollections.observableArrayList(dc.geefSpelers()));
-
+		lvSpelers
+				.setItems(FXCollections.observableArrayList(dc.geefSpelers().stream().map(s -> s.toString()).toList()));
 	}
 
 	private void startSpelGeklikt(ActionEvent event) {
@@ -131,9 +138,6 @@ public class SpelerRegistratieScherm extends GridPane {
 	}
 
 	private void toonFoutmelding(String melding) {
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle("Foutmelding");
-		alert.setContentText(melding);
-		alert.showAndWait();
+		lblFoutmelding.setText(melding);
 	}
 }
