@@ -1,6 +1,8 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -11,7 +13,6 @@ public class Speler {
 	private final static int MINIMUMLEEFTIJD = 6;
 	private final static int MINIMUMGEBOORTEJAAR = 1900;
 	private boolean isStartSpeler;
-	private boolean isAanDeBeurt;
 	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
 	private int prestigepunten;
 	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
@@ -20,7 +21,6 @@ public class Speler {
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
 		setGeboortejaar(geboortejaar);
-		prestigepunten = 0;
 	}
 
 	private void setGebruikersnaam(String gebruikersnaam) throws IllegalArgumentException {
@@ -59,12 +59,48 @@ public class Speler {
 		this.isStartSpeler = isStartSpeler;
 	}
 
-	public boolean isAanDeBeurt() {
-		return isAanDeBeurt;
+	protected void stelSpelAttributenIn() {
+		// int default 0 bij declaratie
+		// this.prestigepunten = 0;
+		this.edelenInBezit = new ArrayList<>();
+		this.ontwikkelingskaartenInBezit = new ArrayList<>();
+		this.aantalEdelsteenfichesPerTypeInBezit = new HashMap<Edelsteen, Integer>();
+
 	}
 
-	protected void setAanDeBeurt(boolean isAanDeBeurt) {
-		this.isAanDeBeurt = isAanDeBeurt;
+	public List<Ontwikkelingskaart> getOntwikkelingskaartenInBezit() {
+		return ontwikkelingskaartenInBezit;
+	}
+
+	protected void voegOntwikkelingskaartToe(Ontwikkelingskaart kaart) {
+		ontwikkelingskaartenInBezit.add(kaart);
+		prestigepunten += kaart.prestigePunten();
+		// bonussen toevoegen?
+	}
+
+	public int getPrestigepunten() {
+		return prestigepunten;
+	}
+
+	public Map<Edelsteen, Integer> getAantalEdelsteenfichesPerTypeInBezit() {
+		return aantalEdelsteenfichesPerTypeInBezit;
+	}
+
+	protected void voegEdelsteenfichesToe(List<Edelsteenfiche> edelsteenfiches) {
+		for (Edelsteenfiche e : edelsteenfiches) {
+			int huidigAantal = aantalEdelsteenfichesPerTypeInBezit.get(e.edelsteen());
+			aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal + 1);
+		}
+	}
+
+	public List<Edele> getEdelenInBezit() {
+		return edelenInBezit;
+	}
+
+	protected void voegEdeleToe(Edele edele) {
+		edelenInBezit.add(edele);
+		prestigepunten += Edele.PRESTIGE_PUNTEN;
+		// bonussen toevoegen?
 	}
 
 	@Override

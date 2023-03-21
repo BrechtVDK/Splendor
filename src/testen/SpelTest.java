@@ -16,6 +16,7 @@ class SpelTest {
 	@BeforeEach
 	public void beforeEach() {
 		spel = new Spel();
+
 	}
 
 	@Test
@@ -102,4 +103,9 @@ class SpelTest {
 		Assertions.assertEquals("Filip", spel.getSpelers().get(0).toString());
 	}
 
+	// TODO spel.isEindeSpel()
+	// Momenteel nog niet te testen door de protected methodes in Speler
+
+	// TODO spel.geefWinnaars()
+	// Momenteel nog niet te testen door de protected methodes in Speler
 }

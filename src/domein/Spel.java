@@ -17,6 +17,7 @@ public class Spel {
 	private Map<Edelsteen, StapelEdelsteenfiches> stapelsEdelsteenfiches;
 	public static final int MIN_SPELERS = 2;
 	public static final int MAX_SPELERS = 4;
+	private static final int EINDE_SPEL_SCORE = 15;
 
 	// UC1
 	public Spel() {
@@ -90,7 +91,6 @@ public class Spel {
 		// spelerAanDeBeurt;
 		spelerAanDeBeurt = spelers.indexOf(startSpeler);
 		startSpeler.setStartSpeler(true);
-		startSpeler.setAanDeBeurt(true);
 	}
 
 	public int geefAantalSpelers() {
@@ -146,6 +146,41 @@ public class Spel {
 	// geef het aantal resterende kaarten per stapel (per niveau) terug
 	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
 		return tafel.geefAantalResterendeKaarten();
+	}
+
+	public void speelSpel() {
+		for (Speler s : spelers) {
+			s.stelSpelAttributenIn();
+		}
+	}
+
+	public boolean isEindeSpel() {
+		return spelers.stream().anyMatch(s -> s.getPrestigepunten() >= EINDE_SPEL_SCORE);
+	}
+
+	public List<Speler> geefWinnaars() {
+		int hoogstePrestigepunten = spelers.stream().mapToInt(Speler::getPrestigepunten).max()
+				.orElse(Integer.MIN_VALUE);
+		List<Speler> spelersHoogstePrestigepunten = spelers.stream()
+				.filter(s -> s.getPrestigepunten() == hoogstePrestigepunten).toList();
+		// winaar gevonden: hoogste prestigepunten
+		if (spelersHoogstePrestigepunten.size() == 1) {
+			return spelersHoogstePrestigepunten;
+		} else {
+			int minstAantalOntwikkelingskaarten = spelersHoogstePrestigepunten.stream()
+					.mapToInt(s -> s.getOntwikkelingskaartenInBezit().size()).min().orElse(Integer.MIN_VALUE);
+			List<Speler> spelersLaagsteAantalOntwikkelingskaarten = spelersHoogstePrestigepunten.stream()
+					.filter(s -> s.getOntwikkelingskaartenInBezit().size() == minstAantalOntwikkelingskaarten).toList();
+			// 1 of meerdere winnaars gevonden: hoogste prestigepunten en minst aantal
+			// ontwikkelingskaarten
+			return spelersLaagsteAantalOntwikkelingskaarten;
+		}
+	}
+
+	// UC3
+	public void speelRonde() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
