@@ -67,9 +67,26 @@ public class DomeinController {
 		return spel.geefAantalFichesPerStapel();
 	}
 
-	public Map<Niveau, Integer> geefAantalResterendeKaarten(){
+	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
 		return spel.geefAantalResterendeKaarten();
 	}
 
+	public void speelSpel() {
+		spel.speelSpel();
+	}
+
+	public boolean isEindeSpel() {
+		return spel.isEindeSpel();
+	}
+
+	public List<String> geefNamenWinnaars() {
+		return spel.geefWinnaars().stream().map(s -> s.toString()).toList();
+	}
+
+	// UC3
+
+	public void speelRonde() {
+		spel.speelRonde();
+	}
 
 }
