@@ -33,7 +33,7 @@ public class FXEdelsteenFiche extends StackPane {
 		txtAantal.setFill(TEKSTKLEUR);
 		// BOLD en size afh. van de radius instellen
 		txtAantal.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,
-				radius > GROOT ? radius / 1.5 : radius / 0.9));
+				radius >= GROOT ? radius / 1.5 : radius / 0.9));
 
 		this.getChildren().add(txtAantal);
 
