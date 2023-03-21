@@ -135,7 +135,7 @@ public class Spel {
 
 	// geeft het aantal fiches per soort terug
 	public Map<Edelsteen, Integer> geefAantalFichesPerStapel() {
-		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<Edelsteen, Integer>();
+		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<>();
 
 		for (Edelsteen edelsteen : Edelsteen.values()) {
 			aantalPerSoort.put(edelsteen, stapelsEdelsteenfiches.get(edelsteen).getAantalFiches());

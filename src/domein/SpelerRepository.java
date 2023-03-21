@@ -15,9 +15,7 @@ public class SpelerRepository {
 
 		return spelerMap.geefSpeler(gebruikersnaam, geboortejaar);
 
-		// Jonas: onderstaade moet uit commentaar om de gui te kunnen gebruiken;
-		// Brecht: nog nodig voor jou Jonas?
-		// return new Speler(gebruikersnaam, geboortejaar);
+
 
 	}
 
