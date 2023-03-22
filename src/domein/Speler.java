@@ -16,6 +16,7 @@ public class Speler {
 	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
 	private int prestigepunten;
 	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
+	private Map<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
 	private List<Edele> edelenInBezit;
 
 	public Speler(String gebruikersnaam, int geboortejaar) {
@@ -65,7 +66,11 @@ public class Speler {
 		this.edelenInBezit = new ArrayList<>();
 		this.ontwikkelingskaartenInBezit = new ArrayList<>();
 		this.aantalEdelsteenfichesPerTypeInBezit = new HashMap<Edelsteen, Integer>();
-
+		this.aantalBonussenPerTypeInBezit = new HashMap<Edelsteen, Integer>();
+		for (Edelsteen e : Edelsteen.values()) {
+			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
+			aantalBonussenPerTypeInBezit.put(e, 0);
+		}
 	}
 
 	public List<Ontwikkelingskaart> getOntwikkelingskaartenInBezit() {
@@ -75,7 +80,7 @@ public class Speler {
 	protected void voegOntwikkelingskaartToe(Ontwikkelingskaart kaart) {
 		ontwikkelingskaartenInBezit.add(kaart);
 		prestigepunten += kaart.prestigePunten();
-		// bonussen toevoegen?
+		voegBonusToe(kaart.bonus());
 	}
 
 	public int getPrestigepunten() {
@@ -93,6 +98,15 @@ public class Speler {
 		}
 	}
 
+	public Map<Edelsteen, Integer> getAantalBonussenPerTypeInBezit() {
+		return aantalBonussenPerTypeInBezit;
+	}
+
+	private void voegBonusToe(Edelsteenfiche bonus) {
+		int huidigAantal = aantalBonussenPerTypeInBezit.get(bonus.edelsteen());
+		aantalEdelsteenfichesPerTypeInBezit.put(bonus.edelsteen(), huidigAantal + 1);
+	}
+
 	public List<Edele> getEdelenInBezit() {
 		return edelenInBezit;
 	}
@@ -100,7 +114,6 @@ public class Speler {
 	protected void voegEdeleToe(Edele edele) {
 		edelenInBezit.add(edele);
 		prestigepunten += Edele.PRESTIGE_PUNTEN;
-		// bonussen toevoegen?
 	}
 
 	@Override

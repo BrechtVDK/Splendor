@@ -10,6 +10,7 @@ public class Hoofdscherm extends GridPane {
 	private EdelenScherm edelenScherm;
 	private EdelsteenFicheScherm edelsteenFicheScherm;
 	private TafelScherm tafelscherm;
+	private LinkerInfoScherm linkerInfoScherm;
 
 	public Hoofdscherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
@@ -27,13 +28,16 @@ public class Hoofdscherm extends GridPane {
 		this.setVgap(25);
 		this.setHgap(25);
 		this.setAlignment(Pos.CENTER);
-
+		linkerInfoScherm = new LinkerInfoScherm(dc);
 		edelenScherm = new EdelenScherm(dc);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
 		tafelscherm = new TafelScherm(dc);
 
-		this.add(edelenScherm, 1, 0, 5, 1);
-		this.add(edelsteenFicheScherm, 0, 1, 1, 3);
-		this.add(tafelscherm, 1, 1, 5, 3);
+
+		this.add(linkerInfoScherm, 0, 0, 1, 5);
+		this.add(edelenScherm, 2, 0, 5, 1);
+		this.add(edelsteenFicheScherm, 1, 1, 1, 3);
+		this.add(tafelscherm, 2, 1, 5, 3);
+	
 	}
 }
