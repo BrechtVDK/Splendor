@@ -11,6 +11,7 @@ public class Hoofdscherm extends GridPane {
 	private EdelsteenFicheScherm edelsteenFicheScherm;
 	private TafelScherm tafelscherm;
 	private LinkerInfoScherm linkerInfoScherm;
+	private ScoreBordScherm scoreBordScherm;
 
 	public Hoofdscherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
@@ -32,12 +33,14 @@ public class Hoofdscherm extends GridPane {
 		edelenScherm = new EdelenScherm(dc);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
 		tafelscherm = new TafelScherm(dc);
+		scoreBordScherm = new ScoreBordScherm(dc, ws.getScene().getWidth());
 
 
 		this.add(linkerInfoScherm, 0, 0, 1, 5);
 		this.add(edelenScherm, 2, 0, 5, 1);
 		this.add(edelsteenFicheScherm, 1, 1, 1, 3);
 		this.add(tafelscherm, 2, 1, 5, 3);
+		this.add(scoreBordScherm, 6, 0, 1, 5);
 	
 	}
 }
