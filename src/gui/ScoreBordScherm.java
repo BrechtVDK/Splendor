@@ -12,14 +12,13 @@ public class ScoreBordScherm extends VBox {
 	public ScoreBordScherm(DomeinController dc, double breedte) {
 		this.dc = dc;
 		this.breedte = breedte / 5;
-		this.setMinWidth(breedte);
-		this.setAlignment(Pos.CENTER);
-		this.setSpacing(2);
 		buildGui();
 	}
 
 	private void buildGui() {
-
+		this.setMinWidth(breedte);
+		this.setAlignment(Pos.CENTER);
+		this.setSpacing(2);
 		for (Speler sp : dc.geefSpelers()) {
 			this.getChildren().add(new SpelerScoreScherm(dc, sp, breedte));
 		}
