@@ -25,7 +25,8 @@ public class SpelerScoreScherm extends GridPane {
 	private void buildGui() {
 		this.setMinWidth(minBreedte);
 		this.getStyleClass().add("scoreKaart");
-		Rectangle voorgrond = new Rectangle(40, minBreedte);
+		Rectangle voorgrond = new Rectangle(minBreedte, 40);
+		;
 		voorgrond.setFill(Color.BROWN);
 		if (dc.geefSpelerAanDeBeurt() == sp.toString())
 			voorgrond.setOpacity(0);

@@ -169,11 +169,11 @@ public class Spel {
 		} else {
 			int minstAantalOntwikkelingskaarten = spelersHoogstePrestigepunten.stream()
 					.mapToInt(s -> s.getOntwikkelingskaartenInBezit().size()).min().orElse(Integer.MIN_VALUE);
-			List<Speler> spelersLaagsteAantalOntwikkelingskaarten = spelersHoogstePrestigepunten.stream()
+			List<Speler> spelersMinsAantalOntwikkelingskaarten = spelersHoogstePrestigepunten.stream()
 					.filter(s -> s.getOntwikkelingskaartenInBezit().size() == minstAantalOntwikkelingskaarten).toList();
 			// 1 of meerdere winnaars gevonden: hoogste prestigepunten en minst aantal
 			// ontwikkelingskaarten
-			return spelersLaagsteAantalOntwikkelingskaarten;
+			return spelersMinsAantalOntwikkelingskaarten;
 		}
 	}
 
