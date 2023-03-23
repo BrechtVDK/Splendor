@@ -115,6 +115,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 	private void startSpelGeklikt(ActionEvent event) {
 		dc.organiseerSpelVolgensHetAantalSpelers();
+		dc.speelSpel();
 		toonStartspeler();
 
 		Stage stage = (Stage) this.getScene().getWindow();
