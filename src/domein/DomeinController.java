@@ -27,10 +27,9 @@ public class DomeinController {
 		spel.organiseerSpelVolgensHetAantalSpelers();
 	}
 
-	// indien we meer willen dan de naam kunnen we ook Speler teruggeven (gedrag is
-	// toch afgeschermd)
-	public String geefSpelerAanDeBeurt() {
-		return spel.getSpelerAanDeBeurt().toString();
+	// Speler teruggeven, gedrag is afgeschermd
+	public Speler geefSpelerAanDeBeurt() {
+		return spel.getSpelerAanDeBeurt();
 	}
 
 //	David: ik heb deze nodig voor mijn menu te kunnen doen stoppen 

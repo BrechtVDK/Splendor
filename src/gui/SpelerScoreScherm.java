@@ -1,6 +1,5 @@
 package gui;
 
-
 import domein.DomeinController;
 import domein.Speler;
 import javafx.scene.layout.GridPane;
@@ -28,11 +27,12 @@ public class SpelerScoreScherm extends GridPane {
 		Rectangle voorgrond = new Rectangle(minBreedte, 40);
 
 		voorgrond.setFill(Color.BROWN);
-		if (dc.geefSpelerAanDeBeurt() == sp.toString())
+		if (dc.geefSpelerAanDeBeurt().equals(sp))
 			voorgrond.setOpacity(0);
 		else
 			voorgrond.setOpacity(0.20);
 		this.add(voorgrond, 0, 0, 6, 4);
+
 	}
 
 }
