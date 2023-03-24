@@ -185,10 +185,7 @@ public class Spel {
 	}
 
 	public void bepaalVolgendeSpeler() {
-		if (spelerAanDeBeurt == spelers.size() - 1)
-			spelerAanDeBeurt = 0;
-		else
-			spelerAanDeBeurt++;
+		spelerAanDeBeurt = spelerAanDeBeurt + 1 % spelers.size();
 	}
 
 	// methode geeft edelen terug waar spelerAanDeBeurt recht op heeft
