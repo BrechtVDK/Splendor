@@ -91,6 +91,7 @@ public class Spel {
 		// spelerAanDeBeurt;
 		spelerAanDeBeurt = spelers.indexOf(startSpeler);
 		startSpeler.setStartSpeler(true);
+
 	}
 
 	public int geefAantalSpelers() {
@@ -183,5 +184,46 @@ public class Spel {
 
 	}
 
+	public void bepaalVolgendeSpeler() {
+		if (spelerAanDeBeurt == spelers.size() - 1)
+			spelerAanDeBeurt = 0;
+		else
+			spelerAanDeBeurt++;
+	}
+
+	// methode geeft edelen terug waar spelerAanDeBeurt recht op heeft
+	public List<Edele> geefBeschikbareEdelen() {
+		Map<Edelsteen, Integer> spelerBonussen = spelers.get(spelerAanDeBeurt).getAantalBonussenPerTypeInBezit();
+		List<Edele> beschikbareEdelen = new ArrayList<>();
+
+		for (Edele edele : edelen) {
+			Map<Edelsteen, Integer> edeleBonussen = new HashMap<>();
+			for (Edelsteen edelsteen : Edelsteen.values()) {
+				edeleBonussen.put(edelsteen, 0);
+			}
+			Edelsteenfiche[] ebonussen = edele.bonussen();
+			for (Edelsteenfiche ef : ebonussen) {
+				edeleBonussen.put(ef.edelsteen(), edeleBonussen.get(ef.edelsteen()) + 1);
+			}
+			if (vergelijkBonussenSpelerMetEdelen(spelerBonussen, edeleBonussen))
+				beschikbareEdelen.add(edele);
+		}
+		return beschikbareEdelen;
+	}
+
+	private boolean vergelijkBonussenSpelerMetEdelen(Map<Edelsteen, Integer> spelerBonussen,
+			Map<Edelsteen, Integer> edeleBonussen) {
+		for (Edelsteen edelsteen : Edelsteen.values()) {
+			if (spelerBonussen.get(edelsteen) < edeleBonussen.get(edelsteen))
+				return false;
+		}
+		return true;
+	}
+
+	// methode verplaats gekozen Edele van Spel naar spelerAanDeBeurt
+	public void verplaatsEdeleVanSpelNaarSpeler(Edele edele) {
+		spelers.get(spelerAanDeBeurt).voegEdeleToe(edele);
+		edelen.remove(edele);
+	}
 
 }

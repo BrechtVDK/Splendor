@@ -85,8 +85,21 @@ public class DomeinController {
 
 	// UC3
 
+	// niet gebruikt
 	public void speelRonde() {
 		spel.speelRonde();
+	}
+
+	public void bepaalVolgendeSpeler() {
+		spel.bepaalVolgendeSpeler();
+	}
+
+	public List<Edele> geefBeschikbareEdelen() {
+		return spel.geefBeschikbareEdelen();
+	}
+
+	public void verplaatsEdeleVanSpelNaarSpeler(Edele edele) {
+		spel.verplaatsEdeleVanSpelNaarSpeler(edele);
 	}
 
 

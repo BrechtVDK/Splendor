@@ -19,6 +19,7 @@ public class Speler {
 	private Map<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
 	private List<Edele> edelenInBezit;
 
+	// UC1
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
 		setGeboortejaar(geboortejaar);
@@ -60,6 +61,8 @@ public class Speler {
 		this.isStartSpeler = isStartSpeler;
 	}
 
+	// UC2
+
 	protected void stelSpelAttributenIn() {
 		// int default 0 bij declaratie
 		// this.prestigepunten = 0;
@@ -86,6 +89,7 @@ public class Speler {
 	public int getPrestigepunten() {
 		return prestigepunten;
 	}
+
 
 	public Map<Edelsteen, Integer> getAantalEdelsteenfichesPerTypeInBezit() {
 		return aantalEdelsteenfichesPerTypeInBezit;
