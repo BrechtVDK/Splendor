@@ -1,8 +1,11 @@
 package gui;
 
+
 import domein.DomeinController;
 import domein.Speler;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class ScoreBordScherm extends VBox {
@@ -19,10 +22,22 @@ public class ScoreBordScherm extends VBox {
 		this.setMinWidth(breedte);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(2);
-		for (Speler sp : dc.geefSpelers()) {
-			this.getChildren().add(new SpelerScoreScherm(dc, sp, breedte));
+		for (Speler speler : dc.geefSpelers()) {
+			SpelerScoreScherm spelerScherm = new SpelerScoreScherm(dc, speler);
+			this.getChildren().add(spelerScherm);
 		}
 
+		// voorlopig om te changeren van speler
+		Button btnVolgendeSpeler = new Button("Volgende speler");
+		btnVolgendeSpeler.minWidth(150);
+		btnVolgendeSpeler.setOnAction(this::volgendeSpelerGeklikt);
+		this.getChildren().add(btnVolgendeSpeler);
+
+	}
+
+	private void volgendeSpelerGeklikt(ActionEvent e) {
+		dc.bepaalVolgendeSpeler();
+		buildGui();
 	}
 
 }
