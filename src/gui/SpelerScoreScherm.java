@@ -30,7 +30,6 @@ public class SpelerScoreScherm extends GridPane {
 		this.dc = dc;
 		this.speler = speler;
 		this.isStartSpeler = speler.isStartSpeler();
-		this.minBreedte = minBreedte;
 		this.aantalBonussenPerTypeInBezit = new EdelsteenPerSpelerScherm(speler, true);
 		this.aantalEdelsteenFichesPerTypeInBezit = new EdelsteenPerSpelerScherm(speler, false);
 

@@ -33,7 +33,7 @@ public class EdelsteenPerSpelerScherm extends HBox {
 
 		for (Edelsteen e : Edelsteen.values()) {
 			int aantal = aantalFichesPerStapel.get(e);
-			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFicheKlikbaar(e, 15, aantal);
+			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(e, 15, aantal);
 			this.getChildren().add(fxEdelsteenFiche);
 		}
 	}
