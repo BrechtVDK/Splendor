@@ -37,6 +37,7 @@ public class ScoreBordScherm extends VBox {
 
 	private void volgendeSpelerGeklikt(ActionEvent e) {
 		dc.bepaalVolgendeSpeler();
+		this.getChildren().clear();
 		buildGui();
 	}
 

@@ -184,7 +184,7 @@ public class Spel {
 	}
 
 	public void bepaalVolgendeSpeler() {
-		spelerAanDeBeurt = spelerAanDeBeurt + 1 % spelers.size();
+		spelerAanDeBeurt = (spelerAanDeBeurt + 1) % spelers.size();
 	}
 
 	// methode geeft edelen terug waar spelerAanDeBeurt recht op heeft
