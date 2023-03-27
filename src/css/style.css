@@ -65,24 +65,20 @@
 
 .scoreKaart{
 	-fx-font-family: 'Londrina Solid', cursive;
-	-fx-border-color: #B8860B;
-	-fx-border-style: segments(2);
-	-fx-border-width: 15px;
-	-fx-background-radius: 7.5px;
-	-fx-border-radius: 7.5px;
+	-fx-border-color: #a9a9a9;
+	-fx-border-width: 2px;
+	-fx-background-radius: 10px;
+	-fx-border-radius: 10px;
+	-fx-font-size: 18.0px;
 	
 }
 
 .scoreKaartAanBeurt{
-		-fx-background-color: #FFD700;
-		-fx-font-size: 18.0px;
-		-fx-text-fill: #800000;
-		-fx-font-weight: 900;
+		-fx-background-color: linear-gradient(#FFFFFF, #f4e320);
+		
 }
 
 .scoreKaartNietAanBeurt{
-		-fx-background-color: #B8860B;
-		-fx-font-size: 14.00px;
-		-fx-text-fill: #EEE8AA;
-		-fx-font-weight: 400;
+		-fx-background-color: linear-gradient(#FFFFFF, #C0C0C0);
+	
 }

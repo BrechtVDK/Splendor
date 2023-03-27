@@ -31,7 +31,6 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 	private void plaatsBonus() {
 		FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(bonus.edelsteen(), 15);
 		fxEdelsteenFiche.setAlignment(Pos.TOP_RIGHT);
-
 		this.add(fxEdelsteenFiche, 1, 0);
 	}
 
