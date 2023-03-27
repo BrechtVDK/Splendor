@@ -10,20 +10,18 @@ import javafx.scene.layout.VBox;
 
 public class ScoreBordScherm extends VBox {
 	private DomeinController dc;
-	private double breedte;
 
+	// private double breedte;
 	// Brecht: breedte zou ik weglaten. Als je het in commentaar zet zie ik geen
 	// verschil
 	// zie:
 	// https://docs.oracle.com/javafx/2/api/javafx/scene/layout/Region.html#setMinWidth(double)
 	public ScoreBordScherm(DomeinController dc, double breedte) {
 		this.dc = dc;
-		this.breedte = breedte / 5;
 		buildGui();
 	}
 
 	private void buildGui() {
-		this.setMinWidth(breedte);
 		this.setAlignment(Pos.CENTER);
 		// Brecht: aangepast naar 25
 		this.setSpacing(25);
@@ -44,7 +42,8 @@ public class ScoreBordScherm extends VBox {
 		dc.bepaalVolgendeSpeler();
 		// buildgui verdubbelt de huidge gui constant ==> niet te de bedoeling. Later op
 		// te lossen via databinding
-		// buildGui();
+		this.getChildren().clear();
+		buildGui();
 	}
 
 }

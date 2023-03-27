@@ -9,10 +9,10 @@ import javafx.scene.layout.GridPane;
 public class SpelerScoreScherm extends GridPane {
 	private DomeinController dc;
 	private Speler speler;
-	private double minBreedte;
+	// private double minBreedte;
 
-	private int totaalAantalPrestigepunten;
-	private boolean isAanDeBeurt;
+	// private int totaalAantalPrestigepunten;
+	// private boolean isAanDeBeurt;
 	private final boolean isStartSpeler;
 
 	// fx elementen
@@ -35,7 +35,7 @@ public class SpelerScoreScherm extends GridPane {
 	}
 
 	private void buildGui() {
-		this.setMinWidth(minBreedte);
+		// this.setMinWidth(minBreedte);
 		this.setVgap(5);
 		this.setHgap(10);
 		this.getStyleClass().add("scoreKaart");
@@ -72,15 +72,13 @@ public class SpelerScoreScherm extends GridPane {
 
 	}
 
-	/*
-	 * private int geefTotaalAantalFiches(Map<Edelsteen, Integer> fiches) { int
-	 * totaalSom = 0; for (Edelsteen e : Edelsteen.values()) { totaalSom +=
-	 * fiches.get(e); } return totaalSom;
-	 * 
-	 * }
-	 */
-	public void setVoorgrond(double breedte, double hoogte) {
+//	private int geefTotaalAantalFiches(Map<Edelsteen, Integer> fiches) { 
+//	  		int totaalSom = 0; 
+//	  		for (Edelsteen e : Edelsteen.values()) { 
+//	  			totaalSom += fiches.get(e); 
+//	  		} 
+//	  		return totaalSom;	  
+//	  }
 
-	}
 
 }
