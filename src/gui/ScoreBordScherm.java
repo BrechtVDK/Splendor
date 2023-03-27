@@ -46,5 +46,4 @@ public class ScoreBordScherm extends VBox {
 					String.format("%s", sss.isSpelerAanDeBeurt() ? "scoreKaartAanBeurt" : "scoreKaartNietAanBeurt"));
 		}
 	}
-
 }
