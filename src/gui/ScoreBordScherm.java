@@ -1,6 +1,5 @@
 package gui;
 
-
 import domein.DomeinController;
 import domein.Speler;
 import javafx.event.ActionEvent;
@@ -10,24 +9,21 @@ import javafx.scene.layout.VBox;
 
 public class ScoreBordScherm extends VBox {
 	private DomeinController dc;
+	private SpelerScoreScherm[] spelerScoreSchermen;
 
-	// private double breedte;
-	// Brecht: breedte zou ik weglaten. Als je het in commentaar zet zie ik geen
-	// verschil
-	// zie:
-	// https://docs.oracle.com/javafx/2/api/javafx/scene/layout/Region.html#setMinWidth(double)
-	public ScoreBordScherm(DomeinController dc, double breedte) {
+	public ScoreBordScherm(DomeinController dc) {
 		this.dc = dc;
 		buildGui();
 	}
 
 	private void buildGui() {
 		this.setAlignment(Pos.CENTER);
-		// Brecht: aangepast naar 25
 		this.setSpacing(25);
+		this.spelerScoreSchermen = new SpelerScoreScherm[dc.geefAantalSpelers()];
+		int i = 0;
 		for (Speler speler : dc.geefSpelers()) {
-			SpelerScoreScherm spelerScherm = new SpelerScoreScherm(dc, speler);
-			this.getChildren().add(spelerScherm);
+			spelerScoreSchermen[i] = new SpelerScoreScherm(dc, speler);
+			this.getChildren().add(spelerScoreSchermen[i++]);
 		}
 
 		// voorlopig om te changeren van speler
@@ -40,10 +36,15 @@ public class ScoreBordScherm extends VBox {
 
 	private void volgendeSpelerGeklikt(ActionEvent e) {
 		dc.bepaalVolgendeSpeler();
-		// buildgui verdubbelt de huidge gui constant ==> niet te de bedoeling. Later op
-		// te lossen via databinding
-		this.getChildren().clear();
-		buildGui();
+		// this.getChildren().clear();
+		// buildGui();
+		// niet perfect, maar toch performanter
+		for (SpelerScoreScherm sss : spelerScoreSchermen) {
+			sss.getStyleClass().clear();
+			sss.getStyleClass().add("scoreKaart");
+			sss.getStyleClass().add(
+					String.format("%s", sss.isSpelerAanDeBeurt() ? "scoreKaartAanBeurt" : "scoreKaartNietAanBeurt"));
+		}
 	}
 
 }

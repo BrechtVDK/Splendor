@@ -33,7 +33,7 @@ public class Hoofdscherm extends GridPane {
 		edelenScherm = new EdelenScherm(dc);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
 		tafelscherm = new TafelScherm(dc);
-		scoreBordScherm = new ScoreBordScherm(dc, ws.getScene().getWidth());
+		scoreBordScherm = new ScoreBordScherm(dc);
 
 
 		this.add(linkerInfoScherm, 0, 0, 1, 2);

@@ -9,16 +9,12 @@ import javafx.scene.layout.GridPane;
 public class SpelerScoreScherm extends GridPane {
 	private DomeinController dc;
 	private Speler speler;
-	// private double minBreedte;
-
 	// private int totaalAantalPrestigepunten;
-	// private boolean isAanDeBeurt;
 	private final boolean isStartSpeler;
 
 	// fx elementen
 	private Label lblSpelerNaam, lblAantalPrestigepunten, lblAantalEdelenInBezit, lblTitelBonus, lblTitelFiche,
-			lblIsStartspeler,
-			lblAantalOntwikkelingskaarten;
+			lblIsStartspeler, lblAantalOntwikkelingskaarten;
 	private EdelsteenPerSpelerScherm aantalEdelsteenFichesPerTypeInBezitScherm;
 	private EdelsteenPerSpelerScherm aantalBonussenPerTypeInBezitScherm;
 
@@ -39,11 +35,11 @@ public class SpelerScoreScherm extends GridPane {
 		this.setVgap(5);
 		this.setHgap(10);
 		this.getStyleClass().add("scoreKaart");
-		if (dc.geefSpelerAanDeBeurt().equals(speler))
+		if (dc.geefSpelerAanDeBeurt().equals(speler)) {
 			this.getStyleClass().add("scoreKaartAanBeurt");
-		else
+		} else {
 			this.getStyleClass().add("scoreKaartNietAanBeurt");
-		// this.setAlignment(Pos.CENTER);
+		}
 		this.setPadding(new Insets(5));
 
 		// Labels
@@ -55,10 +51,9 @@ public class SpelerScoreScherm extends GridPane {
 		lblAantalEdelenInBezit = new Label(String.format("%s: %d", "Edelen", speler.getEdelenInBezit().size()));
 		lblTitelBonus = new Label(String.format("%s", "Bonussen"));
 		lblTitelFiche = new Label(String.format("%s", "Fiches"));
-		
+
 		lblAantalOntwikkelingskaarten = new Label(
 				String.format("Ontwikkelingskaarten: %d", speler.getOntwikkelingskaartenInBezit().size()));
-		
 
 		this.add(lblIsStartspeler, 0, 1);
 		this.add(lblSpelerNaam, 0, 0);
@@ -72,6 +67,10 @@ public class SpelerScoreScherm extends GridPane {
 
 	}
 
+	public boolean isSpelerAanDeBeurt() {
+		return dc.geefSpelerAanDeBeurt().equals(speler);
+	}
+
 //	private int geefTotaalAantalFiches(Map<Edelsteen, Integer> fiches) { 
 //	  		int totaalSom = 0; 
 //	  		for (Edelsteen e : Edelsteen.values()) { 
@@ -79,6 +78,5 @@ public class SpelerScoreScherm extends GridPane {
 //	  		} 
 //	  		return totaalSom;	  
 //	  }
-
 
 }
