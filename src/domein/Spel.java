@@ -290,7 +290,7 @@ public class Spel {
 			// fiches nodig = fiches kaart - bonussen speler
 			int fichesNodigVanEdelsteenE = aantalEdelsteenfichesOpKaartVanEdelsteenE
 					- aantalBonussenSpelerVanEdelsteenE;
-			afTeTrekkenFichesPerSoort[i++] = fichesNodigVanEdelsteenE;
+			afTeTrekkenFichesPerSoort[i++] = fichesNodigVanEdelsteenE < 0 ? 0 : fichesNodigVanEdelsteenE;
 			// controle
 			if (fichesNodigVanEdelsteenE > fichesSpeler.get(e)) {
 				throw new IllegalArgumentException("Te weinig edelsteenfiches in bezit om kaart te kopen!");
