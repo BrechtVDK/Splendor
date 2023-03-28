@@ -108,4 +108,9 @@ class SpelTest {
 
 	// TODO spel.geefWinnaars()
 	// Momenteel nog niet te testen door de protected methodes in Speler
+
+	// UC3
+	// TODO
+	// UC4
+	// TODO
 }
