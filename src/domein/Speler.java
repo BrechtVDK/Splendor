@@ -22,6 +22,7 @@ public class Speler {
 	private Map<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
 	private List<Edele> edelenInBezit;
 
+
 	// UC1
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
@@ -102,8 +103,10 @@ public class Speler {
 			int huidigAantal = aantalEdelsteenfichesPerTypeInBezit.get(e.edelsteen());
 			aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal + 1);
 		}
-		if (edelsteenfiches.size() > MAX_FICHES_IN_BEZIT) {
+		if (aantalEdelsteenfichesPerTypeInBezit.values().stream().reduce((i1, i2) -> i1 + i2)
+				.get() > MAX_FICHES_IN_BEZIT) {
 			throw new TeVeelFichesInBezitException();
+
 		}
 	}
 

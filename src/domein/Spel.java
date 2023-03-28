@@ -241,13 +241,13 @@ public class Spel {
 	}
 
 	private void validatieDR_BEURT_AANTAL_FICHES(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
-		if (edelsteenfiches.size() > 3) {
+		if (edelsteenfiches.size() > MAX_FICHES_PER_BEURT) {
 			throw new IllegalArgumentException(
 					String.format("Maximum %d edelsteenfiches per beurt nemen!", MAX_FICHES_PER_BEURT));
-		} else if (edelsteenfiches.size() == 3
+		} else if (edelsteenfiches.size() == MAX_FICHES_PER_BEURT
 				&& edelsteenfiches.stream().distinct().count() != edelsteenfiches.size()) {
 			throw new IllegalArgumentException("De 3 edelsteenfiches moeten verschillend zijn van elkaar!");
-		} else if (edelsteenfiches.size() == 2 && edelsteenfiches.stream().distinct().count() == edelsteenfiches.size()
+		} else if (edelsteenfiches.size() == 2 && edelsteenfiches.stream().distinct().count() == 1
 				&& stapelsEdelsteenfiches.get(edelsteenfiches.get(0).edelsteen()).getAantalFiches() < 2) {
 			throw new IllegalArgumentException(
 					"Er moeten minstens 2 edelsteenfiches op de stapel overblijven als je 2 dezelfde edelsteenfiches neemt!");

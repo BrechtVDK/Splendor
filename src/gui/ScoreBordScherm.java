@@ -1,6 +1,10 @@
 package gui;
 
+import java.util.ArrayList;
+
 import domein.DomeinController;
+import domein.Edelsteen;
+import domein.Edelsteenfiche;
 import domein.Speler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -45,5 +49,21 @@ public class ScoreBordScherm extends VBox {
 			sss.getStyleClass().add(
 					String.format("%s", sss.isSpelerAanDeBeurt() ? "scoreKaartAanBeurt" : "scoreKaartNietAanBeurt"));
 		}
+		// Brecht: Om binding voorlopig te testen
+		ArrayList<Edelsteenfiche> lijst = new ArrayList<>();
+		lijst.add(new Edelsteenfiche(Edelsteen.BLAUW));
+		lijst.add(new Edelsteenfiche(Edelsteen.WIT));
+		lijst.add(new Edelsteenfiche(Edelsteen.GROEN));
+		dc.verplaatsEdelsteenfichesNaarSpeler(lijst);
+
+		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.BLAUW));
+
+		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.GROEN));
+
+		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.WIT));
+
+		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.ROOD));
+
+		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.ZWART));
 	}
 }

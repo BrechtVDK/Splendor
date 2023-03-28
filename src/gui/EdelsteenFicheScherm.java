@@ -13,7 +13,6 @@ public class EdelsteenFicheScherm extends VBox {
 	public EdelsteenFicheScherm(DomeinController dc) {
 		this.dc = dc;
 		this.aantalFichesPerStapel = dc.geefAantalFichesPerStapel();
-
 		buildGui();
 	}
 
