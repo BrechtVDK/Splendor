@@ -32,4 +32,18 @@ public class StapelEdelsteenfiches {
 			edelsteenfiches.add(new Edelsteenfiche(edelsteen));
 		}
 	}
+
+	// laatste fiche verwijderen
+	public void verwijderFiche() throws IllegalArgumentException {
+		if (edelsteenfiches.size() > 0) {
+			edelsteenfiches.subList(edelsteenfiches.size() - 1, edelsteenfiches.size()).clear();
+		} else {
+			throw new IllegalArgumentException("Stapel is leeg!");
+		}
+	}
+
+	public Edelsteen getEdelsteen() {
+		return edelsteen;
+	}
+
 }

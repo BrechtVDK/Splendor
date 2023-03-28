@@ -3,6 +3,8 @@ package domein;
 import java.util.List;
 import java.util.Map;
 
+import Exceptions.TeVeelFichesInBezitException;
+
 public class DomeinController {
 	private SpelerRepository spelerRepo;
 	private Spel spel;
@@ -101,5 +103,24 @@ public class DomeinController {
 		spel.verplaatsEdeleVanSpelNaarSpeler(edele);
 	}
 
+	// UC4
+	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
+			throws IllegalArgumentException, TeVeelFichesInBezitException {
+		spel.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
+	}
+
+	public void verwijderEdelsteenficheVanStapel(Edelsteenfiche edelsteenfiche) throws IllegalArgumentException {
+		spel.verwijderEdelsteenficheVanStapel(edelsteenfiche);
+	}
+
+	public void verplaatsEdelsteenfichesVanSpelerNaarSpel(List<Edelsteenfiche> edelsteenfiches)
+			throws IllegalArgumentException {
+		spel.verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
+	}
+
+	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
+			throws IllegalArgumentException {
+		spel.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
+	}
 
 }

@@ -1,12 +1,15 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+
+import Exceptions.TeVeelFichesInBezitException;
 
 public class Spel {
 	private List<Speler> spelers;
@@ -18,6 +21,7 @@ public class Spel {
 	public static final int MIN_SPELERS = 2;
 	public static final int MAX_SPELERS = 4;
 	private static final int EINDE_SPEL_SCORE = 15;
+	public static final int MAX_FICHES_PER_BEURT = 3;
 
 	// UC1
 	public Spel() {
@@ -218,8 +222,90 @@ public class Spel {
 
 	// methode verplaats gekozen Edele van Spel naar spelerAanDeBeurt
 	public void verplaatsEdeleVanSpelNaarSpeler(Edele edele) {
-		spelers.get(spelerAanDeBeurt).voegEdeleToe(edele);
+		this.getSpelerAanDeBeurt().voegEdeleToe(edele);
 		edelen.remove(edele);
+	}
+
+	// UC4
+
+	// Brecht: ik ga ervan uit dat we bij selecteren van edelsteenfiches deze direct
+	// verwijderen uit de stapels zodat de gui direct update. Indien validatie
+	// faalt, voegen we ze opnieuw toe => dit schrijven in de 2 catchen van de gui
+	// Eerst TeVeelFichesInBezitException opvangen voor IllegalArgumentException!!
+	// Afwijkend van UC4 maar lijkt me logischer
+	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
+			throws IllegalArgumentException, TeVeelFichesInBezitException {
+		validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
+		// validatie max 10 in klasse Speler
+		this.getSpelerAanDeBeurt().voegEdelsteenfichesToe(edelsteenfiches);
+	}
+
+	private void validatieDR_BEURT_AANTAL_FICHES(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
+		if (edelsteenfiches.size() > 3) {
+			throw new IllegalArgumentException(
+					String.format("Maximum %d edelsteenfiches per beurt nemen!", MAX_FICHES_PER_BEURT));
+		} else if (edelsteenfiches.size() == 3
+				&& edelsteenfiches.stream().distinct().count() != edelsteenfiches.size()) {
+			throw new IllegalArgumentException("De 3 edelsteenfiches moeten verschillend zijn van elkaar!");
+		} else if (edelsteenfiches.size() == 2 && edelsteenfiches.stream().distinct().count() == edelsteenfiches.size()
+				&& stapelsEdelsteenfiches.get(edelsteenfiches.get(0).edelsteen()).getAantalFiches() < 2) {
+			throw new IllegalArgumentException(
+					"Er moeten minstens 2 edelsteenfiches op de stapel overblijven als je 2 dezelfde edelsteenfiches neemt!");
+		}
+
+	}
+
+	public void verwijderEdelsteenficheVanStapel(Edelsteenfiche edelsteenfiche) throws IllegalArgumentException {
+		stapelsEdelsteenfiches.get(edelsteenfiche.edelsteen()).verwijderFiche();
+	}
+
+	// list gebruikt omdat aantal fiches niet vastligt
+	public void verplaatsEdelsteenfichesVanSpelerNaarSpel(List<Edelsteenfiche> edelsteenfiches)
+			throws IllegalArgumentException {
+		// verwijderen uit speler
+		this.getSpelerAanDeBeurt().verwijderEdelsteenfiches(edelsteenfiches);
+		// toevoegen aan spel
+		for (StapelEdelsteenfiches stapel : stapelsEdelsteenfiches.values()) {
+			int aantal = Math.toIntExact(
+					edelsteenfiches.stream().filter(e -> e.edelsteen().equals(stapel.getEdelsteen())).count());
+			stapel.voegEdelsteenfichesToe(aantal);
+		}
+	}
+
+	// valideert of speler genoeg fiches/bonussen bezit om kaart te kopen
+	// kaart wordt op tafel vervangen door kaart van de stapel
+	// edelsteenfiches speler worden verminderd
+	// kaart wordt aan speler toegevoegd
+	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
+			throws IllegalArgumentException {
+		// validatie DR_BEURT_KOOP_KAART
+		Map<Edelsteen, Integer> fichesSpeler = this.getSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
+		Map<Edelsteen, Integer> bonussenSpeler = this.getSpelerAanDeBeurt().getAantalBonussenPerTypeInBezit();
+		int[] afTeTrekkenFichesPerSoort = new int[5];
+		int i = 0;
+		for (Edelsteen e : Edelsteen.values()) {
+			int aantalEdelsteenfichesOpKaartVanEdelsteenE = Math
+					.toIntExact(Arrays.stream(kaart.edelsteenfiches()).filter(k -> k.edelsteen().equals(e)).count());
+			int aantalBonussenSpelerVanEdelsteenE = bonussenSpeler.get(e);
+			// fiches nodig = fiches kaart - bonussen speler
+			int fichesNodigVanEdelsteenE = aantalEdelsteenfichesOpKaartVanEdelsteenE
+					- aantalBonussenSpelerVanEdelsteenE;
+			afTeTrekkenFichesPerSoort[i++] = fichesNodigVanEdelsteenE;
+			// controle
+			if (fichesNodigVanEdelsteenE > fichesSpeler.get(e)) {
+				throw new IllegalArgumentException("Te weinig edelsteenfiches in bezit om kaart te kopen!");
+			}
+		}
+
+		// kaart van tafel verwijderen en nieuwe kaart van stapel halen
+		tafel.verwijderKaartEnVervang(kaart);
+
+		// edelsteenfiches speler naar spel
+		verplaatsEdelsteenfichesVanSpelerNaarSpel(
+				Arrays.stream(EdelsteenficheFactory.maakArrayEdelsteenfiches(afTeTrekkenFichesPerSoort)).toList());
+
+		// kaart toevoegen aan speler
+		this.getSpelerAanDeBeurt().voegOntwikkelingskaartToe(kaart);
 	}
 
 }

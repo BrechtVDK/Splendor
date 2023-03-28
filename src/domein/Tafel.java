@@ -52,4 +52,29 @@ public class Tafel {
 		}
 		return aantalPerNiveau;
 	}
+
+	public void verwijderKaartEnVervang(Ontwikkelingskaart kaart) {
+		// kaart zoeken op tafel
+		int rijIndex = -1;
+		int kolIndex = -1;
+		// outer zorgt dat break statement uit de beide forloops ontsnapt
+		outer: for (int rij = 0; rij < zichtbareOntwikkelingskaarten.length; rij++) {
+			for (int kol = 0; kol < zichtbareOntwikkelingskaarten[rij].length; kol++) {
+				if (zichtbareOntwikkelingskaarten[rij][kol].equals(kaart)) {
+					rijIndex = rij;
+					kolIndex = kol;
+					break outer;
+				}
+			}
+		}
+
+		// vervangen door kaart van stapel
+		try {
+			zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = stapelsOntwikkelingskaarten
+					.get(Niveau.values()[rijIndex]).haalKaartVanStapel();
+			// IndexOutOfBoundsException = geen kaarten meer op de stapel
+		} catch (IndexOutOfBoundsException e) {
+			zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = null;
+		}
+	}
 }

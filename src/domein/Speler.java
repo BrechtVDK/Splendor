@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import Exceptions.TeVeelFichesInBezitException;
+
 public class Speler {
 	private String gebruikersnaam;
 	private int geboortejaar;
 	private final static int MINIMUMLEEFTIJD = 6;
 	private final static int MINIMUMGEBOORTEJAAR = 1900;
+	public static final int MAX_FICHES_IN_BEZIT = 10;
 	private boolean isStartSpeler;
 	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
 	private int prestigepunten;
@@ -90,15 +93,17 @@ public class Speler {
 		return prestigepunten;
 	}
 
-
 	public Map<Edelsteen, Integer> getAantalEdelsteenfichesPerTypeInBezit() {
 		return aantalEdelsteenfichesPerTypeInBezit;
 	}
 
-	protected void voegEdelsteenfichesToe(List<Edelsteenfiche> edelsteenfiches) {
+	protected void voegEdelsteenfichesToe(List<Edelsteenfiche> edelsteenfiches) throws TeVeelFichesInBezitException {
 		for (Edelsteenfiche e : edelsteenfiches) {
 			int huidigAantal = aantalEdelsteenfichesPerTypeInBezit.get(e.edelsteen());
 			aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal + 1);
+		}
+		if (edelsteenfiches.size() > MAX_FICHES_IN_BEZIT) {
+			throw new TeVeelFichesInBezitException();
 		}
 	}
 
@@ -118,6 +123,17 @@ public class Speler {
 	protected void voegEdeleToe(Edele edele) {
 		edelenInBezit.add(edele);
 		prestigepunten += Edele.PRESTIGE_PUNTEN;
+	}
+
+	protected void verwijderEdelsteenfiches(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
+		for (Edelsteenfiche e : edelsteenfiches) {
+			int huidigAantal = aantalEdelsteenfichesPerTypeInBezit.get(e.edelsteen());
+			if (huidigAantal == 0) {
+				throw new IllegalArgumentException("Edelsteenfiche niet in bezit, kan niet verwijderd worden!");
+			} else {
+				aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal - 1);
+			}
+		}
 	}
 
 	@Override
