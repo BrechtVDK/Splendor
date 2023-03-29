@@ -2,6 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import domein.Speler;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -47,7 +48,10 @@ public class SpelerScoreScherm extends GridPane {
 		// zorgt voor zelfde uitlijning bij startspeler als niet-startspeler
 		lblIsStartspeler.setMinWidth(90);
 		lblSpelerNaam = new Label(speler.getGebruikersnaam());
-		lblAantalPrestigepunten = new Label(String.format("%s: %d", "Prestigepunten", speler.getPrestigepunten()));
+		lblAantalPrestigepunten = new Label();
+		// binding
+		lblAantalPrestigepunten.textProperty()
+				.bind(Bindings.concat("Prestigepunten: ", speler.prestigepuntenProperty()));
 		lblAantalEdelenInBezit = new Label(String.format("%s: %d", "Edelen", speler.getEdelenInBezit().size()));
 		lblTitelBonus = new Label(String.format("%s", "Bonussen"));
 		lblTitelFiche = new Label(String.format("%s", "Fiches"));

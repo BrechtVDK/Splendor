@@ -40,5 +40,4 @@ public class FXEdelsteenFiche extends StackPane {
 	}
 
 
-
 }

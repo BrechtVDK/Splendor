@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import Exceptions.TeVeelFichesInBezitException;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Speler {
 	private String gebruikersnaam;
@@ -17,11 +19,10 @@ public class Speler {
 	public static final int MAX_FICHES_IN_BEZIT = 10;
 	private boolean isStartSpeler;
 	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
-	private int prestigepunten;
+	private IntegerProperty prestigepunten;
 	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
 	private Map<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
 	private List<Edele> edelenInBezit;
-
 
 	// UC1
 	public Speler(String gebruikersnaam, int geboortejaar) {
@@ -68,8 +69,7 @@ public class Speler {
 	// UC2
 
 	protected void stelSpelAttributenIn() {
-		// int default 0 bij declaratie
-		// this.prestigepunten = 0;
+		this.prestigepunten = new SimpleIntegerProperty(0);
 		this.edelenInBezit = new ArrayList<>();
 		this.ontwikkelingskaartenInBezit = new ArrayList<>();
 		this.aantalEdelsteenfichesPerTypeInBezit = new HashMap<Edelsteen, Integer>();
@@ -86,11 +86,15 @@ public class Speler {
 
 	protected void voegOntwikkelingskaartToe(Ontwikkelingskaart kaart) {
 		ontwikkelingskaartenInBezit.add(kaart);
-		prestigepunten += kaart.prestigePunten();
+		prestigepunten.set(prestigepunten.get() + kaart.prestigePunten());
 		voegBonusToe(kaart.bonus());
 	}
 
 	public int getPrestigepunten() {
+		return prestigepunten.get();
+	}
+
+	public IntegerProperty prestigepuntenProperty() {
 		return prestigepunten;
 	}
 
@@ -105,7 +109,8 @@ public class Speler {
 		}
 		if (aantalEdelsteenfichesPerTypeInBezit.values().stream().reduce((i1, i2) -> i1 + i2)
 				.get() > MAX_FICHES_IN_BEZIT) {
-			throw new TeVeelFichesInBezitException();
+			// in commentaar om binding te testen
+			// throw new TeVeelFichesInBezitException();
 
 		}
 	}
@@ -116,7 +121,7 @@ public class Speler {
 
 	private void voegBonusToe(Edelsteenfiche bonus) {
 		int huidigAantal = aantalBonussenPerTypeInBezit.get(bonus.edelsteen());
-		aantalEdelsteenfichesPerTypeInBezit.put(bonus.edelsteen(), huidigAantal + 1);
+		aantalBonussenPerTypeInBezit.put(bonus.edelsteen(), huidigAantal + 1);
 	}
 
 	public List<Edele> getEdelenInBezit() {
@@ -125,7 +130,7 @@ public class Speler {
 
 	protected void voegEdeleToe(Edele edele) {
 		edelenInBezit.add(edele);
-		prestigepunten += Edele.PRESTIGE_PUNTEN;
+		prestigepunten.set(prestigepunten.get() + Edele.PRESTIGE_PUNTEN);
 	}
 
 	protected void verwijderEdelsteenfiches(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {

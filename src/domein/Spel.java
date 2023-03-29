@@ -235,12 +235,14 @@ public class Spel {
 	// Afwijkend van UC4 maar lijkt me logischer
 	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException, TeVeelFichesInBezitException {
-		validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
+		// In commentaar om binding te testen
+		// validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
 		// validatie max 10 in klasse Speler
 		this.getSpelerAanDeBeurt().voegEdelsteenfichesToe(edelsteenfiches);
 	}
 
 	private void validatieDR_BEURT_AANTAL_FICHES(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
+
 		if (edelsteenfiches.size() > MAX_FICHES_PER_BEURT) {
 			throw new IllegalArgumentException(
 					String.format("Maximum %d edelsteenfiches per beurt nemen!", MAX_FICHES_PER_BEURT));
@@ -279,6 +281,7 @@ public class Spel {
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
 			throws IllegalArgumentException {
 		// validatie DR_BEURT_KOOP_KAART
+
 		Map<Edelsteen, Integer> fichesSpeler = this.getSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
 		Map<Edelsteen, Integer> bonussenSpeler = this.getSpelerAanDeBeurt().getAantalBonussenPerTypeInBezit();
 		int[] afTeTrekkenFichesPerSoort = new int[5];
@@ -287,7 +290,7 @@ public class Spel {
 			int aantalEdelsteenfichesOpKaartVanEdelsteenE = Math
 					.toIntExact(Arrays.stream(kaart.edelsteenfiches()).filter(k -> k.edelsteen().equals(e)).count());
 			int aantalBonussenSpelerVanEdelsteenE = bonussenSpeler.get(e);
-			// fiches nodig = fiches kaart - bonussen speler
+			// fiches nodig = fiches kaart - bonussen
 			int fichesNodigVanEdelsteenE = aantalEdelsteenfichesOpKaartVanEdelsteenE
 					- aantalBonussenSpelerVanEdelsteenE;
 			afTeTrekkenFichesPerSoort[i++] = fichesNodigVanEdelsteenE < 0 ? 0 : fichesNodigVanEdelsteenE;
@@ -300,7 +303,7 @@ public class Spel {
 		// kaart van tafel verwijderen en nieuwe kaart van stapel halen
 		tafel.verwijderKaartEnVervang(kaart);
 
-		// edelsteenfiches speler naar spel
+		// edelsteenfiches verplaatsen van speler naar spel
 		verplaatsEdelsteenfichesVanSpelerNaarSpel(
 				Arrays.stream(EdelsteenficheFactory.maakArrayEdelsteenfiches(afTeTrekkenFichesPerSoort)).toList());
 

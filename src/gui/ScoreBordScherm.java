@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import domein.DomeinController;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
+import domein.Ontwikkelingskaart;
 import domein.Speler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -39,31 +40,43 @@ public class ScoreBordScherm extends VBox {
 	}
 
 	private void volgendeSpelerGeklikt(ActionEvent e) {
+
+		// BEGIN binding testen
+		ArrayList<Edelsteenfiche> lijst = new ArrayList<>();
+		// 10 fiches van elk toevoegen
+		for (int i = 0; i < 10; i++) {
+			for (Edelsteen ed : Edelsteen.values()) {
+				lijst.add(new Edelsteenfiche(ed));
+			}
+		}
+		// Exceptions staan momenteel in commentaar om te testen!
+		dc.verplaatsEdelsteenfichesNaarSpeler(lijst);
+		System.out.println("Voor aftrek kaart:");
+		for (Edelsteen ed : Edelsteen.values()) {
+			System.out.println(dc.geefSpelerAanDeBeurt() + " fiches " + ed.name() + ": "
+					+ dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(ed));
+		}
+		System.out.println(dc.geefSpelerAanDeBeurt() + " punten: " + dc.geefSpelerAanDeBeurt().getPrestigepunten());
+		Ontwikkelingskaart kaart = dc.geefZichtbareOntwikkelingskaarten()[1][0];
+		dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
+		System.out.println("Na aftrek kaart:");
+		for (Edelsteen ed : Edelsteen.values()) {
+			System.out.println(dc.geefSpelerAanDeBeurt() + " fiches " + ed.name() + ": "
+					+ dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(ed));
+		}
+
+		System.out.println(dc.geefSpelerAanDeBeurt() + " punten: " + dc.geefSpelerAanDeBeurt().getPrestigepunten());
+
+		// EINDE testen binding
+
 		dc.bepaalVolgendeSpeler();
-		// this.getChildren().clear();
-		// buildGui();
-		// niet perfect, maar toch performanter
+		// achtergrond scorebord speler aan de beurt aanpassen
 		for (SpelerScoreScherm sss : spelerScoreSchermen) {
 			sss.getStyleClass().clear();
 			sss.getStyleClass().add("scoreKaart");
 			sss.getStyleClass().add(
 					String.format("%s", sss.isSpelerAanDeBeurt() ? "scoreKaartAanBeurt" : "scoreKaartNietAanBeurt"));
 		}
-		// Brecht: Om binding voorlopig te testen
-		ArrayList<Edelsteenfiche> lijst = new ArrayList<>();
-		lijst.add(new Edelsteenfiche(Edelsteen.BLAUW));
-		lijst.add(new Edelsteenfiche(Edelsteen.WIT));
-		lijst.add(new Edelsteenfiche(Edelsteen.GROEN));
-		dc.verplaatsEdelsteenfichesNaarSpeler(lijst);
 
-		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.BLAUW));
-
-		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.GROEN));
-
-		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.WIT));
-
-		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.ROOD));
-
-		System.out.println(dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(Edelsteen.ZWART));
 	}
 }
