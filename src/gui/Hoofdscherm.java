@@ -29,14 +29,14 @@ public class Hoofdscherm extends GridPane {
 		this.setVgap(25);
 		this.setHgap(25);
 		this.setAlignment(Pos.CENTER);
-		linkerInfoScherm = new LinkerInfoScherm(dc);
+		linkerInfoScherm = new LinkerInfoScherm(dc, this);
 		edelenScherm = new EdelenScherm(dc);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
 		tafelscherm = new TafelScherm(dc);
 		scoreBordScherm = new ScoreBordScherm(dc);
 
 
-		this.add(linkerInfoScherm, 0, 0, 1, 2);
+		this.add(linkerInfoScherm, 0, 1, 1, 2);
 		this.add(edelenScherm, 2, 0);
 		this.add(edelsteenFicheScherm, 1, 1);
 		this.add(tafelscherm, 2, 1);
