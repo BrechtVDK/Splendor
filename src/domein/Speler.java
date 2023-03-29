@@ -1,6 +1,5 @@
 package domein;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +9,8 @@ import java.util.Objects;
 import Exceptions.TeVeelFichesInBezitException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Speler {
 	private String gebruikersnaam;
@@ -18,11 +19,11 @@ public class Speler {
 	private final static int MINIMUMGEBOORTEJAAR = 1900;
 	public static final int MAX_FICHES_IN_BEZIT = 10;
 	private boolean isStartSpeler;
-	private List<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
+	private ObservableList<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
 	private IntegerProperty prestigepunten;
 	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
 	private Map<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
-	private List<Edele> edelenInBezit;
+	private ObservableList<Edele> edelenInBezit;
 
 	// UC1
 	public Speler(String gebruikersnaam, int geboortejaar) {
@@ -70,8 +71,8 @@ public class Speler {
 
 	protected void stelSpelAttributenIn() {
 		this.prestigepunten = new SimpleIntegerProperty(0);
-		this.edelenInBezit = new ArrayList<>();
-		this.ontwikkelingskaartenInBezit = new ArrayList<>();
+		this.edelenInBezit = FXCollections.observableArrayList();
+		this.ontwikkelingskaartenInBezit = FXCollections.observableArrayList();
 		this.aantalEdelsteenfichesPerTypeInBezit = new HashMap<Edelsteen, Integer>();
 		this.aantalBonussenPerTypeInBezit = new HashMap<Edelsteen, Integer>();
 		for (Edelsteen e : Edelsteen.values()) {
@@ -80,7 +81,7 @@ public class Speler {
 		}
 	}
 
-	public List<Ontwikkelingskaart> getOntwikkelingskaartenInBezit() {
+	public ObservableList<Ontwikkelingskaart> getOntwikkelingskaartenInBezit() {
 		return ontwikkelingskaartenInBezit;
 	}
 
@@ -124,7 +125,7 @@ public class Speler {
 		aantalBonussenPerTypeInBezit.put(bonus.edelsteen(), huidigAantal + 1);
 	}
 
-	public List<Edele> getEdelenInBezit() {
+	public ObservableList<Edele> getEdelenInBezit() {
 		return edelenInBezit;
 	}
 

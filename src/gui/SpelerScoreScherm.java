@@ -48,17 +48,20 @@ public class SpelerScoreScherm extends GridPane {
 		// zorgt voor zelfde uitlijning bij startspeler als niet-startspeler
 		lblIsStartspeler.setMinWidth(90);
 		lblSpelerNaam = new Label(speler.getGebruikersnaam());
+		// binding ok
 		lblAantalPrestigepunten = new Label();
-		// binding
 		lblAantalPrestigepunten.textProperty()
 				.bind(Bindings.concat("Prestigepunten: ", speler.prestigepuntenProperty()));
-		lblAantalEdelenInBezit = new Label(String.format("%s: %d", "Edelen", speler.getEdelenInBezit().size()));
+		// binding ok
+		lblAantalEdelenInBezit = new Label();
+		lblAantalEdelenInBezit.textProperty()
+				.bind(Bindings.concat("Edelen: ", Bindings.size(speler.getEdelenInBezit())));
 		lblTitelBonus = new Label(String.format("%s", "Bonussen"));
 		lblTitelFiche = new Label(String.format("%s", "Fiches"));
-
-		lblAantalOntwikkelingskaarten = new Label(
-				String.format("Ontwikkelingskaarten: %d", speler.getOntwikkelingskaartenInBezit().size()));
-
+		// binding ok
+		lblAantalOntwikkelingskaarten = new Label();
+		lblAantalOntwikkelingskaarten.textProperty().bind(
+				Bindings.concat("Ontwikkelingskaarten: ", Bindings.size(speler.getOntwikkelingskaartenInBezit())));
 		this.add(lblIsStartspeler, 0, 1);
 		this.add(lblSpelerNaam, 0, 0);
 		this.add(lblAantalPrestigepunten, 1, 0);
