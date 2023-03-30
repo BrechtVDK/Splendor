@@ -37,7 +37,7 @@ public class FXEdelsteenFiche extends StackPane {
 	public FXEdelsteenFiche(Edelsteen edelsteen, double radius, int aantal) {
 		this(edelsteen, radius);
 		txtAantal = new Text(Integer.toString(aantal));
-		stelTekstLayOutIn(txtAantal);
+		stelTekstLayOutIn();
 
 		this.getChildren().add(txtAantal);
 	}
@@ -47,18 +47,18 @@ public class FXEdelsteenFiche extends StackPane {
 		this(edelsteen, radius);
 		txtAantal = new Text();
 		ObjectBinding<Integer> aantalFichesBinding;
-
-		// Parameters Bindings.valueAt: (ObservableMap, key)
+		
+		//Parameters Bindings.valueAt: (ObservableMap, key)
 		aantalFichesBinding = Bindings.valueAt(
 				!isBonus ? speler.getAantalEdelsteenfichesPerTypeInBezit() : speler.getAantalBonussenPerTypeInBezit(),
 				edelsteen);
 
 		txtAantal.textProperty().bind(aantalFichesBinding.asString());
-		stelTekstLayOutIn(txtAantal);
+		stelTekstLayOutIn();
 		this.getChildren().add(txtAantal);
 	}
 
-	private void stelTekstLayOutIn(Text txtAantal) {
+	private void stelTekstLayOutIn() {
 		txtAantal.setFill(TEKSTKLEUR);
 		// BOLD en size afh. van de radius instellen
 		txtAantal.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,
