@@ -51,21 +51,9 @@ public class ScoreBordScherm extends VBox {
 		}
 		// Exceptions staan momenteel in commentaar om te testen!
 		dc.verplaatsEdelsteenfichesNaarSpeler(lijst);
-		System.out.println("Voor aftrek kaart:");
-		for (Edelsteen ed : Edelsteen.values()) {
-			System.out.println(dc.geefSpelerAanDeBeurt() + " fiches " + ed.name() + ": "
-					+ dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(ed));
-		}
-		System.out.println(dc.geefSpelerAanDeBeurt() + " punten: " + dc.geefSpelerAanDeBeurt().getPrestigepunten());
 		Ontwikkelingskaart kaart = dc.geefZichtbareOntwikkelingskaarten()[1][0];
 		dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
-		System.out.println("Na aftrek kaart:");
-		for (Edelsteen ed : Edelsteen.values()) {
-			System.out.println(dc.geefSpelerAanDeBeurt() + " fiches " + ed.name() + ": "
-					+ dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit().get(ed));
-		}
 
-		System.out.println(dc.geefSpelerAanDeBeurt() + " punten: " + dc.geefSpelerAanDeBeurt().getPrestigepunten());
 
 		// EINDE testen binding
 

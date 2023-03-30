@@ -1,9 +1,7 @@
 package domein;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import Exceptions.TeVeelFichesInBezitException;
@@ -11,6 +9,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 
 public class Speler {
 	private String gebruikersnaam;
@@ -21,9 +20,10 @@ public class Speler {
 	private boolean isStartSpeler;
 	private ObservableList<Ontwikkelingskaart> ontwikkelingskaartenInBezit;
 	private IntegerProperty prestigepunten;
-	private Map<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
-	private Map<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
+	private ObservableMap<Edelsteen, Integer> aantalEdelsteenfichesPerTypeInBezit;
+	private ObservableMap<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
 	private ObservableList<Edele> edelenInBezit;
+
 
 	// UC1
 	public Speler(String gebruikersnaam, int geboortejaar) {
@@ -73,8 +73,8 @@ public class Speler {
 		this.prestigepunten = new SimpleIntegerProperty(0);
 		this.edelenInBezit = FXCollections.observableArrayList();
 		this.ontwikkelingskaartenInBezit = FXCollections.observableArrayList();
-		this.aantalEdelsteenfichesPerTypeInBezit = new HashMap<Edelsteen, Integer>();
-		this.aantalBonussenPerTypeInBezit = new HashMap<Edelsteen, Integer>();
+		this.aantalEdelsteenfichesPerTypeInBezit = FXCollections.observableHashMap();
+		this.aantalBonussenPerTypeInBezit = FXCollections.observableHashMap();
 		for (Edelsteen e : Edelsteen.values()) {
 			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
 			aantalBonussenPerTypeInBezit.put(e, 0);
@@ -99,7 +99,7 @@ public class Speler {
 		return prestigepunten;
 	}
 
-	public Map<Edelsteen, Integer> getAantalEdelsteenfichesPerTypeInBezit() {
+	public ObservableMap<Edelsteen, Integer> getAantalEdelsteenfichesPerTypeInBezit() {
 		return aantalEdelsteenfichesPerTypeInBezit;
 	}
 
@@ -116,7 +116,7 @@ public class Speler {
 		}
 	}
 
-	public Map<Edelsteen, Integer> getAantalBonussenPerTypeInBezit() {
+	public ObservableMap<Edelsteen, Integer> getAantalBonussenPerTypeInBezit() {
 		return aantalBonussenPerTypeInBezit;
 	}
 
@@ -166,5 +166,4 @@ public class Speler {
 	public String toString() {
 		return gebruikersnaam;
 	}
-
 }

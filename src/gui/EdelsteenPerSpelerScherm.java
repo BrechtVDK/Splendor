@@ -1,42 +1,26 @@
 package gui;
 
-import java.util.Map;
-
 import domein.Edelsteen;
 import domein.Speler;
 import javafx.scene.layout.HBox;
 
 public class EdelsteenPerSpelerScherm extends HBox {
 	private Speler speler;
-	private Map<Edelsteen, Integer> aantalFichesPerStapel;
+	private boolean isBonus;
 
-	public EdelsteenPerSpelerScherm(Speler speler, Boolean isBonus) {
+	public EdelsteenPerSpelerScherm(Speler speler, boolean isBonus) {
 		this.speler = speler;
-		if (!isBonus)
-			setAantalFichesPerStapel(speler.getAantalEdelsteenfichesPerTypeInBezit());
-		else
-			setAantalFichesPerStapel(speler.getAantalBonussenPerTypeInBezit());
-
+		this.isBonus = isBonus;
 		buildGui();
-	}
-
-	public Map<Edelsteen, Integer> getAantalFichesPerStapel() {
-		return aantalFichesPerStapel;
-	}
-
-	public void setAantalFichesPerStapel(Map<Edelsteen, Integer> aantalFichesPerStapel) {
-		this.aantalFichesPerStapel = aantalFichesPerStapel;
 	}
 
 	private void buildGui() {
 		this.setSpacing(5);
 
 		for (Edelsteen e : Edelsteen.values()) {
-			int aantal = aantalFichesPerStapel.get(e);
-			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(e, 15, aantal);
+			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(e, 15, speler, isBonus);
 			this.getChildren().add(fxEdelsteenFiche);
 		}
 	}
 
 }
-
