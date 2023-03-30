@@ -46,13 +46,12 @@ class SpelTest {
 		spel.voegSpelerToe(new Speler("abc", 1980));
 		spel.voegSpelerToe(new Speler("abd", 1981));
 		switch (aantalSpelers) {
-		case 3:
-			spel.voegSpelerToe(new Speler("abe", 1982));
-			break;
-		case 4:
+		case 3 -> spel.voegSpelerToe(new Speler("abe", 1982));
+
+		case 4 -> {
 			spel.voegSpelerToe(new Speler("abe", 1982));
 			spel.voegSpelerToe(new Speler("abf", 1983));
-			break;
+		}
 		}
 		spel.organiseerSpelVolgensHetAantalSpelers();
 		Assertions.assertEquals(aantalSpelers + 1, spel.getEdelen().size());
@@ -77,7 +76,6 @@ class SpelTest {
 		spel.voegSpelerToe(new Speler("Corneel", 1980));
 		spel.organiseerSpelVolgensHetAantalSpelers();
 
-
 		Assertions.assertEquals("Corneel", spel.getSpelerAanDeBeurt().toString());
 	}
 
@@ -98,7 +96,6 @@ class SpelTest {
 		spel.voegSpelerToe(new Speler("Karel", 1980));
 		spel.voegSpelerToe(new Speler("Joris", 1980));
 		spel.voegSpelerToe(new Speler("David", 1980));
-
 
 		Assertions.assertEquals("Filip", spel.getSpelers().get(0).toString());
 	}
