@@ -57,8 +57,22 @@ public class Hoofdscherm extends GridPane {
 		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
 	}
 
+	public void haalGekozenKaartTerugVanLinkerInfoScherm() {
+		tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(linkerInfoScherm.verwijderOntwikkelingskaart());
+	}
+
 	public void maakKaartenKlikbaar() {
 		tafelscherm.maakKaartenKlikbaar();
+	}
+
+	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart kaart) {
+		try {
+		dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+				tafelscherm.geefOntwikkelingskaartVolgensIndex(kaart.getIndex()));
+		} catch (IllegalArgumentException e) {
+			linkerInfoScherm.toonFoutmelding(e.getMessage());
+			haalGekozenKaartTerugVanLinkerInfoScherm();
+		}
 	}
 
 }

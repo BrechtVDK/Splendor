@@ -15,9 +15,10 @@ public class LinkerInfoScherm extends VBox {
 	private DomeinController dc;
 	private Hoofdscherm hs;
 	private SpelerScoreScherm[] spelerScoreSchermen;
+	private FXOntwikkelingskaart gekozenKaart;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfo;
-	private Button btnKaart, btnFiche, btnPas;
+	private Button btnKaart, btnFiche, btnPas, btnBevestig;
 
 	public LinkerInfoScherm(DomeinController dc, Hoofdscherm hs) {
 		this.dc = dc;
@@ -37,16 +38,20 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart = new Button("Ik koop een ontwikkelingskaart");
 		btnFiche = new Button("Ik neem edelsteenfiches");
 		btnPas = new Button("Ik pas en sla deze ronde over");
+		btnBevestig = new Button("Bevestig keuze");
+		btnBevestig.setVisible(false);
 
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
 
-		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfo);
+		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, btnBevestig, lblInfo);
 	}
 
 	private void pasGeklikt(ActionEvent e) {
-		dc.bepaalVolgendeSpeler();
+		hs.bepaalVolgendeSpeler();
+		lblSpelerAanDeBeurt
+				.setText(String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
 		lblInfo.setText(
 				String.format("Je besliste om te passen, de volgende speler is %s.", dc.geefSpelerAanDeBeurt()));
 
@@ -60,6 +65,12 @@ public class LinkerInfoScherm extends VBox {
 
 	private void kiesKaartGeklikt(ActionEvent e) {
 		hs.maakKaartenKlikbaar();
+		btnKaart.setVisible(false);
+		btnFiche.setVisible(false);
+		btnPas.setVisible(false);
+		lblKeuze.setText("Kies een kaart van de tafel");
+		btnBevestig.setVisible(true);
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart"));
 	}
 
 	private void kiesFicheGeklikt(ActionEvent e) {
@@ -67,7 +78,24 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
-		this.getChildren().add(kaart);
+		this.gekozenKaart = kaart;
+		this.getChildren().add(gekozenKaart);
+	}
+
+	public FXOntwikkelingskaart verwijderOntwikkelingskaart() {
+		FXOntwikkelingskaart terugTeLeggenKaart = gekozenKaart;
+		gekozenKaart = null;
+		return terugTeLeggenKaart;
+	}
+
+	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
+		if (spelerKeuze.equals("kaart")) {
+			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
+		}
+	}
+
+	public void toonFoutmelding(String foutmelding) {
+		lblInfo.setText(foutmelding);
 	}
 
 	}

@@ -29,6 +29,10 @@ public class TafelScherm extends GridPane {
 	private void buildGui() {
 		geefZichtbareKaartenWeer();
 		geefStapelsWeer();
+		// TODO: zorgt ervoor dat je niet op de ontwikkelingskaarten kan klikken. De
+		// stapels
+		// worden dan ook lichter gekleurd: moet nog opgelost worden (misschien betere
+		// manier vinden?)
 		this.setDisable(true);
 		for (Label stapel : lblStapels) {
 			stapel.setDisable(false);
@@ -39,7 +43,7 @@ public class TafelScherm extends GridPane {
 
 		for (int rij = 0; rij < kaarten.length; rij++) {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
-				int[] index = { rij, kolom };
+				int[] index = { kolom, rij };
 				FXOntwikkelingskaart kaart = new FXOntwikkelingskaart(kaarten[rij][kolom], index, this);
 				this.add(kaart, kolom + 1, rij);
 			}
@@ -70,11 +74,19 @@ public class TafelScherm extends GridPane {
 		hs.verplaatsKaartNaarLinkerInfoScherm(fxKaart);
 	}
 
+	public void voegFouteKaartTerugToeVanLinkerInfoScherm(FXOntwikkelingskaart terugTeLeggenKaart) {
+		this.add(terugTeLeggenKaart, terugTeLeggenKaart.getIndex()[0] + 1, terugTeLeggenKaart.getIndex()[1]);
+	}
+
 	public void maakKaartenKlikbaar() {
 		this.setDisable(false);
 	}
 
 	public void maakKaartenOnKlikbaar() {
 		this.setDisable(true);
+	}
+
+	public Ontwikkelingskaart geefOntwikkelingskaartVolgensIndex(int[] index) {
+		return kaarten[index[1]][index[0]];
 	}
 }
