@@ -22,6 +22,8 @@ public class Hoofdscherm extends GridPane {
 
 	}
 
+
+
 	private void buildGui() {
 		this.getStyleClass().add("hoofddscherm");
 
@@ -32,7 +34,7 @@ public class Hoofdscherm extends GridPane {
 		linkerInfoScherm = new LinkerInfoScherm(dc, this);
 		edelenScherm = new EdelenScherm(dc);
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
-		tafelscherm = new TafelScherm(dc);
+		tafelscherm = new TafelScherm(dc, this);
 		scoreBordScherm = new ScoreBordScherm(dc);
 
 
@@ -41,5 +43,22 @@ public class Hoofdscherm extends GridPane {
 		this.add(edelsteenFicheScherm, 1, 1);
 		this.add(tafelscherm, 2, 1);
 		this.add(scoreBordScherm, 3, 0, 1, 2);
+
+		tafelscherm.setDisable(true);
 	}
+
+
+	public void bepaalVolgendeSpeler() {
+		dc.bepaalVolgendeSpeler();
+		scoreBordScherm.markeerVolgendeSpeler();
+	}
+
+	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart kaart) {
+		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
+	}
+
+	public void maakKaartenKlikbaar() {
+		tafelscherm.maakKaartenKlikbaar();
+	}
+
 }

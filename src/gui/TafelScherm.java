@@ -12,9 +12,13 @@ import javafx.scene.layout.GridPane;
 public class TafelScherm extends GridPane {
 	private DomeinController dc;
 	private Label[] lblStapels;
+	private Ontwikkelingskaart[][] kaarten;
+	private Hoofdscherm hs;
 
-	public TafelScherm(DomeinController dc) {
+	public TafelScherm(DomeinController dc, Hoofdscherm hs) {
 		this.dc = dc;
+		this.kaarten = dc.geefZichtbareOntwikkelingskaarten();
+		this.hs = hs;
 
 		this.setVgap(25);
 		this.setHgap(25);
@@ -25,14 +29,18 @@ public class TafelScherm extends GridPane {
 	private void buildGui() {
 		geefZichtbareKaartenWeer();
 		geefStapelsWeer();
+		this.setDisable(true);
+		for (Label stapel : lblStapels) {
+			stapel.setDisable(false);
+		}
 	}
 
 	private void geefZichtbareKaartenWeer() {
-		Ontwikkelingskaart[][] kaarten = dc.geefZichtbareOntwikkelingskaarten();
 
 		for (int rij = 0; rij < kaarten.length; rij++) {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
-				FXOntwikkelingskaart kaart = new FXOntwikkelingskaart(kaarten[rij][kolom]);
+				int[] index = { rij, kolom };
+				FXOntwikkelingskaart kaart = new FXOntwikkelingskaart(kaarten[rij][kolom], index, this);
 				this.add(kaart, kolom + 1, rij);
 			}
 		}
@@ -58,4 +66,15 @@ public class TafelScherm extends GridPane {
 
 	}
 
+	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart fxKaart) {
+		hs.verplaatsKaartNaarLinkerInfoScherm(fxKaart);
+	}
+
+	public void maakKaartenKlikbaar() {
+		this.setDisable(false);
+	}
+
+	public void maakKaartenOnKlikbaar() {
+		this.setDisable(true);
+	}
 }

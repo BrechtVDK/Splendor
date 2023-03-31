@@ -21,6 +21,10 @@ public class ScoreBordScherm extends VBox {
 		buildGui();
 	}
 
+	public SpelerScoreScherm[] getSpelerScoreSchermen() {
+		return spelerScoreSchermen;
+	}
+
 	private void buildGui() {
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(25);
@@ -57,7 +61,9 @@ public class ScoreBordScherm extends VBox {
 
 		// EINDE testen binding
 
-		dc.bepaalVolgendeSpeler();
+	}
+
+	public void markeerVolgendeSpeler() {
 		// achtergrond scorebord speler aan de beurt aanpassen
 		for (SpelerScoreScherm sss : spelerScoreSchermen) {
 			sss.getStyleClass().clear();
@@ -65,6 +71,5 @@ public class ScoreBordScherm extends VBox {
 			sss.getStyleClass().add(
 					String.format("%s", sss.isSpelerAanDeBeurt() ? "scoreKaartAanBeurt" : "scoreKaartNietAanBeurt"));
 		}
-
 	}
 }

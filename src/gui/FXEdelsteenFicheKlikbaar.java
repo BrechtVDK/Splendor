@@ -13,6 +13,6 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 
 	@Override
 	public void onLeftClicked() {
-		System.out.println("FXEdelsteenFiche");
+
 	}
 }

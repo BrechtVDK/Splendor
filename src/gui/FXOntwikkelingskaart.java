@@ -7,10 +7,14 @@ import javafx.geometry.Pos;
 public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 
 	private Edelsteenfiche bonus;
+	private int[] index;
+	private TafelScherm tafel;
 
-	public FXOntwikkelingskaart(Ontwikkelingskaart info) {
+	public FXOntwikkelingskaart(Ontwikkelingskaart info, int[] index, TafelScherm tafel) {
 		super(info.prestigePunten(), info.edelsteenfiches());
 		bonus = info.bonus();
+		this.index = index;
+		this.tafel = tafel;
 		buildExtras();
 	}
 
@@ -36,7 +40,8 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 
 	@Override
 	public void onLeftClicked() {
-		System.out.println("FXOntwikkelingskaart");
+		tafel.verplaatsKaartNaarLinkerInfoScherm(this);
+		tafel.maakKaartenOnKlikbaar();
 	}
 
 }
