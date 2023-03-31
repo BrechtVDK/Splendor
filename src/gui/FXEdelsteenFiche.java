@@ -47,10 +47,10 @@ public class FXEdelsteenFiche extends StackPane {
 		this(edelsteen, radius);
 		txtAantal = new Text();
 		ObjectBinding<Integer> aantalFichesBinding;
-		
-		//Parameters Bindings.valueAt: (ObservableMap, key)
+
+		// Parameters Bindings.valueAt: (ObservableMap, key)
 		aantalFichesBinding = Bindings.valueAt(
-				!isBonus ? speler.getAantalEdelsteenfichesPerTypeInBezit() : speler.getAantalBonussenPerTypeInBezit(),
+				isBonus ? speler.getAantalBonussenPerTypeInBezit() : speler.getAantalEdelsteenfichesPerTypeInBezit(),
 				edelsteen);
 
 		txtAantal.textProperty().bind(aantalFichesBinding.asString());
