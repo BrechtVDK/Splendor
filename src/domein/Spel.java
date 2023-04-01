@@ -164,6 +164,10 @@ public class Spel {
 	}
 
 	public List<Speler> geefWinnaars() {
+		if (!isEindeSpel()) {
+			// lege lijst
+			return new ArrayList<Speler>();
+		}
 		int hoogstePrestigepunten = spelers.stream().mapToInt(Speler::getPrestigepunten).max()
 				.orElse(Integer.MIN_VALUE);
 		List<Speler> spelersHoogstePrestigepunten = spelers.stream()

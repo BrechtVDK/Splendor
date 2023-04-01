@@ -2,7 +2,6 @@ package testen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.DomeinController;
-import domein.Edele;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
 import domein.EdelsteenficheFactory;
@@ -111,64 +109,18 @@ class SpelTest {
 		Assertions.assertEquals("Filip", spel.getSpelers().get(0).toString());
 	}
 
-	// spel met 3 spelers, 10 beheersbare edelen en 12 beheersbare kaarten aanmaken
-	// (niet random)
+	// hier testen met domeincontroller
+	// spel met 3 spelers met elk 10 fiches aanmaken in beforeEach2
 	@Nested
 	class NestedTests {
 		private DomeinController dc;
-		private List<Ontwikkelingskaart> ontwikkelingskaarten;
 		private ArrayList<Edelsteenfiche> fiches3BlauwGroenRood, fiches3RoodWitZwart, fiches2Blauw, fiches2Groen,
 				fiches2Rood, fiches2Wit, fiches2Zwart;
-		private Ontwikkelingskaart[][] kaarten;
-		private Edele edele1, edele2, edele3, edele4, edele5, edele6, edele7, edele8, edele9, edele10;
 
 		@BeforeEach
 		public void beforeEach2() {
 			dc = new DomeinController();
 			dc.startNieuwSpel();
-			// kaarten tafel zelf instellen
-			kaarten = new Ontwikkelingskaart[3][4];
-			// volgorde int[] {GROEN, WIT, BLAUW, ZWART, ROOD}
-			kaarten[0][0] = new Ontwikkelingskaart(4, new Edelsteenfiche(Edelsteen.ROOD),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 6, 0, 3, 0, 3 }));
-			kaarten[0][1] = new Ontwikkelingskaart(5, new Edelsteenfiche(Edelsteen.ZWART),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 0, 0, 3, 7 }));
-			kaarten[0][2] = new Ontwikkelingskaart(4, new Edelsteenfiche(Edelsteen.ZWART),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 3, 0, 0, 3, 6 }));
-			kaarten[0][3] = new Ontwikkelingskaart(4, new Edelsteenfiche(Edelsteen.GROEN),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 3, 3, 6, 0, 0 }));
-			kaarten[1][0] = new Ontwikkelingskaart(2, new Edelsteenfiche(Edelsteen.ZWART),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 5, 0, 0, 0 }));
-			kaarten[1][1] = new Ontwikkelingskaart(1, new Edelsteenfiche(Edelsteen.ZWART),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 3, 2, 0, 0 }));
-			kaarten[1][2] = new Ontwikkelingskaart(1, new Edelsteenfiche(Edelsteen.ROOD),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 0, 3, 3, 2 }));
-			kaarten[1][3] = new Ontwikkelingskaart(2, new Edelsteenfiche(Edelsteen.WIT),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 1, 0, 0, 2, 4 }));
-			kaarten[2][0] = new Ontwikkelingskaart(0, new Edelsteenfiche(Edelsteen.ROOD),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 3, 0, 0, 0 }));
-			kaarten[2][1] = new Ontwikkelingskaart(0, new Edelsteenfiche(Edelsteen.ROOD),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 1, 2, 0, 2, 0 }));
-			kaarten[2][2] = new Ontwikkelingskaart(0, new Edelsteenfiche(Edelsteen.GROEN),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 2, 1, 0, 0 }));
-			kaarten[2][3] = new Ontwikkelingskaart(0, new Edelsteenfiche(Edelsteen.ZWART),
-					EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 3, 0, 0, 0, 0 }));
-
-			// edelen zelf maken
-			// volgorde int[] {GROEN, WIT, BLAUW, ZWART, ROOD}
-			int[][] aantalFichesPerSoortPerEdele = { { 0, 4, 0, 4, 0 }, { 0, 3, 0, 3, 3 }, { 0, 3, 3, 3, 0 },
-					{ 3, 3, 3, 0, 0 }, { 3, 0, 0, 3, 3 }, { 3, 0, 3, 0, 3 }, { 4, 0, 4, 0, 0 }, { 0, 0, 0, 4, 4 },
-					{ 0, 4, 4, 0, 0 }, { 4, 0, 0, 0, 4 } };
-			edele1 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[0]));
-			edele2 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[1]));
-			edele3 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[2]));
-			edele4 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[3]));
-			edele5 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[4]));
-			edele6 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[5]));
-			edele7 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[6]));
-			edele8 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[7]));
-			edele9 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[8]));
-			edele10 = new Edele(EdelsteenficheFactory.maakArrayEdelsteenfiches(aantalFichesPerSoortPerEdele[9]));
 
 			// fiches maken om te nemen bij een beurt
 			fiches3BlauwGroenRood = new ArrayList<>(Arrays.asList(new Edelsteenfiche(Edelsteen.BLAUW),
@@ -205,35 +157,133 @@ class SpelTest {
 
 		@Test
 		public void isEindeSpel_teWeinigPunten_geeftFalse() {
-			try {
-				// 3pt
-				dc.verplaatsEdeleVanSpelNaarSpeler(edele4);
-			} catch (Exception e) {
-				// niks doen als edele niet in spel zit om te verwijderen
-			}
-			try {
-				// 3pt
-				dc.verplaatsEdeleVanSpelNaarSpeler(edele10);
-			} catch (Exception e) {
-				// niks doen als edele niet in spel zit om te verwijderen
-			}
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(6, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
 
-			// spelsituatie: Brecht: 6pt, Jonas: 0pt, Davis: 0pt
+			// spelsituatie: Brecht: 6pt, Jonas: 0pt, Davi: 0pt
 			Assertions.assertEquals(false, dc.isEindeSpel());
 		}
 
 		@Test
 		public void isEindeSpel_NetGenoegPunten_geeftTrue() {
-			// TODO
+
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(15, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(12, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			// spelsituatie: Brecht: 15pt, Jonas: 0pt, David: 12pt
+			Assertions.assertEquals(true, dc.isEindeSpel());
+
 		}
 
 		@Test
-		public void isEindeSpel_GenoegPunten_geeftTrue() {
-			// TODO
+		public void isEindeSpel_GenoegPuntenMeerdereSpelers_geeftTrue() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(16, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(17, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			// spelsituatie: Brecht: 16pt, Jonas: 0pt, David: 17pt
+			Assertions.assertEquals(true, dc.isEindeSpel());
 		}
 
-// TODO spel.geefWinnaars()
-// Momenteel nog niet te testen door de protected methodes in Speler
+		@Test
+		public void geefWinnaars_geenWinnaars_legeLijst() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(6, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+
+			// spelsituatie: Brecht: 6pt, Jonas: 0pt, David: 0pt
+			Assertions.assertEquals(new ArrayList<String>(), dc.geefNamenWinnaars());
+		}
+
+		@Test
+		public void geefWinnaars_1speler15punten_juisteWinnaar() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(15, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(14, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			// spelsituatie: Brecht: 15pt, Jonas: 0pt, David: 14pt
+			Assertions.assertEquals(new ArrayList<>(Arrays.asList("Brecht")), dc.geefNamenWinnaars());
+		}
+
+		@Test
+		public void geefWinnaars_2spelersMeerDan15puntenGelijkAantalKaarten_juisteWinnaarHoogstePunten() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(15, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(17, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			// spelsituatie: Brecht: 15pt 1kaart, Jonas: 0pt, David: 17pt 1kaart
+			Assertions.assertEquals(new ArrayList<>(Arrays.asList("David")), dc.geefNamenWinnaars());
+		}
+
+		@Test
+		public void geefWinnaars_2spelersMeerDan15puntenOngelijkAantalKaarten_juisteWinnaarHoogstePunten() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(15, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(10, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(7, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 0, 0, 2, 2 })));
+			// spelsituatie: Brecht: 15pt 1kaart, Jonas: 0pt, David: 17pt 2kaart
+			Assertions.assertEquals(new ArrayList<>(Arrays.asList("David")), dc.geefNamenWinnaars());
+		}
+
+		@Test
+		public void geefWinnaars_2spelersGelijkePuntenOngelijkAantalKaarten_juisteWinnaarLaagsteAantalKaarten() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(17, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(10, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(7, new Edelsteenfiche(Edelsteen.BLAUW),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 0, 2, 2, 0 })));
+			// spelsituatie: Brecht: 17pt 1kaart, Jonas: 0pt, David: 17pt 2kaart
+			Assertions.assertEquals(new ArrayList<>(Arrays.asList("Brecht")), dc.geefNamenWinnaars());
+		}
+
+		@Test
+		public void geefWinnaars_2spelersGelijkePuntenGelijkAantalKaarten_2juisteWinnaars() {
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(10, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(7, new Edelsteenfiche(Edelsteen.WIT),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 0, 0, 2, 2 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(10, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(7, new Edelsteenfiche(Edelsteen.BLAUW),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 0, 0, 2, 2, 0 })));
+			dc.bepaalVolgendeSpeler();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					new Ontwikkelingskaart(5, new Edelsteenfiche(Edelsteen.ROOD),
+							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
+			// spelsituatie: Brecht: 17pt 2kaart, Jonas: 5pt, David: 17pt 2kaart
+			Assertions.assertEquals(new ArrayList<>(Arrays.asList("Brecht", "David")), dc.geefNamenWinnaars());
+		}
+
 
 // UC3
 // TODO

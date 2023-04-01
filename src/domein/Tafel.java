@@ -67,14 +67,17 @@ public class Tafel {
 				}
 			}
 		}
-
-		// vervangen door kaart van stapel
-		try {
-			zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = stapelsOntwikkelingskaarten
-					.get(Niveau.values()[rijIndex]).haalKaartVanStapel();
-			// IndexOutOfBoundsException = geen kaarten meer op de stapel
-		} catch (IndexOutOfBoundsException e) {
-			zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = null;
+		// kaart gevonden = vervangen, kaart niet gevonden = niks => nodig om testen te
+		// kunnen uitvoeren
+		if (rijIndex != -1 && kolIndex != -1) {
+			// vervangen door kaart van stapel
+			try {
+				zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = stapelsOntwikkelingskaarten
+						.get(Niveau.values()[rijIndex]).haalKaartVanStapel();
+				// IndexOutOfBoundsException = geen kaarten meer op de stapel
+			} catch (IndexOutOfBoundsException e) {
+				zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = null;
+			}
 		}
 	}
 
