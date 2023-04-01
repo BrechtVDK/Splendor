@@ -242,7 +242,7 @@ public class Spel {
 	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException, TeVeelFichesInBezitException {
 		// In commentaar om binding te testen
-		// validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
+		validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
 		// validatie max 10 in klasse Speler
 		this.getSpelerAanDeBeurt().voegEdelsteenfichesToe(edelsteenfiches);
 	}
@@ -287,7 +287,7 @@ public class Spel {
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
 			throws IllegalArgumentException {
 		// validatie DR_BEURT_KOOP_KAART
-		if (kaart.equals(null)) {
+		if (kaart == null) {
 			throw new IllegalArgumentException("Geen kaart geselecteerd");
 		}
 
