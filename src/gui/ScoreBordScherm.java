@@ -1,11 +1,11 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import domein.DomeinController;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
-import domein.Ontwikkelingskaart;
 import domein.Speler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -36,28 +36,22 @@ public class ScoreBordScherm extends VBox {
 		}
 
 		// voorlopig om te changeren van speler
-		Button btnVolgendeSpeler = new Button("Volgende speler");
+		Button btnVolgendeSpeler = new Button("5x2fiches toevoegen");
 		btnVolgendeSpeler.minWidth(150);
-		btnVolgendeSpeler.setOnAction(this::volgendeSpelerGeklikt);
+		btnVolgendeSpeler.setOnAction(this::vijfx2fichesToevoegen);
 		this.getChildren().add(btnVolgendeSpeler);
 
 	}
 
-	private void volgendeSpelerGeklikt(ActionEvent e) {
+	private void vijfx2fichesToevoegen(ActionEvent e) {
 
 		// BEGIN binding testen
-		ArrayList<Edelsteenfiche> lijst = new ArrayList<>();
-		// 10 fiches van elk toevoegen
-		for (int i = 0; i < 10; i++) {
-			for (Edelsteen ed : Edelsteen.values()) {
-				lijst.add(new Edelsteenfiche(ed));
-			}
+		// MAX 10 FICHES IN KLASSE SPELER STAAT NOG IN COMMENTAAR!
+		// 5x2 fiches van elk toevoegen
+		for (Edelsteen ed : Edelsteen.values()) {
+			dc.verplaatsEdelsteenfichesNaarSpeler(
+					new ArrayList<>(Arrays.asList(new Edelsteenfiche(ed), new Edelsteenfiche(ed))));
 		}
-		// Exceptions staan momenteel in commentaar om te testen!
-		dc.verplaatsEdelsteenfichesNaarSpeler(lijst);
-		Ontwikkelingskaart kaart = dc.geefZichtbareOntwikkelingskaarten()[1][0];
-		dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
-
 
 		// EINDE testen binding
 

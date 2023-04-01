@@ -111,7 +111,7 @@ public class Speler {
 		if (aantalEdelsteenfichesPerTypeInBezit.values().stream().reduce((i1, i2) -> i1 + i2)
 				.get() > MAX_FICHES_IN_BEZIT) {
 			// in commentaar om binding te testen
-			throw new TeVeelFichesInBezitException();
+			// throw new TeVeelFichesInBezitException();
 
 		}
 	}
