@@ -61,6 +61,8 @@ public class SpelerRegistratieScherm extends GridPane {
 		lvSpelers.setItems(dc.geefSpelers());
 		lvSpelers.setMinWidth(200);
 		lvSpelers.setMaxHeight(150);
+		// klikken op listView = geen effect
+		lvSpelers.setMouseTransparent(true);
 
 		lblFoutmelding = new Label();
 		lblFoutmelding.setTextFill(Color.RED);
