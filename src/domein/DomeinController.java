@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import Exceptions.TeVeelFichesInBezitException;
+import javafx.collections.ObservableList;
 
 public class DomeinController {
 	private SpelerRepository spelerRepo;
@@ -54,7 +55,7 @@ public class DomeinController {
 	}
 
 	// gedrag Speler is afgeschermd via private en protected setters
-	public List<Speler> geefSpelers() {
+	public ObservableList<Speler> geefSpelers() {
 		return spel.getSpelers();
 	}
 

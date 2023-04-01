@@ -10,9 +10,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 import Exceptions.TeVeelFichesInBezitException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Spel {
-	private List<Speler> spelers;
+	private ObservableList<Speler> spelers;
 	private int spelerAanDeBeurt;
 	private Tafel tafel;
 	private List<Edele> edelen;
@@ -28,7 +30,7 @@ public class Spel {
 		maakStapelsEdelsteenfichesAan();
 		tafel = new Tafel();
 		maakEdelenAan();
-		spelers = new ArrayList<>();
+		spelers = FXCollections.observableArrayList();
 		spelerAanDeBeurt = -1;
 	}
 
@@ -42,7 +44,7 @@ public class Spel {
 		return spelers.get(spelerAanDeBeurt);
 	}
 
-	public List<Speler> getSpelers() {
+	public ObservableList<Speler> getSpelers() {
 		return spelers;
 	}
 

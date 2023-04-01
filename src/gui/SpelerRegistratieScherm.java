@@ -2,7 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import domein.Spel;
-import javafx.collections.FXCollections;
+import domein.Speler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +21,7 @@ public class SpelerRegistratieScherm extends GridPane {
 	private WelkomScherm ws;
 	private TextField txtGebruikersnaam, txtGeboortejaar;
 	private Button btnStartSpel;
-	private ListView<String> lvSpelers;
+	private ListView<Speler> lvSpelers;
 	private Label lblFoutmelding;
 
 	public SpelerRegistratieScherm(DomeinController dc, WelkomScherm ws) {
@@ -56,13 +56,14 @@ public class SpelerRegistratieScherm extends GridPane {
 
 		Label lblSpelers = new Label("Spelers toegevoegd aan spel:");
 
-		lvSpelers = new ListView<String>();
+		lvSpelers = new ListView<Speler>();
+		// observableList koppelen aan listView
+		lvSpelers.setItems(dc.geefSpelers());
 		lvSpelers.setMinWidth(200);
 		lvSpelers.setMaxHeight(150);
 
 		lblFoutmelding = new Label();
 		lblFoutmelding.setTextFill(Color.RED);
-
 
 		this.add(lblGebruikersnaam, 0, 1);
 		this.add(txtGebruikersnaam, 1, 1);
@@ -86,8 +87,6 @@ public class SpelerRegistratieScherm extends GridPane {
 			if (dc.geefAantalSpelers() == Spel.MIN_SPELERS) {
 				btnStartSpel.setDisable(false);
 			}
-			// speler zichtbaar in listview maken
-			updateLvSpelers();
 			// TextFields leegmaken en focus terug instellen
 			txtGebruikersnaam.clear();
 			txtGeboortejaar.clear();
@@ -106,11 +105,6 @@ public class SpelerRegistratieScherm extends GridPane {
 			txtGebruikersnaam.requestFocus();
 			txtGebruikersnaam.selectAll();
 		}
-	}
-
-	private void updateLvSpelers() {
-		lvSpelers
-				.setItems(FXCollections.observableArrayList(dc.geefSpelers().stream().map(s -> s.toString()).toList()));
 	}
 
 	private void startSpelGeklikt(ActionEvent event) {
