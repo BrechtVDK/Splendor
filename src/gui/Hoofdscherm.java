@@ -57,21 +57,26 @@ public class Hoofdscherm extends GridPane {
 		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
 	}
 
-	public void haalGekozenKaartTerugVanLinkerInfoScherm() {
-		tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(linkerInfoScherm.verwijderOntwikkelingskaart());
-	}
 
 	public void maakKaartenKlikbaar() {
 		tafelscherm.maakKaartenKlikbaar();
 	}
 
+	public void maakKaartenOnKlikbaar() {
+		tafelscherm.maakKaartenOnKlikbaar();
+	}
+
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart kaart) {
 		try {
-		dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
-				tafelscherm.geefOntwikkelingskaartVolgensIndex(kaart.getIndex()));
+			int[] indexKaart = kaart.getIndex();
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+					tafelscherm.geefOntwikkelingskaartVolgensIndex(indexKaart));
+			tafelscherm.legNieuweKaartOpTafel(dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]), indexKaart);
+
 		} catch (IllegalArgumentException e) {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
-			haalGekozenKaartTerugVanLinkerInfoScherm();
+			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(kaart);
+			linkerInfoScherm.verwijderOntwikkelingskaart();
 		}
 	}
 

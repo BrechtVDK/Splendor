@@ -13,6 +13,7 @@ public class TafelScherm extends GridPane {
 	private DomeinController dc;
 	private Label[] lblStapels;
 	private Ontwikkelingskaart[][] kaarten;
+	private FXOntwikkelingskaart[][] FXkaarten;
 	private Hoofdscherm hs;
 
 	public TafelScherm(DomeinController dc, Hoofdscherm hs) {
@@ -23,6 +24,7 @@ public class TafelScherm extends GridPane {
 		this.setVgap(25);
 		this.setHgap(25);
 
+		FXkaarten = new FXOntwikkelingskaart[kaarten.length][kaarten[0].length];
 		buildGui();
 	}
 
@@ -45,6 +47,7 @@ public class TafelScherm extends GridPane {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
 				int[] index = { kolom, rij };
 				FXOntwikkelingskaart kaart = new FXOntwikkelingskaart(kaarten[rij][kolom], index, this);
+				FXkaarten[rij][kolom] = kaart;
 				this.add(kaart, kolom + 1, rij);
 			}
 		}
@@ -88,5 +91,14 @@ public class TafelScherm extends GridPane {
 
 	public Ontwikkelingskaart geefOntwikkelingskaartVolgensIndex(int[] index) {
 		return kaarten[index[1]][index[0]];
+	}
+
+	public void legNieuweKaartOpTafel(Ontwikkelingskaart kaart, int[] kaartIndex) {
+		kaarten[kaartIndex[1]][kaartIndex[0]] = kaart;
+		this.add(new FXOntwikkelingskaart(kaart, kaartIndex, this), kaartIndex[0], kaartIndex[1]);
+	}
+
+	public void verwijderOntwikkelingskaart(FXOntwikkelingskaart kaart) {
+		FXkaarten[kaart.getIndex()[1]][kaart.getIndex()[0]] = null;
 	}
 }

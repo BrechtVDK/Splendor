@@ -74,7 +74,7 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	private void kiesFicheGeklikt(ActionEvent e) {
-
+		hs.maakKaartenOnKlikbaar();
 	}
 
 	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
@@ -82,15 +82,16 @@ public class LinkerInfoScherm extends VBox {
 		this.getChildren().add(gekozenKaart);
 	}
 
-	public FXOntwikkelingskaart verwijderOntwikkelingskaart() {
-		FXOntwikkelingskaart terugTeLeggenKaart = gekozenKaart;
+	public void verwijderOntwikkelingskaart() {
 		gekozenKaart = null;
-		return terugTeLeggenKaart;
 	}
 
 	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
 		if (spelerKeuze.equals("kaart")) {
-			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
+			if (gekozenKaart.equals(null))
+				lblInfo.setText("Geen kaart geselecteerd");
+			else
+				hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
 		}
 	}
 

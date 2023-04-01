@@ -77,4 +77,9 @@ public class Tafel {
 			zichtbareOntwikkelingskaarten[rijIndex][kolIndex] = null;
 		}
 	}
+
+	// om nieuwe kaart weer te geven in gui
+	public Ontwikkelingskaart geefKaartVolgensIndex(int rij, int kolom) {
+		return zichtbareOntwikkelingskaarten[rij][kolom];
+	}
 }

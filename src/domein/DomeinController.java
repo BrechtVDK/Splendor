@@ -123,4 +123,8 @@ public class DomeinController {
 		spel.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
 	}
 
+	public Ontwikkelingskaart geefNieuweKaartVanStapel(int rij, int kolom) {
+		return spel.geefKaartVolgensIndex(rij, kolom);
+	}
+
 }

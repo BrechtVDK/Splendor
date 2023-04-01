@@ -281,6 +281,9 @@ public class Spel {
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
 			throws IllegalArgumentException {
 		// validatie DR_BEURT_KOOP_KAART
+		if (kaart.equals(null)) {
+			throw new IllegalArgumentException("Geen kaart geselecteerd");
+		}
 
 		Map<Edelsteen, Integer> fichesSpeler = this.getSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
 		Map<Edelsteen, Integer> bonussenSpeler = this.getSpelerAanDeBeurt().getAantalBonussenPerTypeInBezit();
@@ -309,6 +312,11 @@ public class Spel {
 
 		// kaart toevoegen aan speler
 		this.getSpelerAanDeBeurt().voegOntwikkelingskaartToe(kaart);
+	}
+
+	// om nieuwe kaart weer te geven in gui
+	public Ontwikkelingskaart geefKaartVolgensIndex(int rij, int kolom) {
+		return tafel.geefKaartVolgensIndex(rij, kolom);
 	}
 
 }
