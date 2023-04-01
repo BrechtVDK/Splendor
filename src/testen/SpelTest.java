@@ -162,7 +162,7 @@ class SpelTest {
 							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
 
 			// spelsituatie: Brecht: 6pt, Jonas: 0pt, Davi: 0pt
-			Assertions.assertEquals(false, dc.isEindeSpel());
+			Assertions.assertFalse(dc.isEindeSpel());
 		}
 
 		@Test
@@ -176,7 +176,7 @@ class SpelTest {
 					new Ontwikkelingskaart(12, new Edelsteenfiche(Edelsteen.ROOD),
 							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
 			// spelsituatie: Brecht: 15pt, Jonas: 0pt, David: 12pt
-			Assertions.assertEquals(true, dc.isEindeSpel());
+			Assertions.assertTrue(dc.isEindeSpel());
 
 		}
 
@@ -190,7 +190,7 @@ class SpelTest {
 					new Ontwikkelingskaart(17, new Edelsteenfiche(Edelsteen.ROOD),
 							EdelsteenficheFactory.maakArrayEdelsteenfiches(new int[] { 2, 2, 0, 0, 0 })));
 			// spelsituatie: Brecht: 16pt, Jonas: 0pt, David: 17pt
-			Assertions.assertEquals(true, dc.isEindeSpel());
+			Assertions.assertTrue(dc.isEindeSpel());
 		}
 
 		@Test
