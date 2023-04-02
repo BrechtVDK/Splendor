@@ -268,9 +268,9 @@ class SpelTest {
 			Edele edele = dc.geefEdelen().get(0);
 			dc.verplaatsEdeleVanSpelNaarSpeler(edele);
 			// niet meer in spel
-			Assertions.assertTrue(dc.geefEdelen().indexOf(edele) == -1);
+			Assertions.assertFalse(dc.geefEdelen().contains(edele));
 			// wel bij speler
-			Assertions.assertTrue(dc.geefSpelerAanDeBeurt().getEdelenInBezit().indexOf(edele) != -1);
+			Assertions.assertTrue(dc.geefSpelerAanDeBeurt().getEdelenInBezit().contains(edele));
 		}
 
 		@Test
@@ -540,7 +540,7 @@ class SpelTest {
 			int aantalZwartSpelerNa = spelerNa.get(Edelsteen.ZWART);
 
 			Assertions.assertFalse(dc.geefZichtbareOntwikkelingskaarten()[1][1] == kaart);
-			Assertions.assertTrue(dc.geefSpelerAanDeBeurt().getOntwikkelingskaartenInBezit().indexOf(kaart) != 1);
+			Assertions.assertTrue(dc.geefSpelerAanDeBeurt().getOntwikkelingskaartenInBezit().contains(kaart));
 			Assertions.assertEquals(aantalBlauwStapelVoor + (aantalBlauw > 0 ? aantalBlauw : 0), aantalBlauwStapelNa);
 			Assertions.assertEquals(aantalGroenStapelVoor + (aantalGroen > 0 ? aantalGroen : 0), aantalGroenStapelNa);
 			Assertions.assertEquals(aantalRoodStapelVoor + (aantalRood > 0 ? aantalRood : 0), aantalRoodStapelNa);
