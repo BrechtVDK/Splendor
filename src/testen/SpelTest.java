@@ -2,6 +2,7 @@ package testen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
@@ -111,7 +112,7 @@ class SpelTest {
 	}
 
 	// hier testen met domeincontroller
-	// spel met 3 spelers met elk 10 fiches aanmaken in beforeEach2
+	// spel met 3 spelers in befeorEach2
 	@Nested
 	class NestedTests {
 		private DomeinController dc;
@@ -146,6 +147,7 @@ class SpelTest {
 			dc.speelSpel();
 		}
 
+		// UC2
 		@Test
 		public void isEindeSpel_teWeinigPunten_geeftFalse() {
 			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
@@ -268,6 +270,36 @@ class SpelTest {
 			Assertions.assertTrue(dc.geefEdelen().indexOf(edele) == -1);
 			// wel bij speler
 			Assertions.assertTrue(dc.geefSpelerAanDeBeurt().getEdelenInBezit().indexOf(edele) != -1);
+		}
+
+		@Test
+		public void geefBeschikbareEdelen_spelerHeeftGeenBonussen_geenEdelen() {
+			Assertions.assertTrue(dc.geefBeschikbareEdelen().isEmpty());
+		}
+
+		@Test
+		public void geefBeschikbareEdelen_spelerHeeftGenoegBonussen_correcteEdelen() {
+			// 3x bonussen van elke soort toevoegen aan Speler
+			for (Edelsteen e : Edelsteen.values()) {
+				for (int i = 0; i < 3; i++) {
+					dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+							new Ontwikkelingskaart(0, new Edelsteenfiche(e), new Edelsteenfiche[0]));
+				}
+			}
+			List<Edele> edelenInSpel = dc.geefEdelen();
+			List<Edele> edelenGenoegBonussen = new ArrayList<>();
+			for (Edele edele : edelenInSpel) {
+				boolean genoegBonussen = true;
+				for (Edelsteen e : Edelsteen.values()) {
+					if (Arrays.stream(edele.bonussen()).filter(b -> b.edelsteen().equals(e)).count() > 3) {
+						genoegBonussen = false;
+					}
+				}
+				if (genoegBonussen) {
+					edelenGenoegBonussen.add(edele);
+				}
+			}
+			Assertions.assertEquals(edelenGenoegBonussen, dc.geefBeschikbareEdelen());
 		}
 
 //UC4
