@@ -255,6 +255,7 @@ class SpelTest {
 			Assertions.assertEquals(new ArrayList<>(Arrays.asList("Brecht", "David")), dc.geefNamenWinnaars());
 		}
 
+
 // UC3
 		@Test
 		public void bepaalVolgendeSpeler_correcteSpelerAanDeBeurt() {
