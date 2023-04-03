@@ -48,7 +48,7 @@
 }
 
 .hoofdscherm {
-	-fx-backgroundcolor: #F8BD7F;
+	-fx-background-color: #F8BD7F;
 }
 
 .stapelniveau1 {
@@ -69,7 +69,7 @@
 	-fx-border-width: 2px;
 	-fx-background-radius: 10px;
 	-fx-border-radius: 10px;
-	-fx-font-size: 18.0px;
+	-fx-font-size: 16.0px;
 	
 }
 

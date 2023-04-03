@@ -22,8 +22,6 @@ public class TafelScherm extends GridPane {
 
 		this.setVgap(25);
 		this.setHgap(25);
-
-
 		buildGui();
 	}
 
@@ -44,6 +42,7 @@ public class TafelScherm extends GridPane {
 
 		for (int rij = 0; rij < kaarten.length; rij++) {
 			for (int kolom = 0; kolom < kaarten[rij].length; kolom++) {
+				// volgorde gridpane: kol, rij!
 				int[] index = { kolom, rij };
 				FXOntwikkelingskaart kaart = new FXOntwikkelingskaart(kaarten[rij][kolom], index, this);
 				this.add(kaart, kolom + 1, rij);

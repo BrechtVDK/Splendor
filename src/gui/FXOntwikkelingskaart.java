@@ -1,5 +1,6 @@
 package gui;
 
+import domein.Edelsteen;
 import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
 import javafx.geometry.Pos;
@@ -10,12 +11,14 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 	// index bevat {kolom, rij}
 	private int[] index;
 	private TafelScherm tafel;
+	private Ontwikkelingskaart ontwikkelingskaart;
 
 	public FXOntwikkelingskaart(Ontwikkelingskaart info, int[] index, TafelScherm tafel) {
 		super(info.prestigePunten(), info.edelsteenfiches());
 		bonus = info.bonus();
 		this.index = index;
 		this.tafel = tafel;
+		this.ontwikkelingskaart = info;
 		buildExtras();
 	}
 
@@ -29,7 +32,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		this.getStyleClass().add("ontwikkelingskaart");
 		// achtergrond instellen adhv kleur bonus. Witte bonus => rgb(192,192,192)
 		this.setStyle(String.format("-fx-background-color: linear-gradient(rgba(255,255,255), rgba%s);",
-				rgb.equals("(255,255,255)") ? "(192,192,192)" : rgb));
+				bonus.edelsteen().equals(Edelsteen.WIT) ? "(192,192,192)" : rgb));
 
 		// interface
 		this.backgroundProperty();
@@ -43,6 +46,10 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		this.add(fxEdelsteenFiche, 1, 0);
 	}
 
+	public Ontwikkelingskaart getKaart() {
+		return ontwikkelingskaart;
+	}
+
 	@Override
 	public void onLeftClicked() {
 		// Eerst kijken waar de kaart zich bevindt, dan naar respectievelijke plaats
@@ -51,17 +58,17 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		if (parent.equals("TafelScherm")) {
 			tafel.verplaatsKaartNaarLinkerInfoScherm(this);
 			tafel.maakKaartenOnKlikbaar();
-			((LinkerInfoScherm) this.getParent()).activeerBevestigKnop();
-		}
-		else {
-			((LinkerInfoScherm) this.getParent()).deactiveerBevestigKnop();
+			// Brecht: zie LinkerInfoScherm.voegOntwikkelingskaartToe()
+			// ((LinkerInfoScherm) this.getParent()).activeerBevestigKnop();
+		} else {
+			// ((LinkerInfoScherm) this.getParent()).deactiveerBevestigKnop();
+			((LinkerInfoScherm) this.getParent()).verwijderBevestigKnop();
+
 			tafel.voegFouteKaartTerugToeVanLinkerInfoScherm(this);
 			tafel.maakKaartenKlikbaar();
 
 		}
 
-
 	}
-
 
 }

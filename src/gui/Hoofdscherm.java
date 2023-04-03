@@ -2,6 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import domein.Ontwikkelingskaart;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
@@ -26,9 +27,9 @@ public class Hoofdscherm extends GridPane {
 
 
 	private void buildGui() {
-		this.getStyleClass().add("hoofddscherm");
+		// this.getStyleClass().add("hoofdscherm");
 
-		// this.setPadding(new Insets(25));
+		this.setPadding(new Insets(5));
 		this.setVgap(25);
 		this.setHgap(25);
 		this.setAlignment(Pos.CENTER);
@@ -71,22 +72,27 @@ public class Hoofdscherm extends GridPane {
 		tafelscherm.maakKaartenOnKlikbaar();
 	}
 
-	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart kaart) {
+	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart fxKaart) {
 		try {
-			int[] indexKaart = kaart.getIndex();
-			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
-					tafelscherm.geefOntwikkelingskaartVolgensIndex(indexKaart));
+			int[] indexKaart = fxKaart.getIndex();
+			/*
+			 * dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
+			 * tafelscherm.geefOntwikkelingskaartVolgensIndex(indexKaart));
+			 */
+			// Brecht: getter toegevoegd aan FXOntwikkelingskaart
+			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(fxKaart.getKaart());
 			Ontwikkelingskaart nieuweKaart = dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]);
 			if (nieuweKaart != null) {
 				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
 			}
-			linkerInfoScherm.verwijderKaart(kaart);
+			linkerInfoScherm.verwijderKaart(fxKaart);
 			bepaalVolgendeSpeler();
 
 		} catch (IllegalArgumentException e) {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
-			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(kaart);
-			linkerInfoScherm.deactiveerBevestigKnop();
+			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(fxKaart);
+			// linkerInfoScherm.deactiveerBevestigKnop();
+			linkerInfoScherm.verwijderBevestigKnop();
 		}
 		linkerInfoScherm.zetKeuzeMenuTerug();
 

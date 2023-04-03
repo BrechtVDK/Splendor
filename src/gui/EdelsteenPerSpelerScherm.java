@@ -18,7 +18,7 @@ public class EdelsteenPerSpelerScherm extends HBox {
 		this.setSpacing(5);
 
 		for (Edelsteen e : Edelsteen.values()) {
-			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(e, 15, speler, isBonus);
+			FXEdelsteenFiche fxEdelsteenFiche = new FXEdelsteenFiche(e, 14, speler, isBonus);
 			this.getChildren().add(fxEdelsteenFiche);
 		}
 	}

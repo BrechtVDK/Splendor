@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,30 +31,44 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	private void buildGui() {
+		// Ook een optie:
+		// Neemt dynamisch 1/6 breedte in van Hoofdscherm
+		// super.prefWidthProperty().bind(hs.widthProperty().divide(6));
+		this.setMinWidth(225);
+		this.setMaxWidth(225);
 		this.setSpacing(10);
-		this.setAlignment(Pos.TOP_CENTER);
+		this.setAlignment(Pos.TOP_LEFT);
 
 		lblSpelerAanDeBeurt = new Label(
 				String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
 		lblKeuze = new Label("Wat wil je doen in deze beurt?");
-		lblInfo = new Label("");
+		lblInfo = new Label();
 
 		btnKaart = new Button("Ik koop een ontwikkelingskaart");
 		btnFiche = new Button("Ik neem edelsteenfiches");
 		btnPas = new Button("Ik pas en sla deze ronde over");
 		btnBevestig = new Button("Bevestig keuze");
-		btnBevestig.setVisible(false);
+		btnBevestig.setId("btnBevestig");
+		// btnBevestig.setVisible(false);
 
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
-
-		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, btnBevestig, lblInfo);
+		// Brecht: btnBevestig geschrapt: onderaan scherm toevoegen (onder kaart of
+		// fiches)
+		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfo);
+		// alle labels wrappen
+		this.getChildren().forEach(node -> {
+			if (node instanceof Label) {
+				((Label) node).setWrapText(true);
+			}
+		});
 	}
 
 	private void pasGeklikt(ActionEvent e) {
 		hs.bepaalVolgendeSpeler();
-		stelVolgendeSpelerIn();
+		// Brecht: wordt in methode hierboven aangeroepen
+		// stelVolgendeSpelerIn();
 		lblInfo.setText(
 				String.format("Je besliste om te passen, de volgende speler is %s.", dc.geefSpelerAanDeBeurt()));
 
@@ -97,40 +110,48 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart.setVisible(false);
 		btnFiche.setVisible(false);
 		btnPas.setVisible(false);
-		btnBevestig.setVisible(true);
-		deactiveerBevestigKnop();
+		// btnBevestig.setVisible(true);
+		// deactiveerBevestigKnop();
 	}
 
-	public void activeerBevestigKnop() {
-		btnBevestig.setDisable(false);
-	}
+	/*
+	 * public void activeerBevestigKnop() { // Brecht aangepast naar visible
+	 * btnBevestig.setVisible(true); // btnBevestig.setDisable(false); }
+	 * 
+	 * public void deactiveerBevestigKnop() { // Brecht aangepast naar visible
+	 * btnBevestig.setVisible(false); // btnBevestig.setDisable(true); }
+	 */
 
-	public void deactiveerBevestigKnop() {
-		btnBevestig.setDisable(true);
+	public void verwijderBevestigKnop() {
+		if (this.getChildren().contains(btnBevestig)) {
+			this.getChildren().remove(btnBevestig);
+		}
+
 	}
 
 	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
 
-
 		if (spelerKeuze.equals("kaart")) {
-				hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
+			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
+			verwijderBevestigKnop();
 		}
 	}
 
-
 	public void zetKeuzeMenuTerug() {
 		lblKeuze.setText("Wat wil je doen in deze beurt?");
-		btnBevestig.setVisible(false);
+		// btnBevestig.setVisible(false);
 		btnKaart.setVisible(true);
 		btnFiche.setVisible(true);
 		btnPas.setVisible(true);
+		verwijderBevestigKnop();
 	}
 
 	// Ontwikkelingskaarten:
 	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
 		this.gekozenKaart = kaart;
-		this.getChildren().add(gekozenKaart);
-
+		// Brecht: btnBevestig onder kaart toevoegen
+		this.getChildren().addAll(gekozenKaart, btnBevestig);
+		// activeerBevestigKnop();
 	}
 
 	public void verwijderKaart(FXOntwikkelingskaart kaart) {
@@ -147,4 +168,3 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 }
-

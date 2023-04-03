@@ -57,7 +57,7 @@ public class ScoreBordScherm extends VBox {
 
 	}
 
-	public void markeerVolgendeSpeler() {
+	protected void markeerVolgendeSpeler() {
 		// achtergrond scorebord speler aan de beurt aanpassen
 		for (SpelerScoreScherm sss : spelerScoreSchermen) {
 			sss.getStyleClass().clear();
