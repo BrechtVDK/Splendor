@@ -1,6 +1,9 @@
 package gui;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import domein.DomeinController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,8 +17,8 @@ import javafx.util.Duration;
 public class LinkerInfoScherm extends VBox {
 	private DomeinController dc;
 	private Hoofdscherm hs;
-	private SpelerScoreScherm[] spelerScoreSchermen;
 	private FXOntwikkelingskaart gekozenKaart;
+	private List<FXEdelsteenFiche> edelsteenfiches;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfo;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig;
@@ -23,6 +26,8 @@ public class LinkerInfoScherm extends VBox {
 	public LinkerInfoScherm(DomeinController dc, Hoofdscherm hs) {
 		this.dc = dc;
 		this.hs = hs;
+		this.edelsteenfiches = new ArrayList();
+
 		buildGui();
 	}
 
@@ -50,14 +55,22 @@ public class LinkerInfoScherm extends VBox {
 
 	private void pasGeklikt(ActionEvent e) {
 		hs.bepaalVolgendeSpeler();
-		lblSpelerAanDeBeurt
-				.setText(String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
+		stelVolgendeSpelerIn();
 		lblInfo.setText(
 				String.format("Je besliste om te passen, de volgende speler is %s.", dc.geefSpelerAanDeBeurt()));
 
-		// tijdlijn om pasboodschap na 5 seconden te wissen (andere speler is dan reeds
+		maakInfoLabelLeeg(2);
+	}
+
+	public void stelVolgendeSpelerIn() {
+		lblSpelerAanDeBeurt
+				.setText(String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
+	}
+
+	private void maakInfoLabelLeeg(double seconden) {
+		// tijdlijn om pasboodschap na x seconden te wissen (andere speler is dan reeds
 		// aan de beurt)
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), ev -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconden), ev -> {
 			lblInfo.setText("");
 		}));
 		timeline.play();
@@ -65,39 +78,73 @@ public class LinkerInfoScherm extends VBox {
 
 	private void kiesKaartGeklikt(ActionEvent e) {
 		hs.maakKaartenKlikbaar();
-		btnKaart.setVisible(false);
-		btnFiche.setVisible(false);
-		btnPas.setVisible(false);
 		lblKeuze.setText("Kies een kaart van de tafel");
-		btnBevestig.setVisible(true);
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart"));
 	}
 
 	private void kiesFicheGeklikt(ActionEvent e) {
-		hs.maakKaartenOnKlikbaar();
-	}
-
-	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
-		this.gekozenKaart = kaart;
-		this.getChildren().add(gekozenKaart);
-	}
-
-	public void verwijderOntwikkelingskaart() {
-		gekozenKaart = null;
-	}
-
-	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
-		if (spelerKeuze.equals("kaart")) {
-			if (gekozenKaart.equals(null))
-				lblInfo.setText("Geen kaart geselecteerd");
-			else
-				hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
-		}
+		hs.maakFichesKlikbaar();
+		verbergKeuzeknoppen();
+		lblKeuze.setText("Kies 2 fiches van dezelfde kleur of 3 verschillende.");
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "fiche"));
 	}
 
 	public void toonFoutmelding(String foutmelding) {
 		lblInfo.setText(foutmelding);
 	}
 
+	private void verbergKeuzeknoppen() {
+		btnKaart.setVisible(false);
+		btnFiche.setVisible(false);
+		btnPas.setVisible(false);
+		btnBevestig.setVisible(true);
+		deactiveerBevestigKnop();
 	}
+
+	public void activeerBevestigKnop() {
+		btnBevestig.setDisable(false);
+	}
+
+	public void deactiveerBevestigKnop() {
+		btnBevestig.setDisable(true);
+	}
+
+	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
+
+
+		if (spelerKeuze.equals("kaart")) {
+				hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
+		}
+	}
+
+
+	public void zetKeuzeMenuTerug() {
+		lblKeuze.setText("Wat wil je doen in deze beurt?");
+		btnBevestig.setVisible(false);
+		btnKaart.setVisible(true);
+		btnFiche.setVisible(true);
+		btnPas.setVisible(true);
+	}
+
+	// Ontwikkelingskaarten:
+	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
+		this.gekozenKaart = kaart;
+		this.getChildren().add(gekozenKaart);
+
+	}
+
+	public void verwijderKaart(FXOntwikkelingskaart kaart) {
+		this.getChildren().remove(kaart);
+	}
+
+	// Fiches
+	public void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
+		if (edelsteenfiches.size() < 3) {
+			edelsteenfiches.add(edelsteenfiche);
+			this.getChildren().add(edelsteenfiche);
+		} else
+			lblInfo.setText("Je mag maximum 3 fiches kiezen");
+	}
+
+}
 

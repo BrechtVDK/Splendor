@@ -50,12 +50,14 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		String parent = this.getParent().getClass().getSimpleName();
 		if (parent.equals("TafelScherm")) {
 			tafel.verplaatsKaartNaarLinkerInfoScherm(this);
-			tafel.verwijderOntwikkelingskaart(this);
 			tafel.maakKaartenOnKlikbaar();
+			((LinkerInfoScherm) this.getParent()).activeerBevestigKnop();
 		}
 		else {
+			((LinkerInfoScherm) this.getParent()).deactiveerBevestigKnop();
 			tafel.voegFouteKaartTerugToeVanLinkerInfoScherm(this);
 			tafel.maakKaartenKlikbaar();
+
 		}
 
 

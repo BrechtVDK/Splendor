@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.Ontwikkelingskaart;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
@@ -33,7 +34,7 @@ public class Hoofdscherm extends GridPane {
 		this.setAlignment(Pos.CENTER);
 		linkerInfoScherm = new LinkerInfoScherm(dc, this);
 		edelenScherm = new EdelenScherm(dc);
-		edelsteenFicheScherm = new EdelsteenFicheScherm(dc);
+		edelsteenFicheScherm = new EdelsteenFicheScherm(dc, this);
 		tafelscherm = new TafelScherm(dc, this);
 		scoreBordScherm = new ScoreBordScherm(dc);
 
@@ -44,15 +45,19 @@ public class Hoofdscherm extends GridPane {
 		this.add(tafelscherm, 2, 1);
 		this.add(scoreBordScherm, 3, 0, 1, 2);
 
-		tafelscherm.setDisable(true);
+		tafelscherm.maakKaartenOnKlikbaar();
+		edelsteenFicheScherm.maakFichesOnklikbaar();
+		;
 	}
 
 
 	public void bepaalVolgendeSpeler() {
 		dc.bepaalVolgendeSpeler();
 		scoreBordScherm.markeerVolgendeSpeler();
+		linkerInfoScherm.stelVolgendeSpelerIn();
 	}
 
+	// alles in verbande met Ontwikkelingskaarten:
 	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart kaart) {
 		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
 	}
@@ -71,13 +76,34 @@ public class Hoofdscherm extends GridPane {
 			int[] indexKaart = kaart.getIndex();
 			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
 					tafelscherm.geefOntwikkelingskaartVolgensIndex(indexKaart));
-			tafelscherm.legNieuweKaartOpTafel(dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]), indexKaart);
+			Ontwikkelingskaart nieuweKaart = dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]);
+			if (nieuweKaart != null) {
+				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
+			}
+			linkerInfoScherm.verwijderKaart(kaart);
+			bepaalVolgendeSpeler();
 
 		} catch (IllegalArgumentException e) {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(kaart);
-			linkerInfoScherm.verwijderOntwikkelingskaart();
+			linkerInfoScherm.deactiveerBevestigKnop();
 		}
+		linkerInfoScherm.zetKeuzeMenuTerug();
+
+
+	}
+
+	// alles in verband met fiches:
+	public void maakFichesKlikbaar() {
+		edelsteenFicheScherm.maakFichesKlikbaar();
+	}
+
+	public void maakFichesOnKlikbaar() {
+		edelsteenFicheScherm.maakFichesOnklikbaar();
+	}
+
+	public void voegEdelsteenficheToeAanLinkerInfoScherm(FXEdelsteenFiche edelsteenfiche) {
+		linkerInfoScherm.voegFicheToe(edelsteenfiche);
 	}
 
 }

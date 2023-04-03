@@ -60,7 +60,9 @@ public class Tafel {
 		// outer zorgt dat break statement uit de beide forloops ontsnapt
 		outer: for (int rij = 0; rij < zichtbareOntwikkelingskaarten.length; rij++) {
 			for (int kol = 0; kol < zichtbareOntwikkelingskaarten[rij].length; kol++) {
-				if (zichtbareOntwikkelingskaarten[rij][kol].equals(kaart)) {
+
+				if (zichtbareOntwikkelingskaarten[rij][kol] != null
+						&& zichtbareOntwikkelingskaarten[rij][kol].equals(kaart)) {
 					rijIndex = rij;
 					kolIndex = kol;
 					break outer;

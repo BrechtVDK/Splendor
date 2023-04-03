@@ -12,6 +12,7 @@ import java.util.function.Function;
 import Exceptions.TeVeelFichesInBezitException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 
 public class Spel {
 	private ObservableList<Speler> spelers;
@@ -19,7 +20,7 @@ public class Spel {
 	private Tafel tafel;
 	private List<Edele> edelen;
 	// hashmap: sleutel = enum Edelsteen, waarde = list Edelsteenfiches
-	private Map<Edelsteen, StapelEdelsteenfiches> stapelsEdelsteenfiches;
+	private ObservableMap<Edelsteen, StapelEdelsteenfiches> stapelsEdelsteenfiches;
 	public static final int MIN_SPELERS = 2;
 	public static final int MAX_SPELERS = 4;
 	private static final int EINDE_SPEL_SCORE = 15;
@@ -111,7 +112,7 @@ public class Spel {
 	// instanties van StapelEdelsteenfiches aanmaken en verzamelen in HashMap
 	// stapelsEdelsteenfiches
 	private void maakStapelsEdelsteenfichesAan() {
-		stapelsEdelsteenfiches = new HashMap<Edelsteen, StapelEdelsteenfiches>();
+		stapelsEdelsteenfiches = FXCollections.observableHashMap();
 		// enums overlopen
 		for (Edelsteen e : Edelsteen.values()) {
 			stapelsEdelsteenfiches.put(e, new StapelEdelsteenfiches(e));
@@ -140,8 +141,8 @@ public class Spel {
 	// UC2
 
 	// geeft het aantal fiches per soort terug
-	public Map<Edelsteen, Integer> geefAantalFichesPerStapel() {
-		Map<Edelsteen, Integer> aantalPerSoort = new HashMap<Edelsteen, Integer>();
+	public ObservableMap<Edelsteen, Integer> geefAantalFichesPerStapel() {
+		ObservableMap<Edelsteen, Integer> aantalPerSoort = FXCollections.observableHashMap();
 
 		for (Edelsteen edelsteen : Edelsteen.values()) {
 			aantalPerSoort.put(edelsteen, stapelsEdelsteenfiches.get(edelsteen).getAantalFiches());
