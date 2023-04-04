@@ -14,6 +14,8 @@ import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+//import resources.Messages;
+import resources.Taal;
 
 public class Spel {
 	private ObservableList<Speler> spelers;
@@ -52,14 +54,19 @@ public class Spel {
 
 	public void voegSpelerToe(Speler speler) throws IllegalArgumentException {
 		if (speler == null) {
-			throw new IllegalArgumentException("De speler is niet geregistreerd in de databank");
+			throw new IllegalArgumentException(Taal.vertaling("Spel.0"));
+			// $NON-NLS-1$
+//			throw new IllegalArgumentException("De speler is niet geregistreerd in de databank");
 		}
 		if (spelers.indexOf(speler) != -1) {
-			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
+			throw new IllegalArgumentException(Taal.vertaling("Spel.1"));
+			// $NON-NLS-1$
+//			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
 		}
 
 		if (spelers.size() >= MAX_SPELERS) {
-			throw new IllegalArgumentException(String.format("Max %d spelers!", MAX_SPELERS));
+			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.2"), MAX_SPELERS)); // $NON-NLS-1$
+//			throw new IllegalArgumentException(String.format("Max %d spelers!", MAX_SPELERS));
 		}
 		spelers.add(speler);
 
@@ -67,8 +74,9 @@ public class Spel {
 
 	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
 		if (spelers.size() < MIN_SPELERS || spelers.size() > MAX_SPELERS) {
-			throw new IllegalArgumentException(String.format(
-					"Spel moet gespeeld worden door minimum %d en maximum %d spelers", MIN_SPELERS, MAX_SPELERS));
+			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.3"), MIN_SPELERS, MAX_SPELERS)); //$NON-NLS-1$
+//			throw new IllegalArgumentException(String.format(
+//					"Spel moet gespeeld worden door minimum %d en maximum %d spelers", MIN_SPELERS, MAX_SPELERS));
 		}
 		// Speler.isStartSpeler en spelerAanDeBeurt instellen
 		kiesStartSpeler();
@@ -254,15 +262,18 @@ public class Spel {
 	private void validatieDR_BEURT_AANTAL_FICHES(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
 
 		if (edelsteenfiches.size() > MAX_FICHES_PER_BEURT) {
-			throw new IllegalArgumentException(
-					String.format("Maximum %d edelsteenfiches per beurt nemen!", MAX_FICHES_PER_BEURT));
+			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.4"), MAX_FICHES_PER_BEURT)); //$NON-NLS-1$
+//			throw new IllegalArgumentException(
+//					String.format("Maximum %d edelsteenfiches per beurt nemen!", MAX_FICHES_PER_BEURT));
 		} else if (edelsteenfiches.size() == MAX_FICHES_PER_BEURT
 				&& edelsteenfiches.stream().distinct().count() != edelsteenfiches.size()) {
-			throw new IllegalArgumentException("De 3 edelsteenfiches moeten verschillend zijn van elkaar!");
+			throw new IllegalArgumentException(Taal.vertaling("Spel.5")); //$NON-NLS-1$
+//			throw new IllegalArgumentException("De 3 edelsteenfiches moeten verschillend zijn van elkaar!");
 		} else if (edelsteenfiches.size() == 2 && edelsteenfiches.stream().distinct().count() == 1
 				&& stapelsEdelsteenfiches.get(edelsteenfiches.get(0).edelsteen()).getAantalFiches() < 2) {
-			throw new IllegalArgumentException(
-					"Er moeten minstens 2 edelsteenfiches op de stapel overblijven als je 2 dezelfde edelsteenfiches neemt!");
+			throw new IllegalArgumentException(Taal.vertaling("Spel.6")); //$NON-NLS-1$
+//			throw new IllegalArgumentException(
+//					"Er moeten minstens 2 edelsteenfiches op de stapel overblijven als je 2 dezelfde edelsteenfiches neemt!");
 		}
 
 	}
@@ -297,7 +308,8 @@ public class Spel {
 			throws IllegalArgumentException {
 		// validatie DR_BEURT_KOOP_KAART
 		if (kaart == null) {
-			throw new IllegalArgumentException("Geen kaart geselecteerd");
+			throw new IllegalArgumentException(Taal.vertaling("Spel.7")); //$NON-NLS-1$
+//			throw new IllegalArgumentException("Geen kaart geselecteerd");
 		}
 
 		Map<Edelsteen, Integer> fichesSpeler = this.getSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
@@ -314,7 +326,8 @@ public class Spel {
 			afTeTrekkenFichesPerSoort[i++] = fichesNodigVanEdelsteenE < 0 ? 0 : fichesNodigVanEdelsteenE;
 			// controle
 			if (fichesNodigVanEdelsteenE > fichesSpeler.get(e)) {
-				throw new IllegalArgumentException("Te weinig edelsteenfiches in bezit om kaart te kopen!");
+				throw new IllegalArgumentException(Taal.vertaling("Spel.8")); //$NON-NLS-1$
+//				throw new IllegalArgumentException("Te weinig edelsteenfiches in bezit om kaart te kopen!"); //$NON-NLS-1$
 			}
 		}
 
