@@ -21,15 +21,14 @@ public class EdelsteenFicheScherm extends VBox {
 		this.setSpacing(10);
 
 		FXFicheGroen = new FXEdelsteenFicheKlikbaar(Edelsteen.GROEN, 38,
-				dc.geefAantalFichesPerStapel().get(Edelsteen.GROEN), this);
-		FXFicheWit = new FXEdelsteenFicheKlikbaar(Edelsteen.WIT, 38, dc.geefAantalFichesPerStapel().get(Edelsteen.WIT),
-				this);
+				dc.geefAantalFichesPerStapel().get(Edelsteen.GROEN));
+		FXFicheWit = new FXEdelsteenFicheKlikbaar(Edelsteen.WIT, 38, dc.geefAantalFichesPerStapel().get(Edelsteen.WIT));
 		FXFicheBlauw = new FXEdelsteenFicheKlikbaar(Edelsteen.BLAUW, 38,
-				dc.geefAantalFichesPerStapel().get(Edelsteen.BLAUW), this);
+				dc.geefAantalFichesPerStapel().get(Edelsteen.BLAUW));
 		FXFicheZwart = new FXEdelsteenFicheKlikbaar(Edelsteen.ZWART, 38,
-				dc.geefAantalFichesPerStapel().get(Edelsteen.ZWART), this);
+				dc.geefAantalFichesPerStapel().get(Edelsteen.ZWART));
 		FXFicheRood = new FXEdelsteenFicheKlikbaar(Edelsteen.ROOD, 38,
-				dc.geefAantalFichesPerStapel().get(Edelsteen.ROOD), this);
+				dc.geefAantalFichesPerStapel().get(Edelsteen.ROOD));
 
 		this.getChildren().addAll(FXFicheGroen, FXFicheWit, FXFicheBlauw, FXFicheZwart, FXFicheRood);
 //		for (Edelsteen e : Edelsteen.values()) {
@@ -51,29 +50,29 @@ public class EdelsteenFicheScherm extends VBox {
 		hs.voegEdelsteenficheToeAanLinkerInfoScherm(edelsteenfiche);
 	}
 
+
 	public void voegFoutieveEdelsteenficheTerugToe(Edelsteenfiche e) {
 		switch (e.edelsteen()) {
 		case GROEN -> {
-			FXFicheGroen.pasAantalAanMet(1);
-			FXFicheGroen.setVisible(true);
+			FXFicheGroen.txtAantal.setText(Integer.toString(dc.geefAantalFichesPerStapel().get(Edelsteen.GROEN)));
+			FXFicheGroen.checkVisibility();
 		}
 		case WIT -> {
-			FXFicheWit.pasAantalAanMet(1);
-			FXFicheWit.setVisible(true);
+			FXFicheWit.txtAantal.setText(Integer.toString(dc.geefAantalFichesPerStapel().get(Edelsteen.WIT)));
+			FXFicheWit.checkVisibility();
 		}
 
 		case BLAUW -> {
-			FXFicheBlauw.pasAantalAanMet(1);
-			FXFicheBlauw.setVisible(true);
-
+			FXFicheBlauw.txtAantal.setText(Integer.toString(dc.geefAantalFichesPerStapel().get(Edelsteen.BLAUW)));
+			FXFicheBlauw.checkVisibility();
 		}
 		case ZWART -> {
-			FXFicheZwart.pasAantalAanMet(1);
-			FXFicheZwart.setVisible(true);
+			FXFicheZwart.txtAantal.setText(Integer.toString(dc.geefAantalFichesPerStapel().get(Edelsteen.ZWART)));
+			FXFicheZwart.checkVisibility();
 		}
 		case ROOD -> {
-			FXFicheRood.pasAantalAanMet(1);
-			FXFicheRood.setVisible(true);
+			FXFicheRood.txtAantal.setText(Integer.toString(dc.geefAantalFichesPerStapel().get(Edelsteen.ROOD)));
+			FXFicheRood.checkVisibility();
 		}
 		}
 	}

@@ -3,6 +3,7 @@ package gui;
 import java.util.Arrays;
 import java.util.List;
 
+import Exceptions.TeVeelFichesInBezitException;
 import domein.DomeinController;
 import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
@@ -86,6 +87,7 @@ public class Hoofdscherm extends GridPane {
 			// Brecht: getter toegevoegd aan FXOntwikkelingskaart
 			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(fxKaart.getKaart());
 			voegEdelsteenfichesTerugToeAanStapels(Arrays.asList(fxKaart.getKaart().edelsteenfiches()));
+
 			Ontwikkelingskaart nieuweKaart = dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]);
 			if (nieuweKaart != null) {
 				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
@@ -96,8 +98,8 @@ public class Hoofdscherm extends GridPane {
 		} catch (IllegalArgumentException e) {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(fxKaart);
-			// linkerInfoScherm.deactiveerBevestigKnop();
-			linkerInfoScherm.verwijderBevestigKnop();
+			linkerInfoScherm.deactiveerBevestigKnop();
+			// linkerInfoScherm.verwijderBevestigKnop();
 		}
 		linkerInfoScherm.zetKeuzeMenuTerug();
 	}
@@ -123,18 +125,35 @@ public class Hoofdscherm extends GridPane {
 			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
 			bepaalVolgendeSpeler();
+		} catch (TeVeelFichesInBezitException e) {
+			linkerInfoScherm.toonFoutmelding(e.getMessage());
+			linkerInfoScherm.verwijderFiches();
+			linkerInfoScherm.zetKlaarOmFichesTerugTeGeven();
+
+
 		} catch (IllegalArgumentException e) {
-			voegEdelsteenfichesTerugToeAanStapels(edelsteenfiches);
+
 			dc.voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
+			voegEdelsteenfichesTerugToeAanStapels(edelsteenfiches);
+
 			linkerInfoScherm.verwijderFiches();
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 		}
+
 		linkerInfoScherm.zetKeuzeMenuTerug();
 	}
 
 	private void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
 		for (Edelsteenfiche ef : edelsteenfiches) {
 			edelsteenFicheScherm.voegFoutieveEdelsteenficheTerugToe(ef);
+		}
+	}
+
+	public void verplaatsEdelsteenFichesVanSpelerNaarSpel(List<Edelsteenfiche> edelsteenfiches) {
+		try {
+			dc.verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
+		} catch (IllegalArgumentException e) {
+			linkerInfoScherm.toonFoutmelding(e.getMessage());
 		}
 	}
 }

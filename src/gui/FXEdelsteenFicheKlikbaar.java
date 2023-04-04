@@ -1,17 +1,18 @@
 package gui;
 
 import domein.Edelsteen;
+import domein.Edelsteenfiche;
 
 public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clickable {
 
-	private int aantal;
-	private EdelsteenFicheScherm es;
 
-	public FXEdelsteenFicheKlikbaar(Edelsteen edelsteen, double radius, int aantal, EdelsteenFicheScherm es) {
+
+
+	public FXEdelsteenFicheKlikbaar(Edelsteen edelsteen, double radius, int aantal) {
 		super(edelsteen, radius, aantal);
 
-		this.aantal = aantal;
-		this.es = es;
+
+
 //		txtAantal = new Text();
 //		ObjectBinding<Integer> aantalFichesBinding;
 
@@ -26,8 +27,13 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	}
 
 	public void pasAantalAanMet(int aantal) {
-		this.aantal += aantal;
-		txtAantal.setText(Integer.toString(this.aantal));
+		int nieuwAantal = Integer.parseInt(txtAantal.getText()) + aantal;
+		txtAantal.setText(Integer.toString(nieuwAantal));
+	}
+
+	public void checkVisibility() {
+		boolean visible = (Integer.parseInt(txtAantal.getText()) == 0) ? false : true;
+		this.setVisible(visible);
 	}
 
 
@@ -36,15 +42,20 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		String parent = this.getParent().getClass().getSimpleName();
 		if (parent.equals("EdelsteenFicheScherm")) {
 			pasAantalAanMet(-1);
-			if (aantal == 0) {
-				this.setVisible(false);
-			}
-			FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), super.getRadius(),
-					0, es);
+			checkVisibility();
+			FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), 20,
+					0);
 			nieuweFiche.getTxtAantal().setText("");
-			es.voegEdelsteenficheToeAanLinkerInfoScherm(nieuweFiche);
-				
-			
+			((EdelsteenFicheScherm) this.getParent()).voegEdelsteenficheToeAanLinkerInfoScherm(nieuweFiche);
+		} else if (parent.equals("LinkerInfoScherm")) {
+			if (txtAantal.getText().equals("")) {
+				((EdelsteenFicheScherm) this.getParent())
+						.voegFoutieveEdelsteenficheTerugToe(new Edelsteenfiche(this.getEdelsteen()));
+				((LinkerInfoScherm) this.getParent()).verwijderEnkeleFiche(this);
+				((EdelsteenFicheScherm) this.getParent()).maakFichesKlikbaar();
+			} else if (!txtAantal.getText().equals("0")) {
+				pasAantalAanMet(-1);
+			}
 		}
 		
 	}

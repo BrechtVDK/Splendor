@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 //Circle en evt Text in StackPane stoppen
 public class FXEdelsteenFiche extends StackPane {
 	private final static Paint TEKSTKLEUR = Color.web("F8BD7F");
-	private final static int GROOT = 30;
+	private final static int GROOT = 20;
 	private final double radius;
 	protected Text txtAantal;
 	private final Edelsteen edelsteen;
@@ -37,18 +37,6 @@ public class FXEdelsteenFiche extends StackPane {
 	}
 
 
-
-	public double getRadius() {
-		return radius;
-	}
-
-	public Text getTxtAantal() {
-		return txtAantal;
-	}
-
-	public Edelsteen getEdelsteen() {
-		return edelsteen;
-	}
 
 	// aantal fixed
 	public FXEdelsteenFiche(Edelsteen edelsteen, double radius, int aantal) {
@@ -76,9 +64,19 @@ public class FXEdelsteenFiche extends StackPane {
 		this.getChildren().add(txtAantal);
 	}
 
+	public double getRadius() {
+		return radius;
+	}
 
+	public Text getTxtAantal() {
+		return txtAantal;
+	}
 
-	protected void stelTekstLayOutIn() {
+	public Edelsteen getEdelsteen() {
+		return edelsteen;
+	}
+
+	private void stelTekstLayOutIn() {
 		txtAantal.setFill(TEKSTKLEUR);
 		// BOLD en size afh. van de radius instellen
 		txtAantal.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,

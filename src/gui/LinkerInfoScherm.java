@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domein.DomeinController;
+import domein.Edelsteen;
 import domein.Edelsteenfiche;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,6 +21,7 @@ public class LinkerInfoScherm extends VBox {
 	private Hoofdscherm hs;
 	private FXOntwikkelingskaart gekozenKaart;
 	private List<FXEdelsteenFiche> edelsteenfiches;
+	private List<Edelsteenfiche> terugTeGevenFiches;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfo;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig;
@@ -27,6 +30,7 @@ public class LinkerInfoScherm extends VBox {
 		this.dc = dc;
 		this.hs = hs;
 		this.edelsteenfiches = new ArrayList<>();
+		this.terugTeGevenFiches = new ArrayList<>();
 
 		buildGui();
 	}
@@ -50,14 +54,14 @@ public class LinkerInfoScherm extends VBox {
 		btnPas = new Button("Ik pas en sla deze ronde over");
 		btnBevestig = new Button("Bevestig keuze");
 		btnBevestig.setId("btnBevestig");
-		// btnBevestig.setVisible(false);
+		btnBevestig.setVisible(false);
 
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
 		// Brecht: btnBevestig geschrapt: onderaan scherm toevoegen (onder kaart of
 		// fiches)
-		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfo);
+		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfo, btnBevestig);
 		// alle labels wrappen
 		this.getChildren().forEach(node -> {
 			if (node instanceof Label) {
@@ -112,39 +116,46 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart.setVisible(false);
 		btnFiche.setVisible(false);
 		btnPas.setVisible(false);
-		// btnBevestig.setVisible(true);
-		// deactiveerBevestigKnop();
+		btnBevestig.setVisible(true);
+		deactiveerBevestigKnop();
 	}
 
-	/*
-	 * public void activeerBevestigKnop() { // Brecht aangepast naar visible
-	 * btnBevestig.setVisible(true); // btnBevestig.setDisable(false); }
-	 * 
-	 * public void deactiveerBevestigKnop() { // Brecht aangepast naar visible
-	 * btnBevestig.setVisible(false); // btnBevestig.setDisable(true); }
-	 */
-
-	public void verwijderBevestigKnop() {
-		if (this.getChildren().contains(btnBevestig)) {
-			this.getChildren().remove(btnBevestig);
-		}
-
+	public void activeerBevestigKnop() { // Brecht aangepast naar visible
+		btnBevestig.setVisible(true); // btnBevestig.setDisable(false);
 	}
+
+	public void deactiveerBevestigKnop() { // Brecht aangepast naar visible
+		btnBevestig.setVisible(false); // btnBevestig.setDisable(true);
+	}
+
+//	public void verwijderBevestigKnop() {
+//		if (this.getChildren().contains(btnBevestig)) {
+//			this.getChildren().remove(btnBevestig);
+//		}
+//
+//	}
 
 	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
 
-		if (spelerKeuze.equals("kaart")) {
+		switch (spelerKeuze) {
+		case ("kaart") -> {
 			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
-			verwijderBevestigKnop();
+			// verwijderBevestigKnop();
+			deactiveerBevestigKnop();
 		}
-		else if (spelerKeuze.equals("fiche")) {
+		case ("fiche") -> {
 			List<Edelsteenfiche> teVerplaatsenFiches = new ArrayList<>();
 			for (FXEdelsteenFiche ef : edelsteenfiches) {
 				teVerplaatsenFiches.add(new Edelsteenfiche(ef.getEdelsteen()));
 			}
 			hs.verplaatsEdelsteenFichesNaarSpeler(teVerplaatsenFiches);
-			verwijderBevestigKnop();
-
+			// verwijderBevestigKnop();
+			deactiveerBevestigKnop();
+			hs.maakFichesOnKlikbaar();
+		}
+		case ("ficheTerug") -> {
+			hs.verplaatsEdelsteenFichesVanSpelerNaarSpel(terugTeGevenFiches);
+		}
 		}
 
 		maakInfoLabelLeeg(3);
@@ -156,15 +167,15 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart.setVisible(true);
 		btnFiche.setVisible(true);
 		btnPas.setVisible(true);
-		verwijderBevestigKnop();
+		// verwijderBevestigKnop();
 	}
 
 	// Ontwikkelingskaarten:
 	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
 		this.gekozenKaart = kaart;
 		// Brecht: btnBevestig onder kaart toevoegen
-		this.getChildren().addAll(gekozenKaart, btnBevestig);
-		// activeerBevestigKnop();
+		this.getChildren().addAll(gekozenKaart);
+		activeerBevestigKnop();
 	}
 
 	public void verwijderKaart(FXOntwikkelingskaart kaart) {
@@ -173,24 +184,54 @@ public class LinkerInfoScherm extends VBox {
 
 	// Fiches
 	public void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
+
 		if (edelsteenfiches.size() < 3) {
 			edelsteenfiches.add(edelsteenfiche);
 			this.getChildren().add(edelsteenfiche);
 			if (edelsteenfiches.size() == 3) {
 				hs.maakFichesOnKlikbaar();
-			} else if (edelsteenfiches.size() == 2) {
-				this.getChildren().add(btnBevestig);
+			} else if (edelsteenfiches.size() == 1) {
+				activeerBevestigKnop();
 			}
 		} else {
 			lblInfo.setText("Je mag maximum 3 fiches kiezen");
 		}
 	}
 
+	public void voegFichesVanSpelerToe(FXEdelsteenFiche edelsteenfiche) {
+		this.getChildren().add(edelsteenfiche);
+	}
+
+	public void voegTerugTeGevenFichesToe(FXEdelsteenFiche edelsteenfiche) {
+		terugTeGevenFiches.add(new Edelsteenfiche(edelsteenfiche.getEdelsteen()));
+	}
 	public void verwijderFiches() {
 		for (FXEdelsteenFiche ef : edelsteenfiches) {
 			this.getChildren().remove(ef);
 		}
 		edelsteenfiches.clear();
 	}
+
+	public void verwijderEnkeleFiche(FXEdelsteenFiche ef) {
+		this.getChildren().remove(ef);
+		edelsteenfiches.remove(ef);
+
+
+		if (edelsteenfiches.size() == 0) {
+			deactiveerBevestigKnop();
+		}
+
+	}
+
+	public void zetKlaarOmFichesTerugTeGeven() {
+		ObservableMap<Edelsteen, Integer> fichesSpelerAanDeBeurt = dc.geefSpelerAanDeBeurt()
+				.getAantalEdelsteenfichesPerTypeInBezit();
+		for (Edelsteen edelsteen : Edelsteen.values()) {
+			voegFichesVanSpelerToe(new FXEdelsteenFicheKlikbaar(edelsteen, 20, fichesSpelerAanDeBeurt.get(edelsteen)));
+		}
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug"));
+		activeerBevestigKnop();
+	}
+
 
 }
