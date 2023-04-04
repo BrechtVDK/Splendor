@@ -41,7 +41,7 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	public void onLeftClicked() {
 		String parent = this.getParent().getClass().getSimpleName();
 		if (parent.equals("EdelsteenFicheScherm")) {
-			pasAantalAanMet(-1);
+			// pasAantalAanMet(-1);
 			checkVisibility();
 			FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), 20,
 					0);
