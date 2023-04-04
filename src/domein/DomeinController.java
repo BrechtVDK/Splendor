@@ -6,7 +6,6 @@ import java.util.Map;
 import Exceptions.TeVeelFichesInBezitException;
 import javafx.beans.binding.IntegerBinding;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 
 public class DomeinController {
 	private SpelerRepository spelerRepo;
@@ -67,7 +66,7 @@ public class DomeinController {
 
 	// UC2
 
-	public ObservableMap<Edelsteen, Integer> geefAantalFichesPerStapel() {
+	public Map<Edelsteen, IntegerBinding> geefAantalFichesPerStapel() {
 		return spel.geefAantalFichesPerStapel();
 	}
 

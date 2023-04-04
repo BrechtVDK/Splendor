@@ -2,6 +2,8 @@ package domein;
 
 import java.util.Collections;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -229,12 +231,8 @@ public class StapelOntwikkelingskaarten {
 
 	// UC2
 
-	public int geefAantalResterendeKaarten() {
-		return ontwikkelingskaarten.size();
-	}
-
-	public ObservableList<Ontwikkelingskaart> getOntwikkelingskaarten() {
-		return ontwikkelingskaarten;
+	public IntegerBinding geefAantalResterendeKaarten() {
+		return Bindings.size(ontwikkelingskaarten);
 	}
 
 }

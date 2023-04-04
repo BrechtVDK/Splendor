@@ -1,14 +1,14 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import domein.DomeinController;
-import domein.Edelsteen;
 import domein.Edelsteenfiche;
+import domein.Spel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,7 +21,7 @@ public class LinkerInfoScherm extends VBox {
 	private Hoofdscherm hs;
 	private FXOntwikkelingskaart gekozenKaart;
 	private List<FXEdelsteenFiche> edelsteenfiches;
-	private List<Edelsteenfiche> terugTeGevenFiches;
+	private EdelsteenficheGeefTerugScherm edelsteenficheGeefTerugScherm;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfo;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig;
@@ -30,7 +30,6 @@ public class LinkerInfoScherm extends VBox {
 		this.dc = dc;
 		this.hs = hs;
 		this.edelsteenfiches = new ArrayList<>();
-		this.terugTeGevenFiches = new ArrayList<>();
 
 		buildGui();
 	}
@@ -154,7 +153,10 @@ public class LinkerInfoScherm extends VBox {
 			hs.maakFichesOnKlikbaar();
 		}
 		case ("ficheTerug") -> {
+			List<Edelsteenfiche> terugTeGevenFiches = edelsteenficheGeefTerugScherm.geefTerugTeGevenFiches();
 			hs.verplaatsEdelsteenFichesVanSpelerNaarSpel(terugTeGevenFiches);
+			// this.getChildren().remove(edelsteenficheGeefTerugScherm);
+			// TODO
 		}
 		}
 
@@ -184,27 +186,22 @@ public class LinkerInfoScherm extends VBox {
 
 	// Fiches
 	public void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
-
-		if (edelsteenfiches.size() < 3) {
-			edelsteenfiches.add(edelsteenfiche);
-			this.getChildren().add(edelsteenfiche);
-			if (edelsteenfiches.size() == 3) {
-				hs.maakFichesOnKlikbaar();
-			} else if (edelsteenfiches.size() == 1) {
-				activeerBevestigKnop();
-			}
-		} else {
-			lblInfo.setText("Je mag maximum 3 fiches kiezen");
-		}
-	}
-
-	public void voegFichesVanSpelerToe(FXEdelsteenFiche edelsteenfiche) {
+		// Brecht: lijnen in commentaar lijken me overbodig aangezien fiches onklikbaar
+		// worden vanaf MAX_FICHES_PER_BEURT
+		// if (edelsteenfiches.size() < Spel.MAX_FICHES_PER_BEURT) {
+		edelsteenfiches.add(edelsteenfiche);
 		this.getChildren().add(edelsteenfiche);
+		if (edelsteenfiches.size() == Spel.MAX_FICHES_PER_BEURT) {
+			hs.maakFichesOnKlikbaar();
+			// enkel bij eerste fiche activeren
+		} else if (edelsteenfiches.size() == 1) {
+			activeerBevestigKnop();
+		}
+		/*
+		 * } else { lblInfo.setText("Je mag maximum 3 fiches kiezen"); }
+		 */
 	}
 
-	public void voegTerugTeGevenFichesToe(FXEdelsteenFiche edelsteenfiche) {
-		terugTeGevenFiches.add(new Edelsteenfiche(edelsteenfiche.getEdelsteen()));
-	}
 	public void verwijderFiches() {
 		for (FXEdelsteenFiche ef : edelsteenfiches) {
 			this.getChildren().remove(ef);
@@ -216,22 +213,25 @@ public class LinkerInfoScherm extends VBox {
 		this.getChildren().remove(ef);
 		edelsteenfiches.remove(ef);
 
-
 		if (edelsteenfiches.size() == 0) {
 			deactiveerBevestigKnop();
 		}
+	}
 
+	public void voegEdelsteenficheTerugToeAanStapel(Edelsteenfiche e) {
+		hs.voegEdelsteenfichesTerugToeAanStapels(Arrays.asList(e));
 	}
 
 	public void zetKlaarOmFichesTerugTeGeven() {
-		ObservableMap<Edelsteen, Integer> fichesSpelerAanDeBeurt = dc.geefSpelerAanDeBeurt()
-				.getAantalEdelsteenfichesPerTypeInBezit();
-		for (Edelsteen edelsteen : Edelsteen.values()) {
-			voegFichesVanSpelerToe(new FXEdelsteenFicheKlikbaar(edelsteen, 20, fichesSpelerAanDeBeurt.get(edelsteen)));
-		}
+		edelsteenficheGeefTerugScherm = new EdelsteenficheGeefTerugScherm(dc);
+		this.getChildren().add(edelsteenficheGeefTerugScherm);
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug"));
 		activeerBevestigKnop();
 	}
 
+	public void maakFichesKlikbaarInEdelsteenficheScherm() {
+		hs.maakFichesKlikbaar();
+
+	}
 
 }

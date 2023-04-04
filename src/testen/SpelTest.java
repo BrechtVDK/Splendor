@@ -19,6 +19,7 @@ import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
 import domein.Spel;
 import domein.Speler;
+import javafx.beans.binding.IntegerBinding;
 
 class SpelTest {
 
@@ -409,19 +410,19 @@ class SpelTest {
 
 		@Test
 		public void verwijderEdelsteenficheVanStapel_1witte_correctVerwijderd() {
-			Map<Edelsteen, Integer> stapels = dc.geefAantalFichesPerStapel();
-			int aantalBlauwVoor = stapels.get(Edelsteen.BLAUW);
-			int aantalGroenVoor = stapels.get(Edelsteen.GROEN);
-			int aantalRoodVoor = stapels.get(Edelsteen.ROOD);
-			int aantalWitVoor = stapels.get(Edelsteen.WIT);
-			int aantalZwartVoor = stapels.get(Edelsteen.ZWART);
+			Map<Edelsteen, IntegerBinding> stapels = dc.geefAantalFichesPerStapel();
+			int aantalBlauwVoor = stapels.get(Edelsteen.BLAUW).get();
+			int aantalGroenVoor = stapels.get(Edelsteen.GROEN).get();
+			int aantalRoodVoor = stapels.get(Edelsteen.ROOD).get();
+			int aantalWitVoor = stapels.get(Edelsteen.WIT).get();
+			int aantalZwartVoor = stapels.get(Edelsteen.ZWART).get();
 			dc.verwijderEdelsteenficheVanStapel(new Edelsteenfiche(Edelsteen.WIT));
-			Map<Edelsteen, Integer> stapelsNa = dc.geefAantalFichesPerStapel();
-			int aantalBlauwNa = stapelsNa.get(Edelsteen.BLAUW);
-			int aantalGroenNa = stapelsNa.get(Edelsteen.GROEN);
-			int aantalRoodNa = stapelsNa.get(Edelsteen.ROOD);
-			int aantalWitNa = stapelsNa.get(Edelsteen.WIT);
-			int aantalZwartNa = stapelsNa.get(Edelsteen.ZWART);
+			Map<Edelsteen, IntegerBinding> stapelsNa = dc.geefAantalFichesPerStapel();
+			int aantalBlauwNa = stapelsNa.get(Edelsteen.BLAUW).get();
+			int aantalGroenNa = stapelsNa.get(Edelsteen.GROEN).get();
+			int aantalRoodNa = stapelsNa.get(Edelsteen.ROOD).get();
+			int aantalWitNa = stapelsNa.get(Edelsteen.WIT).get();
+			int aantalZwartNa = stapelsNa.get(Edelsteen.ZWART).get();
 			Assertions.assertEquals(aantalBlauwVoor, aantalBlauwNa);
 			Assertions.assertEquals(aantalGroenVoor, aantalGroenNa);
 			Assertions.assertEquals(aantalRoodVoor, aantalRoodNa);
@@ -432,7 +433,7 @@ class SpelTest {
 		@Test
 		public void verwijderEdelsteenficheVanStapel_1witteVerwijderenVanLegeStapel_Exception() {
 			// stapel leegmaken
-			int aantalWitteOpStapel = dc.geefAantalFichesPerStapel().get(Edelsteen.WIT);
+			int aantalWitteOpStapel = dc.geefAantalFichesPerStapel().get(Edelsteen.WIT).get();
 			for (int i = 0; i < aantalWitteOpStapel; i++) {
 				dc.verwijderEdelsteenficheVanStapel(new Edelsteenfiche(Edelsteen.WIT));
 			}
@@ -444,26 +445,26 @@ class SpelTest {
 		public void verplaatsEdelsteenfichesVanSpelerNaarSpel_roodWitZwart_correctVerplaatst() {
 			dc.verplaatsEdelsteenfichesNaarSpeler(fiches3RoodWitZwart);
 			dc.verplaatsEdelsteenfichesNaarSpeler(fiches3BlauwGroenRood);
-			Map<Edelsteen, Integer> stapelsVoor = dc.geefAantalFichesPerStapel();
+			Map<Edelsteen, IntegerBinding> stapelsVoor = dc.geefAantalFichesPerStapel();
 			Map<Edelsteen, Integer> spelerVoor = dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
-			int aantalBlauwStapelVoor = stapelsVoor.get(Edelsteen.BLAUW);
-			int aantalGroenStapelVoor = stapelsVoor.get(Edelsteen.GROEN);
-			int aantalRoodStapelVoor = stapelsVoor.get(Edelsteen.ROOD);
-			int aantalWitStapelVoor = stapelsVoor.get(Edelsteen.WIT);
-			int aantalZwartStapelVoor = stapelsVoor.get(Edelsteen.ZWART);
+			int aantalBlauwStapelVoor = stapelsVoor.get(Edelsteen.BLAUW).get();
+			int aantalGroenStapelVoor = stapelsVoor.get(Edelsteen.GROEN).get();
+			int aantalRoodStapelVoor = stapelsVoor.get(Edelsteen.ROOD).get();
+			int aantalWitStapelVoor = stapelsVoor.get(Edelsteen.WIT).get();
+			int aantalZwartStapelVoor = stapelsVoor.get(Edelsteen.ZWART).get();
 			int aantalBlauwSpelerVoor = spelerVoor.get(Edelsteen.BLAUW);
 			int aantalGroenSpelerVoor = spelerVoor.get(Edelsteen.GROEN);
 			int aantalRoodSpelerVoor = spelerVoor.get(Edelsteen.ROOD);
 			int aantalWitSpelerVoor = spelerVoor.get(Edelsteen.WIT);
 			int aantalZwartSpelerVoor = spelerVoor.get(Edelsteen.ZWART);
 			dc.verplaatsEdelsteenfichesVanSpelerNaarSpel(fiches3RoodWitZwart);
-			Map<Edelsteen, Integer> stapelsNa = dc.geefAantalFichesPerStapel();
+			Map<Edelsteen, IntegerBinding> stapelsNa = dc.geefAantalFichesPerStapel();
 			Map<Edelsteen, Integer> spelerNa = dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
-			int aantalBlauwStapelNa = stapelsNa.get(Edelsteen.BLAUW);
-			int aantalGroenStapelNa = stapelsNa.get(Edelsteen.GROEN);
-			int aantalRoodStapelNa = stapelsNa.get(Edelsteen.ROOD);
-			int aantalWitStapelNa = stapelsNa.get(Edelsteen.WIT);
-			int aantalZwartStapelNa = stapelsNa.get(Edelsteen.ZWART);
+			int aantalBlauwStapelNa = stapelsNa.get(Edelsteen.BLAUW).get();
+			int aantalGroenStapelNa = stapelsNa.get(Edelsteen.GROEN).get();
+			int aantalRoodStapelNa = stapelsNa.get(Edelsteen.ROOD).get();
+			int aantalWitStapelNa = stapelsNa.get(Edelsteen.WIT).get();
+			int aantalZwartStapelNa = stapelsNa.get(Edelsteen.ZWART).get();
 			int aantalBlauwSpelerNa = spelerNa.get(Edelsteen.BLAUW);
 			int aantalGroenSpelerNa = spelerNa.get(Edelsteen.GROEN);
 			int aantalRoodSpelerNa = spelerNa.get(Edelsteen.ROOD);
@@ -513,26 +514,26 @@ class SpelTest {
 						new Ontwikkelingskaart(0, new Edelsteenfiche(e), new Edelsteenfiche[0]));
 			}
 
-			Map<Edelsteen, Integer> stapelsVoor = dc.geefAantalFichesPerStapel();
+			Map<Edelsteen, IntegerBinding> stapelsVoor = dc.geefAantalFichesPerStapel();
 			Map<Edelsteen, Integer> spelerVoor = dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
-			int aantalBlauwStapelVoor = stapelsVoor.get(Edelsteen.BLAUW);
-			int aantalGroenStapelVoor = stapelsVoor.get(Edelsteen.GROEN);
-			int aantalRoodStapelVoor = stapelsVoor.get(Edelsteen.ROOD);
-			int aantalWitStapelVoor = stapelsVoor.get(Edelsteen.WIT);
-			int aantalZwartStapelVoor = stapelsVoor.get(Edelsteen.ZWART);
+			int aantalBlauwStapelVoor = stapelsVoor.get(Edelsteen.BLAUW).get();
+			int aantalGroenStapelVoor = stapelsVoor.get(Edelsteen.GROEN).get();
+			int aantalRoodStapelVoor = stapelsVoor.get(Edelsteen.ROOD).get();
+			int aantalWitStapelVoor = stapelsVoor.get(Edelsteen.WIT).get();
+			int aantalZwartStapelVoor = stapelsVoor.get(Edelsteen.ZWART).get();
 			int aantalBlauwSpelerVoor = spelerVoor.get(Edelsteen.BLAUW);
 			int aantalGroenSpelerVoor = spelerVoor.get(Edelsteen.GROEN);
 			int aantalRoodSpelerVoor = spelerVoor.get(Edelsteen.ROOD);
 			int aantalWitSpelerVoor = spelerVoor.get(Edelsteen.WIT);
 			int aantalZwartSpelerVoor = spelerVoor.get(Edelsteen.ZWART);
 			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
-			Map<Edelsteen, Integer> stapelsNa = dc.geefAantalFichesPerStapel();
+			Map<Edelsteen, IntegerBinding> stapelsNa = dc.geefAantalFichesPerStapel();
 			Map<Edelsteen, Integer> spelerNa = dc.geefSpelerAanDeBeurt().getAantalEdelsteenfichesPerTypeInBezit();
-			int aantalBlauwStapelNa = stapelsNa.get(Edelsteen.BLAUW);
-			int aantalGroenStapelNa = stapelsNa.get(Edelsteen.GROEN);
-			int aantalRoodStapelNa = stapelsNa.get(Edelsteen.ROOD);
-			int aantalWitStapelNa = stapelsNa.get(Edelsteen.WIT);
-			int aantalZwartStapelNa = stapelsNa.get(Edelsteen.ZWART);
+			int aantalBlauwStapelNa = stapelsNa.get(Edelsteen.BLAUW).get();
+			int aantalGroenStapelNa = stapelsNa.get(Edelsteen.GROEN).get();
+			int aantalRoodStapelNa = stapelsNa.get(Edelsteen.ROOD).get();
+			int aantalWitStapelNa = stapelsNa.get(Edelsteen.WIT).get();
+			int aantalZwartStapelNa = stapelsNa.get(Edelsteen.ZWART).get();
 			int aantalBlauwSpelerNa = spelerNa.get(Edelsteen.BLAUW);
 			int aantalGroenSpelerNa = spelerNa.get(Edelsteen.GROEN);
 			int aantalRoodSpelerNa = spelerNa.get(Edelsteen.ROOD);

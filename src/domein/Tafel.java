@@ -3,7 +3,6 @@ package domein;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 
 public class Tafel {
@@ -51,8 +50,7 @@ public class Tafel {
 		Map<Niveau, IntegerBinding> aantalPerNiveau = new HashMap<Niveau, IntegerBinding>();
 
 		for (Niveau n : Niveau.values()) {
-			// Bindings.size = aantal = grootte van lijst ontwikkelingskaarten
-			aantalPerNiveau.put(n, Bindings.size(stapelsOntwikkelingskaarten.get(n).getOntwikkelingskaarten()));
+			aantalPerNiveau.put(n, stapelsOntwikkelingskaarten.get(n).geefAantalResterendeKaarten());
 		}
 		return aantalPerNiveau;
 	}

@@ -1,10 +1,12 @@
 package domein;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class StapelEdelsteenfiches {
-	private List<Edelsteenfiche> edelsteenfiches;
+	private ObservableList<Edelsteenfiche> edelsteenfiches;
 	private Edelsteen edelsteen;
 	private static final int MIN_FICHES_BIJ_START = 4;
 
@@ -12,13 +14,17 @@ public class StapelEdelsteenfiches {
 		// 4 instanties van Edelsteenfiches aanmaken en verzamelen in ArrayList
 		// edelsteenfiches
 		this.edelsteen = edelsteen;
-		edelsteenfiches = new ArrayList<>();
+		edelsteenfiches = FXCollections.observableArrayList();
 		maakEdelsteenfichesAan();
 
 	}
 
 	public int getAantalFiches() {
 		return edelsteenfiches.size();
+	}
+
+	public IntegerBinding geefAantalFiches() {
+		return Bindings.size(edelsteenfiches);
 	}
 
 	private void maakEdelsteenfichesAan() {

@@ -26,10 +26,7 @@ public class Hoofdscherm extends GridPane {
 
 		buildGui();
 
-
 	}
-
-
 
 	private void buildGui() {
 		// this.getStyleClass().add("hoofdscherm");
@@ -44,7 +41,6 @@ public class Hoofdscherm extends GridPane {
 		tafelscherm = new TafelScherm(dc, this);
 		scoreBordScherm = new ScoreBordScherm(dc);
 
-
 		this.add(linkerInfoScherm, 0, 1, 1, 2);
 		this.add(edelenScherm, 2, 0);
 		this.add(edelsteenFicheScherm, 1, 1);
@@ -56,7 +52,6 @@ public class Hoofdscherm extends GridPane {
 		;
 	}
 
-
 	public void bepaalVolgendeSpeler() {
 		dc.bepaalVolgendeSpeler();
 		scoreBordScherm.markeerVolgendeSpeler();
@@ -67,7 +62,6 @@ public class Hoofdscherm extends GridPane {
 	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart kaart) {
 		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
 	}
-
 
 	public void maakKaartenKlikbaar() {
 		tafelscherm.maakKaartenKlikbaar();
@@ -119,9 +113,6 @@ public class Hoofdscherm extends GridPane {
 
 	public void verplaatsEdelsteenFichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches) {
 		try {
-			for (Edelsteenfiche ef : edelsteenfiches) {
-				dc.verwijderEdelsteenficheVanStapel(ef);
-			}
 			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
 			bepaalVolgendeSpeler();
@@ -130,12 +121,8 @@ public class Hoofdscherm extends GridPane {
 			linkerInfoScherm.verwijderFiches();
 			linkerInfoScherm.zetKlaarOmFichesTerugTeGeven();
 
-
 		} catch (IllegalArgumentException e) {
-
-			dc.voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
 			voegEdelsteenfichesTerugToeAanStapels(edelsteenfiches);
-
 			linkerInfoScherm.verwijderFiches();
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 		}
@@ -143,9 +130,9 @@ public class Hoofdscherm extends GridPane {
 		linkerInfoScherm.zetKeuzeMenuTerug();
 	}
 
-	private void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
+	public void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
 		for (Edelsteenfiche ef : edelsteenfiches) {
-			edelsteenFicheScherm.voegFoutieveEdelsteenficheTerugToe(ef);
+			edelsteenFicheScherm.voegEdelsteenficheTerugToe(ef);
 		}
 	}
 
@@ -156,4 +143,6 @@ public class Hoofdscherm extends GridPane {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 		}
 	}
+
+
 }

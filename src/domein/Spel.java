@@ -150,11 +150,11 @@ public class Spel {
 	// UC2
 
 	// geeft het aantal fiches per soort terug
-	public ObservableMap<Edelsteen, Integer> geefAantalFichesPerStapel() {
-		ObservableMap<Edelsteen, Integer> aantalPerSoort = FXCollections.observableHashMap();
+	public Map<Edelsteen, IntegerBinding> geefAantalFichesPerStapel() {
+		Map<Edelsteen, IntegerBinding> aantalPerSoort = new HashMap<Edelsteen, IntegerBinding>();
 
 		for (Edelsteen edelsteen : Edelsteen.values()) {
-			aantalPerSoort.put(edelsteen, stapelsEdelsteenfiches.get(edelsteen).getAantalFiches());
+			aantalPerSoort.put(edelsteen, stapelsEdelsteenfiches.get(edelsteen).geefAantalFiches());
 		}
 
 		return aantalPerSoort;

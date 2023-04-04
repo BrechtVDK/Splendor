@@ -1,34 +1,44 @@
 package gui;
 
+import domein.DomeinController;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
+import javafx.beans.binding.IntegerBinding;
+import javafx.scene.text.Text;
 
 public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clickable {
+	private DomeinController dc;
 
+	public FXEdelsteenFicheKlikbaar(Edelsteen edelsteen, double radius) {
+		super(edelsteen, radius);
+		// interface
+		this.setOnMouseClicked(this::onClicked);
+		this.onHovered(this, 1.1);
 
-
+	}
 
 	public FXEdelsteenFicheKlikbaar(Edelsteen edelsteen, double radius, int aantal) {
 		super(edelsteen, radius, aantal);
-
-
-
-//		txtAantal = new Text();
-//		ObjectBinding<Integer> aantalFichesBinding;
-
-//		aantalFichesBinding = Bindings.valueAt(dc.geefAantalFichesPerStapel(), edelsteen);
-//		txtAantal.textProperty().bind(aantalFichesBinding.asString());
-//		stelTekstLayOutIn();
-//		this.getChildren().add(txtAantal);
-		// interface
 
 		this.setOnMouseClicked(this::onClicked);
 		this.onHovered(this, 1.1);
 	}
 
-	public void pasAantalAanMet(int aantal) {
-		int nieuwAantal = Integer.parseInt(txtAantal.getText()) + aantal;
-		txtAantal.setText(Integer.toString(nieuwAantal));
+	// constructor voor stapels
+	public FXEdelsteenFicheKlikbaar(Edelsteen edelsteen, double radius, DomeinController dc) {
+		super(edelsteen, radius);
+		this.dc = dc;
+		// binding
+		super.txtAantal = new Text();
+		IntegerBinding aantal = dc.geefAantalFichesPerStapel().get(edelsteen);
+		super.txtAantal.textProperty().bind(aantal.asString());
+		super.stelTekstLayOutIn();
+		this.getChildren().add(txtAantal);
+
+		// interface
+		this.setOnMouseClicked(this::onClicked);
+		this.onHovered(this, 1.1);
+
 	}
 
 	public void checkVisibility() {
@@ -36,27 +46,54 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		this.setVisible(visible);
 	}
 
-
 	@Override
 	public void onLeftClicked() {
 		String parent = this.getParent().getClass().getSimpleName();
-		if (parent.equals("EdelsteenFicheScherm")) {
-			pasAantalAanMet(-1);
-			checkVisibility();
-			FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), 20,
-					0);
-			nieuweFiche.getTxtAantal().setText("");
-			((EdelsteenFicheScherm) this.getParent()).voegEdelsteenficheToeAanLinkerInfoScherm(nieuweFiche);
-		} else if (parent.equals("LinkerInfoScherm")) {
-			if (txtAantal.getText().equals("")) {
-				((EdelsteenFicheScherm) this.getParent())
-						.voegFoutieveEdelsteenficheTerugToe(new Edelsteenfiche(this.getEdelsteen()));
-				((LinkerInfoScherm) this.getParent()).verwijderEnkeleFiche(this);
-				((EdelsteenFicheScherm) this.getParent()).maakFichesKlikbaar();
-			} else if (!txtAantal.getText().equals("0")) {
-				pasAantalAanMet(-1);
-			}
+		switch (parent) {
+		case "EdelsteenFicheScherm" -> verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm();
+		case "LinkerInfoScherm" -> verplaatsFicheVanLinkerInfoSchermNaarStapel();
+		case "EdelsteenficheGeefTerugScherm" -> verlaagFichesInBezitVerhoogFichesGeefTerug();
 		}
-		
 	}
+
+	private void verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm() {
+		dc.verwijderEdelsteenficheVanStapel(new Edelsteenfiche(super.getEdelsteen()));
+		checkVisibility();
+		FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), 20);
+		((EdelsteenFicheScherm) this.getParent()).voegEdelsteenficheToeAanLinkerInfoScherm(nieuweFiche);
+	}
+
+	private void verplaatsFicheVanLinkerInfoSchermNaarStapel() {
+		// fiche bevat getal: bij validatie >10 fiches in bezit
+		// fiche uit spelervoorraad nemen en terugleggen op stapel
+		if (this.getChildren().contains(txtAantal)) {
+			// ((LinkerInfoScherm) this.getParent())
+			// .verplaatsEdelsteenfichesVanSpelerNaarSpel
+			((LinkerInfoScherm) this.getParent())
+					.voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(super.getEdelsteen()));
+
+		}
+		// fiche bevat geen getal -> klikken = terugleggen op stapel
+		else {
+			((LinkerInfoScherm) this.getParent())
+					.voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(super.getEdelsteen()));
+			((LinkerInfoScherm) this.getParent()).maakFichesKlikbaarInEdelsteenficheScherm();
+			((LinkerInfoScherm) this.getParent()).verwijderEnkeleFiche(this);
+		}
+	}
+
+	private void verlaagFichesInBezitVerhoogFichesGeefTerug() {
+
+		int aantal = Integer.parseInt(getTxtAantal().getText()) - 1;
+		// aantal aanpassen tem 0
+		if (aantal >= 0) {
+			getTxtAantal().setText(Integer.toString(aantal));
+			((EdelsteenficheGeefTerugScherm) this.getParent()).verhoogFicheInBezitMetEen(this);
+		}
+		// gelijk aan nul, niet meer klikbaar
+		if (aantal == 0) {
+			this.setMouseTransparent(true);
+		}
+	}
+
 }
