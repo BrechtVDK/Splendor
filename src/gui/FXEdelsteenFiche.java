@@ -19,10 +19,12 @@ public class FXEdelsteenFiche extends StackPane {
 	private final static int GROOT = 30;
 	private final double radius;
 	protected Text txtAantal;
+	private final Edelsteen edelsteen;
 
 
 	public FXEdelsteenFiche(Edelsteen edelsteen, double radius) {
 		this.radius = radius;
+		this.edelsteen = edelsteen;
 		Circle cirkel = new Circle(radius, Color.web(String.format("rgb%s", edelsteen.getRgb())));
 		// zwarte rand
 		cirkel.setStroke(Color.BLACK);
@@ -34,6 +36,19 @@ public class FXEdelsteenFiche extends StackPane {
 		this.getChildren().add(cirkel);
 	}
 
+
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public Text getTxtAantal() {
+		return txtAantal;
+	}
+
+	public Edelsteen getEdelsteen() {
+		return edelsteen;
+	}
 
 	// aantal fixed
 	public FXEdelsteenFiche(Edelsteen edelsteen, double radius, int aantal) {
@@ -60,6 +75,7 @@ public class FXEdelsteenFiche extends StackPane {
 		stelTekstLayOutIn();
 		this.getChildren().add(txtAantal);
 	}
+
 
 
 	protected void stelTekstLayOutIn() {

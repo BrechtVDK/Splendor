@@ -246,6 +246,8 @@ public class Spel {
 		validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
 		// validatie max 10 in klasse Speler
 		this.getSpelerAanDeBeurt().voegEdelsteenfichesToe(edelsteenfiches);
+
+
 	}
 
 	private void validatieDR_BEURT_AANTAL_FICHES(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
@@ -274,6 +276,11 @@ public class Spel {
 		// verwijderen uit speler
 		this.getSpelerAanDeBeurt().verwijderEdelsteenfiches(edelsteenfiches);
 		// toevoegen aan spel
+		voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
+
+	}
+
+	public void voegEdelsteenfichesTerugToeAanStapelsSpel(List<Edelsteenfiche> edelsteenfiches) {
 		for (StapelEdelsteenfiches stapel : stapelsEdelsteenfiches.values()) {
 			int aantal = Math.toIntExact(
 					edelsteenfiches.stream().filter(e -> e.edelsteen().equals(stapel.getEdelsteen())).count());

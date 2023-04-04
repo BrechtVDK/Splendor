@@ -25,13 +25,27 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		this.onHovered(this, 1.1);
 	}
 
+	public void pasAantalAanMet(int aantal) {
+		this.aantal += aantal;
+		txtAantal.setText(Integer.toString(this.aantal));
+	}
+
+
 	@Override
 	public void onLeftClicked() {
-		txtAantal.setText(Integer.toString(--aantal));
-
-		if (aantal == 0) {
-			this.setVisible(false);
-
+		String parent = this.getParent().getClass().getSimpleName();
+		if (parent.equals("EdelsteenFicheScherm")) {
+			pasAantalAanMet(-1);
+			if (aantal == 0) {
+				this.setVisible(false);
+			}
+			FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), super.getRadius(),
+					0, es);
+			nieuweFiche.getTxtAantal().setText("");
+			es.voegEdelsteenficheToeAanLinkerInfoScherm(nieuweFiche);
+				
+			
 		}
+		
 	}
 }

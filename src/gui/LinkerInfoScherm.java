@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domein.DomeinController;
+import domein.Edelsteenfiche;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ public class LinkerInfoScherm extends VBox {
 	public LinkerInfoScherm(DomeinController dc, Hoofdscherm hs) {
 		this.dc = dc;
 		this.hs = hs;
-		this.edelsteenfiches = new ArrayList();
+		this.edelsteenfiches = new ArrayList<>();
 
 		buildGui();
 	}
@@ -91,6 +92,7 @@ public class LinkerInfoScherm extends VBox {
 
 	private void kiesKaartGeklikt(ActionEvent e) {
 		hs.maakKaartenKlikbaar();
+		verbergKeuzeknoppen();
 		lblKeuze.setText("Kies een kaart van de tafel");
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart"));
 	}
@@ -135,6 +137,17 @@ public class LinkerInfoScherm extends VBox {
 			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
 			verwijderBevestigKnop();
 		}
+		else if (spelerKeuze.equals("fiche")) {
+			List<Edelsteenfiche> teVerplaatsenFiches = new ArrayList<>();
+			for (FXEdelsteenFiche ef : edelsteenfiches) {
+				teVerplaatsenFiches.add(new Edelsteenfiche(ef.getEdelsteen()));
+			}
+			hs.verplaatsEdelsteenFichesNaarSpeler(teVerplaatsenFiches);
+			verwijderBevestigKnop();
+
+		}
+
+		maakInfoLabelLeeg(3);
 	}
 
 	public void zetKeuzeMenuTerug() {
@@ -163,8 +176,21 @@ public class LinkerInfoScherm extends VBox {
 		if (edelsteenfiches.size() < 3) {
 			edelsteenfiches.add(edelsteenfiche);
 			this.getChildren().add(edelsteenfiche);
-		} else
+			if (edelsteenfiches.size() == 3) {
+				hs.maakFichesOnKlikbaar();
+			} else if (edelsteenfiches.size() == 2) {
+				this.getChildren().add(btnBevestig);
+			}
+		} else {
 			lblInfo.setText("Je mag maximum 3 fiches kiezen");
+		}
+	}
+
+	public void verwijderFiches() {
+		for (FXEdelsteenFiche ef : edelsteenfiches) {
+			this.getChildren().remove(ef);
+		}
+		edelsteenfiches.clear();
 	}
 
 }

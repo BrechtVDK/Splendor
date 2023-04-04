@@ -129,4 +129,8 @@ public class DomeinController {
 		return spel.geefKaartVolgensIndex(rij, kolom);
 	}
 
+	public void voegEdelsteenfichesTerugToeAanStapelsSpel(List<Edelsteenfiche> edelsteenfiches) {
+		spel.voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
+	}
+
 }

@@ -1,6 +1,10 @@
 package gui;
 
+import java.util.Arrays;
+import java.util.List;
+
 import domein.DomeinController;
+import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -58,7 +62,7 @@ public class Hoofdscherm extends GridPane {
 		linkerInfoScherm.stelVolgendeSpelerIn();
 	}
 
-	// alles in verbande met Ontwikkelingskaarten:
+	// alles in verband met Ontwikkelingskaarten:
 	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart kaart) {
 		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
 	}
@@ -81,6 +85,7 @@ public class Hoofdscherm extends GridPane {
 			 */
 			// Brecht: getter toegevoegd aan FXOntwikkelingskaart
 			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(fxKaart.getKaart());
+			voegEdelsteenfichesTerugToeAanStapels(Arrays.asList(fxKaart.getKaart().edelsteenfiches()));
 			Ontwikkelingskaart nieuweKaart = dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]);
 			if (nieuweKaart != null) {
 				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
@@ -95,8 +100,6 @@ public class Hoofdscherm extends GridPane {
 			linkerInfoScherm.verwijderBevestigKnop();
 		}
 		linkerInfoScherm.zetKeuzeMenuTerug();
-
-
 	}
 
 	// alles in verband met fiches:
@@ -112,4 +115,26 @@ public class Hoofdscherm extends GridPane {
 		linkerInfoScherm.voegFicheToe(edelsteenfiche);
 	}
 
+	public void verplaatsEdelsteenFichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches) {
+		try {
+			for (Edelsteenfiche ef : edelsteenfiches) {
+				dc.verwijderEdelsteenficheVanStapel(ef);
+			}
+			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
+			linkerInfoScherm.verwijderFiches();
+			bepaalVolgendeSpeler();
+		} catch (IllegalArgumentException e) {
+			voegEdelsteenfichesTerugToeAanStapels(edelsteenfiches);
+			dc.voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
+			linkerInfoScherm.verwijderFiches();
+			linkerInfoScherm.toonFoutmelding(e.getMessage());
+		}
+		linkerInfoScherm.zetKeuzeMenuTerug();
+	}
+
+	private void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
+		for (Edelsteenfiche ef : edelsteenfiches) {
+			edelsteenFicheScherm.voegFoutieveEdelsteenficheTerugToe(ef);
+		}
+	}
 }
