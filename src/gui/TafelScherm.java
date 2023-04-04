@@ -1,10 +1,10 @@
 package gui;
 
-import java.util.Map;
-
 import domein.DomeinController;
 import domein.Niveau;
 import domein.Ontwikkelingskaart;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -52,12 +52,15 @@ public class TafelScherm extends GridPane {
 	}
 
 	private void geefStapelsWeer() {
-		Map<Niveau, Integer> aantalResterendeKaarten = dc.geefAantalResterendeKaarten();
 		lblStapels = new Label[Niveau.values().length];
 		for (int i = 0; i < lblStapels.length; i++) {
-			StringBuilder aantal = new StringBuilder(Integer.toString(aantalResterendeKaarten.get(Niveau.values()[i])));
-			aantal.append("\n").append(" • ".repeat(lblStapels.length - i));
-			lblStapels[i] = new Label(aantal.toString());
+			IntegerBinding aantalKaarten = dc.geefAantalResterendeKaarten().get(Niveau.values()[i]);
+			StringBuilder bollen = new StringBuilder("\n");
+			bollen.append(" • ".repeat(lblStapels.length - i));
+			lblStapels[i] = new Label();
+			// binding
+			lblStapels[i].textProperty()
+					.bind(Bindings.concat(aantalKaarten.asString(), bollen));
 			lblStapels[i].setAlignment(Pos.BOTTOM_CENTER);
 			lblStapels[i].setMinHeight(150);
 			lblStapels[i].setMaxHeight(150);
@@ -67,20 +70,6 @@ public class TafelScherm extends GridPane {
 			lblStapels[i].getStyleClass().add("stapel");
 			this.add(lblStapels[i], 0, i);
 		}
-
-	}
-
-	private void veranderAantallenVanStapel(int rij) {
-		Map<Niveau, Integer> aantalResterendeKaarten = dc.geefAantalResterendeKaarten();
-
-		int niveau = switch (rij) {
-		case 0 -> 3;
-		case 1 -> 2;
-		default -> 1;
-		};
-		StringBuilder aantal = new StringBuilder(Integer.toString(aantalResterendeKaarten.get(Niveau.values()[rij])));
-		aantal.append("\n").append(" • ".repeat(niveau));
-		lblStapels[rij].setText(aantal.toString());
 
 	}
 
@@ -108,8 +97,6 @@ public class TafelScherm extends GridPane {
 
 		kaarten[kaartIndex[1]][kaartIndex[0]] = kaart;
 		this.add(new FXOntwikkelingskaart(kaart, kaartIndex, this), kaartIndex[0] + 1, kaartIndex[1]);
-		veranderAantallenVanStapel(kaartIndex[1]);
 	}
-
 
 }

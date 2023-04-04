@@ -3,6 +3,9 @@ package domein;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+
 public class Tafel {
 	private Map<Niveau, StapelOntwikkelingskaarten> stapelsOntwikkelingskaarten;
 	private Ontwikkelingskaart[][] zichtbareOntwikkelingskaarten;
@@ -44,11 +47,12 @@ public class Tafel {
 	// UC2
 
 	// geef het aantal resterende kaarten per stapel (per niveau) terug
-	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
-		Map<Niveau, Integer> aantalPerNiveau = new HashMap<Niveau, Integer>();
+	public Map<Niveau, IntegerBinding> geefAantalResterendeKaarten() {
+		Map<Niveau, IntegerBinding> aantalPerNiveau = new HashMap<Niveau, IntegerBinding>();
 
 		for (Niveau n : Niveau.values()) {
-			aantalPerNiveau.put(n, stapelsOntwikkelingskaarten.get(n).geefAantalResterendeKaarten());
+			// Bindings.size = aantal = grootte van lijst ontwikkelingskaarten
+			aantalPerNiveau.put(n, Bindings.size(stapelsOntwikkelingskaarten.get(n).getOntwikkelingskaarten()));
 		}
 		return aantalPerNiveau;
 	}

@@ -1,16 +1,17 @@
 package domein;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class StapelOntwikkelingskaarten {
-	private List<Ontwikkelingskaart> ontwikkelingskaarten;
+	private ObservableList<Ontwikkelingskaart> ontwikkelingskaarten;
 	private Niveau niveau;
 
 	public StapelOntwikkelingskaarten(Niveau niveau) {
 		this.niveau = niveau;
-		this.ontwikkelingskaarten = new ArrayList<>();
+		this.ontwikkelingskaarten = FXCollections.observableArrayList();
 		maakOntwikkelingskaartenAan();
 		schudDeStapel();
 	}
@@ -230,6 +231,10 @@ public class StapelOntwikkelingskaarten {
 
 	public int geefAantalResterendeKaarten() {
 		return ontwikkelingskaarten.size();
+	}
+
+	public ObservableList<Ontwikkelingskaart> getOntwikkelingskaarten() {
+		return ontwikkelingskaarten;
 	}
 
 }

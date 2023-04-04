@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import Exceptions.TeVeelFichesInBezitException;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
@@ -70,7 +71,7 @@ public class DomeinController {
 		return spel.geefAantalFichesPerStapel();
 	}
 
-	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
+	public Map<Niveau, IntegerBinding> geefAantalResterendeKaarten() {
 		return spel.geefAantalResterendeKaarten();
 	}
 

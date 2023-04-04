@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import Exceptions.TeVeelFichesInBezitException;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -152,7 +153,7 @@ public class Spel {
 	}
 
 	// geef het aantal resterende kaarten per stapel (per niveau) terug
-	public Map<Niveau, Integer> geefAantalResterendeKaarten() {
+	public Map<Niveau, IntegerBinding> geefAantalResterendeKaarten() {
 		return tafel.geefAantalResterendeKaarten();
 	}
 
