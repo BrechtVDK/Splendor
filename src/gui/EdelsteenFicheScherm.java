@@ -21,24 +21,12 @@ public class EdelsteenFicheScherm extends VBox {
 
 	private void buildGui() {
 		this.setSpacing(10);
-		/*
-		 * FXFicheGroen = new FXEdelsteenFicheKlikbaar(Edelsteen.GROEN, 38,
-		 * dc.geefAantalFichesPerStapel().get(Edelsteen.GROEN)); FXFicheWit = new
-		 * FXEdelsteenFicheKlikbaar(Edelsteen.WIT, 38,
-		 * dc.geefAantalFichesPerStapel().get(Edelsteen.WIT)); FXFicheBlauw = new
-		 * FXEdelsteenFicheKlikbaar(Edelsteen.BLAUW, 38,
-		 * dc.geefAantalFichesPerStapel().get(Edelsteen.BLAUW)); FXFicheZwart = new
-		 * FXEdelsteenFicheKlikbaar(Edelsteen.ZWART, 38,
-		 * dc.geefAantalFichesPerStapel().get(Edelsteen.ZWART)); FXFicheRood = new
-		 * FXEdelsteenFicheKlikbaar(Edelsteen.ROOD, 38,
-		 * dc.geefAantalFichesPerStapel().get(Edelsteen.ROOD));
-		 */
-
-		FXFicheGroen = new FXEdelsteenFicheKlikbaar(Edelsteen.GROEN, 38, dc);
-		FXFicheWit = new FXEdelsteenFicheKlikbaar(Edelsteen.WIT, 38, dc);
-		FXFicheBlauw = new FXEdelsteenFicheKlikbaar(Edelsteen.BLAUW, 38, dc);
-		FXFicheZwart = new FXEdelsteenFicheKlikbaar(Edelsteen.ZWART, 38, dc);
-		FXFicheRood = new FXEdelsteenFicheKlikbaar(Edelsteen.ROOD, 38, dc);
+		int radius = 38;
+		FXFicheGroen = new FXEdelsteenFicheKlikbaar(Edelsteen.GROEN, radius, dc);
+		FXFicheWit = new FXEdelsteenFicheKlikbaar(Edelsteen.WIT, radius, dc);
+		FXFicheBlauw = new FXEdelsteenFicheKlikbaar(Edelsteen.BLAUW, radius, dc);
+		FXFicheZwart = new FXEdelsteenFicheKlikbaar(Edelsteen.ZWART, radius, dc);
+		FXFicheRood = new FXEdelsteenFicheKlikbaar(Edelsteen.ROOD, radius, dc);
 		this.getChildren().addAll(FXFicheGroen, FXFicheWit, FXFicheBlauw, FXFicheZwart, FXFicheRood);
 	}
 

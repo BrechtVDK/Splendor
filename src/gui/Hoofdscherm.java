@@ -1,6 +1,5 @@
 package gui;
 
-import java.util.Arrays;
 import java.util.List;
 
 import Exceptions.TeVeelFichesInBezitException;
@@ -73,15 +72,11 @@ public class Hoofdscherm extends GridPane {
 
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart fxKaart) {
 		try {
+			// index gridpane:[kol][rij]
 			int[] indexKaart = fxKaart.getIndex();
-			/*
-			 * dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(
-			 * tafelscherm.geefOntwikkelingskaartVolgensIndex(indexKaart));
-			 */
 			// Brecht: getter toegevoegd aan FXOntwikkelingskaart
 			dc.verplaatsOntwikkelingskaartVanTafelNaarSpeler(fxKaart.getKaart());
-			voegEdelsteenfichesTerugToeAanStapels(Arrays.asList(fxKaart.getKaart().edelsteenfiches()));
-
+			// index tafel: [rij][kol]
 			Ontwikkelingskaart nieuweKaart = dc.geefNieuweKaartVanStapel(indexKaart[1], indexKaart[0]);
 			if (nieuweKaart != null) {
 				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
@@ -116,18 +111,17 @@ public class Hoofdscherm extends GridPane {
 			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
 			bepaalVolgendeSpeler();
+			linkerInfoScherm.zetKeuzeMenuTerug();
 		} catch (TeVeelFichesInBezitException e) {
-			linkerInfoScherm.toonFoutmelding(e.getMessage());
 			linkerInfoScherm.verwijderFiches();
+			linkerInfoScherm.toonFoutmelding(e.getMessage());
 			linkerInfoScherm.zetKlaarOmFichesTerugTeGeven();
-
 		} catch (IllegalArgumentException e) {
 			voegEdelsteenfichesTerugToeAanStapels(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
+			linkerInfoScherm.zetKeuzeMenuTerug();
 		}
-
-		linkerInfoScherm.zetKeuzeMenuTerug();
 	}
 
 	public void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
@@ -135,14 +129,5 @@ public class Hoofdscherm extends GridPane {
 			edelsteenFicheScherm.voegEdelsteenficheTerugToe(ef);
 		}
 	}
-
-	public void verplaatsEdelsteenFichesVanSpelerNaarSpel(List<Edelsteenfiche> edelsteenfiches) {
-		try {
-			dc.verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
-		} catch (IllegalArgumentException e) {
-			linkerInfoScherm.toonFoutmelding(e.getMessage());
-		}
-	}
-
 
 }

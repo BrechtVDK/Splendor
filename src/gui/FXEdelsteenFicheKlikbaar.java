@@ -42,7 +42,7 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	}
 
 	public void checkVisibility() {
-		boolean visible = (Integer.parseInt(txtAantal.getText()) == 0) ? false : true;
+		boolean visible = (getAantal() == 0) ? false : true;
 		this.setVisible(visible);
 	}
 
@@ -84,7 +84,7 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 
 	private void verlaagFichesInBezitVerhoogFichesGeefTerug() {
 
-		int aantal = Integer.parseInt(getTxtAantal().getText()) - 1;
+		int aantal = getAantal() - 1;
 		// aantal aanpassen tem 0
 		if (aantal >= 0) {
 			getTxtAantal().setText(Integer.toString(aantal));

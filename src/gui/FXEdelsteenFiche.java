@@ -45,7 +45,7 @@ public class FXEdelsteenFiche extends StackPane {
 		this.getChildren().add(txtAantal);
 	}
 
-	// binding: aantal via Speler en boolean
+	// constructor voor scorebord: aantal via Speler en boolean
 	public FXEdelsteenFiche(Edelsteen edelsteen, double radius, Speler speler, boolean isBonus) {
 		this(edelsteen, radius);
 		txtAantal = new Text();
@@ -67,6 +67,10 @@ public class FXEdelsteenFiche extends StackPane {
 
 	public Text getTxtAantal() {
 		return txtAantal;
+	}
+
+	public int getAantal() {
+		return Integer.parseInt(txtAantal.getText());
 	}
 
 	public Edelsteen getEdelsteen() {

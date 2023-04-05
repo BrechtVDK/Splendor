@@ -24,7 +24,6 @@ public class Speler {
 	private ObservableMap<Edelsteen, Integer> aantalBonussenPerTypeInBezit;
 	private ObservableList<Edele> edelenInBezit;
 
-
 	// UC1
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
@@ -108,12 +107,15 @@ public class Speler {
 			int huidigAantal = aantalEdelsteenfichesPerTypeInBezit.get(e.edelsteen());
 			aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal + 1);
 		}
-		if (aantalEdelsteenfichesPerTypeInBezit.values().stream().reduce((i1, i2) -> i1 + i2)
-				.get() > MAX_FICHES_IN_BEZIT) {
+		if (geefAantalFichesInBezit() > MAX_FICHES_IN_BEZIT) {
 			// in commentaar om binding te testen
 			throw new TeVeelFichesInBezitException();
 
 		}
+	}
+
+	public int geefAantalFichesInBezit() {
+		return aantalEdelsteenfichesPerTypeInBezit.values().stream().reduce((i1, i2) -> i1 + i2).get();
 	}
 
 	public ObservableMap<Edelsteen, Integer> getAantalBonussenPerTypeInBezit() {

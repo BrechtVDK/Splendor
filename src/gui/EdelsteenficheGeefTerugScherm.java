@@ -61,8 +61,8 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 		Node ficheTerug = this.getChildren().stream()
 				.filter(node -> GridPane.getRowIndex(node) == rij && GridPane.getColumnIndex(node) == kol).findFirst()
 				.orElse(null);
-		// getal aanpassen en evt zichtbaar indien 0
-		int huidigAantal = Integer.parseInt(((FXEdelsteenFiche) ficheTerug).getTxtAantal().getText());
+		// getal aanpassen en evt zichtbaar maken indien 0 was
+		int huidigAantal = ((FXEdelsteenFiche) ficheTerug).getAantal();
 		if (huidigAantal == 0) {
 			((FXEdelsteenFiche) ficheTerug).setVisible(true);
 		}
@@ -72,7 +72,7 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 	public List<Edelsteenfiche> geefTerugTeGevenFiches() {
 		List<Edelsteenfiche> lijst = new ArrayList<>();
 		for (FXEdelsteenFiche fiche : fichesTerug) {
-			int aantal = Integer.parseInt(fiche.getTxtAantal().getText());
+			int aantal = fiche.getAantal();
 			for (int i = 0; i < aantal; i++) {
 				lijst.add(new Edelsteenfiche(fiche.getEdelsteen()));
 			}

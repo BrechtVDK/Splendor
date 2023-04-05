@@ -256,7 +256,6 @@ public class Spel {
 		// validatie max 10 in klasse Speler
 		this.getSpelerAanDeBeurt().voegEdelsteenfichesToe(edelsteenfiches);
 
-
 	}
 
 	private void validatieDR_BEURT_AANTAL_FICHES(List<Edelsteenfiche> edelsteenfiches) throws IllegalArgumentException {
@@ -290,6 +289,16 @@ public class Spel {
 		// toevoegen aan spel
 		voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
 
+	}
+
+	public void verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(List<Edelsteenfiche> edelsteenfiches)
+			throws IllegalArgumentException {
+		if (this.getSpelerAanDeBeurt().geefAantalFichesInBezit()
+				- edelsteenfiches.size() != Speler.MAX_FICHES_IN_BEZIT) {
+			throw new IllegalArgumentException(
+					String.format("Na teruggave dien je exact %d fiches overhouden!", Speler.MAX_FICHES_IN_BEZIT));
+		}
+		verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
 	}
 
 	public void voegEdelsteenfichesTerugToeAanStapelsSpel(List<Edelsteenfiche> edelsteenfiches) {

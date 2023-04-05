@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -21,7 +22,9 @@ public class LinkerInfoScherm extends VBox {
 	private Hoofdscherm hs;
 	private FXOntwikkelingskaart gekozenKaart;
 	private List<FXEdelsteenFiche> edelsteenfiches;
+	private HBox hboxEdelsteenficheGeefTerugScherm;
 	private EdelsteenficheGeefTerugScherm edelsteenficheGeefTerugScherm;
+	private int indexBtnBevestig;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfo;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig;
@@ -115,7 +118,6 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart.setVisible(false);
 		btnFiche.setVisible(false);
 		btnPas.setVisible(false);
-		btnBevestig.setVisible(true);
 		deactiveerBevestigKnop();
 	}
 
@@ -147,28 +149,39 @@ public class LinkerInfoScherm extends VBox {
 			for (FXEdelsteenFiche ef : edelsteenfiches) {
 				teVerplaatsenFiches.add(new Edelsteenfiche(ef.getEdelsteen()));
 			}
-			hs.verplaatsEdelsteenFichesNaarSpeler(teVerplaatsenFiches);
-			// verwijderBevestigKnop();
 			deactiveerBevestigKnop();
+			hs.verplaatsEdelsteenFichesNaarSpeler(teVerplaatsenFiches);
 			hs.maakFichesOnKlikbaar();
 		}
 		case ("ficheTerug") -> {
 			List<Edelsteenfiche> terugTeGevenFiches = edelsteenficheGeefTerugScherm.geefTerugTeGevenFiches();
-			hs.verplaatsEdelsteenFichesVanSpelerNaarSpel(terugTeGevenFiches);
-			// this.getChildren().remove(edelsteenficheGeefTerugScherm);
-			// TODO
+
+			this.getChildren().remove(hboxEdelsteenficheGeefTerugScherm);
+			// btnBevestig terug toevoegen op oorspronkelijke plaats
+			this.getChildren().add(indexBtnBevestig, btnBevestig);
+
+			// validatie exact 10 fiches in bezit na teruggave
+			try {
+				dc.verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(terugTeGevenFiches);
+				zetKeuzeMenuTerug();
+				hs.bepaalVolgendeSpeler();
+			} catch (IllegalArgumentException ex) {
+				toonFoutmelding(ex.getMessage());
+				zetKlaarOmFichesTerugTeGeven();
+			}
 		}
 		}
 
 		maakInfoLabelLeeg(3);
+
 	}
 
 	public void zetKeuzeMenuTerug() {
 		lblKeuze.setText("Wat wil je doen in deze beurt?");
-		// btnBevestig.setVisible(false);
 		btnKaart.setVisible(true);
 		btnFiche.setVisible(true);
 		btnPas.setVisible(true);
+		deactiveerBevestigKnop();
 		// verwijderBevestigKnop();
 	}
 
@@ -223,10 +236,21 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	public void zetKlaarOmFichesTerugTeGeven() {
-		edelsteenficheGeefTerugScherm = new EdelsteenficheGeefTerugScherm(dc);
-		this.getChildren().add(edelsteenficheGeefTerugScherm);
-		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug"));
+		// index btnBevestig bijhouden om later terug toe te voegen
+		indexBtnBevestig = this.getChildren().indexOf(btnBevestig);
+		this.getChildren().remove(btnBevestig);
 		activeerBevestigKnop();
+
+		hboxEdelsteenficheGeefTerugScherm = new HBox();
+		hboxEdelsteenficheGeefTerugScherm.setAlignment(Pos.CENTER);
+
+		edelsteenficheGeefTerugScherm = new EdelsteenficheGeefTerugScherm(dc);
+		// btnBevestig in hbox stoppen (boven of onder edelsteensteficheGeefTerugScherm
+		// was te weinig plaats)
+		hboxEdelsteenficheGeefTerugScherm.getChildren().addAll(edelsteenficheGeefTerugScherm, btnBevestig);
+		this.getChildren().add(hboxEdelsteenficheGeefTerugScherm);
+
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug"));
 	}
 
 	public void maakFichesKlikbaarInEdelsteenficheScherm() {

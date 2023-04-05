@@ -120,6 +120,11 @@ public class DomeinController {
 		spel.verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
 	}
 
+	public void verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(List<Edelsteenfiche> edelsteenfiches)
+			throws IllegalArgumentException {
+		spel.verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(edelsteenfiches);
+	}
+
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
 			throws IllegalArgumentException {
 		spel.verplaatsOntwikkelingskaartVanTafelNaarSpeler(kaart);
