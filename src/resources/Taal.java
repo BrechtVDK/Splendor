@@ -6,7 +6,6 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class Taal {
-	// public static Taal taal = null;
 
 	private static ResourceBundle resBundel;
 	private static final String STANDAARDTAAL = "Nederlands";
