@@ -18,7 +18,7 @@ class TaalTest {
 
 	public void buildMenu() {
 		Scanner invoer = new Scanner(System.in);
-		String talen[] = { "nl", "en", "fr", "de" };
+		String talen[] = Taal.TALEN;
 		String teksten[] = { "een", "twee", "kies een andere taal" };
 
 		System.out.println("Kies uw voorkeurtaal");

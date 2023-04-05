@@ -14,7 +14,6 @@ import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-//import resources.Messages;
 import resources.Taal;
 
 public class Spel {

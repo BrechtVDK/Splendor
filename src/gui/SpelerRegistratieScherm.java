@@ -67,12 +67,16 @@ public class SpelerRegistratieScherm extends GridPane {
 		lblFoutmelding = new Label();
 		lblFoutmelding.setTextFill(Color.RED);
 
+		FXTaalKeuze chBTaalKeuze = new FXTaalKeuze();
+		chBTaalKeuze.setAlignment(Pos.CENTER);
+
 		this.add(lblGebruikersnaam, 0, 1);
 		this.add(txtGebruikersnaam, 1, 1);
 		this.add(lblGeboortejaar, 0, 2);
 		this.add(txtGeboortejaar, 1, 2);
 		this.add(btnVoegToe, 1, 3);
 		this.add(btnStartSpel, 1, 4);
+		this.add(chBTaalKeuze, 1, 6);
 		this.add(lblSpelers, 3, 0);
 		this.add(lvSpelers, 3, 1, 1, 4);
 		this.add(lblFoutmelding, 0, 5, this.getColumnCount(), 1);

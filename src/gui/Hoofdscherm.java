@@ -18,6 +18,7 @@ public class Hoofdscherm extends GridPane {
 	private TafelScherm tafelscherm;
 	private LinkerInfoScherm linkerInfoScherm;
 	private ScoreBordScherm scoreBordScherm;
+	private FXTaalKeuze chBoxTaalKeuze;
 
 	public Hoofdscherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
@@ -39,7 +40,9 @@ public class Hoofdscherm extends GridPane {
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc, this);
 		tafelscherm = new TafelScherm(dc, this);
 		scoreBordScherm = new ScoreBordScherm(dc);
+		chBoxTaalKeuze = new FXTaalKeuze();
 
+		this.add(chBoxTaalKeuze, 0, 0);
 		this.add(linkerInfoScherm, 0, 1, 1, 2);
 		this.add(edelenScherm, 2, 0);
 		this.add(edelsteenFicheScherm, 1, 1);
