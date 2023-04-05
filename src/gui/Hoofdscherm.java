@@ -48,10 +48,9 @@ public class Hoofdscherm extends GridPane {
 		this.add(edelsteenFicheScherm, 1, 1);
 		this.add(tafelscherm, 2, 1);
 		this.add(scoreBordScherm, 3, 0, 1, 2);
-
 		tafelscherm.maakKaartenOnKlikbaar();
 		edelsteenFicheScherm.maakFichesOnklikbaar();
-		;
+
 	}
 
 	public void bepaalVolgendeSpeler() {

@@ -66,7 +66,7 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 		if (huidigAantal == 0) {
 			((FXEdelsteenFiche) ficheTerug).setVisible(true);
 		}
-		((FXEdelsteenFiche) ficheTerug).getTxtAantal().setText(Integer.toString(++huidigAantal));
+		((FXEdelsteenFiche) ficheTerug).getTxtAantal().setText(Integer.toString(huidigAantal + 1));
 	}
 
 	public List<Edelsteenfiche> geefTerugTeGevenFiches() {

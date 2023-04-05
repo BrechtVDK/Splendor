@@ -44,13 +44,13 @@ public class EdelsteenFicheScherm extends VBox {
 
 	public void voegEdelsteenficheTerugToe(Edelsteenfiche e) {
 		dc.voegEdelsteenfichesTerugToeAanStapelsSpel(Arrays.asList(e));
-		switch (e.edelsteen()) {
-		case GROEN -> FXFicheGroen.checkVisibility();
-		case WIT -> FXFicheWit.checkVisibility();
-		case BLAUW -> FXFicheBlauw.checkVisibility();
-		case ZWART -> FXFicheZwart.checkVisibility();
-		case ROOD -> FXFicheRood.checkVisibility();
-		}
+		// Overbodig geworden: Listener toegevoegd aan FXEdelsteenFicheKlikbaar
+		/*
+		 * switch (e.edelsteen()) { case GROEN -> FXFicheGroen.checkVisibility(); case
+		 * WIT -> FXFicheWit.checkVisibility(); case BLAUW ->
+		 * FXFicheBlauw.checkVisibility(); case ZWART -> FXFicheZwart.checkVisibility();
+		 * case ROOD -> FXFicheRood.checkVisibility(); }
+		 */
 	}
 
 }

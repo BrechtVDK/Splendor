@@ -32,6 +32,11 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		super.txtAantal = new Text();
 		IntegerBinding aantal = dc.geefAantalFichesPerStapel().get(edelsteen);
 		super.txtAantal.textProperty().bind(aantal.asString());
+		// als aantal wijzigt -> visibility checken
+		aantal.addListener((observable, oldValue, newValue) -> {
+			checkVisibility();
+		});
+
 		super.stelTekstLayOutIn();
 		this.getChildren().add(txtAantal);
 
@@ -41,6 +46,9 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 
 	}
 
+	// Brecht: heb deze gekoppeld aan IntegerBinding aantal via listener, zo moet je
+	// deze
+	// niet meer ergens anders expliciet aanroepen bij wijziging
 	public void checkVisibility() {
 		boolean visible = (getAantal() == 0) ? false : true;
 		this.setVisible(visible);
@@ -58,7 +66,6 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 
 	private void verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm() {
 		dc.verwijderEdelsteenficheVanStapel(new Edelsteenfiche(super.getEdelsteen()));
-		checkVisibility();
 		FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(super.getEdelsteen(), 20);
 		((EdelsteenFicheScherm) this.getParent()).voegEdelsteenficheToeAanLinkerInfoScherm(nieuweFiche);
 	}
