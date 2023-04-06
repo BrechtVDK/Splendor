@@ -16,7 +16,9 @@ import javafx.scene.text.TextAlignment;
 public class EdelsteenficheGeefTerugScherm extends GridPane {
 	private DomeinController dc;
 	FXEdelsteenFicheKlikbaar[] fichesInBezit;
-	FXEdelsteenFiche[] fichesTerug;
+	// Jonas: fichesTerug aangepast naar lijst ipv Array: gaf een fout omdat de
+	// array een vaste grootte had en een lijst niet
+	List<FXEdelsteenFiche> fichesTerug;
 
 	public EdelsteenficheGeefTerugScherm(DomeinController dc) {
 		this.dc = dc;
@@ -39,16 +41,17 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 
 		int rij = 1;
 		fichesInBezit = new FXEdelsteenFicheKlikbaar[5];
-		fichesTerug = new FXEdelsteenFiche[5];
+		fichesTerug = new ArrayList<>();
 		int teller = 0;
 		for (Edelsteen edelsteen : Edelsteen.values()) {
 			int aantal = fichesSpelerAanDeBeurt.get(edelsteen);
 			if (aantal > 0) {
 				fichesInBezit[teller] = new FXEdelsteenFicheKlikbaar(edelsteen, 20, aantal);
-				fichesTerug[teller] = new FXEdelsteenFiche(edelsteen, 20, 0);
-				fichesTerug[teller].setVisible(false);
+				FXEdelsteenFiche nieuweFiche = new FXEdelsteenFiche(edelsteen, 20, 0);
+				fichesTerug.add(nieuweFiche);
+				nieuweFiche.setVisible(false);
 				this.add(fichesInBezit[teller], 0, rij);
-				this.add(fichesTerug[teller++], 1, rij++);
+				this.add(nieuweFiche, 1, rij++);
 			}
 		}
 	}

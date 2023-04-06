@@ -201,6 +201,7 @@ public class LinkerInfoScherm extends VBox {
 	public void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
 		// Brecht: lijnen in commentaar lijken me overbodig aangezien fiches onklikbaar
 		// worden vanaf MAX_FICHES_PER_BEURT
+		// Jonas: correct
 		// if (edelsteenfiches.size() < Spel.MAX_FICHES_PER_BEURT) {
 		edelsteenfiches.add(edelsteenfiche);
 		this.getChildren().add(edelsteenfiche);

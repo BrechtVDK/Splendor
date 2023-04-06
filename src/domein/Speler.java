@@ -76,6 +76,8 @@ public class Speler {
 		this.aantalBonussenPerTypeInBezit = FXCollections.observableHashMap();
 		for (Edelsteen e : Edelsteen.values()) {
 			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
+
+			// om edelen sneller te kunnen testen, best even op 2 zetten:
 			aantalBonussenPerTypeInBezit.put(e, 0);
 		}
 	}

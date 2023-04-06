@@ -4,6 +4,7 @@ import java.util.List;
 
 import Exceptions.TeVeelFichesInBezitException;
 import domein.DomeinController;
+import domein.Edele;
 import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
 import javafx.geometry.Insets;
@@ -54,6 +55,7 @@ public class Hoofdscherm extends GridPane {
 	}
 
 	public void bepaalVolgendeSpeler() {
+
 		dc.bepaalVolgendeSpeler();
 		scoreBordScherm.markeerVolgendeSpeler();
 		linkerInfoScherm.stelVolgendeSpelerIn();
@@ -84,6 +86,7 @@ public class Hoofdscherm extends GridPane {
 				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
 			}
 			linkerInfoScherm.verwijderKaart(fxKaart);
+			checkOpBeschikbareEdelen();
 			bepaalVolgendeSpeler();
 
 		} catch (IllegalArgumentException e) {
@@ -129,6 +132,14 @@ public class Hoofdscherm extends GridPane {
 	public void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
 		for (Edelsteenfiche ef : edelsteenfiches) {
 			edelsteenFicheScherm.voegEdelsteenficheTerugToe(ef);
+		}
+	}
+
+	// alles in verband met Edelen:
+	public void checkOpBeschikbareEdelen() {
+		List<Edele> edelen = dc.geefBeschikbareEdelen();
+		if (!edelen.isEmpty()) {
+			edelenScherm.markeerEnMaakBeschikbareEdelenKlikbaar(edelen);
 		}
 	}
 
