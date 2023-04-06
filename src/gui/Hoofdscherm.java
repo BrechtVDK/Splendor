@@ -86,9 +86,7 @@ public class Hoofdscherm extends GridPane {
 				tafelscherm.legNieuweKaartOpTafel(nieuweKaart, indexKaart);
 			}
 			linkerInfoScherm.verwijderKaart(fxKaart);
-			checkOpBeschikbareEdelen();
-			bepaalVolgendeSpeler();
-
+			eindeBeurt();
 		} catch (IllegalArgumentException e) {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(fxKaart);
@@ -115,7 +113,7 @@ public class Hoofdscherm extends GridPane {
 		try {
 			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
-			bepaalVolgendeSpeler();
+			eindeBeurt();
 			linkerInfoScherm.zetKeuzeMenuTerug();
 		} catch (TeVeelFichesInBezitException e) {
 			linkerInfoScherm.verwijderFiches();
@@ -135,11 +133,13 @@ public class Hoofdscherm extends GridPane {
 		}
 	}
 
-	// alles in verband met Edelen:
-	public void checkOpBeschikbareEdelen() {
+	private void eindeBeurt() {
+		// controle DR_BEURT_SPECIALE_TEGEL
 		List<Edele> edelen = dc.geefBeschikbareEdelen();
 		if (!edelen.isEmpty()) {
 			edelenScherm.markeerEnMaakBeschikbareEdelenKlikbaar(edelen);
+		} else {
+			bepaalVolgendeSpeler();
 		}
 	}
 

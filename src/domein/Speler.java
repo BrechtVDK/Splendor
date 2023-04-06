@@ -78,7 +78,8 @@ public class Speler {
 			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
 
 			// om edelen sneller te kunnen testen, best even op 2 zetten:
-			aantalBonussenPerTypeInBezit.put(e, 0);
+			aantalBonussenPerTypeInBezit.put(e, 2);
+			// aantalBonussenPerTypeInBezit.put(e, 0);
 		}
 	}
 

@@ -30,8 +30,15 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 	}
 
 	@Override
+
 	public void onLeftClicked() {
-		((EdelenScherm) this.getParent()).verplaatsEdeleNaarSpeler(this);
+		// edelenscherm apart bijhouden voor verplaatsen Edele, anders Hoofdscherm niet
+		// meer bereikbaar na uitvoeren ervan
+		EdelenScherm edelenscherm = (EdelenScherm) this.getParent();
+		edelenscherm.verplaatsEdeleNaarSpeler(this);
+		// volgende speler in stellen
+		((Hoofdscherm) edelenscherm.getParent()).bepaalVolgendeSpeler();
+
 	}
 
 }

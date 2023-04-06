@@ -199,10 +199,6 @@ public class LinkerInfoScherm extends VBox {
 
 	// Fiches
 	public void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
-		// Brecht: lijnen in commentaar lijken me overbodig aangezien fiches onklikbaar
-		// worden vanaf MAX_FICHES_PER_BEURT
-		// Jonas: correct
-		// if (edelsteenfiches.size() < Spel.MAX_FICHES_PER_BEURT) {
 		edelsteenfiches.add(edelsteenfiche);
 		this.getChildren().add(edelsteenfiche);
 		if (edelsteenfiches.size() == Spel.MAX_FICHES_PER_BEURT) {
@@ -211,9 +207,6 @@ public class LinkerInfoScherm extends VBox {
 		} else if (edelsteenfiches.size() == 1) {
 			activeerBevestigKnop();
 		}
-		/*
-		 * } else { lblInfo.setText("Je mag maximum 3 fiches kiezen"); }
-		 */
 	}
 
 	public void verwijderFiches() {
