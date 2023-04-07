@@ -53,13 +53,14 @@ public class EdelenScherm extends HBox {
 	public void verplaatsEdeleNaarSpeler(FXEdeleKaart fxEdele) {
 		dc.verplaatsEdeleVanSpelNaarSpeler(fxEdele.getEdele());
 		this.getChildren().remove(fxEdele);
-		zetEdelenTerugZichtbaar();
+		zetEdelenTerugNormaal();
 	}
 
-	private void zetEdelenTerugZichtbaar() {
+	private void zetEdelenTerugNormaal() {
 		for (FXEdeleKaart fxE : fxEdelen) {
 			// fxE.setVisible(true);
 			fxE.setEffect(null);
+			fxE.setMouseTransparent(true);
 		}
 	}
 }
