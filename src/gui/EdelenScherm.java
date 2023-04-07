@@ -21,7 +21,6 @@ public class EdelenScherm extends HBox {
 		maakEdeleKaartenAan();
 	}
 
-
 	private void maakEdeleKaartenAan() {
 
 		List<Edele> edelen = dc.geefEdelen();
@@ -34,14 +33,19 @@ public class EdelenScherm extends HBox {
 
 	public void markeerEnMaakBeschikbareEdelenKlikbaar(List<Edele> beschikbareEdelen) {
 
-
 		for (Edele beschikbareEdele : beschikbareEdelen) {
 			for (FXEdeleKaart fxE : fxEdelen) {
 				if (fxE.getEdele().equals(beschikbareEdele)) {
 					fxE.highlight();
+				} else {
+					// Blurren: niet geslaagd vind ik
+					// GaussianBlur blur = new GaussianBlur();
+					// Hoe hoger getal, hoe hoger blureffect
+					// blur.setRadius(1);
+					// fxE.setEffect(blur);
+
+					// fxE.setVisible(false);
 				}
-				else
-					fxE.setVisible(false);
 			}
 		}
 	}
@@ -54,7 +58,8 @@ public class EdelenScherm extends HBox {
 
 	private void zetEdelenTerugZichtbaar() {
 		for (FXEdeleKaart fxE : fxEdelen) {
-			fxE.setVisible(true);
+			// fxE.setVisible(true);
+			fxE.setEffect(null);
 		}
 	}
 }

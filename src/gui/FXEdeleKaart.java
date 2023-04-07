@@ -1,6 +1,8 @@
 package gui;
 
 import domein.Edele;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.paint.Color;
 
 public class FXEdeleKaart extends FXKaart implements Clickable {
 
@@ -27,6 +29,12 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 
 	public void highlight() {
 		this.setMouseTransparent(false);
+
+		InnerShadow highlight = new InnerShadow();
+		highlight.setColor(Color.YELLOW);
+		highlight.setRadius(10);
+		this.setEffect(highlight);
+
 	}
 
 	@Override
