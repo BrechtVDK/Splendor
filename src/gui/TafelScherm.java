@@ -32,10 +32,11 @@ public class TafelScherm extends GridPane {
 		// stapels
 		// worden dan ook lichter gekleurd: moet nog opgelost worden (misschien betere
 		// manier vinden?)
-		this.setDisable(true);
-		for (Label stapel : lblStapels) {
-			stapel.setDisable(false);
-		}
+		this.setMouseTransparent(true);
+		;
+//		for (Label stapel : lblStapels) {
+//			stapel.setDisable(false);
+//		}
 	}
 
 	private void geefZichtbareKaartenWeer() {
@@ -82,11 +83,11 @@ public class TafelScherm extends GridPane {
 	}
 
 	public void maakKaartenKlikbaar() {
-		this.setDisable(false);
+		this.setMouseTransparent(false);
 	}
 
 	public void maakKaartenOnKlikbaar() {
-		this.setDisable(true);
+		this.setMouseTransparent(true);
 	}
 
 	public Ontwikkelingskaart geefOntwikkelingskaartVolgensIndex(int[] index) {

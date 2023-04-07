@@ -31,11 +31,11 @@ public class EdelsteenFicheScherm extends VBox {
 	}
 
 	public void maakFichesKlikbaar() {
-		this.setDisable(false);
+		this.setMouseTransparent(false);
 	}
 
 	public void maakFichesOnklikbaar() {
-		this.setDisable(true);
+		this.setMouseTransparent(true);
 	}
 
 	public void voegEdelsteenficheToeAanLinkerInfoScherm(FXEdelsteenFiche edelsteenfiche) {

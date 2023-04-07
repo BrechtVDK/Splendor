@@ -33,8 +33,7 @@ public class EdelenScherm extends HBox {
 	}
 
 	public void markeerEnMaakBeschikbareEdelenKlikbaar(List<Edele> beschikbareEdelen) {
-		// Brecht: reeds doorgegeven
-		// beschikbareEdelen = dc.geefBeschikbareEdelen();
+
 
 		for (Edele beschikbareEdele : beschikbareEdelen) {
 			for (FXEdeleKaart fxE : fxEdelen) {
