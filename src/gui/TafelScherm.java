@@ -63,10 +63,10 @@ public class TafelScherm extends GridPane {
 			lblStapels[i].textProperty()
 					.bind(Bindings.concat(aantalKaarten.asString(), bollen));
 			lblStapels[i].setAlignment(Pos.BOTTOM_CENTER);
-			lblStapels[i].setMinHeight(150);
-			lblStapels[i].setMaxHeight(150);
-			lblStapels[i].setMinWidth(100);
-			lblStapels[i].setMaxWidth(100);
+			lblStapels[i].setMinHeight(142);
+			lblStapels[i].setMaxHeight(142);
+			lblStapels[i].setMinWidth(94);
+			lblStapels[i].setMaxWidth(94);
 			lblStapels[i].getStyleClass().add(String.format("stapelniveau%d", i + 1));
 			lblStapels[i].getStyleClass().add("stapel");
 			this.add(lblStapels[i], 0, i);

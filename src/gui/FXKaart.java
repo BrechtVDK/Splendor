@@ -30,10 +30,10 @@ public abstract class FXKaart extends GridPane {
 
 		this.setHgap(25);
 		this.setPadding(new Insets(5));
-		this.setMinWidth(100);
-		this.setMaxWidth(100);
-		this.setMinHeight(150);
-		this.setMaxHeight(150);
+		this.setMinWidth(94);
+		this.setMaxWidth(94);
+		this.setMinHeight(142);
+		this.setMaxHeight(142);
 	}
 
 	private void plaatsPrestigePunten() {

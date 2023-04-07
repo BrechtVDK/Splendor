@@ -32,7 +32,7 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 
 		InnerShadow highlight = new InnerShadow();
 		highlight.setColor(Color.YELLOW);
-		highlight.setRadius(10);
+		highlight.setRadius(15);
 		this.setEffect(highlight);
 
 	}

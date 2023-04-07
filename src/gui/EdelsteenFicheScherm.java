@@ -21,7 +21,7 @@ public class EdelsteenFicheScherm extends VBox {
 
 	private void buildGui() {
 		this.setSpacing(10);
-		int radius = 38;
+		int radius = 35;
 		FXFicheGroen = new FXEdelsteenFicheKlikbaar(Edelsteen.GROEN, radius, dc);
 		FXFicheWit = new FXEdelsteenFicheKlikbaar(Edelsteen.WIT, radius, dc);
 		FXFicheBlauw = new FXEdelsteenFicheKlikbaar(Edelsteen.BLAUW, radius, dc);
