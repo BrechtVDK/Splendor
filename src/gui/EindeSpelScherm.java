@@ -52,7 +52,7 @@ public class EindeSpelScherm extends VBox {
 		VBox.setMargin(lblEindeSpel, new Insets(0, 0, 90, 0));
 
 		Label lblWinnaars = new Label();
-		lblWinnaars.setText(String.format("Proficiat: %s %s gewonnen!", winnaars, eenWinnaar ? "is" : "hebben"));
+		lblWinnaars.setText(String.format("%s %s gewonnen!", winnaars, eenWinnaar ? "is" : "hebben"));
 		lblWinnaars.setTextFill(Color.YELLOW);
 		lblWinnaars.setId("eindeSpelSchermWinnaars");
 		lblWinnaars.setTextAlignment(TextAlignment.CENTER);

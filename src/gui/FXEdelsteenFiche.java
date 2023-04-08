@@ -61,19 +61,19 @@ public class FXEdelsteenFiche extends StackPane {
 		this.getChildren().add(txtAantal);
 	}
 
-	public double getRadius() {
+	protected double getRadius() {
 		return radius;
 	}
 
-	public Text getTxtAantal() {
+	protected Text getTxtAantal() {
 		return txtAantal;
 	}
 
-	public int getAantal() {
+	protected int getAantal() {
 		return Integer.parseInt(txtAantal.getText());
 	}
 
-	public Edelsteen getEdelsteen() {
+	protected Edelsteen getEdelsteen() {
 		return edelsteen;
 	}
 

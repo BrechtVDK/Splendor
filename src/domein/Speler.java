@@ -70,8 +70,8 @@ public class Speler {
 
 	protected void stelSpelAttributenIn() {
 		// om einde spel sneller te kunnen testen
-		this.prestigepunten = new SimpleIntegerProperty(14);
-		// this.prestigepunten = new SimpleIntegerProperty(0);
+		// this.prestigepunten = new SimpleIntegerProperty(14);
+		this.prestigepunten = new SimpleIntegerProperty(0);
 		this.edelenInBezit = FXCollections.observableArrayList();
 		this.ontwikkelingskaartenInBezit = FXCollections.observableArrayList();
 		this.aantalEdelsteenfichesPerTypeInBezit = FXCollections.observableHashMap();

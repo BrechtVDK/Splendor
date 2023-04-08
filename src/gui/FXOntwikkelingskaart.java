@@ -13,7 +13,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 	private TafelScherm tafel;
 	private Ontwikkelingskaart ontwikkelingskaart;
 
-	public FXOntwikkelingskaart(Ontwikkelingskaart info, int[] index, TafelScherm tafel) {
+	protected FXOntwikkelingskaart(Ontwikkelingskaart info, int[] index, TafelScherm tafel) {
 		super(info.prestigePunten(), info.edelsteenfiches());
 		bonus = info.bonus();
 		this.index = index;
@@ -22,7 +22,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		buildExtras();
 	}
 
-	public int[] getIndex() {
+	protected int[] getIndex() {
 		return index;
 	}
 
@@ -46,7 +46,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		this.add(fxEdelsteenFiche, 1, 0);
 	}
 
-	public Ontwikkelingskaart getKaart() {
+	protected Ontwikkelingskaart getKaart() {
 		return ontwikkelingskaart;
 	}
 

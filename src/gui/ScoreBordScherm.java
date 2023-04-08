@@ -21,7 +21,7 @@ public class ScoreBordScherm extends VBox {
 		buildGui();
 	}
 
-	public SpelerScoreScherm[] getSpelerScoreSchermen() {
+	protected SpelerScoreScherm[] getSpelerScoreSchermen() {
 		return spelerScoreSchermen;
 	}
 

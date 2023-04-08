@@ -14,7 +14,7 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 		this.edele = info;
 	}
 
-	public Edele getEdele() {
+	protected Edele getEdele() {
 		return edele;
 	}
 
@@ -27,7 +27,7 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 		this.setMouseTransparent(true);
 	}
 
-	public void highlight() {
+	protected void highlight() {
 		this.setMouseTransparent(false);
 
 		InnerShadow highlight = new InnerShadow();

@@ -32,7 +32,6 @@ public class SpelerScoreScherm extends GridPane {
 	}
 
 	private void buildGui() {
-		// this.setMinWidth(minBreedte);
 		this.setVgap(5);
 		this.setHgap(10);
 		this.getStyleClass().add("scoreKaart");
@@ -74,16 +73,7 @@ public class SpelerScoreScherm extends GridPane {
 
 	}
 
-	public boolean isSpelerAanDeBeurt() {
+	protected boolean isSpelerAanDeBeurt() {
 		return dc.geefSpelerAanDeBeurt().equals(speler);
 	}
-
-//	private int geefTotaalAantalFiches(Map<Edelsteen, Integer> fiches) { 
-//	  		int totaalSom = 0; 
-//	  		for (Edelsteen e : Edelsteen.values()) { 
-//	  			totaalSom += fiches.get(e); 
-//	  		} 
-//	  		return totaalSom;	  
-//	  }
-
 }

@@ -28,15 +28,7 @@ public class TafelScherm extends GridPane {
 	private void buildGui() {
 		geefZichtbareKaartenWeer();
 		geefStapelsWeer();
-		// TODO: zorgt ervoor dat je niet op de ontwikkelingskaarten kan klikken. De
-		// stapels
-		// worden dan ook lichter gekleurd: moet nog opgelost worden (misschien betere
-		// manier vinden?)
 		this.setMouseTransparent(true);
-		;
-//		for (Label stapel : lblStapels) {
-//			stapel.setDisable(false);
-//		}
 	}
 
 	private void geefZichtbareKaartenWeer() {
@@ -74,27 +66,27 @@ public class TafelScherm extends GridPane {
 
 	}
 
-	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart fxKaart) {
+	protected void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart fxKaart) {
 		hs.verplaatsKaartNaarLinkerInfoScherm(fxKaart);
 	}
 
-	public void voegFouteKaartTerugToeVanLinkerInfoScherm(FXOntwikkelingskaart terugTeLeggenKaart) {
+	protected void voegFouteKaartTerugToeVanLinkerInfoScherm(FXOntwikkelingskaart terugTeLeggenKaart) {
 		this.add(terugTeLeggenKaart, terugTeLeggenKaart.getIndex()[0] + 1, terugTeLeggenKaart.getIndex()[1]);
 	}
 
-	public void maakKaartenKlikbaar() {
+	protected void maakKaartenKlikbaar() {
 		this.setMouseTransparent(false);
 	}
 
-	public void maakKaartenOnKlikbaar() {
+	protected void maakKaartenOnKlikbaar() {
 		this.setMouseTransparent(true);
 	}
 
-	public Ontwikkelingskaart geefOntwikkelingskaartVolgensIndex(int[] index) {
+	protected Ontwikkelingskaart geefOntwikkelingskaartVolgensIndex(int[] index) {
 		return kaarten[index[1]][index[0]];
 	}
 
-	public void legNieuweKaartOpTafel(Ontwikkelingskaart kaart, int[] kaartIndex) {
+	protected void legNieuweKaartOpTafel(Ontwikkelingskaart kaart, int[] kaartIndex) {
 
 		kaarten[kaartIndex[1]][kaartIndex[0]] = kaart;
 		this.add(new FXOntwikkelingskaart(kaart, kaartIndex, this), kaartIndex[0] + 1, kaartIndex[1]);

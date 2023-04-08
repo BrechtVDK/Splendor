@@ -4,6 +4,7 @@ import domein.DomeinController;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
 import javafx.beans.binding.IntegerBinding;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clickable {
@@ -49,7 +50,7 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	// Brecht: heb deze gekoppeld aan IntegerBinding aantal via listener, zo moet je
 	// deze
 	// niet meer ergens anders expliciet aanroepen bij wijziging
-	public void checkVisibility() {
+	protected void checkVisibility() {
 		boolean visible = (getAantal() == 0) ? false : true;
 		this.setVisible(visible);
 	}
@@ -60,7 +61,13 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		switch (parent) {
 		case "EdelsteenFicheScherm" -> verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm();
 		case "LinkerInfoScherm" -> verplaatsFicheVanLinkerInfoSchermNaarStapel();
-		case "EdelsteenficheGeefTerugScherm" -> verlaagFichesInBezitVerhoogFichesGeefTerug();
+		case "EdelsteenficheGeefTerugScherm" -> {
+			if (GridPane.getColumnIndex(this) == 0) {
+				verlaagFicheInBezitVerhoogFicheGeefTerug();
+			} else {
+				verhoogFicheInBezitVerlaagFicheGeefTerug();
+			}
+		}
 		}
 	}
 
@@ -89,18 +96,31 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		}
 	}
 
-	private void verlaagFichesInBezitVerhoogFichesGeefTerug() {
-
+	private void verlaagFicheInBezitVerhoogFicheGeefTerug() {
 		int aantal = getAantal() - 1;
 		// aantal aanpassen tem 0
 		if (aantal >= 0) {
 			getTxtAantal().setText(Integer.toString(aantal));
-			((EdelsteenficheGeefTerugScherm) this.getParent()).verhoogFicheInBezitMetEen(this);
+			((EdelsteenficheGeefTerugScherm) this.getParent()).verhoogFicheTerug(this);
 		}
 		// gelijk aan nul, niet meer klikbaar
 		if (aantal == 0) {
 			this.setMouseTransparent(true);
 		}
+	}
+
+	private void verhoogFicheInBezitVerlaagFicheGeefTerug() {
+		int aantal = getAantal() - 1;
+		// aantal aanpassen tem 0
+		if (aantal >= 0) {
+			getTxtAantal().setText(Integer.toString(aantal));
+			((EdelsteenficheGeefTerugScherm) this.getParent()).verhoogFicheInBezit(this);
+		}
+		// gelijk aan nul, niet meer zichtbaar
+		if (aantal == 0) {
+			this.setVisible(false);
+		}
+
 	}
 
 }

@@ -30,27 +30,21 @@ public class EdelsteenFicheScherm extends VBox {
 		this.getChildren().addAll(FXFicheGroen, FXFicheWit, FXFicheBlauw, FXFicheZwart, FXFicheRood);
 	}
 
-	public void maakFichesKlikbaar() {
+	protected void maakFichesKlikbaar() {
 		this.setMouseTransparent(false);
 	}
 
-	public void maakFichesOnklikbaar() {
+	protected void maakFichesOnklikbaar() {
 		this.setMouseTransparent(true);
 	}
 
-	public void voegEdelsteenficheToeAanLinkerInfoScherm(FXEdelsteenFiche edelsteenfiche) {
+	protected void voegEdelsteenficheToeAanLinkerInfoScherm(FXEdelsteenFiche edelsteenfiche) {
 		hs.voegEdelsteenficheToeAanLinkerInfoScherm(edelsteenfiche);
 	}
 
-	public void voegEdelsteenficheTerugToe(Edelsteenfiche e) {
+	protected void voegEdelsteenficheTerugToe(Edelsteenfiche e) {
 		dc.voegEdelsteenfichesTerugToeAanStapelsSpel(Arrays.asList(e));
-		// Overbodig geworden: Listener toegevoegd aan FXEdelsteenFicheKlikbaar
-		/*
-		 * switch (e.edelsteen()) { case GROEN -> FXFicheGroen.checkVisibility(); case
-		 * WIT -> FXFicheWit.checkVisibility(); case BLAUW ->
-		 * FXFicheBlauw.checkVisibility(); case ZWART -> FXFicheZwart.checkVisibility();
-		 * case ROOD -> FXFicheRood.checkVisibility(); }
-		 */
+
 	}
 
 }

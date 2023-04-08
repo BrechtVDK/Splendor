@@ -24,7 +24,7 @@ public abstract class FXKaart extends GridPane {
 		buildGui();
 	}
 
-	public void buildGui() {
+	private void buildGui() {
 		plaatsPrestigePunten();
 		voegEdelsteenfichesToe();
 

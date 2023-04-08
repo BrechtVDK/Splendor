@@ -30,11 +30,11 @@ public class EdelenScherm extends HBox {
 		}
 	}
 
-	public void markeerEnMaakBeschikbareEdelenKlikbaar(List<Edele> beschikbareEdelen) {
+	protected void markeerEnMaakBeschikbareEdelenKlikbaar(List<Edele> beschikbareEdelen) {
 		fxEdelen.stream().filter(fxe -> beschikbareEdelen.contains(fxe.getEdele())).forEach(fxe -> fxe.highlight());
 	}
 
-	public void verplaatsEdeleNaarSpeler(FXEdeleKaart fxEdele) {
+	protected void verplaatsEdeleNaarSpeler(FXEdeleKaart fxEdele) {
 		dc.verplaatsEdeleVanSpelNaarSpeler(fxEdele.getEdele());
 		this.getChildren().remove(fxEdele);
 		zetEdelenTerugNormaal();

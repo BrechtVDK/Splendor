@@ -57,7 +57,7 @@ public class Hoofdscherm extends GridPane {
 
 	}
 
-	public void bepaalVolgendeSpeler() {
+	protected void bepaalVolgendeSpeler() {
 
 		dc.bepaalVolgendeSpeler();
 		scoreBordScherm.markeerVolgendeSpeler();
@@ -65,19 +65,19 @@ public class Hoofdscherm extends GridPane {
 	}
 
 	// alles in verband met Ontwikkelingskaarten:
-	public void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart kaart) {
+	protected void verplaatsKaartNaarLinkerInfoScherm(FXOntwikkelingskaart kaart) {
 		linkerInfoScherm.voegOntwikkelingskaartToe(kaart);
 	}
 
-	public void maakKaartenKlikbaar() {
+	protected void maakKaartenKlikbaar() {
 		tafelscherm.maakKaartenKlikbaar();
 	}
 
-	public void maakKaartenOnKlikbaar() {
+	protected void maakKaartenOnKlikbaar() {
 		tafelscherm.maakKaartenOnKlikbaar();
 	}
 
-	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart fxKaart) {
+	protected void verplaatsOntwikkelingskaartVanTafelNaarSpeler(FXOntwikkelingskaart fxKaart) {
 		try {
 			// index gridpane:[kol][rij]
 			int[] indexKaart = fxKaart.getIndex();
@@ -100,19 +100,19 @@ public class Hoofdscherm extends GridPane {
 	}
 
 	// alles in verband met fiches:
-	public void maakFichesKlikbaar() {
+	protected void maakFichesKlikbaar() {
 		edelsteenFicheScherm.maakFichesKlikbaar();
 	}
 
-	public void maakFichesOnKlikbaar() {
+	protected void maakFichesOnKlikbaar() {
 		edelsteenFicheScherm.maakFichesOnklikbaar();
 	}
 
-	public void voegEdelsteenficheToeAanLinkerInfoScherm(FXEdelsteenFiche edelsteenfiche) {
+	protected void voegEdelsteenficheToeAanLinkerInfoScherm(FXEdelsteenFiche edelsteenfiche) {
 		linkerInfoScherm.voegFicheToe(edelsteenfiche);
 	}
 
-	public void verplaatsEdelsteenFichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches) {
+	protected void verplaatsEdelsteenFichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches) {
 		try {
 			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
@@ -129,14 +129,14 @@ public class Hoofdscherm extends GridPane {
 		}
 	}
 
-	public void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
+	protected void voegEdelsteenfichesTerugToeAanStapels(List<Edelsteenfiche> edelsteenfiches) {
 		for (Edelsteenfiche ef : edelsteenfiches) {
 			edelsteenFicheScherm.voegEdelsteenficheTerugToe(ef);
 		}
 	}
 
 	// einde beurt = controle DR_BEURT_SPECIALE_TEGEL en controle op einde ronde
-	public void eindeBeurt() {
+	protected void eindeBeurt() {
 		List<Edele> edelen = dc.geefBeschikbareEdelen();
 		if (!edelen.isEmpty()) {
 			edelenScherm.markeerEnMaakBeschikbareEdelenKlikbaar(edelen);
@@ -148,7 +148,7 @@ public class Hoofdscherm extends GridPane {
 	}
 
 	// einde ronde = controle DR_SPEL_EINDE
-	public void controleEindeRonde() {
+	protected void controleEindeRonde() {
 		if (dc.geefSpelerAanDeBeurt().equals(dc.geefLaatsteSpelerVanRonde()) && dc.isEindeSpel()) {
 			EindeSpelScherm eindespelscherm = new EindeSpelScherm(dc.geefNamenWinnaars(), this);
 			Scene scene = new Scene(eindespelscherm, 400, 400);

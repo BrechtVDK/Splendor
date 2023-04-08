@@ -21,7 +21,7 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 	private FXEdelsteenFicheKlikbaar[] fichesInBezit;
 	// Jonas: fichesTerug aangepast naar lijst ipv Array: gaf een fout omdat de
 	// array een vaste grootte had en een lijst niet
-	private List<FXEdelsteenFiche> fichesTerug;
+	private List<FXEdelsteenFicheKlikbaar> fichesTerug;
 	private IntegerProperty totaalInBezit;
 
 	public EdelsteenficheGeefTerugScherm(DomeinController dc) {
@@ -62,7 +62,7 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 			totaalInBezit.set(totaalInBezit.get() + aantal);
 			if (aantal > 0) {
 				fichesInBezit[teller] = new FXEdelsteenFicheKlikbaar(edelsteen, 20, aantal);
-				FXEdelsteenFiche nieuweFiche = new FXEdelsteenFiche(edelsteen, 20, 0);
+				FXEdelsteenFicheKlikbaar nieuweFiche = new FXEdelsteenFicheKlikbaar(edelsteen, 20, 0);
 				fichesTerug.add(nieuweFiche);
 				nieuweFiche.setVisible(false);
 				this.add(fichesInBezit[teller], 0, rij);
@@ -72,7 +72,7 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 
 	}
 
-	public void verhoogFicheInBezitMetEen(FXEdelsteenFicheKlikbaar ficheInBezit) {
+	protected void verhoogFicheTerug(FXEdelsteenFicheKlikbaar ficheInBezit) {
 		// indexen van ficheTerug bepalen adhv ficheInBezit
 		int kol = GridPane.getColumnIndex(ficheInBezit) + 1;
 		int rij = GridPane.getRowIndex(ficheInBezit);
@@ -86,10 +86,30 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 			((FXEdelsteenFiche) ficheTerug).setVisible(true);
 		}
 		((FXEdelsteenFiche) ficheTerug).getTxtAantal().setText(Integer.toString(huidigAantal + 1));
+
 		totaalInBezit.set(totaalInBezit.get() - 1);
 	}
 
-	public List<Edelsteenfiche> geefTerugTeGevenFiches() {
+	protected void verhoogFicheInBezit(FXEdelsteenFicheKlikbaar ficheTerug) {
+		// indexen van ficheInBezit bepalen adhv ficheTerug
+		int kol = GridPane.getColumnIndex(ficheTerug) - 1;
+		int rij = GridPane.getRowIndex(ficheTerug);
+		// ficheInBezit zoeken adhv indexen
+		Node ficheInBezit = this.getChildren().stream()
+				.filter(node -> GridPane.getRowIndex(node) == rij && GridPane.getColumnIndex(node) == kol).findFirst()
+				.orElse(null);
+		// getal aanpassen
+		int huidigAantal = ((FXEdelsteenFiche) ficheInBezit).getAantal();
+		if (huidigAantal == 0) {
+			((FXEdelsteenFiche) ficheInBezit).setMouseTransparent(false);
+		}
+
+		((FXEdelsteenFiche) ficheInBezit).getTxtAantal().setText(Integer.toString(huidigAantal + 1));
+
+		totaalInBezit.set(totaalInBezit.get() + 1);
+	}
+
+	protected List<Edelsteenfiche> geefTerugTeGevenFiches() {
 		List<Edelsteenfiche> lijst = new ArrayList<>();
 		for (FXEdelsteenFiche fiche : fichesTerug) {
 			int aantal = fiche.getAantal();
@@ -100,7 +120,7 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 		return lijst;
 	}
 
-	public void resetFiches() {
+	protected void resetFiches() {
 		this.getChildren().removeAll(fichesInBezit);
 		this.getChildren().removeAll(fichesTerug);
 		totaalInBezit.set(0);
