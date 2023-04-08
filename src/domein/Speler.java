@@ -69,7 +69,9 @@ public class Speler {
 	// UC2
 
 	protected void stelSpelAttributenIn() {
-		this.prestigepunten = new SimpleIntegerProperty(0);
+		// om einde spel sneller te kunnen testen
+		this.prestigepunten = new SimpleIntegerProperty(14);
+		// this.prestigepunten = new SimpleIntegerProperty(0);
 		this.edelenInBezit = FXCollections.observableArrayList();
 		this.ontwikkelingskaartenInBezit = FXCollections.observableArrayList();
 		this.aantalEdelsteenfichesPerTypeInBezit = FXCollections.observableHashMap();
@@ -77,7 +79,7 @@ public class Speler {
 		for (Edelsteen e : Edelsteen.values()) {
 			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
 
-			// om edelen sneller te kunnen testen, best even op 2 zetten:
+			// om edelen sneller te kunnen testen
 			aantalBonussenPerTypeInBezit.put(e, 2);
 			// aantalBonussenPerTypeInBezit.put(e, 0);
 		}

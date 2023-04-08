@@ -58,11 +58,8 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		if (parent.equals("TafelScherm")) {
 			tafel.verplaatsKaartNaarLinkerInfoScherm(this);
 			tafel.maakKaartenOnKlikbaar();
-			// Brecht: zie LinkerInfoScherm.voegOntwikkelingskaartToe()
-			// ((LinkerInfoScherm) this.getParent()).activeerBevestigKnop();
 		} else {
 			((LinkerInfoScherm) this.getParent()).deactiveerBevestigKnop();
-			// ((LinkerInfoScherm) this.getParent()).verwijderBevestigKnop();
 
 			tafel.voegFouteKaartTerugToeVanLinkerInfoScherm(this);
 			tafel.maakKaartenKlikbaar();

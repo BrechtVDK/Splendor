@@ -19,6 +19,7 @@ import resources.Taal;
 public class Spel {
 	private ObservableList<Speler> spelers;
 	private int spelerAanDeBeurt;
+	private int laatsteSpelerVanRonde;
 	private Tafel tafel;
 	private List<Edele> edelen;
 	// hashmap: sleutel = enum Edelsteen, waarde = list Edelsteenfiches
@@ -103,10 +104,10 @@ public class Spel {
 				.toList().get(0);
 
 		// isStartSpeler van Speler op true zetten en instellen als
-		// spelerAanDeBeurt;
+		// spelerAanDeBeurt + laatsteSpelerVanRonde vastleggen
 		spelerAanDeBeurt = spelers.indexOf(startSpeler);
 		startSpeler.setStartSpeler(true);
-
+		laatsteSpelerVanRonde = spelerAanDeBeurt == 0 ? spelers.size() - 1 : spelerAanDeBeurt - 1;
 	}
 
 	public int geefAantalSpelers() {
@@ -239,6 +240,10 @@ public class Spel {
 	public void verplaatsEdeleVanSpelNaarSpeler(Edele edele) {
 		this.getSpelerAanDeBeurt().voegEdeleToe(edele);
 		edelen.remove(edele);
+	}
+
+	public Speler geefLaatsteSpelerVanRonde() {
+		return spelers.get(laatsteSpelerVanRonde);
 	}
 
 	// UC4

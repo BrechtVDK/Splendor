@@ -44,8 +44,9 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 		// meer bereikbaar na uitvoeren ervan
 		EdelenScherm edelenscherm = (EdelenScherm) this.getParent();
 		edelenscherm.verplaatsEdeleNaarSpeler(this);
-		// volgende speler in stellen
-		((Hoofdscherm) edelenscherm.getParent()).bepaalVolgendeSpeler();
+		((Hoofdscherm) edelenscherm.getParent()).maakInfoOfFoutLabelLeeg();
+		// beurt beëindigd -> controle einde ronde
+		((Hoofdscherm) edelenscherm.getParent()).controleEindeRonde();
 
 	}
 

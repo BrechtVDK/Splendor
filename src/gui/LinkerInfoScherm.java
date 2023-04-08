@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class LinkerInfoScherm extends VBox {
@@ -26,7 +27,7 @@ public class LinkerInfoScherm extends VBox {
 	private EdelsteenficheGeefTerugScherm edelsteenficheGeefTerugScherm;
 	private int indexBtnBevestig;
 
-	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfo;
+	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfoOfFout;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig;
 
 	public LinkerInfoScherm(DomeinController dc, Hoofdscherm hs) {
@@ -49,7 +50,7 @@ public class LinkerInfoScherm extends VBox {
 		lblSpelerAanDeBeurt = new Label(
 				String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
 		lblKeuze = new Label("Wat wil je doen in deze beurt?");
-		lblInfo = new Label();
+		lblInfoOfFout = new Label();
 
 		btnKaart = new Button("Ik koop een ontwikkelingskaart");
 		btnFiche = new Button("Ik neem edelsteenfiches");
@@ -61,9 +62,13 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
-		// Brecht: btnBevestig geschrapt: onderaan scherm toevoegen (onder kaart of
-		// fiches)
-		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfo, btnBevestig);
+		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfoOfFout,
+				btnBevestig);
+
+		// index btnBevestig bijhouden om nodes tussen te voegen / verwijderen en later
+		// terug toe te voegen
+		indexBtnBevestig = this.getChildren().indexOf(btnBevestig);
+
 		// alle labels wrappen
 		this.getChildren().forEach(node -> {
 			if (node instanceof Label) {
@@ -73,30 +78,30 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	private void pasGeklikt(ActionEvent e) {
-		hs.bepaalVolgendeSpeler();
-		// Brecht: wordt in methode hierboven aangeroepen
-		// stelVolgendeSpelerIn();
-		lblInfo.setText(
-				String.format("Je besliste om te passen, de volgende speler is %s.", dc.geefSpelerAanDeBeurt()));
-
-		maakInfoLabelLeeg(2);
+		hs.eindeBeurt();
+		toonInfo(String.format("Je besliste om te passen, de volgende speler is %s.", dc.geefSpelerAanDeBeurt()));
+		maakInfoOfFoutLabelLeegNaXSec(2);
 	}
 
-	public void stelVolgendeSpelerIn() {
+	protected void stelVolgendeSpelerIn() {
 		lblSpelerAanDeBeurt
 				.setText(String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
 	}
 
-	private void maakInfoLabelLeeg(double seconden) {
-		// tijdlijn om pasboodschap na x seconden te wissen (andere speler is dan reeds
-		// aan de beurt)
+	private void maakInfoOfFoutLabelLeegNaXSec(double seconden) {
+		// tijdlijn om boodschap na x seconden te wissen
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconden), ev -> {
-			lblInfo.setText("");
+			lblInfoOfFout.setText("");
 		}));
 		timeline.play();
 	}
 
+	protected void maakInfoOfFoutLabelLeeg() {
+		lblInfoOfFout.setText("");
+	}
+
 	private void kiesKaartGeklikt(ActionEvent e) {
+		maakInfoOfFoutLabelLeeg();
 		hs.maakKaartenKlikbaar();
 		verbergKeuzeknoppen();
 		lblKeuze.setText("Kies een kaart van de tafel");
@@ -104,44 +109,43 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	private void kiesFicheGeklikt(ActionEvent e) {
+		maakInfoOfFoutLabelLeeg();
 		hs.maakFichesKlikbaar();
 		verbergKeuzeknoppen();
 		lblKeuze.setText("Kies 2 fiches van dezelfde kleur of 3 verschillende.");
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "fiche"));
 	}
 
-	public void toonFoutmelding(String foutmelding) {
-		lblInfo.setText(foutmelding);
+	protected void toonInfo(String info) {
+		lblInfoOfFout.setTextFill(Color.BLACK);
+		lblInfoOfFout.setText(info);
 	}
 
-	private void verbergKeuzeknoppen() {
+	protected void toonFoutmelding(String foutmelding) {
+		lblInfoOfFout.setTextFill(Color.RED);
+		lblInfoOfFout.setText(foutmelding);
+	}
+
+	protected void verbergKeuzeknoppen() {
 		btnKaart.setVisible(false);
 		btnFiche.setVisible(false);
 		btnPas.setVisible(false);
 		deactiveerBevestigKnop();
 	}
 
-	public void activeerBevestigKnop() { // Brecht aangepast naar visible
-		btnBevestig.setVisible(true); // btnBevestig.setDisable(false);
+	protected void activeerBevestigKnop() {
+		btnBevestig.setVisible(true);
 	}
 
-	public void deactiveerBevestigKnop() { // Brecht aangepast naar visible
-		btnBevestig.setVisible(false); // btnBevestig.setDisable(true);
+	protected void deactiveerBevestigKnop() {
+		btnBevestig.setVisible(false);
 	}
-
-//	public void verwijderBevestigKnop() {
-//		if (this.getChildren().contains(btnBevestig)) {
-//			this.getChildren().remove(btnBevestig);
-//		}
-//
-//	}
 
 	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
 
 		switch (spelerKeuze) {
 		case ("kaart") -> {
 			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
-			// verwijderBevestigKnop();
 			deactiveerBevestigKnop();
 		}
 		case ("fiche") -> {
@@ -154,53 +158,52 @@ public class LinkerInfoScherm extends VBox {
 			hs.maakFichesOnKlikbaar();
 		}
 		case ("ficheTerug") -> {
+			maakInfoOfFoutLabelLeeg();
 			List<Edelsteenfiche> terugTeGevenFiches = edelsteenficheGeefTerugScherm.geefTerugTeGevenFiches();
-
-			this.getChildren().remove(hboxEdelsteenficheGeefTerugScherm);
-			// btnBevestig terug toevoegen op oorspronkelijke plaats
-			this.getChildren().add(indexBtnBevestig, btnBevestig);
 
 			// validatie exact 10 fiches in bezit na teruggave
 			try {
 				dc.verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(terugTeGevenFiches);
+				this.getChildren().remove(hboxEdelsteenficheGeefTerugScherm);
+				// btnBevestig terug toevoegen op oorspronkelijke plaats
+				this.getChildren().add(indexBtnBevestig, btnBevestig);
 				zetKeuzeMenuTerug();
-				hs.bepaalVolgendeSpeler();
+				hs.eindeBeurt();
 			} catch (IllegalArgumentException ex) {
 				toonFoutmelding(ex.getMessage());
-				zetKlaarOmFichesTerugTeGeven();
+				edelsteenficheGeefTerugScherm.resetFiches();
 			}
+
 		}
 		}
 
-		maakInfoLabelLeeg(3);
+		// maakInfoOfFoutLabelLeegNaXSec(5);
 
 	}
 
-	public void zetKeuzeMenuTerug() {
+	protected void zetKeuzeMenuTerug() {
 		lblKeuze.setText("Wat wil je doen in deze beurt?");
 		btnKaart.setVisible(true);
 		btnFiche.setVisible(true);
 		btnPas.setVisible(true);
 		deactiveerBevestigKnop();
-		// verwijderBevestigKnop();
 	}
 
 	// Ontwikkelingskaarten:
-	public void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
+	protected void voegOntwikkelingskaartToe(FXOntwikkelingskaart kaart) {
 		this.gekozenKaart = kaart;
-		// Brecht: btnBevestig onder kaart toevoegen
-		this.getChildren().addAll(gekozenKaart);
+		this.getChildren().add(indexBtnBevestig, gekozenKaart);
 		activeerBevestigKnop();
 	}
 
-	public void verwijderKaart(FXOntwikkelingskaart kaart) {
+	protected void verwijderKaart(FXOntwikkelingskaart kaart) {
 		this.getChildren().remove(kaart);
 	}
 
 	// Fiches
-	public void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
+	protected void voegFicheToe(FXEdelsteenFiche edelsteenfiche) {
 		edelsteenfiches.add(edelsteenfiche);
-		this.getChildren().add(edelsteenfiche);
+		this.getChildren().add(indexBtnBevestig, edelsteenfiche);
 		if (edelsteenfiches.size() == Spel.MAX_FICHES_PER_BEURT) {
 			hs.maakFichesOnKlikbaar();
 			// enkel bij eerste fiche activeren
@@ -209,14 +212,14 @@ public class LinkerInfoScherm extends VBox {
 		}
 	}
 
-	public void verwijderFiches() {
+	protected void verwijderFiches() {
 		for (FXEdelsteenFiche ef : edelsteenfiches) {
 			this.getChildren().remove(ef);
 		}
 		edelsteenfiches.clear();
 	}
 
-	public void verwijderEnkeleFiche(FXEdelsteenFiche ef) {
+	protected void verwijderEnkeleFiche(FXEdelsteenFiche ef) {
 		this.getChildren().remove(ef);
 		edelsteenfiches.remove(ef);
 
@@ -225,13 +228,11 @@ public class LinkerInfoScherm extends VBox {
 		}
 	}
 
-	public void voegEdelsteenficheTerugToeAanStapel(Edelsteenfiche e) {
+	protected void voegEdelsteenficheTerugToeAanStapel(Edelsteenfiche e) {
 		hs.voegEdelsteenfichesTerugToeAanStapels(Arrays.asList(e));
 	}
 
-	public void zetKlaarOmFichesTerugTeGeven() {
-		// index btnBevestig bijhouden om later terug toe te voegen
-		indexBtnBevestig = this.getChildren().indexOf(btnBevestig);
+	protected void zetKlaarOmFichesTerugTeGeven() {
 		this.getChildren().remove(btnBevestig);
 		activeerBevestigKnop();
 
@@ -247,7 +248,7 @@ public class LinkerInfoScherm extends VBox {
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug"));
 	}
 
-	public void maakFichesKlikbaarInEdelsteenficheScherm() {
+	protected void maakFichesKlikbaarInEdelsteenficheScherm() {
 		hs.maakFichesKlikbaar();
 
 	}

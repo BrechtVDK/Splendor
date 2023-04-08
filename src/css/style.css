@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
 /*  Brecht: overbodig momenteel. Aangepast dat de kleuren uit de enum Edelsteen komen
 #smaragd {
   -fx-background-color: #3C5F30;
@@ -47,9 +47,18 @@
 	-fx-font-family: 'Londrina Outline', cursive;
 	-fx-font-size:35.0;
 }
+#eindeSpelSchermTitel
+{
+	-fx-font-family:'Eagle Lake', cursive;
+	-fx-font-size:35.0;
+}
+#eindeSpelSchermWinnaars{
+		-fx-font-family:'Eagle Lake';
+	-fx-font-size:20.0;
+}
 
 .hoofdscherm {
-	-fx-background-color: #F8BD7F;
+	-fx-background-color: #4F79A3;
 }
 
 .stapelniveau1 {
@@ -67,9 +76,9 @@
 .scoreKaart{
 	-fx-font-family: 'Londrina Solid', cursive;
 	-fx-border-color: #a9a9a9;
-	-fx-border-width: 2px;
-	-fx-background-radius: 10px;
-	-fx-border-radius: 10px;
+	-fx-border-width: 2.0px;
+	-fx-background-radius: 10.0px;
+	-fx-border-radius: 10.0px;
 	-fx-font-size: 16.0px;
 	
 }

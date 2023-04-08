@@ -22,7 +22,6 @@ public class EdelenScherm extends HBox {
 	}
 
 	private void maakEdeleKaartenAan() {
-
 		List<Edele> edelen = dc.geefEdelen();
 		for (Edele edele : edelen) {
 			FXEdeleKaart kaart = new FXEdeleKaart(edele);
@@ -32,22 +31,7 @@ public class EdelenScherm extends HBox {
 	}
 
 	public void markeerEnMaakBeschikbareEdelenKlikbaar(List<Edele> beschikbareEdelen) {
-
-		for (Edele beschikbareEdele : beschikbareEdelen) {
-			for (FXEdeleKaart fxE : fxEdelen) {
-				if (fxE.getEdele().equals(beschikbareEdele)) {
-					fxE.highlight();
-				} else {
-					// Blurren: niet geslaagd vind ik
-					// GaussianBlur blur = new GaussianBlur();
-					// Hoe hoger getal, hoe hoger blureffect
-					// blur.setRadius(1);
-					// fxE.setEffect(blur);
-
-					// fxE.setVisible(false);
-				}
-			}
-		}
+		fxEdelen.stream().filter(fxe -> beschikbareEdelen.contains(fxe.getEdele())).forEach(fxe -> fxe.highlight());
 	}
 
 	public void verplaatsEdeleNaarSpeler(FXEdeleKaart fxEdele) {
@@ -58,7 +42,6 @@ public class EdelenScherm extends HBox {
 
 	private void zetEdelenTerugNormaal() {
 		for (FXEdeleKaart fxE : fxEdelen) {
-			// fxE.setVisible(true);
 			fxE.setEffect(null);
 			fxE.setMouseTransparent(true);
 		}

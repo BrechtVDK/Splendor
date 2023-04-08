@@ -105,6 +105,10 @@ public class DomeinController {
 		spel.verplaatsEdeleVanSpelNaarSpeler(edele);
 	}
 
+	public Speler geefLaatsteSpelerVanRonde() {
+		return spel.geefLaatsteSpelerVanRonde();
+	}
+
 	// UC4
 	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException, TeVeelFichesInBezitException {

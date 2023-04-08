@@ -7,9 +7,12 @@ import domein.DomeinController;
 import domein.Edele;
 import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Hoofdscherm extends GridPane {
 	private DomeinController dc;
@@ -91,9 +94,9 @@ public class Hoofdscherm extends GridPane {
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
 			tafelscherm.voegFouteKaartTerugToeVanLinkerInfoScherm(fxKaart);
 			linkerInfoScherm.deactiveerBevestigKnop();
-			// linkerInfoScherm.verwijderBevestigKnop();
+			linkerInfoScherm.zetKeuzeMenuTerug();
 		}
-		linkerInfoScherm.zetKeuzeMenuTerug();
+
 	}
 
 	// alles in verband met fiches:
@@ -114,7 +117,6 @@ public class Hoofdscherm extends GridPane {
 			dc.verplaatsEdelsteenfichesNaarSpeler(edelsteenfiches);
 			linkerInfoScherm.verwijderFiches();
 			eindeBeurt();
-			linkerInfoScherm.zetKeuzeMenuTerug();
 		} catch (TeVeelFichesInBezitException e) {
 			linkerInfoScherm.verwijderFiches();
 			linkerInfoScherm.toonFoutmelding(e.getMessage());
@@ -133,14 +135,40 @@ public class Hoofdscherm extends GridPane {
 		}
 	}
 
-	private void eindeBeurt() {
-		// controle DR_BEURT_SPECIALE_TEGEL
+	// einde beurt = controle DR_BEURT_SPECIALE_TEGEL en controle op einde ronde
+	public void eindeBeurt() {
 		List<Edele> edelen = dc.geefBeschikbareEdelen();
 		if (!edelen.isEmpty()) {
 			edelenScherm.markeerEnMaakBeschikbareEdelenKlikbaar(edelen);
+			linkerInfoScherm.verbergKeuzeknoppen();
+			linkerInfoScherm.toonInfo("Selecteer één beschikbare edele!");
+		} else {
+			controleEindeRonde();
+		}
+	}
+
+	// einde ronde = controle DR_SPEL_EINDE
+	public void controleEindeRonde() {
+		if (dc.geefSpelerAanDeBeurt().equals(dc.geefLaatsteSpelerVanRonde()) && dc.isEindeSpel()) {
+			EindeSpelScherm eindespelscherm = new EindeSpelScherm(dc.geefNamenWinnaars(), this);
+			Scene scene = new Scene(eindespelscherm, 400, 400);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Einde spel");
+			stage.setResizable(false);
+			scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+			// kruisje klikken = afsluiten
+			stage.setOnCloseRequest(event -> Platform.exit());
+			stage.show();
 		} else {
 			bepaalVolgendeSpeler();
+			linkerInfoScherm.zetKeuzeMenuTerug();
 		}
+
+	}
+
+	protected void maakInfoOfFoutLabelLeeg() {
+		linkerInfoScherm.maakInfoOfFoutLabelLeeg();
 	}
 
 }
