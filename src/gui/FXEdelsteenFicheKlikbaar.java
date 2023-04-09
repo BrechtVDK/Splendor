@@ -47,7 +47,8 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 
 	}
 
-	// Brecht: heb deze gekoppeld aan IntegerBinding aantal via listener, zo moet je
+	// Brecht: heb deze gekoppeld aan IntegerBinding aantal van de stapels via
+	// listener, zo moet je
 	// deze
 	// niet meer ergens anders expliciet aanroepen bij wijziging
 	protected void checkVisibility() {
@@ -62,8 +63,10 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 		case "EdelsteenFicheScherm" -> verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm();
 		case "LinkerInfoScherm" -> verplaatsFicheVanLinkerInfoSchermNaarStapel();
 		case "EdelsteenficheGeefTerugScherm" -> {
+			// ficheInBezit
 			if (GridPane.getColumnIndex(this) == 0) {
 				verlaagFicheInBezitVerhoogFicheGeefTerug();
+				// ficheTerug
 			} else {
 				verhoogFicheInBezitVerlaagFicheGeefTerug();
 			}
@@ -78,22 +81,10 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	}
 
 	private void verplaatsFicheVanLinkerInfoSchermNaarStapel() {
-		// fiche bevat getal: bij validatie >10 fiches in bezit
-		// fiche uit spelervoorraad nemen en terugleggen op stapel
-		if (this.getChildren().contains(txtAantal)) {
-			// ((LinkerInfoScherm) this.getParent())
-			// .verplaatsEdelsteenfichesVanSpelerNaarSpel
-			((LinkerInfoScherm) this.getParent())
-					.voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(super.getEdelsteen()));
-
-		}
-		// fiche bevat geen getal -> klikken = terugleggen op stapel
-		else {
-			((LinkerInfoScherm) this.getParent())
-					.voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(super.getEdelsteen()));
-			((LinkerInfoScherm) this.getParent()).maakFichesKlikbaarInEdelsteenficheScherm();
-			((LinkerInfoScherm) this.getParent()).verwijderEnkeleFiche(this);
-		}
+		((LinkerInfoScherm) this.getParent())
+				.voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(super.getEdelsteen()));
+		((LinkerInfoScherm) this.getParent()).maakFichesKlikbaarInEdelsteenficheScherm();
+		((LinkerInfoScherm) this.getParent()).verwijderEnkeleFiche(this);
 	}
 
 	private void verlaagFicheInBezitVerhoogFicheGeefTerug() {

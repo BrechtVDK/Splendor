@@ -157,7 +157,7 @@ public class Hoofdscherm extends GridPane {
 			stage.setTitle("Einde spel");
 			stage.setResizable(false);
 			scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-			// kruisje klikken = afsluiten
+			// kruisje klikken = volledige applicatie afsluiten
 			stage.setOnCloseRequest(event -> Platform.exit());
 			stage.show();
 		} else {
