@@ -160,6 +160,7 @@ public class Hoofdscherm extends GridPane {
 			// kruisje klikken = volledige applicatie afsluiten
 			stage.setOnCloseRequest(event -> Platform.exit());
 			stage.show();
+
 		} else {
 			bepaalVolgendeSpeler();
 			linkerInfoScherm.zetKeuzeMenuTerug();

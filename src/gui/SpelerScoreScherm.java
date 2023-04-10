@@ -35,11 +35,7 @@ public class SpelerScoreScherm extends GridPane {
 		this.setVgap(5);
 		this.setHgap(10);
 		this.getStyleClass().add("scoreKaart");
-		if (dc.geefSpelerAanDeBeurt().equals(speler)) {
-			this.getStyleClass().add("scoreKaartAanBeurt");
-		} else {
-			this.getStyleClass().add("scoreKaartNietAanBeurt");
-		}
+		this.setId(String.format("%s", isSpelerAanDeBeurt() ? "aanBeurt" : "nietAanBeurt"));
 		this.setPadding(new Insets(5));
 
 		// Labels

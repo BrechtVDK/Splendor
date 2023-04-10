@@ -60,10 +60,7 @@ public class ScoreBordScherm extends VBox {
 	protected void markeerVolgendeSpeler() {
 		// achtergrond scorebord speler aan de beurt aanpassen
 		for (SpelerScoreScherm sss : spelerScoreSchermen) {
-			sss.getStyleClass().clear();
-			sss.getStyleClass().add("scoreKaart");
-			sss.getStyleClass().add(
-					String.format("%s", sss.isSpelerAanDeBeurt() ? "scoreKaartAanBeurt" : "scoreKaartNietAanBeurt"));
+			sss.setId(String.format("%s", sss.isSpelerAanDeBeurt() ? "aanBeurt" : "nietAanBeurt"));
 		}
 	}
 }

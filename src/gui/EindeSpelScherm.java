@@ -17,7 +17,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import main.StartUpGui;
@@ -45,16 +44,15 @@ public class EindeSpelScherm extends VBox {
 		this.setBackground(new Background(new BackgroundImage(imgSplendor, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 
+
 		Label lblEindeSpel = new Label("EINDE SPEL");
-		lblEindeSpel.setTextFill(Color.YELLOW);
-		lblEindeSpel.setId("eindeSpelSchermTitel");
+		lblEindeSpel.setId("titel");
 		// marge onder = 90 -> winnaars in het midden
 		VBox.setMargin(lblEindeSpel, new Insets(0, 0, 90, 0));
 
 		Label lblWinnaars = new Label();
 		lblWinnaars.setText(String.format("%s %s gewonnen!", winnaars, eenWinnaar ? "is" : "hebben"));
-		lblWinnaars.setTextFill(Color.YELLOW);
-		lblWinnaars.setId("eindeSpelSchermWinnaars");
+		lblWinnaars.setId("winnaars");
 		lblWinnaars.setTextAlignment(TextAlignment.CENTER);
 		lblWinnaars.setWrapText(true);
 		// marge onder = 100 -> knoppen onderaan
@@ -71,6 +69,7 @@ public class EindeSpelScherm extends VBox {
 		hboxButtons.getChildren().addAll(btnSpeelOpnieuw, btnAfsluiten);
 
 		this.getChildren().addAll(lblEindeSpel, lblWinnaars, hboxButtons);
+		this.lookupAll(".label").forEach(label -> label.getStyleClass().add("eindeSpelSchermLabels"));
 	}
 
 	private void speelOpnieuwGeklikt(ActionEvent event) {
