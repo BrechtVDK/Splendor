@@ -28,7 +28,7 @@ public class LinkerInfoScherm extends VBox {
 	private int indexBtnBevestig;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfoOfFout;
-	private Button btnKaart, btnFiche, btnPas, btnBevestig;
+	private Button btnKaart, btnFiche, btnPas, btnBevestig, btnAnnuleer;
 
 	public LinkerInfoScherm(DomeinController dc, Hoofdscherm hs) {
 		this.dc = dc;
@@ -58,12 +58,15 @@ public class LinkerInfoScherm extends VBox {
 		btnBevestig = new Button("Bevestig keuze");
 		btnBevestig.setId("btnBevestig");
 		btnBevestig.setVisible(false);
+		btnAnnuleer = new Button("Annuleer");
+		btnAnnuleer.setVisible(false);
+
 
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
 		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfoOfFout,
-				btnBevestig);
+				btnBevestig, btnAnnuleer);
 
 		// index btnBevestig bijhouden om nodes tussen te voegen / verwijderen en later
 		// terug toe te voegen
@@ -106,6 +109,7 @@ public class LinkerInfoScherm extends VBox {
 		verbergKeuzeknoppen();
 		lblKeuze.setText("Kies een kaart van de tafel");
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart"));
+		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "kaart"));
 	}
 
 	private void kiesFicheGeklikt(ActionEvent e) {
@@ -114,6 +118,7 @@ public class LinkerInfoScherm extends VBox {
 		verbergKeuzeknoppen();
 		lblKeuze.setText("Kies 2 fiches van dezelfde kleur of 3 verschillende.");
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "fiche"));
+		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "fiche"));
 	}
 
 	protected void toonInfo(String info) {
@@ -135,10 +140,12 @@ public class LinkerInfoScherm extends VBox {
 
 	protected void activeerBevestigKnop() {
 		btnBevestig.setVisible(true);
+		btnAnnuleer.setVisible(true);
 	}
 
 	protected void deactiveerBevestigKnop() {
 		btnBevestig.setVisible(false);
+		btnAnnuleer.setVisible(false);
 	}
 
 	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
@@ -178,6 +185,25 @@ public class LinkerInfoScherm extends VBox {
 		}
 
 		// maakInfoOfFoutLabelLeegNaXSec(5);
+
+	}
+
+	private void annuleerGeklikt(ActionEvent e, String spelerkeuze) {
+		switch (spelerkeuze) {
+		case ("kaart") -> {
+			gekozenKaart.onLeftClicked();
+			hs.maakKaartenOnKlikbaar();
+		}
+		case ("fiche") -> {
+			for (FXEdelsteenFiche ef : edelsteenfiches) {
+				voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(ef.getEdelsteen()));
+			}
+			verwijderFiches();
+			hs.maakFichesOnKlikbaar();
+		}
+		}
+
+		zetKeuzeMenuTerug();
 
 	}
 
