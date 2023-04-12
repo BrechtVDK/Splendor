@@ -25,7 +25,7 @@ public class LinkerInfoScherm extends VBox {
 	private List<FXEdelsteenFiche> edelsteenfiches;
 	private HBox hboxEdelsteenficheGeefTerugScherm;
 	private EdelsteenficheGeefTerugScherm edelsteenficheGeefTerugScherm;
-	private int indexBtnBevestig;
+	private int indexBtnBevestig, indexBtnAnnuleer;
 
 	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfoOfFout;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig, btnAnnuleer;
@@ -68,9 +68,10 @@ public class LinkerInfoScherm extends VBox {
 		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfoOfFout,
 				btnBevestig, btnAnnuleer);
 
-		// index btnBevestig bijhouden om nodes tussen te voegen / verwijderen en later
+		// index bijhouden om nodes tussen te voegen / verwijderen en later
 		// terug toe te voegen
 		indexBtnBevestig = this.getChildren().indexOf(btnBevestig);
+		indexBtnAnnuleer = this.getChildren().indexOf(btnAnnuleer);
 
 		// alle labels wrappen
 		this.getChildren().forEach(node -> {
@@ -140,6 +141,7 @@ public class LinkerInfoScherm extends VBox {
 
 	protected void activeerBevestigKnop() {
 		btnBevestig.setVisible(true);
+		btnBevestig.requestFocus();
 		btnAnnuleer.setVisible(true);
 	}
 
@@ -172,8 +174,10 @@ public class LinkerInfoScherm extends VBox {
 			try {
 				dc.verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(terugTeGevenFiches);
 				this.getChildren().remove(hboxEdelsteenficheGeefTerugScherm);
-				// btnBevestig terug toevoegen op oorspronkelijke plaats
+				// btnBevestig, btnAnnuleer terug toevoegen op oorspronkelijke plaats, volgorde
+				// belangrijk!
 				this.getChildren().add(indexBtnBevestig, btnBevestig);
+				this.getChildren().add(indexBtnAnnuleer, btnAnnuleer);
 				zetKeuzeMenuTerug();
 				hs.eindeBeurt();
 			} catch (IllegalArgumentException ex) {
@@ -259,8 +263,12 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	protected void zetKlaarOmFichesTerugTeGeven() {
+		// volgorde verwijderen belangrijk!
+		this.getChildren().remove(indexBtnAnnuleer);
 		this.getChildren().remove(btnBevestig);
 		activeerBevestigKnop();
+
+		lblKeuze.setText("");
 
 		hboxEdelsteenficheGeefTerugScherm = new HBox();
 		hboxEdelsteenficheGeefTerugScherm.setAlignment(Pos.CENTER);
