@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 import domein.Speler;
 import resources.Taal;

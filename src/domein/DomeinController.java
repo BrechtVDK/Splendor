@@ -3,7 +3,7 @@ package domein;
 import java.util.List;
 import java.util.Map;
 
-import Exceptions.TeVeelFichesInBezitException;
+import exceptions.TeVeelFichesInBezitException;
 import javafx.beans.binding.IntegerBinding;
 import javafx.collections.ObservableList;
 

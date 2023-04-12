@@ -2,11 +2,11 @@ package gui;
 
 import java.util.List;
 
-import Exceptions.TeVeelFichesInBezitException;
 import domein.DomeinController;
 import domein.Edele;
 import domein.Edelsteenfiche;
 import domein.Ontwikkelingskaart;
+import exceptions.TeVeelFichesInBezitException;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

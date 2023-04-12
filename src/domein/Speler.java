@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-import Exceptions.TeVeelFichesInBezitException;
+import exceptions.TeVeelFichesInBezitException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
