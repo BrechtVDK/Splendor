@@ -30,6 +30,9 @@ public class Spel {
 	public static final int MAX_FICHES_PER_BEURT = 3;
 
 	// UC1
+	/**
+	 * Constructor zorgt ervoor dat een nieuw spel aangemaakt wordt.
+	 */
 	public Spel() {
 		maakStapelsEdelsteenfichesAan();
 		tafel = new Tafel();
@@ -38,19 +41,45 @@ public class Spel {
 		spelerAanDeBeurt = -1;
 	}
 
+	/**
+	 * Geeft een lijst van de edelen in het spel terug
+	 * 
+	 * @return Een List van Edele-objecten
+	 */
 	public List<Edele> getEdelen() {
 		return edelen;
 	}
 
+	/**
+	 * Geeft de speler terug die aan de beurt is
+	 * 
+	 * @return De Speler die aan de beurt is
+	 */
 	public Speler getSpelerAanDeBeurt() {
 		// spelerAanDeBeurt wordt 1e x ingesteld in
 		// organiseerSpelVolgensHetAantalSpelers()
 		return spelers.get(spelerAanDeBeurt);
 	}
 
+	/**
+	 * Geeft een lijst met alle spelers uit het spel
+	 * 
+	 * @return Een ObservableList van Speler-objecten
+	 */
 	public ObservableList<Speler> getSpelers() {
 		return spelers;
 	}
+
+	/**
+	 * 
+	 * Deze methode voegt een speler toe aan het spel
+	 * 
+	 * @param speler Een Speler-object dat je wenst toe te voegen
+	 * @throws IllegalArgumentException Wanneer een null object wordt opgegeven als
+	 *                                  parameter. Wanneer de speler reeds werd
+	 *                                  toegevoegd. Wanneer het maximum aantal
+	 *                                  spelers bereikt werd.
+	 */
 
 	public void voegSpelerToe(Speler speler) throws IllegalArgumentException {
 		if (speler == null) {
@@ -72,6 +101,13 @@ public class Spel {
 
 	}
 
+	/**
+	 * Methode stelt volgens de spelregels de startspeler in, zorgt dat elke speler
+	 * het juist aantal fiches krijgt en kiest een random aantal edelen uit de
+	 * mogelijke edelen.
+	 * 
+	 * @throws IllegalArgumentException Bij te weinig of teveel spelers
+	 */
 	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
 		if (spelers.size() < MIN_SPELERS || spelers.size() > MAX_SPELERS) {
 			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.3"), MIN_SPELERS, MAX_SPELERS)); //$NON-NLS-1$
@@ -110,10 +146,20 @@ public class Spel {
 		laatsteSpelerVanRonde = spelerAanDeBeurt == 0 ? spelers.size() - 1 : spelerAanDeBeurt - 1;
 	}
 
+	/**
+	 * geeft het aantal spelers die het spel spelen
+	 * 
+	 * @return aantal spelers in het spel
+	 */
 	public int geefAantalSpelers() {
 		return spelers.size();
 	}
 
+	/**
+	 * Vraagt aan de tafel de zichtbare ontwikkelingskaarten
+	 * 
+	 * @return een 2D array van Ontwikkelingskaarten
+	 */
 	public Ontwikkelingskaart[][] geefZichtbareOntwikkelingskaarten() {
 		return tafel.getZichtbareOntwikkelingskaarten();
 	}
@@ -149,7 +195,12 @@ public class Spel {
 
 	// UC2
 
-	// geeft het aantal fiches per soort terug
+	/**
+	 * Geeft het aantal fiches per soort terug
+	 * 
+	 * @return Een HashMap met als Key de Edelsteen van de stapel en als Value het
+	 *         aantal fiches dat nog op de stapel ligt
+	 */
 	public Map<Edelsteen, IntegerBinding> geefAantalFichesPerStapel() {
 		Map<Edelsteen, IntegerBinding> aantalPerSoort = new HashMap<Edelsteen, IntegerBinding>();
 
@@ -160,21 +211,43 @@ public class Spel {
 		return aantalPerSoort;
 	}
 
-	// geef het aantal resterende kaarten per stapel (per niveau) terug
+	/**
+	 * Haalt bij de tafel het aantal resterende kaarten per stapel, per niveau op
+	 * 
+	 * @return een HashMap met als key het niveau van de stapel en als value het
+	 *         aantal kaarten dat nog op de stapel ligt
+	 */
 	public Map<Niveau, IntegerBinding> geefAantalResterendeKaarten() {
 		return tafel.geefAantalResterendeKaarten();
 	}
 
+	/**
+	 * Stelt per speler de spelattributen in volgens de spelregels
+	 */
 	public void speelSpel() {
 		for (Speler s : spelers) {
 			s.stelSpelAttributenIn();
 		}
 	}
 
+	/**
+	 * Bekijkt of er een speler is die de maximum score behaalt heeft
+	 * 
+	 * @return Een boolean die aangeeft of het einde van het spel bereikt is
+	 */
 	public boolean isEindeSpel() {
 		return spelers.stream().anyMatch(s -> s.getPrestigepunten() >= EINDE_SPEL_SCORE);
 	}
 
+	/**
+	 * Geeft een lijst terug met nul, 1 of meerdere spelers
+	 * 
+	 * @return Een List met Speler-objecten. Indien spel nog niet beëndigd is: een
+	 *         lege lijst. In het andere geval wordt een lijst met 1 of meerdere
+	 *         Speler-objecten terug gegeven. Meerdere, wanneer het aantal
+	 *         prestigepunten van de spelers gelijk is en ze evenveel
+	 *         ontwikkelingskaarten hebben.
+	 */
 	public List<Speler> geefWinnaars() {
 		if (!isEindeSpel()) {
 			// lege lijst
@@ -198,16 +271,22 @@ public class Spel {
 	}
 
 	// UC3
-	public void speelRonde() {
-		// TODO Auto-generated method stub
 
-	}
 
+	/**
+	 * Zorgt dat in het spel de volgende speler geselecteerd wordt.
+	 */
 	public void bepaalVolgendeSpeler() {
 		spelerAanDeBeurt = (spelerAanDeBeurt + 1) % spelers.size();
 	}
 
-	// methode geeft edelen terug waar spelerAanDeBeurt recht op heeft
+
+	/**
+	 * Geeft edelen terug waar de speler die aan de beurt is uit kan kiezen
+	 * 
+	 * @return Een list met Edelen, indien speler geen recht heeft op een edele uit
+	 *         het spel wordt een lege lijst terug gegeven.
+	 */
 	public List<Edele> geefBeschikbareEdelen() {
 		Map<Edelsteen, Integer> spelerBonussen = spelers.get(spelerAanDeBeurt).getAantalBonussenPerTypeInBezit();
 		List<Edele> beschikbareEdelen = new ArrayList<>();
@@ -236,12 +315,22 @@ public class Spel {
 		return true;
 	}
 
-	// methode verplaats gekozen Edele van Spel naar spelerAanDeBeurt
+	/**
+	 * Verplaatst de door de speler gekozen Edele van het spel naar de speler die
+	 * aan de beurt is
+	 * 
+	 * @param edele De gekozen Edele
+	 */
 	public void verplaatsEdeleVanSpelNaarSpeler(Edele edele) {
 		this.getSpelerAanDeBeurt().voegEdeleToe(edele);
 		edelen.remove(edele);
 	}
 
+	/**
+	 * Geeft de laatste speler van de ronde op.
+	 * 
+	 * @return Speler die als laatst aan de beurt is
+	 */
 	public Speler geefLaatsteSpelerVanRonde() {
 		return spelers.get(laatsteSpelerVanRonde);
 	}
@@ -253,9 +342,22 @@ public class Spel {
 	// faalt, voegen we ze opnieuw toe => dit schrijven in de 2 catchen van de gui
 	// Eerst TeVeelFichesInBezitException opvangen voor IllegalArgumentException!!
 	// Afwijkend van UC4 maar lijkt me logischer
+	/**
+	 * Verplaatst de gekozen edelsteenfiches naar de speler
+	 * 
+	 * @param edelsteenfiches De gekozen edelsteenfiches
+	 * @throws IllegalArgumentException     Wanneer er teveel fiches gekozen worden.
+	 *                                      Wanneer er meer dan 2 fiches van
+	 *                                      dezelfde kleur gekozen worden. Wanneer
+	 *                                      er minder dan 2 fiches op de stapel
+	 *                                      overblijven als je 2 fiches van dezelfde
+	 *                                      kleur neemt
+	 * @throws TeVeelFichesInBezitException Wanneer de speler na het nemen van
+	 *                                      fiches meer dan 10 fiches in zijn bezit
+	 *                                      heeft
+	 */
 	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException, TeVeelFichesInBezitException {
-		// In commentaar om binding te testen
 		validatieDR_BEURT_AANTAL_FICHES(edelsteenfiches);
 		// validatie max 10 in klasse Speler
 		this.getSpelerAanDeBeurt().voegEdelsteenfichesToe(edelsteenfiches);
@@ -281,11 +383,27 @@ public class Spel {
 
 	}
 
+	/**
+	 * Geeft de opdracht aan de betreffende stapelEdelsteenfiches om één
+	 * edelsteenfiche te verwijderen.
+	 * 
+	 * @param edelsteenfiche De te verwijderen Edelsteenfiche.
+	 * @throws IllegalArgumentException Wanneer de betreffende stapel leeg is.
+	 */
 	public void verwijderEdelsteenficheVanStapel(Edelsteenfiche edelsteenfiche) throws IllegalArgumentException {
 		stapelsEdelsteenfiches.get(edelsteenfiche.edelsteen()).verwijderFiche();
 	}
 
 	// list gebruikt omdat aantal fiches niet vastligt
+	/**
+	 * Gebruikt wanneer de speler fiches terug geeft aan het spel. Kan bij het nemen
+	 * van nieuwe fiches, of bij het teruggeven wanneer hij meer dan 10 fiches in
+	 * bezit heeft.
+	 * 
+	 * @param edelsteenfiches De terug te geven fiches
+	 * @throws IllegalArgumentException Wanneer de speler fiches zou willen geven
+	 *                                  waar van hij er geen in zijn bezit heeft.
+	 */
 	public void verplaatsEdelsteenfichesVanSpelerNaarSpel(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException {
 		// verwijderen uit speler
@@ -295,6 +413,14 @@ public class Spel {
 
 	}
 
+	/**
+	 * Enkel gebruikt wanneer de speler na het nemen van nieuwe fiches meer dan 10
+	 * fiches in zijn bezit heeft. Via deze methode wordt het teveel aan fiches
+	 * terug gegeven
+	 * 
+	 * @param edelsteenfiches List met gekozen Edelsteenfiche-objecten
+	 * @throws IllegalArgumentException
+	 */
 	public void verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException {
 		if (this.getSpelerAanDeBeurt().geefAantalFichesInBezit()
@@ -305,6 +431,11 @@ public class Spel {
 		verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
 	}
 
+	/**
+	 * Voegt de betreffende edelsteenfiches terug toe aan de betreffende stapels
+	 * 
+	 * @param edelsteenfiches List met terug te leggen Edelsteenfiche-objecten
+	 */
 	public void voegEdelsteenfichesTerugToeAanStapelsSpel(List<Edelsteenfiche> edelsteenfiches) {
 		for (StapelEdelsteenfiches stapel : stapelsEdelsteenfiches.values()) {
 			int aantal = Math.toIntExact(
@@ -313,10 +444,18 @@ public class Spel {
 		}
 	}
 
-	// valideert of speler genoeg fiches/bonussen bezit om kaart te kopen
-	// kaart wordt op tafel vervangen door kaart van de stapel
-	// edelsteenfiches speler worden verminderd
-	// kaart wordt aan speler toegevoegd
+	/**
+	 * Valideert of speler genoeg fiches/bonussen bezit om de ontwikkelingskaart te
+	 * kopen. De ontwikkelingskaart wordt op tafel vervangen door nieuwe kaart van
+	 * de stapel. Edelsteenfiches van de speler worden verminderd. De
+	 * ontwikkelingskaart wordt aan de speler toegevoegd
+	 * 
+	 * @param kaart De Ontwikkelingskaart die de speler wil kopen
+	 * @throws IllegalArgumentException Wanneer geen ontwikkelingskaart werd
+	 *                                  geselecteerd of wanneer de speler te weinig
+	 *                                  fiches in bezit heeft om de
+	 *                                  ontwikkelingskaart te kopen.
+	 */
 	public void verplaatsOntwikkelingskaartVanTafelNaarSpeler(Ontwikkelingskaart kaart)
 			throws IllegalArgumentException {
 		// validatie DR_BEURT_KOOP_KAART
@@ -355,7 +494,15 @@ public class Spel {
 		this.getSpelerAanDeBeurt().voegOntwikkelingskaartToe(kaart);
 	}
 
-	// om nieuwe kaart weer te geven in gui
+	/**
+	 * Haalt bij de tafel de ontwikkelingskaart op die op de opgegeven rij en kolom
+	 * ligt.
+	 * 
+	 * @param rij   De rij waar de kaart zich bevindt
+	 * @param kolom De kolom waar de kaart zich bevindt
+	 * @return Ontwikkelingskaart die op de opgegeven rij en kolom ligt
+	 */
+
 	public Ontwikkelingskaart geefKaartVolgensIndex(int rij, int kolom) {
 		return tafel.geefKaartVolgensIndex(rij, kolom);
 	}

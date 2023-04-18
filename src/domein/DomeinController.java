@@ -88,10 +88,6 @@ public class DomeinController {
 
 	// UC3
 
-	// niet gebruikt
-	public void speelRonde() {
-		spel.speelRonde();
-	}
 
 	public void bepaalVolgendeSpeler() {
 		spel.bepaalVolgendeSpeler();

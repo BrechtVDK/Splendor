@@ -113,7 +113,6 @@ public class Speler {
 			aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal + 1);
 		}
 		if (geefAantalFichesInBezit() > MAX_FICHES_IN_BEZIT) {
-			// in commentaar om binding te testen
 			throw new TeVeelFichesInBezitException();
 
 		}
