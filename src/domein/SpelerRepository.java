@@ -19,4 +19,8 @@ public class SpelerRepository {
 
 	}
 
+	public void registreerSpeler(String gebruikersnaam, int geboortejaar) throws IllegalArgumentException {
+		spelerMap.registreerSpeler(gebruikersnaam, geboortejaar);
+	}
+
 }

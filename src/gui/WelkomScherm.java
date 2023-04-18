@@ -43,7 +43,6 @@ public class WelkomScherm extends VBox {
 		double breedte = this.getScene().getWidth();
 		double hoogte = this.getScene().getHeight();
 		stage.setTitle(Taal.vertaling("WelkomScherm.2")); //$NON-NLS-1$
-
 		Scene scene = new Scene(new SpelerRegistratieScherm(dc, this), breedte, hoogte);
 		stage.setScene(scene);
 
@@ -59,5 +58,6 @@ public class WelkomScherm extends VBox {
 //		scene.setFill(Color.ALICEBLUE);
 //		stage.setScene(scene);
 		// Tot hier
+
 	}
 }

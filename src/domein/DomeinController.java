@@ -137,5 +137,10 @@ public class DomeinController {
 	public void voegEdelsteenfichesTerugToeAanStapelsSpel(List<Edelsteenfiche> edelsteenfiches) {
 		spel.voegEdelsteenfichesTerugToeAanStapelsSpel(edelsteenfiches);
 	}
-
+	// extra
+	public void registreerSpeler(String gebruikersnaam, int geboortejaar) throws IllegalArgumentException {
+		// validatie correcte gebruikersnaam en geboortejaar
+		new Speler(gebruikersnaam, geboortejaar);
+		spelerRepo.registreerSpeler(gebruikersnaam, geboortejaar);
+	}
 }
