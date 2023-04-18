@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import resources.Taal;
 
 public class SpelerRegistratieScherm extends GridPane {
 	private DomeinController dc;
@@ -36,25 +37,30 @@ public class SpelerRegistratieScherm extends GridPane {
 		this.setPadding(new Insets(25));
 		this.setAlignment(Pos.CENTER);
 
-		Label lblGebruikersnaam = new Label("Gebruikersnaam");
+		Label lblGebruikersnaam = new Label(Taal.vertaling("SpelerRegistratieScherm.0")); //$NON-NLS-1$
+		lblGebruikersnaam.setId("SpelerRegistratieScherm.0");
 		txtGebruikersnaam = new TextField();
 
-		Label lblGeboortejaar = new Label("Geboortejaar");
+		Label lblGeboortejaar = new Label(Taal.vertaling("SpelerRegistratieScherm.1")); //$NON-NLS-1$
+		lblGeboortejaar.setId("SpelerRegistratieScherm.1");
 		txtGeboortejaar = new TextField();
 		// Enter na ingeven geboortejaar = klikken op btnVoegToe
 		txtGeboortejaar.setOnAction(this::voegToeGeklikt);
 
-		Button btnVoegToe = new Button("voeg toe");
+		Button btnVoegToe = new Button(Taal.vertaling("SpelerRegistratieScherm.2")); //$NON-NLS-1$
+		btnVoegToe.setId("SpelerRegistratieScherm.2");
 		btnVoegToe.setMinWidth(150);
 		btnVoegToe.setOnAction(this::voegToeGeklikt);
 
-		btnStartSpel = new Button("start spel");
+		btnStartSpel = new Button(Taal.vertaling("SpelerRegistratieScherm.3")); //$NON-NLS-1$
+		btnStartSpel.setId("SpelerRegistratieScherm.3");
 		btnStartSpel.setMinWidth(150);
 		// Pas klikbaar na toevoegen 2 spelers
 		btnStartSpel.setDisable(true);
 		btnStartSpel.setOnAction(this::startSpelGeklikt);
 
-		Label lblSpelers = new Label("Spelers toegevoegd aan spel:");
+		Label lblSpelers = new Label(Taal.vertaling("SpelerRegistratieScherm.4")); //$NON-NLS-1$
+		lblSpelers.setId("SpelerRegistratieScherm.4");
 
 		lvSpelers = new ListView<Speler>();
 		// observableList koppelen aan listView
@@ -67,7 +73,7 @@ public class SpelerRegistratieScherm extends GridPane {
 		lblFoutmelding = new Label();
 		lblFoutmelding.setTextFill(Color.RED);
 
-		FXTaalKeuze chBTaalKeuze = new FXTaalKeuze();
+		FXTaalKeuze chBTaalKeuze = new FXTaalKeuze(this, Taal.getGekozenTaal());
 		chBTaalKeuze.setAlignment(Pos.CENTER);
 
 		this.add(lblGebruikersnaam, 0, 1);
@@ -84,7 +90,7 @@ public class SpelerRegistratieScherm extends GridPane {
 	}
 
 	private void voegToeGeklikt(ActionEvent event) {
-		lblFoutmelding.setText("");
+		lblFoutmelding.setText(""); //$NON-NLS-1$
 		try {
 			String gebruikersnaam = txtGebruikersnaam.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar.getText());
@@ -99,7 +105,7 @@ public class SpelerRegistratieScherm extends GridPane {
 			txtGebruikersnaam.requestFocus();
 
 		} catch (NumberFormatException e) {
-			toonFoutmelding("Geboortejaar is niet juist ingevuld");
+			toonFoutmelding(Taal.vertaling("SpelerRegistratieScherm.6")); //$NON-NLS-1$
 			// David 2023/03/19 16:22 Toegevoegd als assistentie wanneer er een fout ingave
 			// is
 			txtGeboortejaar.requestFocus();
@@ -121,19 +127,19 @@ public class SpelerRegistratieScherm extends GridPane {
 		Stage stage = (Stage) this.getScene().getWindow();
 		double breedte = this.getScene().getWidth();
 		double hoogte = this.getScene().getHeight();
-		stage.setTitle("Splendor");
+		stage.setTitle("Splendor"); //$NON-NLS-1$
 
 		Scene scene = new Scene(new Hoofdscherm(dc, ws), breedte, hoogte);
-		scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm()); //$NON-NLS-1$
 		scene.setFill(Color.ALICEBLUE);
 		stage.setScene(scene);
 	}
 
 	private void toonStartspeler() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setHeaderText("");
-		alert.setTitle("Startspeler");
-		alert.setContentText(String.format("Speler %s mag starten", dc.geefSpelerAanDeBeurt()));
+		alert.setHeaderText(""); //$NON-NLS-1$
+		alert.setTitle(Taal.vertaling("SpelerRegistratieScherm.10")); //$NON-NLS-1$
+		alert.setContentText(String.format(Taal.vertaling("SpelerRegistratieScherm.11"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
 		alert.showAndWait();
 
 	}

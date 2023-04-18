@@ -12,6 +12,8 @@ public class Taal {
 	public static final String TALEN[] = { "Nederlands", "Français", "Deutsch", "English" };
 
 	public String tekst;
+	// Bij eerste oproep is de voorkeurtaal Null
+	private static String gekozenTaal = null;
 
 	private Taal(String voorkeurTaal) {
 
@@ -20,12 +22,10 @@ public class Taal {
 	public static void setVoorkeurTaal(String voorkeurTaal) {
 		// String talen[] = {"Nederlands", "Français", "Deutsch", "English"};
 		Locale landstaal;
-//		int indexTaal;
+		Taal.gekozenTaal = voorkeurTaal;
 
 		if (Arrays.asList(TALEN).indexOf(voorkeurTaal) < 0)
 			throw new IllegalArgumentException("Deze taal wordt niet ondersteund in deze applicatie!");
-//		else
-//			indexTaal = Arrays.asList(talen).indexOf(voorkeurTaal);
 
 		landstaal = switch (Arrays.asList(TALEN).indexOf(voorkeurTaal)) {
 		case 0 -> new Locale("nl");
@@ -45,9 +45,14 @@ public class Taal {
 		}
 	}
 
+	public static String getGekozenTaal() {
+		return Taal.gekozenTaal;
+	}
+
+
 	public static String vertaling(String tekst) {
 		if (resBundel == null)
-			setVoorkeurTaal(STANDAARDTAAL);
+			setVoorkeurTaal(Taal.gekozenTaal == null ? STANDAARDTAAL : Taal.gekozenTaal);
 
 		try {
 			return resBundel.getString(tekst);

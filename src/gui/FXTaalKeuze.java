@@ -2,16 +2,27 @@ package gui;
 
 import java.util.Arrays;
 
+import javafx.application.Platform;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import resources.Taal;
 
 public class FXTaalKeuze extends HBox {
 
 	ChoiceBox<String> talenLijst = new ChoiceBox<>();
+	Pane rootPane;
+	String gekozenTaal = null;
 	private static final String LIJST_ONDERSTEUNDE_TALEN[] = Taal.TALEN;
 
-	public FXTaalKeuze() {
+	public FXTaalKeuze(Pane rootPane, String gekozenTaal) {
+		// Verwijzing naar moederbord die deze HBox implementeerd
+		this.rootPane = rootPane;
+		// Indien in vorig scherm reeds een taal is gekozen
+		this.gekozenTaal = gekozenTaal;
 		this.getChildren().add(setTalenlijst());
 	}
 
@@ -19,13 +30,25 @@ public class FXTaalKeuze extends HBox {
 		// talenLijst.getItems().add(s));
 		talenLijst.getItems().addAll(Arrays.asList(LIJST_ONDERSTEUNDE_TALEN));
 		// set default
-		talenLijst.setValue(LIJST_ONDERSTEUNDE_TALEN[0]);
+		talenLijst.setValue(Taal.getGekozenTaal() == null ? LIJST_ONDERSTEUNDE_TALEN[0] : Taal.getGekozenTaal());
 		// listener
 		talenLijst.getSelectionModel().selectedItemProperty()
 				.addListener((v, oudeTaal, nieuweTaal) -> {
 					Taal.setVoorkeurTaal(nieuweTaal);
+					// doorlopen van alle children van de moederpane
+					for (Node n : rootPane.getChildren()) {
+						// instanties labels en buttons bevatten meestal een text om te vertalen
+						if (n instanceof Label) {
+							Label l = (Label) n;
+							Platform.runLater(() -> l.setText(Taal.vertaling(l.getId())));
+						} else if (n instanceof Button) {
+							Button b = (Button) n;
+							Platform.runLater(() -> b.setText(Taal.vertaling(b.getId())));
+						}
+					}
 					System.out.println(nieuweTaal);
 				});
+
 		return talenLijst;
 
 	}

@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import resources.Taal;
 
 public class Hoofdscherm extends GridPane {
 	private DomeinController dc;
@@ -44,7 +45,7 @@ public class Hoofdscherm extends GridPane {
 		edelsteenFicheScherm = new EdelsteenFicheScherm(dc, this);
 		tafelscherm = new TafelScherm(dc, this);
 		scoreBordScherm = new ScoreBordScherm(dc);
-		chBoxTaalKeuze = new FXTaalKeuze();
+		chBoxTaalKeuze = new FXTaalKeuze(this, Taal.getGekozenTaal());
 
 		this.add(chBoxTaalKeuze, 0, 0);
 		this.add(linkerInfoScherm, 0, 1, 1, 2);
