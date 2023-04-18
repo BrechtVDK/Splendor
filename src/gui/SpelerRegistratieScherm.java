@@ -182,7 +182,7 @@ public class SpelerRegistratieScherm extends GridPane {
 			txtGebruikersnaam.requestFocus();
 			lblRegistratie.setText("Speler geregistreerd in de databank");
 		} catch (NumberFormatException e) {
-			toonFoutmelding("Geboortejaar is niet juist ingevuld");
+			toonFoutmelding(Taal.vertaling("SpelerRegistratieScherm.6"));
 			txtGeboortejaar2.requestFocus();
 			txtGeboortejaar2.selectAll();
 		} catch (IllegalArgumentException e) {
