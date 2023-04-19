@@ -23,7 +23,7 @@ public class WelkomScherm extends VBox {
 		ImageView ivSplendor = new ImageView(new Image(getClass().getResourceAsStream("/images/splendor.jpg"))); //$NON-NLS-1$
 		FXTaalKeuze chBTaalKeuze = new FXTaalKeuze(this, Taal.getGekozenTaal());
 		Button btnStart = new Button(Taal.vertaling("WelkomScherm.1"));//$NON-NLS-1$
-		btnStart.setId("WelkomScherm.1");
+		btnStart.setId("WelkomScherm.1"); //$NON-NLS-1$
 		btnStart.setMinWidth(200);
 
 

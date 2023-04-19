@@ -19,7 +19,7 @@ public class FXEdeleKaart extends FXKaart implements Clickable {
 	}
 
 	private void buildExtras() {
-		this.getStyleClass().add("edele");
+		this.getStyleClass().add("edele"); //$NON-NLS-1$
 
 		// interface
 		this.setOnMouseClicked(this::onClicked);

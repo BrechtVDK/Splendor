@@ -60,9 +60,9 @@ public class FXEdelsteenFicheKlikbaar extends FXEdelsteenFiche implements Clicka
 	public void onLeftClicked() {
 		String parent = this.getParent().getClass().getSimpleName();
 		switch (parent) {
-		case "EdelsteenFicheScherm" -> verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm();
-		case "LinkerInfoScherm" -> verplaatsFicheVanLinkerInfoSchermNaarStapel();
-		case "EdelsteenficheGeefTerugScherm" -> {
+		case "EdelsteenFicheScherm" -> verplaatsFichesVanEdelsteenFicheSchermNaarLinkerInfoScherm(); //$NON-NLS-1$
+		case "LinkerInfoScherm" -> verplaatsFicheVanLinkerInfoSchermNaarStapel(); //$NON-NLS-1$
+		case "EdelsteenficheGeefTerugScherm" -> { //$NON-NLS-1$
 			// ficheInBezit
 			if (GridPane.getColumnIndex(this) == 0) {
 				verlaagFicheInBezitVerhoogFicheGeefTerug();

@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import resources.Taal;
 
 public class Speler {
 	private String gebruikersnaam;
@@ -31,10 +32,10 @@ public class Speler {
 	}
 
 	private void setGebruikersnaam(String gebruikersnaam) throws IllegalArgumentException {
-		String REGEX = "^[a-z,A-Z][\\w|\\s]*";
+		String REGEX = "^[a-z,A-Z][\\w|\\s]*"; //$NON-NLS-1$
 		if (gebruikersnaam == null || !gebruikersnaam.matches(REGEX)) {
 			throw new IllegalArgumentException(
-					"Gebruikersnaam mag enkel cijfers, letters, spaties of _ bevatten. De gebruikersnaam moet altijd starten met een letter (groot of klein)");
+					Taal.vertaling("Speler.1")); //$NON-NLS-1$
 		}
 		this.gebruikersnaam = gebruikersnaam;
 	}
@@ -42,10 +43,10 @@ public class Speler {
 	private void setGeboortejaar(int geboortejaar) throws IllegalArgumentException {
 		int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 		if (geboortejaar < MINIMUMGEBOORTEJAAR) {
-			throw new IllegalArgumentException("Gelieve een geldig geboortejaar in te geven");
+			throw new IllegalArgumentException(Taal.vertaling("Speler.2")); //$NON-NLS-1$
 		}
 		if (geboortejaar > huidigJaar - MINIMUMLEEFTIJD) {
-			throw new IllegalArgumentException(String.format("Minimum leeftijd is %d jaar;", MINIMUMLEEFTIJD));
+			throw new IllegalArgumentException(String.format(Taal.vertaling("Speler.3"), MINIMUMLEEFTIJD)); //$NON-NLS-1$
 		}
 		this.geboortejaar = geboortejaar;
 	}
@@ -143,7 +144,7 @@ public class Speler {
 		for (Edelsteenfiche e : edelsteenfiches) {
 			int huidigAantal = aantalEdelsteenfichesPerTypeInBezit.get(e.edelsteen());
 			if (huidigAantal == 0) {
-				throw new IllegalArgumentException("Edelsteenfiche niet in bezit, kan niet verwijderd worden!");
+				throw new IllegalArgumentException(Taal.vertaling("Speler.4")); //$NON-NLS-1$
 			} else {
 				aantalEdelsteenfichesPerTypeInBezit.put(e.edelsteen(), huidigAantal - 1);
 			}

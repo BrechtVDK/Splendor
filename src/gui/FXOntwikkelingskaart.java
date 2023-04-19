@@ -29,10 +29,10 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 	private void buildExtras() {
 		plaatsBonus();
 		String rgb = bonus.edelsteen().getRgb();
-		this.getStyleClass().add("ontwikkelingskaart");
+		this.getStyleClass().add("ontwikkelingskaart"); //$NON-NLS-1$
 		// achtergrond instellen adhv kleur bonus. Witte bonus => rgb(192,192,192)
-		this.setStyle(String.format("-fx-background-color: linear-gradient(rgba(255,255,255), rgba%s);",
-				bonus.edelsteen().equals(Edelsteen.WIT) ? "(192,192,192)" : rgb));
+		this.setStyle(String.format("-fx-background-color: linear-gradient(rgba(255,255,255), rgba%s);", //$NON-NLS-1$
+				bonus.edelsteen().equals(Edelsteen.WIT) ? "(192,192,192)" : rgb)); //$NON-NLS-1$
 
 		// interface
 		this.backgroundProperty();
@@ -55,7 +55,7 @@ public class FXOntwikkelingskaart extends FXKaart implements Clickable {
 		// Eerst kijken waar de kaart zich bevindt, dan naar respectievelijke plaats
 		// verplaatsen.
 		String parent = this.getParent().getClass().getSimpleName();
-		if (parent.equals("TafelScherm")) {
+		if (parent.equals("TafelScherm")) { //$NON-NLS-1$
 			tafel.verplaatsKaartNaarLinkerInfoScherm(this);
 			tafel.maakKaartenOnKlikbaar();
 		} else {

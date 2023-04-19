@@ -83,18 +83,18 @@ public class Spel {
 
 	public void voegSpelerToe(Speler speler) throws IllegalArgumentException {
 		if (speler == null) {
-			throw new IllegalArgumentException(Taal.vertaling("Spel.0"));
+			throw new IllegalArgumentException(Taal.vertaling("Spel.0")); //$NON-NLS-1$
 			// $NON-NLS-1$
 //			throw new IllegalArgumentException("De speler is niet geregistreerd in de databank");
 		}
 		if (spelers.indexOf(speler) != -1) {
-			throw new IllegalArgumentException(Taal.vertaling("Spel.1"));
+			throw new IllegalArgumentException(Taal.vertaling("Spel.1")); //$NON-NLS-1$
 			// $NON-NLS-1$
 //			throw new IllegalArgumentException("Speler reeds aan spel toegevoegd");
 		}
 
 		if (spelers.size() >= MAX_SPELERS) {
-			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.2"), MAX_SPELERS)); // $NON-NLS-1$
+			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.2"), MAX_SPELERS)); // $NON-NLS-1$ //$NON-NLS-1$
 //			throw new IllegalArgumentException(String.format("Max %d spelers!", MAX_SPELERS));
 		}
 		spelers.add(speler);
@@ -426,7 +426,7 @@ public class Spel {
 		if (this.getSpelerAanDeBeurt().geefAantalFichesInBezit()
 				- edelsteenfiches.size() != Speler.MAX_FICHES_IN_BEZIT) {
 			throw new IllegalArgumentException(
-					String.format("Na teruggave dien je exact %d fiches overhouden!", Speler.MAX_FICHES_IN_BEZIT));
+					String.format(Taal.vertaling("Spel.9"), Speler.MAX_FICHES_IN_BEZIT)); //$NON-NLS-1$
 		}
 		verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
 	}

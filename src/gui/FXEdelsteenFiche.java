@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 
 //Circle en evt Text in StackPane stoppen
 public class FXEdelsteenFiche extends StackPane {
-	private final static Paint TEKSTKLEUR = Color.web("F8BD7F");
+	private final static Paint TEKSTKLEUR = Color.web("F8BD7F"); //$NON-NLS-1$
 	private final static int GROOT = 21;
 	private final double radius;
 	protected Text txtAantal;
@@ -24,7 +24,7 @@ public class FXEdelsteenFiche extends StackPane {
 	public FXEdelsteenFiche(Edelsteen edelsteen, double radius) {
 		this.radius = radius;
 		this.edelsteen = edelsteen;
-		Circle cirkel = new Circle(radius, Color.web(String.format("rgb%s", edelsteen.getRgb())));
+		Circle cirkel = new Circle(radius, Color.web(String.format("rgb%s", edelsteen.getRgb()))); //$NON-NLS-1$
 		// zwarte rand
 		cirkel.setStroke(Color.BLACK);
 		// grote fiche = dikkere rand + schaduw

@@ -142,7 +142,7 @@ public class Hoofdscherm extends GridPane {
 		if (!edelen.isEmpty()) {
 			edelenScherm.markeerEnMaakBeschikbareEdelenKlikbaar(edelen);
 			linkerInfoScherm.verbergKeuzeknoppen();
-			linkerInfoScherm.toonInfo("Selecteer één beschikbare edele!");
+			linkerInfoScherm.toonInfo(Taal.vertaling("Hoofdscherm.0")); //$NON-NLS-1$
 		} else {
 			controleEindeRonde();
 		}
@@ -155,9 +155,9 @@ public class Hoofdscherm extends GridPane {
 			Scene scene = new Scene(eindespelscherm, 400, 400);
 			Stage stage = new Stage();
 			stage.setScene(scene);
-			stage.setTitle("Einde spel");
+			stage.setTitle(Taal.vertaling("Hoofdscherm.1")); //$NON-NLS-1$
 			stage.setResizable(false);
-			scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm()); //$NON-NLS-1$
 			// kruisje klikken = volledige applicatie afsluiten
 			stage.setOnCloseRequest(event -> Platform.exit());
 			stage.show();

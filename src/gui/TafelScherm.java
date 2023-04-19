@@ -48,8 +48,8 @@ public class TafelScherm extends GridPane {
 		lblStapels = new Label[Niveau.values().length];
 		for (int i = 0; i < lblStapels.length; i++) {
 			IntegerBinding aantalKaarten = dc.geefAantalResterendeKaarten().get(Niveau.values()[i]);
-			StringBuilder bollen = new StringBuilder("\n");
-			bollen.append(" • ".repeat(lblStapels.length - i));
+			StringBuilder bollen = new StringBuilder("\n"); //$NON-NLS-1$
+			bollen.append(" • ".repeat(lblStapels.length - i)); //$NON-NLS-1$
 			lblStapels[i] = new Label();
 			// binding
 			lblStapels[i].textProperty().bind(Bindings.concat(aantalKaarten.asString(), bollen));
@@ -58,8 +58,8 @@ public class TafelScherm extends GridPane {
 			lblStapels[i].setMaxHeight(142);
 			lblStapels[i].setMinWidth(94);
 			lblStapels[i].setMaxWidth(94);
-			lblStapels[i].getStyleClass().add("stapel");
-			lblStapels[i].setId(String.format("niveau%d", i + 1));
+			lblStapels[i].getStyleClass().add("stapel"); //$NON-NLS-1$
+			lblStapels[i].setId(String.format("niveau%d", i + 1)); //$NON-NLS-1$
 			this.add(lblStapels[i], 0, i);
 		}
 

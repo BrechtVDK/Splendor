@@ -38,10 +38,11 @@
 		-fx-font-family:'Eagle Lake', cursive;
 		-fx-text-fill: yellow;
 }
-.eindeSpelSchermLabels#titel{
+.eindeSpelSchermLabels#EindeSpelScherm_titel{
 	-fx-font-size:35.0;
 	}
-.eindeSpelSchermLabels#winnaars{
+/*.eindeSpelSchermLabels#winnaars{ */
+.eindeSpelSchermLabels#EindeSpelScherm_winnaars{
 	-fx-font-size:20.0;
 }
 

@@ -38,10 +38,10 @@ public abstract class FXKaart extends GridPane {
 
 	private void plaatsPrestigePunten() {
 		Label lblPrestigePunten = new Label(Integer.toString(prestigePunten));
-		lblPrestigePunten.getStyleClass().add("prestigePunten");
+		lblPrestigePunten.getStyleClass().add("prestigePunten"); //$NON-NLS-1$
 		this.add(lblPrestigePunten, 0, 0);
 
-		if (lblPrestigePunten.getText().equals("0")) {
+		if (lblPrestigePunten.getText().equals("0")) { //$NON-NLS-1$
 			lblPrestigePunten.setVisible(false);
 		}
 	}

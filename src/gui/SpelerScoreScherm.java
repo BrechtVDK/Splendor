@@ -6,6 +6,7 @@ import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import resources.Taal;
 
 public class SpelerScoreScherm extends GridPane {
 	private DomeinController dc;
@@ -34,29 +35,35 @@ public class SpelerScoreScherm extends GridPane {
 	private void buildGui() {
 		this.setVgap(5);
 		this.setHgap(10);
-		this.getStyleClass().add("scoreKaart");
-		this.setId(String.format("%s", isSpelerAanDeBeurt() ? "aanBeurt" : "nietAanBeurt"));
+		this.getStyleClass().add("scoreKaart"); //$NON-NLS-1$
+		this.setId(String.format("%s", isSpelerAanDeBeurt() ? "aanBeurt" : "nietAanBeurt")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		this.setPadding(new Insets(5));
 
 		// Labels
-		lblIsStartspeler = new Label(String.format("%s", isStartSpeler ? "Startspeler" : ""));
+		lblIsStartspeler = new Label(String.format("%s", isStartSpeler ? Taal.vertaling("SpelerScoreScherm.5") : "")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		lblIsStartspeler.setId("SpelerScoreScherm.5"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		// zorgt voor zelfde uitlijning bij startspeler als niet-startspeler
 		lblIsStartspeler.setMinWidth(90);
 		lblSpelerNaam = new Label(speler.getGebruikersnaam());
 		// binding ok
 		lblAantalPrestigepunten = new Label();
 		lblAantalPrestigepunten.textProperty()
-				.bind(Bindings.concat("Prestigepunten: ", speler.prestigepuntenProperty()));
+				.bind(Bindings.concat(Taal.vertaling("SpelerScoreScherm.7"), speler.prestigepuntenProperty())); //$NON-NLS-1$
+		lblAantalPrestigepunten.setId("SpelerScoreScherm.7");//$NON-NLS-1$
 		// binding ok
 		lblAantalEdelenInBezit = new Label();
 		lblAantalEdelenInBezit.textProperty()
-				.bind(Bindings.concat("Edelen: ", Bindings.size(speler.getEdelenInBezit())));
-		lblTitelBonus = new Label(String.format("%s", "Bonussen"));
-		lblTitelFiche = new Label(String.format("%s", "Fiches"));
+				.bind(Bindings.concat(Taal.vertaling("SpelerScoreScherm.8"), Bindings.size(speler.getEdelenInBezit()))); //$NON-NLS-1$
+		lblAantalEdelenInBezit.setId("SpelerScoreScherm.8"); //$NON-NLS-1$
+		lblTitelBonus = new Label(String.format("%s", Taal.vertaling("SpelerScoreScherm.10"))); //$NON-NLS-1$ //$NON-NLS-2$
+		lblTitelBonus.setId("SpelerScoreScherm.10"); //$NON-NLS-1$
+		lblTitelFiche = new Label(String.format("%s", Taal.vertaling("SpelerScoreScherm.12"))); //$NON-NLS-1$ //$NON-NLS-2$
+		lblTitelFiche.setId("SpelerScoreScherm.12"); //$NON-NLS-1$
 		// binding ok
 		lblAantalOntwikkelingskaarten = new Label();
 		lblAantalOntwikkelingskaarten.textProperty().bind(
-				Bindings.concat("Ontwikkelingskaarten: ", Bindings.size(speler.getOntwikkelingskaartenInBezit())));
+				Bindings.concat(Taal.vertaling("SpelerScoreScherm.13"), Bindings.size(speler.getOntwikkelingskaartenInBezit()))); //$NON-NLS-1$
+		lblAantalOntwikkelingskaarten.setId("SpelerScoreScherm.13"); //$NON-NLS-1$
 		this.add(lblIsStartspeler, 0, 1);
 		this.add(lblSpelerNaam, 0, 0);
 		this.add(lblAantalPrestigepunten, 1, 0);

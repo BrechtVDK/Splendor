@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
+import resources.Taal;
 
 public class EdelsteenficheGeefTerugScherm extends GridPane {
 	private DomeinController dc;
@@ -35,11 +36,13 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 		this.setVgap(8);
 		this.setPadding(new Insets(5));
 
-		Label lblInBezit = new Label("In\nbezit");
-		lblInBezit.textProperty().bind(Bindings.concat("In bezit\n", totaalInBezit.asString()));
+		Label lblInBezit = new Label(Taal.vertaling("EdelsteenficheGeefTerugScherm.0")); //$NON-NLS-1$
+		lblInBezit.setId("EdelsteenficheGeefTerugScherm.0"); //$NON-NLS-1$ );
+		lblInBezit.textProperty().bind(Bindings.concat(Taal.vertaling("EdelsteenficheGeefTerugScherm.1"), totaalInBezit.asString())); //$NON-NLS-1$
 		lblInBezit.setTextAlignment(TextAlignment.CENTER);
 
-		Label lblGeefTerug = new Label("Geef\nterug");
+		Label lblGeefTerug = new Label(Taal.vertaling("EdelsteenficheGeefTerugScherm.2")); //$NON-NLS-1$
+		lblGeefTerug.setId("EdelsteenficheGeefTerugScherm.2"); //$NON-NLS-1$
 		lblGeefTerug.setTextAlignment(TextAlignment.CENTER);
 
 		this.add(lblInBezit, 0, 0);

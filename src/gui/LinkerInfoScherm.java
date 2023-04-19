@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import resources.Taal;
 
 public class LinkerInfoScherm extends VBox {
 	private DomeinController dc;
@@ -48,17 +49,23 @@ public class LinkerInfoScherm extends VBox {
 		this.setAlignment(Pos.TOP_LEFT);
 
 		lblSpelerAanDeBeurt = new Label(
-				String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
-		lblKeuze = new Label("Wat wil je doen in deze beurt?");
+				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt().getGebruikersnaam())); //$NON-NLS-1$
+		lblSpelerAanDeBeurt.setId("LinkerInfoScherm.0"); //$NON-NLS-1$
+		lblKeuze = new Label(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
+		lblKeuze.setAccessibleHelp("LinkerInfoScherm.1"); //$NON-NLS-1$
 		lblInfoOfFout = new Label();
 
-		btnKaart = new Button("Ik koop een ontwikkelingskaart");
-		btnFiche = new Button("Ik neem edelsteenfiches");
-		btnPas = new Button("Ik pas en sla deze ronde over");
-		btnBevestig = new Button("Bevestig keuze");
-		btnBevestig.setId("btnBevestig");
+		btnKaart = new Button(Taal.vertaling("LinkerInfoScherm.2")); //$NON-NLS-1$
+		btnKaart.setId("LinkerInfoScherm.2"); //$NON-NLS-1$
+		btnFiche = new Button(Taal.vertaling("LinkerInfoScherm.3")); //$NON-NLS-1$
+		btnFiche.setId("LinkerInfoScherm.3"); //$NON-NLS-1$
+		btnPas = new Button(Taal.vertaling("LinkerInfoScherm.4")); //$NON-NLS-1$
+		btnPas.setId("LinkerInfoScherm.4"); //$NON-NLS-1$
+		btnBevestig = new Button(Taal.vertaling("btnBevestig")); //$NON-NLS-1$
+		btnBevestig.setId("btnBevestig"); //$NON-NLS-1$
 		btnBevestig.setVisible(false);
-		btnAnnuleer = new Button("Annuleer");
+		btnAnnuleer = new Button(Taal.vertaling("LinkerInfoScherm.7")); //$NON-NLS-1$
+		btnAnnuleer.setId("LinkerInfoScherm.7"); //$NON-NLS-1$
 		btnAnnuleer.setVisible(false);
 
 
@@ -83,43 +90,43 @@ public class LinkerInfoScherm extends VBox {
 
 	private void pasGeklikt(ActionEvent e) {
 		hs.eindeBeurt();
-		toonInfo(String.format("Je besliste om te passen, de volgende speler is %s.", dc.geefSpelerAanDeBeurt()));
-		maakInfoOfFoutLabelLeegNaXSec(2);
+		toonInfo(String.format(Taal.vertaling("LinkerInfoScherm.8"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
+		maakInfoOfFoutLabelLeegNaXSec(4);
 	}
 
 	protected void stelVolgendeSpelerIn() {
 		lblSpelerAanDeBeurt
-				.setText(String.format("Speler aan de beurt: %s", dc.geefSpelerAanDeBeurt().getGebruikersnaam()));
+				.setText(String.format(Taal.vertaling("LinkerInfoScherm.9"), dc.geefSpelerAanDeBeurt().getGebruikersnaam())); //$NON-NLS-1$
 	}
 
 	private void maakInfoOfFoutLabelLeegNaXSec(double seconden) {
 		// tijdlijn om boodschap na x seconden te wissen
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconden), ev -> {
-			lblInfoOfFout.setText("");
+			lblInfoOfFout.setText(""); //$NON-NLS-1$
 		}));
 		timeline.play();
 	}
 
 	protected void maakInfoOfFoutLabelLeeg() {
-		lblInfoOfFout.setText("");
+		lblInfoOfFout.setText(""); //$NON-NLS-1$
 	}
 
 	private void kiesKaartGeklikt(ActionEvent e) {
 		maakInfoOfFoutLabelLeeg();
 		hs.maakKaartenKlikbaar();
 		verbergKeuzeknoppen();
-		lblKeuze.setText("Kies een kaart van de tafel");
-		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart"));
-		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "kaart"));
+		lblKeuze.setText(Taal.vertaling("LinkerInfoScherm.12")); //$NON-NLS-1$
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart")); //$NON-NLS-1$
+		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "kaart")); //$NON-NLS-1$
 	}
 
 	private void kiesFicheGeklikt(ActionEvent e) {
 		maakInfoOfFoutLabelLeeg();
 		hs.maakFichesKlikbaar();
 		verbergKeuzeknoppen();
-		lblKeuze.setText("Kies 2 fiches van dezelfde kleur of 3 verschillende.");
-		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "fiche"));
-		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "fiche"));
+		lblKeuze.setText(Taal.vertaling("LinkerInfoScherm.15")); //$NON-NLS-1$
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "fiche")); //$NON-NLS-1$
+		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "fiche")); //$NON-NLS-1$
 	}
 
 	protected void toonInfo(String info) {
@@ -153,11 +160,11 @@ public class LinkerInfoScherm extends VBox {
 	private void bevestigGeklikt(ActionEvent e, String spelerKeuze) {
 
 		switch (spelerKeuze) {
-		case ("kaart") -> {
+		case ("kaart") -> { //$NON-NLS-1$
 			hs.verplaatsOntwikkelingskaartVanTafelNaarSpeler(gekozenKaart);
 			deactiveerBevestigKnop();
 		}
-		case ("fiche") -> {
+		case ("fiche") -> { //$NON-NLS-1$
 			List<Edelsteenfiche> teVerplaatsenFiches = new ArrayList<>();
 			for (FXEdelsteenFiche ef : edelsteenfiches) {
 				teVerplaatsenFiches.add(new Edelsteenfiche(ef.getEdelsteen()));
@@ -166,7 +173,7 @@ public class LinkerInfoScherm extends VBox {
 			hs.verplaatsEdelsteenFichesNaarSpeler(teVerplaatsenFiches);
 			hs.maakFichesOnKlikbaar();
 		}
-		case ("ficheTerug") -> {
+		case ("ficheTerug") -> { //$NON-NLS-1$
 			maakInfoOfFoutLabelLeeg();
 			List<Edelsteenfiche> terugTeGevenFiches = edelsteenficheGeefTerugScherm.geefTerugTeGevenFiches();
 
@@ -194,11 +201,11 @@ public class LinkerInfoScherm extends VBox {
 
 	private void annuleerGeklikt(ActionEvent e, String spelerkeuze) {
 		switch (spelerkeuze) {
-		case ("kaart") -> {
+		case ("kaart") -> { //$NON-NLS-1$
 			gekozenKaart.onLeftClicked();
 			hs.maakKaartenOnKlikbaar();
 		}
-		case ("fiche") -> {
+		case ("fiche") -> { //$NON-NLS-1$
 			for (FXEdelsteenFiche ef : edelsteenfiches) {
 				voegEdelsteenficheTerugToeAanStapel(new Edelsteenfiche(ef.getEdelsteen()));
 			}
@@ -212,7 +219,7 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	protected void zetKeuzeMenuTerug() {
-		lblKeuze.setText("Wat wil je doen in deze beurt?");
+		lblKeuze.setText(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
 		btnKaart.setVisible(true);
 		btnFiche.setVisible(true);
 		btnPas.setVisible(true);
@@ -268,7 +275,7 @@ public class LinkerInfoScherm extends VBox {
 		this.getChildren().remove(btnBevestig);
 		activeerBevestigKnop();
 
-		lblKeuze.setText("");
+		lblKeuze.setText(""); //$NON-NLS-1$
 
 		hboxEdelsteenficheGeefTerugScherm = new HBox();
 		hboxEdelsteenficheGeefTerugScherm.setAlignment(Pos.CENTER);
@@ -279,7 +286,7 @@ public class LinkerInfoScherm extends VBox {
 		hboxEdelsteenficheGeefTerugScherm.getChildren().addAll(edelsteenficheGeefTerugScherm, btnBevestig);
 		this.getChildren().add(hboxEdelsteenficheGeefTerugScherm);
 
-		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug"));
+		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "ficheTerug")); //$NON-NLS-1$
 	}
 
 	protected void maakFichesKlikbaarInEdelsteenficheScherm() {

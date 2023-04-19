@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import resources.Taal;
 
 public class StapelEdelsteenfiches {
 	private ObservableList<Edelsteenfiche> edelsteenfiches;
@@ -44,7 +45,7 @@ public class StapelEdelsteenfiches {
 		if (edelsteenfiches.size() > 0) {
 			edelsteenfiches.subList(edelsteenfiches.size() - 1, edelsteenfiches.size()).clear();
 		} else {
-			throw new IllegalArgumentException("Stapel is leeg!");
+			throw new IllegalArgumentException(Taal.vertaling("StapelEdelsteenfiches.0")); //$NON-NLS-1$
 		}
 	}
 

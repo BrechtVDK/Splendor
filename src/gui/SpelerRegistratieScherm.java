@@ -41,29 +41,31 @@ public class SpelerRegistratieScherm extends GridPane {
 
 
 		Label lblGebruikersnaam = new Label(Taal.vertaling("SpelerRegistratieScherm.0")); //$NON-NLS-1$
-		lblGebruikersnaam.setId("SpelerRegistratieScherm.0");
+		lblGebruikersnaam.setId("SpelerRegistratieScherm.0"); //$NON-NLS-1$
 
-		Label lblSpelerToevoegen = new Label("Speler toevoegen:");
-		Label lblNieuweSpeler = new Label("Nieuwe speler registreren:");
+		Label lblSpelerToevoegen = new Label(Taal.vertaling("SpelerRegistratieScherm.12")); //$NON-NLS-1$
+		lblSpelerToevoegen.setId("SpelerRegistratieScherm.12"); //$NON-NLS-1$
+		Label lblNieuweSpeler = new Label(Taal.vertaling("SpelerRegistratieScherm.13")); //$NON-NLS-1$
+		lblNieuweSpeler.setId("SpelerRegistratieScherm.13"); //$NON-NLS-1$
 
 
 		txtGebruikersnaam = new TextField();
 
 		Label lblGeboortejaar = new Label(Taal.vertaling("SpelerRegistratieScherm.1")); //$NON-NLS-1$
-		lblGeboortejaar.setId("SpelerRegistratieScherm.1");
+		lblGeboortejaar.setId("SpelerRegistratieScherm.1"); //$NON-NLS-1$
 		txtGeboortejaar = new TextField();
 		// Enter na ingeven geboortejaar = klikken op btnVoegToe
 		txtGeboortejaar.setOnAction(this::voegToeGeklikt);
 
 
 		Button btnVoegToe = new Button(Taal.vertaling("SpelerRegistratieScherm.2")); //$NON-NLS-1$
-		btnVoegToe.setId("SpelerRegistratieScherm.2");
+		btnVoegToe.setId("SpelerRegistratieScherm.2"); //$NON-NLS-1$
 		btnVoegToe.setMinWidth(150);
 		btnVoegToe.setOnAction(this::voegToeGeklikt);
 
 
 		btnStartSpel = new Button(Taal.vertaling("SpelerRegistratieScherm.3")); //$NON-NLS-1$
-		btnStartSpel.setId("SpelerRegistratieScherm.3");
+		btnStartSpel.setId("SpelerRegistratieScherm.3"); //$NON-NLS-1$
 		btnStartSpel.setMinWidth(150);
 		// Pas klikbaar na toevoegen 2 spelers
 		btnStartSpel.setDisable(true);
@@ -71,7 +73,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 
 		Label lblSpelers = new Label(Taal.vertaling("SpelerRegistratieScherm.4")); //$NON-NLS-1$
-		lblSpelers.setId("SpelerRegistratieScherm.4");
+		lblSpelers.setId("SpelerRegistratieScherm.4"); //$NON-NLS-1$
 
 		Separator separator = new Separator();
 		separator.setOrientation(Orientation.VERTICAL);
@@ -81,7 +83,8 @@ public class SpelerRegistratieScherm extends GridPane {
 		txtGeboortejaar2 = new TextField();
 		txtGeboortejaar2.setOnAction(this::registreerGeklikt);
 
-		btnRegistreer = new Button("Registreer");
+		btnRegistreer = new Button(Taal.vertaling("SpelerRegistratieScherm.15")); //$NON-NLS-1$
+		btnRegistreer.setId("SpelerRegistratieScherm.15"); //$NON-NLS-1$
 		btnRegistreer.setMinWidth(150);
 		btnRegistreer.setOnAction(this::registreerGeklikt);
 
@@ -123,7 +126,7 @@ public class SpelerRegistratieScherm extends GridPane {
 
 	private void voegToeGeklikt(ActionEvent event) {
 		lblFoutmelding.setText(""); //$NON-NLS-1$
-		lblRegistratie.setText("");
+		lblRegistratie.setText(""); //$NON-NLS-1$
 
 		try {
 			String gebruikersnaam = txtGebruikersnaam.getText();
@@ -170,8 +173,8 @@ public class SpelerRegistratieScherm extends GridPane {
 	}
 
 	private void registreerGeklikt(ActionEvent event) {
-		lblFoutmelding.setText("");
-		lblRegistratie.setText("");
+		lblFoutmelding.setText(""); //$NON-NLS-1$
+		lblRegistratie.setText(""); //$NON-NLS-1$
 		try {
 			String gebruikersnaam = txtGebruikersnaam2.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar2.getText());
@@ -180,9 +183,9 @@ public class SpelerRegistratieScherm extends GridPane {
 			txtGebruikersnaam2.clear();
 			txtGeboortejaar2.clear();
 			txtGebruikersnaam.requestFocus();
-			lblRegistratie.setText("Speler geregistreerd in de databank");
+			lblRegistratie.setText(Taal.vertaling("SpelerRegistratieScherm.14")); //$NON-NLS-1$
 		} catch (NumberFormatException e) {
-			toonFoutmelding(Taal.vertaling("SpelerRegistratieScherm.6"));
+			toonFoutmelding(Taal.vertaling("SpelerRegistratieScherm.6")); //$NON-NLS-1$
 			txtGeboortejaar2.requestFocus();
 			txtGeboortejaar2.selectAll();
 		} catch (IllegalArgumentException e) {
