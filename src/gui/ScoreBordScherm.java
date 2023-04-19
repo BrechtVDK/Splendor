@@ -9,7 +9,6 @@ import domein.Edelsteenfiche;
 import domein.Speler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class ScoreBordScherm extends VBox {
@@ -35,26 +34,22 @@ public class ScoreBordScherm extends VBox {
 			this.getChildren().add(spelerScoreSchermen[i++]);
 		}
 
-		// voorlopig om te changeren van speler
-		Button btnVolgendeSpeler = new Button("5x2fiches toevoegen");
-		btnVolgendeSpeler.minWidth(150);
-		btnVolgendeSpeler.setOnAction(this::vijfx2fichesToevoegen);
-		this.getChildren().add(btnVolgendeSpeler);
+		// cheatknop om sneller te testen
+		/*
+		 * Button btnVolgendeSpeler = new Button("5x2fiches toevoegen");
+		 * btnVolgendeSpeler.minWidth(150);
+		 * btnVolgendeSpeler.setOnAction(this::vijfx2fichesToevoegen);
+		 * this.getChildren().add(btnVolgendeSpeler);
+		 */
 
 	}
 
+	// cheatknop om sneller te testen
 	private void vijfx2fichesToevoegen(ActionEvent e) {
-
-		// BEGIN binding testen
-		// MAX 10 FICHES IN KLASSE SPELER STAAT NOG IN COMMENTAAR!
-		// 5x2 fiches van elk toevoegen
 		for (Edelsteen ed : Edelsteen.values()) {
 			dc.verplaatsEdelsteenfichesNaarSpeler(
 					new ArrayList<>(Arrays.asList(new Edelsteenfiche(ed), new Edelsteenfiche(ed))));
 		}
-
-		// EINDE testen binding
-
 	}
 
 	protected void markeerVolgendeSpeler() {

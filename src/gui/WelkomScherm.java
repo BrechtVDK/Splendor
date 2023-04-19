@@ -38,7 +38,6 @@ public class WelkomScherm extends VBox {
 	private void startGeklikt(ActionEvent evt) {
 		dc.startNieuwSpel();
 
-		// SpelerRegistratieScherm overslaan
 		Stage stage = (Stage) this.getScene().getWindow();
 		double breedte = this.getScene().getWidth();
 		double hoogte = this.getScene().getHeight();
