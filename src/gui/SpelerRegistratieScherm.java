@@ -127,7 +127,8 @@ public class SpelerRegistratieScherm extends GridPane {
 	private void voegToeGeklikt(ActionEvent event) {
 		lblFoutmelding.setText(""); //$NON-NLS-1$
 		lblRegistratie.setText(""); //$NON-NLS-1$
-
+		txtGebruikersnaam2.clear();
+		txtGeboortejaar2.clear();
 		try {
 			String gebruikersnaam = txtGebruikersnaam.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar.getText());
@@ -175,6 +176,8 @@ public class SpelerRegistratieScherm extends GridPane {
 	private void registreerGeklikt(ActionEvent event) {
 		lblFoutmelding.setText(""); //$NON-NLS-1$
 		lblRegistratie.setText(""); //$NON-NLS-1$
+		txtGebruikersnaam.clear();
+		txtGeboortejaar.clear();
 		try {
 			String gebruikersnaam = txtGebruikersnaam2.getText();
 			int geboortejaar = Integer.parseInt(txtGeboortejaar2.getText());

@@ -32,24 +32,35 @@ public class FXTaalKeuze extends HBox {
 		// set default
 		talenLijst.setValue(Taal.getGekozenTaal() == null ? LIJST_ONDERSTEUNDE_TALEN[0] : Taal.getGekozenTaal());
 		// listener
-		talenLijst.getSelectionModel().selectedItemProperty()
-				.addListener((v, oudeTaal, nieuweTaal) -> {
-					Taal.setVoorkeurTaal(nieuweTaal);
-					// doorlopen van alle children van de moederpane
-					for (Node n : rootPane.getChildren()) {
-						// instanties labels en buttons bevatten meestal een text om te vertalen
-						if (n instanceof Label) {
-							Label l = (Label) n;
-							Platform.runLater(() -> l.setText(Taal.vertaling(l.getId())));
-						} else if (n instanceof Button) {
-							Button b = (Button) n;
-							Platform.runLater(() -> b.setText(Taal.vertaling(b.getId())));
-						}
-					}
-					System.out.println(nieuweTaal);
-				});
+		talenLijst.getSelectionModel().selectedItemProperty().addListener((v, oudeTaal, nieuweTaal) -> {
+			Taal.setVoorkeurTaal(nieuweTaal);
+			// doorlopen van alle children van de moederpane
+			for (Node n : rootPane.getChildren()) {
+				labelsEnButtonsDoorlopen(rootPane);
+			}
+			// System.out.println(nieuweTaal);
+		});
 
 		return talenLijst;
 
+	}
+
+	private void labelsEnButtonsDoorlopen(Pane pane) {
+		for (Node n : pane.getChildren()) {
+			if (n instanceof Label) {
+				Label l = (Label) n;
+				// nullpointers opvangen (labels zonder standaardmelding en labels met
+				// properties (binding))
+				if (l.getId() != null && !l.hasProperties()) {
+					Platform.runLater(() -> l.setText(Taal.vertaling(l.getId())));
+				}
+			} else if (n instanceof Button) {
+				Button b = (Button) n;
+				Platform.runLater(() -> b.setText(Taal.vertaling(b.getId())));
+				// child = pane -> recursief werken
+			} else if (n instanceof Pane) {
+				labelsEnButtonsDoorlopen((Pane) n);
+			}
+		}
 	}
 }

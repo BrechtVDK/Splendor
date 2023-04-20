@@ -71,17 +71,17 @@ public class Speler {
 
 	protected void stelSpelAttributenIn() {
 		// om einde spel sneller te kunnen testen
-		// this.prestigepunten = new SimpleIntegerProperty(14);
-		this.prestigepunten = new SimpleIntegerProperty(0);
+		this.prestigepunten = new SimpleIntegerProperty(14);
+		// this.prestigepunten = new SimpleIntegerProperty(0);
 		this.edelenInBezit = FXCollections.observableArrayList();
 		this.ontwikkelingskaartenInBezit = FXCollections.observableArrayList();
 		this.aantalEdelsteenfichesPerTypeInBezit = FXCollections.observableHashMap();
 		this.aantalBonussenPerTypeInBezit = FXCollections.observableHashMap();
 		for (Edelsteen e : Edelsteen.values()) {
-			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
+			aantalEdelsteenfichesPerTypeInBezit.put(e, 2);
 			// om edelen sneller te kunnen testen
-			// aantalBonussenPerTypeInBezit.put(e, 2);
-			aantalBonussenPerTypeInBezit.put(e, 0);
+			aantalBonussenPerTypeInBezit.put(e, 2);
+			// aantalBonussenPerTypeInBezit.put(e, 0);
 		}
 	}
 

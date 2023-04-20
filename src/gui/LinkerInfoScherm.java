@@ -49,7 +49,7 @@ public class LinkerInfoScherm extends VBox {
 		this.setAlignment(Pos.TOP_LEFT);
 
 		lblSpelerAanDeBeurt = new Label(
-				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt().getGebruikersnaam())); //$NON-NLS-1$
+				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
 		lblSpelerAanDeBeurt.setId("LinkerInfoScherm.0"); //$NON-NLS-1$
 		lblKeuze = new Label(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
 		lblKeuze.setAccessibleHelp("LinkerInfoScherm.1"); //$NON-NLS-1$
@@ -96,7 +96,7 @@ public class LinkerInfoScherm extends VBox {
 
 	protected void stelVolgendeSpelerIn() {
 		lblSpelerAanDeBeurt
-				.setText(String.format(Taal.vertaling("LinkerInfoScherm.9"), dc.geefSpelerAanDeBeurt().getGebruikersnaam())); //$NON-NLS-1$
+				.setText(String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
 	}
 
 	private void maakInfoOfFoutLabelLeegNaXSec(double seconden) {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domein.Speler;
+import resources.Taal;
 
 public class SpelerMapper {
 
@@ -53,15 +54,13 @@ public class SpelerMapper {
 
 	public void registreerSpeler(String gebruikersnaam, int geboortejaar) throws IllegalArgumentException {
 		try (Connection conn = DriverManager.getConnection(ConnectieDB.CONNECTIE_STRING);
-				PreparedStatement query = conn
-						.prepareStatement(
-								"INSERT INTO ID399244_g119.Speler (gebruikersnaam, geboortejaar) VALUES (?,?)")) {
+				PreparedStatement query = conn.prepareStatement(
+						"INSERT INTO ID399244_g119.Speler (gebruikersnaam, geboortejaar) VALUES (?,?)")) {
 			query.setString(1, gebruikersnaam);
 			query.setInt(2, geboortejaar);
 			query.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException ex) {
-			throw new IllegalArgumentException(String
-					.format("Gebruikersnaam %s is niet uniek, probeer een andere gebruikersnaam.", gebruikersnaam));
+			throw new IllegalArgumentException(String.format(Taal.vertaling("SpelerMapper.1"), gebruikersnaam));
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		}

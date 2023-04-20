@@ -28,14 +28,11 @@ public class Hoofdscherm extends GridPane {
 	public Hoofdscherm(DomeinController dc, WelkomScherm ws) {
 		this.dc = dc;
 		this.ws = ws;
-
 		buildGui();
 
 	}
 
 	private void buildGui() {
-		// this.getStyleClass().add("hoofdscherm");
-
 		this.setPadding(new Insets(5));
 		this.setVgap(25);
 		this.setHgap(25);

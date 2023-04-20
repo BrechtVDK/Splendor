@@ -46,10 +46,6 @@
 	-fx-font-size:20.0;
 }
 
-.hoofdscherm {
-	-fx-background-color: #4F79A3;
-}
-
 .scoreKaart{
 	-fx-font-family: 'Londrina Solid', cursive;
 	-fx-border-color: #a9a9a9;
