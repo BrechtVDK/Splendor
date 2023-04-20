@@ -49,9 +49,12 @@ public class LinkerInfoScherm extends VBox {
 		this.setAlignment(Pos.TOP_LEFT);
 
 		lblSpelerAanDeBeurt = new Label(
-				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
+				String.format("%s %s", Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
+//		lblSpelerAanDeBeurt = new Label(
+//				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
 		lblSpelerAanDeBeurt.setId("LinkerInfoScherm.0"); //$NON-NLS-1$
 		lblKeuze = new Label(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
+		lblKeuze.setId("LinkerInfoScherm.1"); //$NON-NLS-1$
 		lblKeuze.setAccessibleHelp("LinkerInfoScherm.1"); //$NON-NLS-1$
 		lblInfoOfFout = new Label();
 
@@ -96,7 +99,7 @@ public class LinkerInfoScherm extends VBox {
 
 	protected void stelVolgendeSpelerIn() {
 		lblSpelerAanDeBeurt
-				.setText(String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
+				.setText(String.format("%s %s", Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
 	}
 
 	private void maakInfoOfFoutLabelLeegNaXSec(double seconden) {

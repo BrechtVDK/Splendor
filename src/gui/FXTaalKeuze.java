@@ -16,6 +16,8 @@ public class FXTaalKeuze extends HBox {
 	ChoiceBox<String> talenLijst = new ChoiceBox<>();
 	Pane rootPane;
 	String gekozenTaal = null;
+	private static final String HOOFDSCHERMCHILDREN_TE_VERTALEN[] = { "SpelerScoreScherm", "LinkerInfoScherm",
+			"ScoreBordScherm", "hboxAantalPrestigepunten" };
 	private static final String LIJST_ONDERSTEUNDE_TALEN[] = Taal.TALEN;
 
 	public FXTaalKeuze(Pane rootPane, String gekozenTaal) {
@@ -35,9 +37,9 @@ public class FXTaalKeuze extends HBox {
 		talenLijst.getSelectionModel().selectedItemProperty().addListener((v, oudeTaal, nieuweTaal) -> {
 			Taal.setVoorkeurTaal(nieuweTaal);
 			// doorlopen van alle children van de moederpane
-			for (Node n : rootPane.getChildren()) {
-				labelsEnButtonsDoorlopen(rootPane);
-			}
+			// for (Node n : rootPane.getChildren()) {
+					labelsEnButtonsDoorlopen(rootPane);
+			// }
 			// System.out.println(nieuweTaal);
 		});
 
@@ -51,15 +53,21 @@ public class FXTaalKeuze extends HBox {
 				Label l = (Label) n;
 				// nullpointers opvangen (labels zonder standaardmelding en labels met
 				// properties (binding))
-				if (l.getId() != null && !l.hasProperties()) {
+//				if (l.getId() != null && !l.hasProperties()) {
+				if (l.getId() != null) {
 					Platform.runLater(() -> l.setText(Taal.vertaling(l.getId())));
+					System.out.println(l.getText());
 				}
 			} else if (n instanceof Button) {
 				Button b = (Button) n;
 				Platform.runLater(() -> b.setText(Taal.vertaling(b.getId())));
 				// child = pane -> recursief werken
 			} else if (n instanceof Pane) {
-				labelsEnButtonsDoorlopen((Pane) n);
+				if (Arrays.stream(HOOFDSCHERMCHILDREN_TE_VERTALEN)
+						.noneMatch(res -> res.equals(n.getClass().getSimpleName())))
+					continue;
+				else
+					labelsEnButtonsDoorlopen((Pane) n);
 			}
 		}
 	}
