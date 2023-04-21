@@ -55,6 +55,8 @@ public class FXTaalKeuze extends HBox {
 				// properties (binding))
 //				if (l.getId() != null && !l.hasProperties()) {
 				if (l.getId() != null) {
+
+
 					Platform.runLater(() -> l.setText(Taal.vertaling(l.getId())));
 					System.out.println(l.getText());
 				}
