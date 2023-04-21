@@ -57,6 +57,7 @@ public class LinkerInfoScherm extends VBox {
 		lblKeuze.setId("LinkerInfoScherm.1"); //$NON-NLS-1$
 		lblKeuze.setAccessibleHelp("LinkerInfoScherm.1"); //$NON-NLS-1$
 		lblInfoOfFout = new Label();
+		lblInfoOfFout.setMinHeight(35);
 
 		btnKaart = new Button(Taal.vertaling("LinkerInfoScherm.2")); //$NON-NLS-1$
 		btnKaart.setId("LinkerInfoScherm.2"); //$NON-NLS-1$
@@ -73,13 +74,11 @@ public class LinkerInfoScherm extends VBox {
 		btnAnnuleer.setVisible(false);
 		btnAnnuleer.setMinWidth(70);
 
-
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
 		this.getChildren().addAll(lblSpelerAanDeBeurtTekst, lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas,
-				lblInfoOfFout,
-				btnBevestig, btnAnnuleer);
+				lblInfoOfFout, btnBevestig, btnAnnuleer);
 
 		// index bijhouden om nodes tussen te voegen / verwijderen en later
 		// terug toe te voegen
@@ -101,8 +100,7 @@ public class LinkerInfoScherm extends VBox {
 	}
 
 	protected void stelVolgendeSpelerIn() {
-		lblSpelerAanDeBeurt
-				.setText(dc.geefSpelerAanDeBeurt().getGebruikersnaam()); // $NON-NLS-1$
+		lblSpelerAanDeBeurt.setText(dc.geefSpelerAanDeBeurt().getGebruikersnaam()); // $NON-NLS-1$
 	}
 
 	private void maakInfoOfFoutLabelLeegNaXSec(double seconden) {
