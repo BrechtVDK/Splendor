@@ -6,14 +6,16 @@ import java.util.List;
 import domein.DomeinController;
 import domein.Edelsteen;
 import domein.Edelsteenfiche;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import resources.Taal;
 
@@ -35,17 +37,24 @@ public class EdelsteenficheGeefTerugScherm extends GridPane {
 		this.setHgap(8);
 		this.setVgap(8);
 		this.setPadding(new Insets(5));
+		this.setAlignment(Pos.CENTER);
+		ColumnConstraints column1 = new ColumnConstraints();
+		column1.setMinWidth(75);
+		this.getColumnConstraints().add(column1);
 
-		Label lblInBezit = new Label(Taal.vertaling("EdelsteenficheGeefTerugScherm.0")); //$NON-NLS-1$
-		lblInBezit.setId("EdelsteenficheGeefTerugScherm.0"); //$NON-NLS-1$ );
-		lblInBezit.textProperty().bind(Bindings.concat(Taal.vertaling("EdelsteenficheGeefTerugScherm.1"), totaalInBezit.asString())); //$NON-NLS-1$
-		lblInBezit.setTextAlignment(TextAlignment.CENTER);
+		Label lblInBezitTekst = new Label(Taal.vertaling("EdelsteenficheGeefTerugScherm.0")); //$NON-NLS-1$
+		lblInBezitTekst.setId("EdelsteenficheGeefTerugScherm.0"); //$NON-NLS-1$ );
+		Label lblInBezitAantal = new Label();
+		lblInBezitAantal.textProperty().bind(totaalInBezit.asString()); // $NON-NLS-1$
+		VBox vboxInBezit = new VBox();
+		vboxInBezit.setAlignment(Pos.CENTER);
+		vboxInBezit.getChildren().addAll(lblInBezitTekst, lblInBezitAantal);
 
-		Label lblGeefTerug = new Label(Taal.vertaling("EdelsteenficheGeefTerugScherm.2")); //$NON-NLS-1$
-		lblGeefTerug.setId("EdelsteenficheGeefTerugScherm.2"); //$NON-NLS-1$
+		Label lblGeefTerug = new Label(Taal.vertaling("EdelsteenficheGeefTerugScherm.1")); //$NON-NLS-1$
+		lblGeefTerug.setId("EdelsteenficheGeefTerugScherm.1"); //$NON-NLS-1$
 		lblGeefTerug.setTextAlignment(TextAlignment.CENTER);
 
-		this.add(lblInBezit, 0, 0);
+		this.add(vboxInBezit, 0, 0);
 		this.add(lblGeefTerug, 1, 0);
 
 		bouwFiches();

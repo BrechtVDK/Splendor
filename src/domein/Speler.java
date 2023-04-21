@@ -34,8 +34,7 @@ public class Speler {
 	private void setGebruikersnaam(String gebruikersnaam) throws IllegalArgumentException {
 		String REGEX = "^[a-z,A-Z][\\w|\\s]*"; //$NON-NLS-1$
 		if (gebruikersnaam == null || !gebruikersnaam.matches(REGEX)) {
-			throw new IllegalArgumentException(
-					Taal.vertaling("Speler.1")); //$NON-NLS-1$
+			throw new IllegalArgumentException(Taal.vertaling("Speler.1")); //$NON-NLS-1$
 		}
 		this.gebruikersnaam = gebruikersnaam;
 	}
@@ -55,7 +54,6 @@ public class Speler {
 		return gebruikersnaam;
 	}
 
-
 	public int getGeboortejaar() {
 		return geboortejaar;
 	}
@@ -72,14 +70,16 @@ public class Speler {
 
 	protected void stelSpelAttributenIn() {
 		// om einde spel sneller te kunnen testen
-		this.prestigepunten = new SimpleIntegerProperty(14);
-		// this.prestigepunten = new SimpleIntegerProperty(0);
+		// this.prestigepunten = new SimpleIntegerProperty(14);
+		this.prestigepunten = new SimpleIntegerProperty(0);
 		this.edelenInBezit = FXCollections.observableArrayList();
 		this.ontwikkelingskaartenInBezit = FXCollections.observableArrayList();
 		this.aantalEdelsteenfichesPerTypeInBezit = FXCollections.observableHashMap();
 		this.aantalBonussenPerTypeInBezit = FXCollections.observableHashMap();
 		for (Edelsteen e : Edelsteen.values()) {
+			// om sneller te kunnen testen
 			aantalEdelsteenfichesPerTypeInBezit.put(e, 2);
+			// aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
 			// om edelen sneller te kunnen testen
 			aantalBonussenPerTypeInBezit.put(e, 2);
 			// aantalBonussenPerTypeInBezit.put(e, 0);

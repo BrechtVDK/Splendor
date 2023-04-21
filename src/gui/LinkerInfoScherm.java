@@ -52,8 +52,6 @@ public class LinkerInfoScherm extends VBox {
 		lblSpelerAanDeBeurtTekst.setId("LinkerInfoScherm.0");
 		lblSpelerAanDeBeurt = new Label(dc.geefSpelerAanDeBeurt().getGebruikersnaam());
 		lblSpelerAanDeBeurt.getStyleClass().add("spelerAanDeBeurt");
-//		lblSpelerAanDeBeurt = new Label(
-//				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
 
 		lblKeuze = new Label(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
 		lblKeuze.setId("LinkerInfoScherm.1"); //$NON-NLS-1$
@@ -69,9 +67,11 @@ public class LinkerInfoScherm extends VBox {
 		btnBevestig = new Button(Taal.vertaling("btnBevestig")); //$NON-NLS-1$
 		btnBevestig.setId("btnBevestig"); //$NON-NLS-1$
 		btnBevestig.setVisible(false);
+		btnBevestig.setMinWidth(70);
 		btnAnnuleer = new Button(Taal.vertaling("LinkerInfoScherm.7")); //$NON-NLS-1$
 		btnAnnuleer.setId("LinkerInfoScherm.7"); //$NON-NLS-1$
 		btnAnnuleer.setVisible(false);
+		btnAnnuleer.setMinWidth(70);
 
 
 		btnKaart.setOnAction(this::kiesKaartGeklikt);

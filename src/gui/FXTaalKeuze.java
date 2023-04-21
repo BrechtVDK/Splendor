@@ -17,7 +17,7 @@ public class FXTaalKeuze extends HBox {
 	Pane rootPane;
 	String gekozenTaal = null;
 	private static final String HOOFDSCHERMCHILDREN_TE_VERTALEN[] = { "SpelerScoreScherm", "LinkerInfoScherm",
-			"ScoreBordScherm", "hboxAantalPrestigepunten" };
+			"ScoreBordScherm", "hboxAantalPrestigepunten", "HBox", "VBox", "EdelsteenficheGeefTerugScherm" };
 	private static final String LIJST_ONDERSTEUNDE_TALEN[] = Taal.TALEN;
 
 	public FXTaalKeuze(Pane rootPane, String gekozenTaal) {
@@ -36,40 +36,30 @@ public class FXTaalKeuze extends HBox {
 		// listener
 		talenLijst.getSelectionModel().selectedItemProperty().addListener((v, oudeTaal, nieuweTaal) -> {
 			Taal.setVoorkeurTaal(nieuweTaal);
-			// doorlopen van alle children van de moederpane
-			// for (Node n : rootPane.getChildren()) {
-					labelsEnButtonsDoorlopen(rootPane);
-			// }
-			// System.out.println(nieuweTaal);
+			labelsEnButtonsRecursiefDoorlopen(rootPane);
 		});
 
 		return talenLijst;
 
 	}
 
-	private void labelsEnButtonsDoorlopen(Pane pane) {
+	private void labelsEnButtonsRecursiefDoorlopen(Pane pane) {
 		for (Node n : pane.getChildren()) {
-			if (n instanceof Label) {
+			// child = pane -> recursief werken
+			if (n instanceof Pane) {
+				if (Arrays.stream(HOOFDSCHERMCHILDREN_TE_VERTALEN)
+						.anyMatch(res -> res.equals(n.getClass().getSimpleName()))) {
+					labelsEnButtonsRecursiefDoorlopen((Pane) n);
+				}
+			} else if (n instanceof Label) {
 				Label l = (Label) n;
-				// nullpointers opvangen (labels zonder standaardmelding en labels met
-				// properties (binding))
-//				if (l.getId() != null && !l.hasProperties()) {
+				// nullpointers opvangen (labels zonder standaardmelding)
 				if (l.getId() != null) {
-
-
 					Platform.runLater(() -> l.setText(Taal.vertaling(l.getId())));
-					System.out.println(l.getText());
 				}
 			} else if (n instanceof Button) {
 				Button b = (Button) n;
 				Platform.runLater(() -> b.setText(Taal.vertaling(b.getId())));
-				// child = pane -> recursief werken
-			} else if (n instanceof Pane) {
-				if (Arrays.stream(HOOFDSCHERMCHILDREN_TE_VERTALEN)
-						.noneMatch(res -> res.equals(n.getClass().getSimpleName())))
-					continue;
-				else
-					labelsEnButtonsDoorlopen((Pane) n);
 			}
 		}
 	}
