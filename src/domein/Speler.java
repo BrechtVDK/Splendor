@@ -55,6 +55,7 @@ public class Speler {
 		return gebruikersnaam;
 	}
 
+
 	public int getGeboortejaar() {
 		return geboortejaar;
 	}

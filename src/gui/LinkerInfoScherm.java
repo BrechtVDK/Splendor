@@ -28,7 +28,7 @@ public class LinkerInfoScherm extends VBox {
 	private EdelsteenficheGeefTerugScherm edelsteenficheGeefTerugScherm;
 	private int indexBtnBevestig, indexBtnAnnuleer;
 
-	private Label lblSpelerAanDeBeurt, lblKeuze, lblInfoOfFout;
+	private Label lblSpelerAanDeBeurt, lblSpelerAanDeBeurtTekst, lblKeuze, lblInfoOfFout;
 	private Button btnKaart, btnFiche, btnPas, btnBevestig, btnAnnuleer;
 
 	public LinkerInfoScherm(DomeinController dc, Hoofdscherm hs) {
@@ -48,11 +48,13 @@ public class LinkerInfoScherm extends VBox {
 		this.setSpacing(10);
 		this.setAlignment(Pos.TOP_LEFT);
 
-		lblSpelerAanDeBeurt = new Label(
-				String.format("%s %s", Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
+		lblSpelerAanDeBeurtTekst = new Label(Taal.vertaling("LinkerInfoScherm.0")); // $NON-NLS-1$
+		lblSpelerAanDeBeurtTekst.setId("LinkerInfoScherm.0");
+		lblSpelerAanDeBeurt = new Label(dc.geefSpelerAanDeBeurt().getGebruikersnaam());
+		lblSpelerAanDeBeurt.getStyleClass().add("spelerAanDeBeurt");
 //		lblSpelerAanDeBeurt = new Label(
 //				String.format(Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
-		lblSpelerAanDeBeurt.setId("LinkerInfoScherm.0"); //$NON-NLS-1$
+
 		lblKeuze = new Label(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
 		lblKeuze.setId("LinkerInfoScherm.1"); //$NON-NLS-1$
 		lblKeuze.setAccessibleHelp("LinkerInfoScherm.1"); //$NON-NLS-1$
@@ -75,7 +77,8 @@ public class LinkerInfoScherm extends VBox {
 		btnKaart.setOnAction(this::kiesKaartGeklikt);
 		btnFiche.setOnAction(this::kiesFicheGeklikt);
 		btnPas.setOnAction(this::pasGeklikt);
-		this.getChildren().addAll(lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas, lblInfoOfFout,
+		this.getChildren().addAll(lblSpelerAanDeBeurtTekst, lblSpelerAanDeBeurt, lblKeuze, btnKaart, btnFiche, btnPas,
+				lblInfoOfFout,
 				btnBevestig, btnAnnuleer);
 
 		// index bijhouden om nodes tussen te voegen / verwijderen en later
@@ -99,7 +102,7 @@ public class LinkerInfoScherm extends VBox {
 
 	protected void stelVolgendeSpelerIn() {
 		lblSpelerAanDeBeurt
-				.setText(String.format("%s %s", Taal.vertaling("LinkerInfoScherm.0"), dc.geefSpelerAanDeBeurt())); //$NON-NLS-1$
+				.setText(dc.geefSpelerAanDeBeurt().getGebruikersnaam()); // $NON-NLS-1$
 	}
 
 	private void maakInfoOfFoutLabelLeegNaXSec(double seconden) {

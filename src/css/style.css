@@ -29,6 +29,13 @@
 	-fx-background-color: linear-gradient(#C05746, #DB9E95);
 }
 
+.spelerAanDeBeurt{
+	-fx-text-fill: rgb(39,76,119);
+	-fx-font-family: 'Londrina Solid', cursive;
+	-fx-font-size: 16.0px;
+}
+
+
 
 .prestigePunten{
 	-fx-font-family: 'Londrina Outline', cursive;
