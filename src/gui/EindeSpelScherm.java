@@ -23,9 +23,9 @@ import main.StartUpGui;
 import resources.Taal;
 
 public class EindeSpelScherm extends VBox {
-	String winnaars;
-	boolean eenWinnaar;
-	Hoofdscherm hs;
+	private String winnaars;
+	private boolean eenWinnaar;
+	private Hoofdscherm hs;
 
 	public EindeSpelScherm(List<String> lijstWinnaars, Hoofdscherm hs) {
 		StringBuilder sbWinaars = new StringBuilder();

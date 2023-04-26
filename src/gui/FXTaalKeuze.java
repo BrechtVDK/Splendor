@@ -13,9 +13,9 @@ import resources.Taal;
 
 public class FXTaalKeuze extends HBox {
 
-	ChoiceBox<String> talenLijst = new ChoiceBox<>();
-	Pane rootPane;
-	String gekozenTaal = null;
+	private ChoiceBox<String> talenLijst = new ChoiceBox<>();
+	private Pane rootPane;
+	private String gekozenTaal = null;
 	private static final String HOOFDSCHERMCHILDREN_TE_VERTALEN[] = { "SpelerScoreScherm", "LinkerInfoScherm",
 			"ScoreBordScherm", "hboxAantalPrestigepunten", "HBox", "VBox", "EdelsteenficheGeefTerugScherm" };
 	private static final String LIJST_ONDERSTEUNDE_TALEN[] = Taal.TALEN;
