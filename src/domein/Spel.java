@@ -432,13 +432,14 @@ public class Spel {
 	 * @param edelsteenfiches List met gekozen Edelsteenfiche-objecten
 	 * @throws IllegalArgumentException Wanneer de speler fiches zou willen geven
 	 *                                  waar van hij er geen in zijn bezit heeft.
+	 * @throws IllegalArgumentException Wanneer speler te veel of te weinig fiches
+	 *                                  teruggeeft
 	 */
 	public void verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException {
 		if (this.getSpelerAanDeBeurt().geefAantalFichesInBezit()
 				- edelsteenfiches.size() != Speler.MAX_FICHES_IN_BEZIT) {
-			throw new IllegalArgumentException(
-					String.format(Taal.vertaling("Spel.9"), Speler.MAX_FICHES_IN_BEZIT)); //$NON-NLS-1$
+			throw new IllegalArgumentException(String.format(Taal.vertaling("Spel.9"), Speler.MAX_FICHES_IN_BEZIT)); //$NON-NLS-1$
 		}
 		verplaatsEdelsteenfichesVanSpelerNaarSpel(edelsteenfiches);
 	}
