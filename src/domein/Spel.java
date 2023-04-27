@@ -24,9 +24,19 @@ public class Spel {
 	private List<Edele> edelen;
 	// hashmap: sleutel = enum Edelsteen, waarde = list Edelsteenfiches
 	private ObservableMap<Edelsteen, StapelEdelsteenfiches> stapelsEdelsteenfiches;
+	/**
+	 * Integer met het minimum aantal spelers dat aan het spel moet meedoen.
+	 */
 	public static final int MIN_SPELERS = 2;
+	/**
+	 * Integer met het maximum aantal spelers dat aan het spel mag meedoen.
+	 */
 	public static final int MAX_SPELERS = 4;
 	private static final int EINDE_SPEL_SCORE = 15;
+	/**
+	 * Integer met het maximum aantal fiches dat de speler in één beurt van de
+	 * stapel mag nemen.
+	 */
 	public static final int MAX_FICHES_PER_BEURT = 3;
 
 	// UC1
@@ -106,7 +116,7 @@ public class Spel {
 	 * het juist aantal fiches krijgt en kiest een random aantal edelen uit de
 	 * mogelijke edelen.
 	 * 
-	 * @throws IllegalArgumentException Bij te weinig of teveel spelers
+	 * @throws IllegalArgumentException Bij te weinig of teveel spelers.
 	 */
 	public void organiseerSpelVolgensHetAantalSpelers() throws IllegalArgumentException {
 		if (spelers.size() < MIN_SPELERS || spelers.size() > MAX_SPELERS) {
@@ -282,7 +292,8 @@ public class Spel {
 
 
 	/**
-	 * Geeft edelen terug waar de speler die aan de beurt is uit kan kiezen
+	 * Geeft edelen terug waar de speler die aan de beurt is uit kan kiezen op het
+	 * einde van zijn beurt.
 	 * 
 	 * @return Een list met Edelen, indien speler geen recht heeft op een edele uit
 	 *         het spel wordt een lege lijst terug gegeven.
@@ -327,9 +338,9 @@ public class Spel {
 	}
 
 	/**
-	 * Geeft de laatste speler van de ronde op.
+	 * Geeft de laatste speler van de ronde.
 	 * 
-	 * @return Speler die als laatst aan de beurt is
+	 * @return Speler die als laatst aan de beurt is.
 	 */
 	public Speler geefLaatsteSpelerVanRonde() {
 		return spelers.get(laatsteSpelerVanRonde);
@@ -343,7 +354,7 @@ public class Spel {
 	// Eerst TeVeelFichesInBezitException opvangen voor IllegalArgumentException!!
 	// Afwijkend van UC4 maar lijkt me logischer
 	/**
-	 * Verplaatst de gekozen edelsteenfiches naar de speler
+	 * Verplaatst de gekozen edelsteenfiches naar de speler.
 	 * 
 	 * @param edelsteenfiches De gekozen edelsteenfiches
 	 * @throws IllegalArgumentException     Wanneer er teveel fiches gekozen worden.
@@ -354,7 +365,7 @@ public class Spel {
 	 *                                      kleur neemt
 	 * @throws TeVeelFichesInBezitException Wanneer de speler na het nemen van
 	 *                                      fiches meer dan 10 fiches in zijn bezit
-	 *                                      heeft
+	 *                                      heeft.
 	 */
 	public void verplaatsEdelsteenfichesNaarSpeler(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException, TeVeelFichesInBezitException {
@@ -396,9 +407,9 @@ public class Spel {
 
 	// list gebruikt omdat aantal fiches niet vastligt
 	/**
-	 * Gebruikt wanneer de speler fiches terug geeft aan het spel. Kan bij het nemen
-	 * van nieuwe fiches, of bij het teruggeven wanneer hij meer dan 10 fiches in
-	 * bezit heeft.
+	 * Gebruikt wanneer de speler fiches terug geeft aan het spel. Kan bij het kopen
+	 * van een ontwikkelingskaart, of bij het teruggeven wanneer hij meer dan 10
+	 * fiches in bezit heeft.
 	 * 
 	 * @param edelsteenfiches De terug te geven fiches
 	 * @throws IllegalArgumentException Wanneer de speler fiches zou willen geven
@@ -419,7 +430,8 @@ public class Spel {
 	 * terug gegeven
 	 * 
 	 * @param edelsteenfiches List met gekozen Edelsteenfiche-objecten
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException Wanneer de speler fiches zou willen geven
+	 *                                  waar van hij er geen in zijn bezit heeft.
 	 */
 	public void verplaatsEdelsteenfichesVanSpelerNaarSpelNaTeVeelInBezit(List<Edelsteenfiche> edelsteenfiches)
 			throws IllegalArgumentException {

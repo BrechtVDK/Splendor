@@ -11,6 +11,11 @@ public class StapelOntwikkelingskaarten {
 	private ObservableList<Ontwikkelingskaart> ontwikkelingskaarten;
 	private Niveau niveau;
 
+	/**
+	 * Maakt een nieuwe stapel met ontwikkelingskaarten aan en schud deze.
+	 * 
+	 * @param niveau Het niveau van de aan te maken stapel.
+	 */
 	public StapelOntwikkelingskaarten(Niveau niveau) {
 		this.niveau = niveau;
 		this.ontwikkelingskaarten = FXCollections.observableArrayList();
@@ -18,6 +23,11 @@ public class StapelOntwikkelingskaarten {
 		schudDeStapel();
 	}
 
+	/**
+	 * Geeft de bovenste kaart van de stapel.
+	 * 
+	 * @return Een ontwikkelingskaartobject van de bovenste kaart van de stapel.
+	 */
 	// Haalt de laatste kaart van de stapel: perfomanter dan de eerste kaart te
 	// verwijderen
 	public Ontwikkelingskaart haalKaartVanStapel() {
@@ -231,6 +241,11 @@ public class StapelOntwikkelingskaarten {
 
 	// UC2
 
+	/**
+	 * Geeft het aantal resterende kaarten op de stapel terug.
+	 * 
+	 * @return IntegerBinding met het aantal resterende kaarten op de stapel.
+	 */
 	public IntegerBinding geefAantalResterendeKaarten() {
 		return Bindings.size(ontwikkelingskaarten);
 	}

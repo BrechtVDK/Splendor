@@ -12,13 +12,24 @@ public enum Edelsteen {
 		this.soort = soort;
 	}
 
+	/**
+	 * Geeft de kleur terug van de Edelsteen in rgb-waarden.
+	 * 
+	 * @return String met de rgb-waarden.
+	 */
 	public String getRgb() {
 		return rgb;
 	}
 
+	/**
+	 * Geeft de soort terug van de Edelsteen.
+	 * 
+	 * @return String met de soort.
+	 */
 	public String getSoort() {
 		return soort;
 	}
+
 
 	@Override
 	public String toString() {

@@ -10,6 +10,10 @@ public class Tafel {
 	private Ontwikkelingskaart[][] zichtbareOntwikkelingskaarten;
 	private static final int AANTAL_ZICHTBARE_KAARTEN_PER_NIVEAU = 4;
 
+	/**
+	 * Maakt een nieuwe tafel aan waar de stapels met kaarten en de zichtbarekaarten
+	 * op liggen.
+	 */
 	public Tafel() {
 		maakStapelsOntwikkelingskaartenAan();
 		// 3 rij: aantal niveas - 4 kol: aantal zichtbare kaarten
@@ -18,6 +22,11 @@ public class Tafel {
 		selecteerZichtbareKaarten();
 	}
 
+	/**
+	 * Geeft de zichtbare ontwikkelingskaarten terug.
+	 * 
+	 * @return Een tweedimensionale array met ontwikkelingskaartobjecten.
+	 */
 	public Ontwikkelingskaart[][] getZichtbareOntwikkelingskaarten() {
 		return zichtbareOntwikkelingskaarten;
 	}
@@ -45,7 +54,13 @@ public class Tafel {
 
 	// UC2
 
-	// geef het aantal resterende kaarten per stapel (per niveau) terug
+	//
+	/**
+	 * Geeft het aantal resterende kaarten per stapel (per niveau) terug.
+	 * 
+	 * @return Een Map met: (key: Niveau, value: IntegerBinding met resterende
+	 *         kaarten per niveau.
+	 */
 	public Map<Niveau, IntegerBinding> geefAantalResterendeKaarten() {
 		Map<Niveau, IntegerBinding> aantalPerNiveau = new HashMap<Niveau, IntegerBinding>();
 
@@ -55,6 +70,13 @@ public class Tafel {
 		return aantalPerNiveau;
 	}
 
+	/**
+	 * Zorgt ervoor dat een nieuwe kaart van de stapel op de plaats van de opgegeven
+	 * kaart wordt gelegd.
+	 * 
+	 * @param kaart Het ontwikkelingskaartobject dat vervangen wordt door een nieuwe
+	 *              kaart van de stapel.
+	 */
 	public void verwijderKaartEnVervang(Ontwikkelingskaart kaart) {
 		// kaart zoeken op tafel
 		int rijIndex = -1;
@@ -85,6 +107,13 @@ public class Tafel {
 		}
 	}
 
+	/**
+	 * Geeft een ontwikkelingskaart terug volgens een opgegeven index.
+	 * 
+	 * @param rij   De rij waar de ontwikkelingskaart zich bevindt.
+	 * @param kolom De kolom waar de ontwikkelingskaart zich bevindt.
+	 * @return Het gevraagde ontwikkelingskaartobject.
+	 */
 	// om nieuwe kaart weer te geven in gui
 	public Ontwikkelingskaart geefKaartVolgensIndex(int rij, int kolom) {
 		return zichtbareOntwikkelingskaarten[rij][kolom];

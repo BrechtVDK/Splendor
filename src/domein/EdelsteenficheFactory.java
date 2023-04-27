@@ -2,6 +2,14 @@ package domein;
 
 //bevat methode om edelsteenfiches te koppelen aan Edele en Ontwikkelingskaart
 public class EdelsteenficheFactory {
+	/**
+	 * Methode geeft een array terug van edelsteenfiches. Aantallen per soort worden
+	 * opgegeven als parameter.
+	 * 
+	 * @param aantalPerSoort Array van Integers die de aantallen bevat die per soort
+	 *                       moeten aangemaakt worden.
+	 * @return Array van edelsteenfiche-objecten.
+	 */
 	// Volgerde parameter int[] aantalPerSoort: {GROEN, WIT, BLAUW, ZWART, ROOD}
 	public static Edelsteenfiche[] maakArrayEdelsteenfiches(int[] aantalPerSoort) {
 		int totaalAantal = 0;

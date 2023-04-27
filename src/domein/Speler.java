@@ -26,6 +26,12 @@ public class Speler {
 	private ObservableList<Edele> edelenInBezit;
 
 	// UC1
+	/**
+	 * Constructor maakt een nieuw Spelerobject aan.
+	 * 
+	 * @param gebruikersnaam String met de naam van de speler.
+	 * @param geboortejaar   Integer met het geboortejaar van de speler
+	 */
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		setGebruikersnaam(gebruikersnaam);
 		setGeboortejaar(geboortejaar);
@@ -50,14 +56,29 @@ public class Speler {
 		this.geboortejaar = geboortejaar;
 	}
 
+	/**
+	 * Geeft de gebruikersnaam van de speler terug.
+	 * 
+	 * @return String met de gebruikersnaam van de speler.
+	 */
 	public String getGebruikersnaam() {
 		return gebruikersnaam;
 	}
 
+	/**
+	 * Geeft het geboortejaar van de speler terug.
+	 * 
+	 * @return Integer met het geboortejaar van de speler.
+	 */
 	public int getGeboortejaar() {
 		return geboortejaar;
 	}
 
+	/**
+	 * Geeft terug of de speler al dan niet de startspeler is.
+	 * 
+	 * @return Boolean die aangeeft of de speler al dan niet de startspeler is.
+	 */
 	public boolean isStartSpeler() {
 		return isStartSpeler;
 	}
@@ -86,6 +107,11 @@ public class Speler {
 		}
 	}
 
+	/**
+	 * Geeft de ontwikkelingskaarten terug die de speler in zijn bezit heeft.
+	 * 
+	 * @return ObservableList van ontwikkelingskaartobjecten.
+	 */
 	public ObservableList<Ontwikkelingskaart> getOntwikkelingskaartenInBezit() {
 		return ontwikkelingskaartenInBezit;
 	}
@@ -96,14 +122,31 @@ public class Speler {
 		voegBonusToe(kaart.bonus());
 	}
 
+	/**
+	 * Geeft het aantal prestigepunten van de speler terug
+	 * 
+	 * @return Integer met het aantal prestigepunten.
+	 */
 	public int getPrestigepunten() {
 		return prestigepunten.get();
 	}
 
+	/**
+	 * Geeft het aantal prestigepunten van de speler terug. (Nodig voor binding in
+	 * gui)
+	 * 
+	 * @return Een IntegerProperty met het aantal prestigepunten.
+	 */
 	public IntegerProperty prestigepuntenProperty() {
 		return prestigepunten;
 	}
 
+	/**
+	 * Geeft het aantal edelsteenfiches per type van de speler terug.
+	 * 
+	 * @return Een ObservableMap met: (key: Edelsteen, value: aantal fiches in
+	 *         bezit).
+	 */
 	public ObservableMap<Edelsteen, Integer> getAantalEdelsteenfichesPerTypeInBezit() {
 		return aantalEdelsteenfichesPerTypeInBezit;
 	}
@@ -119,10 +162,21 @@ public class Speler {
 		}
 	}
 
+	/**
+	 * Geeft het totaal aantal edelsteenfiches dat de speler in bezit heeft terug.
+	 * 
+	 * @return Integer met het totaal aantal edelsteenfiches van de speler
+	 */
 	public int geefAantalFichesInBezit() {
 		return aantalEdelsteenfichesPerTypeInBezit.values().stream().reduce((i1, i2) -> i1 + i2).get();
 	}
 
+	/**
+	 * Geeft het aantal bonussen per type van de speler terug.
+	 * 
+	 * @return Een observablemap met: (key: Edelsteen, value: aantal bonussen in
+	 *         bezit)
+	 */
 	public ObservableMap<Edelsteen, Integer> getAantalBonussenPerTypeInBezit() {
 		return aantalBonussenPerTypeInBezit;
 	}
@@ -132,6 +186,11 @@ public class Speler {
 		aantalBonussenPerTypeInBezit.put(bonus.edelsteen(), huidigAantal + 1);
 	}
 
+	/**
+	 * Geeft de edelen terug die de speler in zijn bezit heeft.
+	 * 
+	 * @return Een observablelist met Edele-objecten.
+	 */
 	public ObservableList<Edele> getEdelenInBezit() {
 		return edelenInBezit;
 	}
