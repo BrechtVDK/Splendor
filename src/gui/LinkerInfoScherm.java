@@ -120,6 +120,7 @@ public class LinkerInfoScherm extends VBox {
 		hs.maakKaartenKlikbaar();
 		verbergKeuzeknoppen();
 		lblKeuze.setText(Taal.vertaling("LinkerInfoScherm.12")); //$NON-NLS-1$
+		lblKeuze.setId("LinkerInfoScherm.12");
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "kaart")); //$NON-NLS-1$
 		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "kaart")); //$NON-NLS-1$
 	}
@@ -129,6 +130,7 @@ public class LinkerInfoScherm extends VBox {
 		hs.maakFichesKlikbaar();
 		verbergKeuzeknoppen();
 		lblKeuze.setText(Taal.vertaling("LinkerInfoScherm.15")); //$NON-NLS-1$
+		lblKeuze.setId("LinkerInfoScherm.15");
 		btnBevestig.setOnAction((event) -> bevestigGeklikt(event, "fiche")); //$NON-NLS-1$
 		btnAnnuleer.setOnAction((event) -> annuleerGeklikt(event, "fiche")); //$NON-NLS-1$
 	}
@@ -224,6 +226,7 @@ public class LinkerInfoScherm extends VBox {
 
 	protected void zetKeuzeMenuTerug() {
 		lblKeuze.setText(Taal.vertaling("LinkerInfoScherm.1")); //$NON-NLS-1$
+		lblKeuze.setId("LinkerInfoScherm.1");
 		btnKaart.setVisible(true);
 		btnFiche.setVisible(true);
 		btnPas.setVisible(true);
@@ -280,6 +283,7 @@ public class LinkerInfoScherm extends VBox {
 		activeerBevestigKnop();
 
 		lblKeuze.setText(""); //$NON-NLS-1$
+		lblKeuze.setId(null);
 
 		hboxEdelsteenficheGeefTerugScherm = new HBox();
 		hboxEdelsteenficheGeefTerugScherm.setAlignment(Pos.CENTER);

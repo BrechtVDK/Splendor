@@ -99,11 +99,11 @@ public class Speler {
 		this.aantalBonussenPerTypeInBezit = FXCollections.observableHashMap();
 		for (Edelsteen e : Edelsteen.values()) {
 			// om sneller te kunnen testen
-			aantalEdelsteenfichesPerTypeInBezit.put(e, 2);
-			// aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
+			// aantalEdelsteenfichesPerTypeInBezit.put(e, 2);
+			aantalEdelsteenfichesPerTypeInBezit.put(e, 0);
 			// om edelen sneller te kunnen testen
-			aantalBonussenPerTypeInBezit.put(e, 2);
-			// aantalBonussenPerTypeInBezit.put(e, 0);
+			// aantalBonussenPerTypeInBezit.put(e, 2);
+			aantalBonussenPerTypeInBezit.put(e, 0);
 		}
 	}
 
